@@ -3,9 +3,9 @@ $(document).ready(function() {
 	var carousel ={};
 	carousel.max_cardnum = 11;
 	carousel.cardnum = [0,1,2,3];
-	
-	carousel.mapcard = function(){
-		console.log('mapcard');
+	// $.getJSON(jsonFile, function(info){
+	// 	console.log("getJSON");
+	// });		
 		// ㅠㅠ
 		carousel.data = [
 			{
@@ -107,8 +107,9 @@ $(document).ready(function() {
 		]
 
 
-		// $.getJSON("js/carousel_info.json", function(info){
-		// console.log("getJSON");
+
+	carousel.mapcard = function(){
+		console.log('mapcard');
 		console.log(carousel.cardnum);
 			var cards = '';
 			for(var i= 0; i <carousel.cardnum.length; i++){
@@ -130,7 +131,6 @@ $(document).ready(function() {
 				console.log(carousel.cardnum[i]);
 			}
 			$('.card_carousel_container_content').html(cards);//+id
-		// });
 	}
 
 
