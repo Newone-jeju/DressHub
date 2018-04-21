@@ -15,4 +15,3 @@ public class RestfulExample {
         return "Greetings from Spring Boot!";
     }
 }
-
