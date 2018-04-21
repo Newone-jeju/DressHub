@@ -44,21 +44,15 @@ public class ProductDao {
         Product product = null;
 
         try {
-            product = (Product) jdbcTemplate.queryForObject("SELECT * FROM PRODUCT WHERE ID = ?", new RowMapper() {
-                @Override
-                public Object mapRow(ResultSet rs, int rowNum) throws SQLException {
-                    Product selectesProduct = makeValidProduct(rs);
+            product = (Product) jdbcTemplate.queryForObject(
+                    "SELECT * FROM PRODUCT WHERE ID = ?", params, (RowMapper) (rs, rowNum) -> {
+                Product selectesProduct = makeValidProduct(rs);
 
-                    return selectesProduct;
-                }
+                return selectesProduct;
             });
-        }catch (Exception e){
+        }catch (EmptyResultDataAccessException e){
             product = null;
         }
-
-
-
-
     return product;
     }
 
@@ -73,7 +67,7 @@ public class ProductDao {
             PreparedStatement preparedStatement = con.prepareStatement(
                   "INSERT INTO PRODUCT(NAME, IMAGE, CONTENTS, COST_PER_DAY, DEPOSIT, SALE_PRICE," +
                           "CATEGORY, CONSIGMENT_START, CONSIGMENT_END, STATE, DELEVERY_TYPE, PROVIDER)" +
-                          "VALUES (? ? ? ? ? ? ? ? ? ? ?)",
+                          "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
                   Statement.RETURN_GENERATED_KEYS);
           for(int i = 0 ; i < params.length ; i++){
               preparedStatement.setObject(i+1, params[i]);
@@ -101,17 +95,14 @@ public class ProductDao {
     public ArrayList<Product> getList(String arrangeQuery) {
         ArrayList<Product> productList = null;
         try {
-            productList = (ArrayList<Product>) jdbcTemplate.queryForObject("SELECT * FROM PRODUCT ORDER BY " + arrangeQuery, new RowMapper<Object>() {
-
-                @Override
-                public Object mapRow(ResultSet rs, int rowNum) throws SQLException {
-                    List<Product> products = new ArrayList<>();
-                    while (rs.next()) {
-                        Product selectesProduct = makeValidProduct(rs);
-                        products.add(selectesProduct);
-                    }
-                    return products;
+            productList = (ArrayList<Product>) jdbcTemplate.queryForObject
+                    ("SELECT * FROM PRODUCT ORDER BY " + arrangeQuery, (RowMapper<Object>) (rs, rowNum) -> {
+                List<Product> products = new ArrayList<>();
+                while (rs.next()) {
+                    Product selectesProduct = makeValidProduct(rs);
+                    products.add(selectesProduct);
                 }
+                return products;
             });
         }catch (EmptyResultDataAccessException e){
             productList = null;
