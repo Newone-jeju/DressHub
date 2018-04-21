@@ -1,27 +1,44 @@
 package com.newoneplus.dresshub;
 
 import org.apache.tomcat.jni.Time;
+import org.junit.Before;
 import org.junit.Test;
-
+import org.junit.matchers.JUnitMatchers.*;
 import java.sql.Date;
 import java.sql.SQLException;
 import java.util.Calendar;
-
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.nullValue;
+import static org.junit.Assert.assertThat;
 public class ProductTest {
+    static final String ID_ASC = "ID ASC";
+    static final String ID_DESC = "ID DESC";
+
+
+    private ProductDao productDao;
+    @Before
+    public void setup() throws ClassNotFoundException {
+         productDao = new ProductDao();
+    }
+
+
     @Test
     public void get() throws SQLException, ClassNotFoundException {
         int id = 1;
-        ProductDao productDao = new ProductDao();
         Product product = productDao.get(id);
     }
 
     @Test
     public void getList(){
+        productDao.getList("ID DESC");
+        //테스트할 방법이없노
     }
 
+
+    //디비에 아무거나 들어가면 안되니까 3개 한꺼번에 테스트
+    //넣고 업데이트해보고 지우기
     @Test
-    public void insertUpdateDelete(){
-        ProductDao productDao = new ProductDao();
+    public void insertUpdateDelete() throws ClassNotFoundException {
         Product product = new Product();
         Date date = new Date(Time.now());
         product.setCategory("categoryTest");
@@ -37,5 +54,30 @@ public class ProductTest {
         product.setSalePrice(3);
         product.setState("stateTest");
 
+        Integer insertedId = productDao.insert(product);
+        //딜리트 테스트가 통과하지 못한경우 직업 지워야할 id출력
+        System.out.println(insertedId);
+
+        Product insertedProduct = productDao.get(insertedId);
+
+        assertThat(product, is(insertedProduct));
+        //여기까지 삽입관련 테스트
+
+        product.setName("changedName");
+        product.setCostPerDay(5);
+        product.setDeposit(6);
+        product.setSalePrice(7);
+        productDao.update(product);
+
+        Product updatedProduct = productDao.get(insertedId);
+
+        assertThat(product, is(updatedProduct));
+        //여기까지 갱신관련 테스트
+
+        productDao.delete(insertedId);
+        Product deletedProduct = productDao.get(insertedId);
+
+        assertThat(deletedProduct, is(nullValue()));
+        //삭제 테스트
     }
 }
