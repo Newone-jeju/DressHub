@@ -36,6 +36,6 @@ public class ProductTest {
         product.setProviderId("prividerTest");
         product.setSalePrice(3);
         product.setState("stateTest");
-        
+
     }
 }
