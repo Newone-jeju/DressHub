@@ -33,4 +33,5 @@ dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.11'
     testCompile('org.springframework.boot:spring-boot-starter-test')
     compileOnly 'org.projectlombok:lombok:1.16.8'
+    compile('org.springframework.boot:spring-boot-starter-thymeleaf')
 }
