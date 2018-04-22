@@ -62,9 +62,9 @@ public class UserDao {
     private DataSource getDataSource() throws ClassNotFoundException {
         DataSource dataSource = new SimpleDriverDataSource();
         ((SimpleDriverDataSource) dataSource).setDriverClass((Class<? extends Driver>)Class.forName("com.mysql.jdbc.Driver"));
-        ((SimpleDriverDataSource) dataSource).setUrl("jdbc:mysql://localhost/jeju");
-        ((SimpleDriverDataSource) dataSource).setUsername("jeju");
-        ((SimpleDriverDataSource) dataSource).setPassword("jejupw");
+        ((SimpleDriverDataSource) dataSource).setUrl("jdbc:mysql://localhost/");
+        ((SimpleDriverDataSource) dataSource).setUsername("");
+        ((SimpleDriverDataSource) dataSource).setPassword("");
         return dataSource;
     }
 
