@@ -1,7 +1,8 @@
 package com.newoneplus.dresshub;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.dao.DataAccessException;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.SimpleDriverDataSource;
@@ -12,7 +13,7 @@ import java.sql.SQLException;
 
 public class UserDao {
     @Value("${db.classname}")
-    private String className;
+    private String className = "com.mysql.jdbc.Driver";
     @Value("${db.url}")
     private String url;
     @Value("${db.username}")
@@ -20,7 +21,6 @@ public class UserDao {
     @Value("${db.password}")
     private String password;
     private JdbcTemplate jdbcTemplate;
-
 
 
 
