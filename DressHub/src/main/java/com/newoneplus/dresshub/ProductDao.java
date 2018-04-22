@@ -117,8 +117,8 @@ public class ProductDao {
         selectesProduct.setCostPerDay(rs.getInt("COST_PER_DAY"));
         selectesProduct.setDeleveryType(rs.getString("DELEVERY_TYPE"));
         selectesProduct.setDeposit(rs.getInt("DEPOSIT"));
-        selectesProduct.setId(rs.getInt("ID"));ls
-                
+        selectesProduct.setId(rs.getInt("ID"));
+
         selectesProduct.setImageUrl(rs.getString("IAMGE"));
         selectesProduct.setName(rs.getString("NAME"));
         selectesProduct.setProviderId(rs.getString("PROVIDER"));
