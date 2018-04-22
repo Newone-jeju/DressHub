@@ -1,6 +1,5 @@
 package com.newoneplus.dresshub;
 
-
 import lombok.Cleanup;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -11,19 +10,18 @@ import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 
 import javax.sql.DataSource;
-
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class ProductDao {
-    @Value("${db.classname")
+    @Value("${db.classname}")
     private String classname;
-    @Value("${db.url")
+    @Value("${db.url}")
     private String url;
-    @Value("${db.password")
+    @Value("${db.password}")
     private String password;
-    @Value("${db.username")
+    @Value("${db.username}")
     private String username;
     DataSource dataSource = null;
     JdbcTemplate jdbcTemplate = null;
@@ -36,7 +34,6 @@ public class ProductDao {
         ((SimpleDriverDataSource) dataSource).setPassword(password);
 
         jdbcTemplate = new JdbcTemplate(dataSource);
-
     }
 
     public Product get(int id) {
