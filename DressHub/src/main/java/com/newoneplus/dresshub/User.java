@@ -17,6 +17,8 @@ public class User {
     private boolean openPrivateInfo;
     private boolean certification;
     private Date resisterDate;
+    private boolean isEnabled;
+
 
 
 }
