@@ -4,9 +4,10 @@ import org.apache.tomcat.jni.Time;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.matchers.JUnitMatchers.*;
-import java.sql.Date;
 import java.sql.SQLException;
 import java.util.Calendar;
+import java.util.Date;
+
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.nullValue;
 import static org.junit.Assert.assertThat;
@@ -40,7 +41,7 @@ public class ProductTest {
     @Test
     public void insertUpdateDelete() throws ClassNotFoundException {
         Product product = new Product();
-        Date date = new Date(Time.now());
+        Date date = new Date();
         product.setCategory("categoryTest");
         product.setConsigmentEnd(date);
         product.setConsigmentStart(date);
