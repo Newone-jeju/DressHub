@@ -28,10 +28,10 @@ public class ProductDao {
 
     public ProductDao() throws ClassNotFoundException {
         dataSource = new SimpleDriverDataSource();
-        ((SimpleDriverDataSource) dataSource).setDriverClass((Class<? extends Driver>) Class.forName(classname));
-        ((SimpleDriverDataSource) dataSource).setUrl(url);
-        ((SimpleDriverDataSource) dataSource).setUsername(username);
-        ((SimpleDriverDataSource) dataSource).setPassword(password);
+        ((SimpleDriverDataSource) dataSource).setDriverClass((Class<? extends Driver>) Class.forName("com.mysql.jdbc.Driver"));
+        ((SimpleDriverDataSource) dataSource).setUrl("jdbc:mysql://localhost/dresshub?characterEncoding=utf-8");
+        ((SimpleDriverDataSource) dataSource).setUsername("root");
+        ((SimpleDriverDataSource) dataSource).setPassword("alswns8516!");
 
         jdbcTemplate = new JdbcTemplate(dataSource);
     }
@@ -52,6 +52,7 @@ public class ProductDao {
         }
     return product;
     }
+
 
     public Integer insert(Product product) {
         KeyHolder keyHolder = new GeneratedKeyHolder();
@@ -119,7 +120,7 @@ public class ProductDao {
         selectesProduct.setDeposit(rs.getInt("DEPOSIT"));
         selectesProduct.setId(rs.getInt("ID"));
 
-        selectesProduct.setImageUrl(rs.getString("IAMGE"));
+        selectesProduct.setImageUrl(rs.getString("IMAGE"));
         selectesProduct.setName(rs.getString("NAME"));
         selectesProduct.setProviderId(rs.getString("PROVIDER"));
         selectesProduct.setSalePrice(rs.getInt("SALE_PRICE"));
