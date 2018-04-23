@@ -53,6 +53,7 @@ public class ProductDao {
     return product;
     }
 
+
     public Integer insert(Product product) {
         KeyHolder keyHolder = new GeneratedKeyHolder();
         Object[] params = {product.getName(), product.getImageUrl(), product.getContents(), product.getCostPerDay(),
@@ -119,7 +120,7 @@ public class ProductDao {
         selectesProduct.setDeposit(rs.getInt("DEPOSIT"));
         selectesProduct.setId(rs.getInt("ID"));
 
-        selectesProduct.setImageUrl(rs.getString("IAMGE"));
+        selectesProduct.setImageUrl(rs.getString("IMAGE"));
         selectesProduct.setName(rs.getString("NAME"));
         selectesProduct.setProviderId(rs.getString("PROVIDER"));
         selectesProduct.setSalePrice(rs.getInt("SALE_PRICE"));

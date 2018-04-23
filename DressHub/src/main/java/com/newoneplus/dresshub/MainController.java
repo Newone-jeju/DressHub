@@ -8,5 +8,5 @@
 //public class MainController {
 //
 //
-//    @RequestMapping
+//    @RequestMapping(value = "/api/")
 //}

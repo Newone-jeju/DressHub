@@ -5,9 +5,10 @@ import org.junit.Test;
 
 public class MainControllerTest {
     private ProductDao productDao;
+
     @Before
     public void setup() throws ClassNotFoundException {
-        productDao= new ProductDao();
+        productDao = new ProductDao();
     }
 
     @Test
