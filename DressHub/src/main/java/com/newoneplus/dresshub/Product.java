@@ -8,7 +8,7 @@ import java.util.Date;
 
 @Data
 public class Product {
-    int id;
+    Integer id;
     String name;
     String imageUrl;
     String contents;
@@ -50,7 +50,7 @@ public class Product {
                 isEqual = false;
             }else if(!deleveryType.equals(((Product) o).getDeleveryType())){
                 isEqual = false;
-            }else if(!providerId.equals(((Product) o).providerId)){
+            }else if(!providerId.equals(((Product) o).getProviderId())){
                 isEqual = false;
             }
         }

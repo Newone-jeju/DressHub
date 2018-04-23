@@ -1,6 +1,5 @@
 package com.newoneplus.dresshub;
 
-
 import lombok.Cleanup;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -11,19 +10,18 @@ import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 
 import javax.sql.DataSource;
-
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class ProductDao {
-    @Value("${db.classname")
+    @Value("${db.classname}")
     private String classname;
-    @Value("${db.url")
+    @Value("${db.url}")
     private String url;
-    @Value("${db.password")
+    @Value("${db.password}")
     private String password;
-    @Value("${db.username")
+    @Value("${db.username}")
     private String username;
     DataSource dataSource = null;
     JdbcTemplate jdbcTemplate = null;
@@ -36,7 +34,6 @@ public class ProductDao {
         ((SimpleDriverDataSource) dataSource).setPassword(password);
 
         jdbcTemplate = new JdbcTemplate(dataSource);
-
     }
 
     public Product get(int id) {
@@ -44,21 +41,15 @@ public class ProductDao {
         Product product = null;
 
         try {
-            product = (Product) jdbcTemplate.queryForObject("SELECT * FROM PRODUCT WHERE ID = ?", new RowMapper() {
-                @Override
-                public Object mapRow(ResultSet rs, int rowNum) throws SQLException {
-                    Product selectesProduct = makeValidProduct(rs);
+            product = (Product) jdbcTemplate.queryForObject(
+                    "SELECT * FROM PRODUCT WHERE ID = ?", params, (RowMapper) (rs, rowNum) -> {
+                Product selectesProduct = makeValidProduct(rs);
 
-                    return selectesProduct;
-                }
+                return selectesProduct;
             });
-        }catch (Exception e){
+        }catch (EmptyResultDataAccessException e){
             product = null;
         }
-
-
-
-
     return product;
     }
 
@@ -73,7 +64,7 @@ public class ProductDao {
             PreparedStatement preparedStatement = con.prepareStatement(
                   "INSERT INTO PRODUCT(NAME, IMAGE, CONTENTS, COST_PER_DAY, DEPOSIT, SALE_PRICE," +
                           "CATEGORY, CONSIGMENT_START, CONSIGMENT_END, STATE, DELEVERY_TYPE, PROVIDER)" +
-                          "VALUES (? ? ? ? ? ? ? ? ? ? ?)",
+                          "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
                   Statement.RETURN_GENERATED_KEYS);
           for(int i = 0 ; i < params.length ; i++){
               preparedStatement.setObject(i+1, params[i]);
@@ -101,17 +92,14 @@ public class ProductDao {
     public ArrayList<Product> getList(String arrangeQuery) {
         ArrayList<Product> productList = null;
         try {
-            productList = (ArrayList<Product>) jdbcTemplate.queryForObject("SELECT * FROM PRODUCT ORDER BY " + arrangeQuery, new RowMapper<Object>() {
-
-                @Override
-                public Object mapRow(ResultSet rs, int rowNum) throws SQLException {
-                    List<Product> products = new ArrayList<>();
-                    while (rs.next()) {
-                        Product selectesProduct = makeValidProduct(rs);
-                        products.add(selectesProduct);
-                    }
-                    return products;
+            productList = (ArrayList<Product>) jdbcTemplate.queryForObject
+                    ("SELECT * FROM PRODUCT ORDER BY " + arrangeQuery, (RowMapper<Object>) (rs, rowNum) -> {
+                List<Product> products = new ArrayList<>();
+                while (rs.next()) {
+                    Product selectesProduct = makeValidProduct(rs);
+                    products.add(selectesProduct);
                 }
+                return products;
             });
         }catch (EmptyResultDataAccessException e){
             productList = null;
@@ -130,6 +118,7 @@ public class ProductDao {
         selectesProduct.setDeleveryType(rs.getString("DELEVERY_TYPE"));
         selectesProduct.setDeposit(rs.getInt("DEPOSIT"));
         selectesProduct.setId(rs.getInt("ID"));
+
         selectesProduct.setImageUrl(rs.getString("IAMGE"));
         selectesProduct.setName(rs.getString("NAME"));
         selectesProduct.setProviderId(rs.getString("PROVIDER"));
