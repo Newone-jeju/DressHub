@@ -1,19 +1,53 @@
-#nav{
-   width:100%;
-   display: flex;
- }
+
  body{
-  margin:30px;
-  margin-left: 30px;
-  margin-right: 30px;
+  /* margin:50px; */
+  /* margin-left: 30px;
+  margin-right: 30px; */
 	font: 67.5% "Lucida Sans Unicode", "Bitstream Vera Sans", "Trebuchet Unicode MS", "Lucida Grande", Verdana, Helvetica, sans-serif;
  }
+ #logo{
+   flex:1;
+ }
+ #top{
+  display:flex;
+  flex:1;
+  margin-left: 30px;
+  margin-right:30px;
+  margin-top:40px;
+}
+#nav{
+   /* width:100%; */
+   display: flex;
+   margin-left: 30px;
+   margin-right: 30px;
+   margin-top: 20px;
+ }
+.topul{
+  display:flex;
+  font-size: 10px;
+  list-style: none;
+  align-items: center;
+  margin: 10px;
+
+}
+.topul li{
+    border-left: 1px solid #c0c0c0;
+    padding-left: 10px;
+    padding-right:10px;
+}
+.topul li:first-child {
+border-left: none;
+}
+.topul li a{
+color:#000;
+text-decoration: none;
+}
 
 .menu {
   margin: 0;
   padding: 0;
   width:100px;
-  height: 30px;
+  height: 35px;
   list-style: none;
   display: flex;
   flex:1;
@@ -24,7 +58,7 @@
   flex:1;
   border-left: 1px solid #fff;
   background-color: #000;
-  line-height: 30px;
+  line-height: 35px;
   vertical-align: middle;
 }
 .menu li:link { text-decoration: none;}
@@ -49,11 +83,11 @@ padding:0px;
 margin:0px;
 border:0px;
 position:absolute;
-width:200px;
-z-index:180;
-/*top:1em;
-/*left:0;*/
+width:15.8%;
+z-index:150;
+/*top:1em;*/
 }
+
 .menu li:hover ul{
 display:block;
 }
@@ -88,4 +122,85 @@ color:#ffffff;
 text-decoration:none;
 }
 
-/*전체카테고리 목록*/
+/* 카드 */
+.card_section{
+  width: 90%;
+  height:200px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top:80px;
+  margin-bottom:30px;
+}
+.card_section img{
+  width: 30%;
+  height: auto;
+}
+
+/* footer */
+footer{
+  color:#fff;
+  background-color: #000;
+}
+footer .container{
+  padding:40px 20px;
+}
+.foota{
+  margin-bottom:30px;
+}
+.footb div{
+  margin-bottom:20px;
+}
+.footb h3{
+  margin-top:0;
+  margin-bottom:10px;
+  border-bottom:solid 1px currentColor;
+  font-size:14px;
+}
+.footb ul{
+  margin:0px;
+  padding:0;
+
+  list-style:none;
+}
+@media (min-width: 768px){
+  .footb{
+    display:flex;
+  }
+  .footb div{
+    flex:1;
+  }
+  .footb div:not(:first-child){
+    margin-left:40px;
+  }
+}
+@media(min-width: 768px){
+  footer .container{
+    display: flex;
+    flex-wrap: wrap;
+    max-width:1000px;
+    max-width: var(--large-width);
+    margin-left: 100px;
+    margin-right: 100px;
+  }
+  .foota{
+    flex: 0 0 40%;
+  }
+  .footb{
+    flex:0 0 60%;
+  }
+}
+
+/* 퀵메뉴 */
+.quick-menu-area{
+  position:fixed;
+  right:5%;
+  z-index: 99;
+}
+.quick-menu-area a{
+  display: block;
+}
+.quick-menu-area img{
+  max-width: 80%;
+  width: 100px;
+}
