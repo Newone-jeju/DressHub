@@ -19,4 +19,9 @@ public class MainService {
         productDao = new ProductDao();
         return productDao.getList("ID DESC");
     }
+
+    public Product getProduct(int id) throws ClassNotFoundException {
+        productDao = new ProductDao();
+        return productDao.get(id);
+    }
 }

@@ -11,8 +11,5 @@ public class MainControllerTest {
         productDao = new ProductDao();
     }
 
-    @Test
-    public void getProductList() {
-        productDao.getList("ID DESC");
-    }
+//    현재 요구사항이 적어 아직 Controller와 Service하는 일이 똑같다!!
 }

@@ -18,11 +18,18 @@ public class MainServiceTest {
         mainService= new MainService();
     }
 
-
     @Test
     public void getProductList() throws ClassNotFoundException {
         ArrayList<Product> productList = new ArrayList<>();
         productList= mainService.getProductList();
         assertThat(productList.size(), is(4));
+    }
+
+    @Test
+    public void getProduct() throws ClassNotFoundException {
+        Product product = new Product();
+        product = mainService.getProduct(1);
+
+        assertThat(product.getName(), is("nameTest"));
     }
 }
