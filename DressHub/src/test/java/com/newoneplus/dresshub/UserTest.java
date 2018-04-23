@@ -1,15 +1,10 @@
 package com.newoneplus.dresshub;
 
-import org.apache.tomcat.jni.Time;
 import org.junit.Before;
 import org.junit.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.jdbc.datasource.SingleConnectionDataSource;
-import org.springframework.test.annotation.DirtiesContext;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
-import javax.sql.DataSource;
-import java.sql.Date;
 import java.sql.SQLException;
 
 import static org.hamcrest.MatcherAssert.*;
@@ -18,11 +13,10 @@ import static org.hamcrest.CoreMatchers.*;
 public class UserTest {
     private UserDao userDao;
 
-//    @Autowired
-    private User user;
     @Before
     public void setup() {
-        userDao = new UserDao();
+        ApplicationContext applicationContext = new AnnotationConfigApplicationContext(DaoFactory.class);
+        userDao = applicationContext.getBean("userDao", UserDao.class);
     }
 
 
