@@ -28,10 +28,10 @@ public class ProductDao {
 
     public ProductDao() throws ClassNotFoundException {
         dataSource = new SimpleDriverDataSource();
-        ((SimpleDriverDataSource) dataSource).setDriverClass((Class<? extends Driver>) Class.forName(classname));
-        ((SimpleDriverDataSource) dataSource).setUrl(url);
-        ((SimpleDriverDataSource) dataSource).setUsername(username);
-        ((SimpleDriverDataSource) dataSource).setPassword(password);
+        ((SimpleDriverDataSource) dataSource).setDriverClass((Class<? extends Driver>) Class.forName("com.mysql.jdbc.Driver"));
+        ((SimpleDriverDataSource) dataSource).setUrl("jdbc:mysql://localhost/dresshub?characterEncoding=utf-8");
+        ((SimpleDriverDataSource) dataSource).setUsername("root");
+        ((SimpleDriverDataSource) dataSource).setPassword("alswns8516!");
 
         jdbcTemplate = new JdbcTemplate(dataSource);
     }

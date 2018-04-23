@@ -30,7 +30,7 @@ public class UserDao {
     public User get(String id) throws ClassNotFoundException, SQLException {
         DataSource dataSource = getDataSource();
         jdbcTemplate = new JdbcTemplate(dataSource);
-        String sql = "select * from dresshub where id = ?";
+        String sql = "select * from user where id = ?";
         Object[] params = new Object[]{id};
         try {
             return jdbcTemplate.queryForObject(sql, params, (rs, rowNum) -> {
@@ -47,7 +47,7 @@ public class UserDao {
 
     public void insert(User user) throws ClassNotFoundException {
         DataSource dataSource = getDataSource();
-        String sql = "insert into dresshub(id, password, name, email, address, " +
+        String sql = "insert into user(id, password, name, email, address, " +
                 "phone_number, nickname, introduce, open_private_info," +
                 " certification, resister_date) " +
                 "values(?, ?, ?, ?, ?," +
@@ -62,15 +62,15 @@ public class UserDao {
     private DataSource getDataSource() throws ClassNotFoundException {
         DataSource dataSource = new SimpleDriverDataSource();
         ((SimpleDriverDataSource) dataSource).setDriverClass((Class<? extends Driver>)Class.forName("com.mysql.jdbc.Driver"));
-        ((SimpleDriverDataSource) dataSource).setUrl("jdbc:mysql://localhost/");
-        ((SimpleDriverDataSource) dataSource).setUsername("");
-        ((SimpleDriverDataSource) dataSource).setPassword("");
+        ((SimpleDriverDataSource) dataSource).setUrl("jdbc:mysql://localhost/dresshub?characterEncoding=utf-8");
+        ((SimpleDriverDataSource) dataSource).setUsername("root");
+        ((SimpleDriverDataSource) dataSource).setPassword("alswns8516!");
         return dataSource;
     }
 
     public void deleteAll() throws ClassNotFoundException {
         DataSource dataSource = getDataSource();
-        String sql = "delete from dresshub";
+        String sql = "delete from user";
         jdbcTemplate = new JdbcTemplate(dataSource);
         jdbcTemplate.update(sql);
     }

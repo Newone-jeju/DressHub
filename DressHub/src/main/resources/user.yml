@@ -1,0 +1,31 @@
+user:
+  user:
+    -
+
+      id: 1
+      password: a
+      name: a
+      email: a
+      address: a
+      phone_number: 010
+      nickname: a
+      introduce: dumydata
+      open_private_info: false
+      certification: false
+      resister_date: 2018년 4월 20일
+
+    -
+
+      id: 2
+      password: b
+      name: b
+      email: b
+      address: b
+      phone_number: 010
+      nickname: b
+      introduce: dumydata
+      open_private_info: false
+      certification: false
+      resister_date: 2018년 4월 21일
+
+    -
