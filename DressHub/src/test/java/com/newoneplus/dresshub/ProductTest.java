@@ -4,6 +4,9 @@ import org.apache.tomcat.jni.Time;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.matchers.JUnitMatchers.*;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+
 import java.sql.SQLException;
 import java.util.Calendar;
 import java.util.Date;
@@ -19,7 +22,8 @@ public class ProductTest {
     private ProductDao productDao;
     @Before
     public void setup() throws ClassNotFoundException {
-         productDao = new ProductDao();
+        ApplicationContext applicationContext = new AnnotationConfigApplicationContext(DaoFactory.class);
+        productDao = applicationContext.getBean("productDao", ProductDao.class);
     }
 
 
