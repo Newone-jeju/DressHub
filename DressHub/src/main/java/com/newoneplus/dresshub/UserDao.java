@@ -42,7 +42,7 @@ public class UserDao {
 
 
     public void deleteAll() throws ClassNotFoundException {
-        String sql = "delete from user";
+        String sql = "delete user dresshub";
         jdbcTemplate.update(sql);
     }
 }
