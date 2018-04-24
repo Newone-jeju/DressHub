@@ -11,7 +11,6 @@ public class DressHubApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(DressHubApplication.class, args);
-
         System.out.println("Spring boot start");
     }
 }
