@@ -50,7 +50,7 @@ public class ProductTest {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
         Date date = null;
         try {
-            date = simpleDateFormat.parse(new Date().toString());
+            date = simpleDateFormat.parse(simpleDateFormat.format(new Date()));
         } catch (ParseException e) {
             e.printStackTrace();
         }
