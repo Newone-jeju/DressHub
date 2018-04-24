@@ -10,7 +10,6 @@ import javax.sql.DataSource;
 import java.sql.Driver;
 
 @Configuration
-
 public class DaoFactory {
     @Value("${db.classname}")
     private String className;
@@ -51,4 +50,7 @@ public class DaoFactory {
         dataSource.setPassword(password);
         return dataSource;
     }
+
+    @Bean
+    public ProductDao productDao() {return new ProductDao(jdbcTemplate());}
 }
