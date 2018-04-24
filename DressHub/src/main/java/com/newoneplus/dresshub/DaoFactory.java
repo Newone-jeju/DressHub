@@ -54,4 +54,7 @@ public class DaoFactory {
     @Bean
     public ProductDao productDao() {return new ProductDao(jdbcTemplate());}
 
+
+    @Bean
+    public MainService mainService(){return new MainService();}
 }
