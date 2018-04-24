@@ -4,7 +4,12 @@ import org.apache.tomcat.jni.Time;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.matchers.JUnitMatchers.*;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -19,7 +24,8 @@ public class ProductTest {
     private ProductDao productDao;
     @Before
     public void setup() throws ClassNotFoundException {
-         productDao = new ProductDao();
+        ApplicationContext applicationContext = new AnnotationConfigApplicationContext(DaoFactory.class);
+        productDao = applicationContext.getBean("productDao", ProductDao.class);
     }
 
 
@@ -41,7 +47,13 @@ public class ProductTest {
     @Test
     public void insertUpdateDelete() throws ClassNotFoundException {
         Product product = new Product();
-        Date date = new Date();
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        Date date = null;
+        try {
+            date = simpleDateFormat.parse(new Date().toString());
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
         product.setCategory("categoryTest");
         product.setConsigmentEnd(date);
         product.setConsigmentStart(date);
