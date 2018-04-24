@@ -8,6 +8,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -45,6 +46,7 @@ public class ProductTest {
     @Test
     public void insertUpdateDelete() throws ClassNotFoundException {
         Product product = new Product();
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
         Date date = new Date();
         product.setCategory("categoryTest");
         product.setConsigmentEnd(date);
