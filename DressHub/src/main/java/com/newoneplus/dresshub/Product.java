@@ -21,6 +21,10 @@ public class Product {
     String state;
     String deleveryType;
     String providerId;
+    Integer likes;
+    Date regDate;
+    Integer leastLeaseDay;
+    String size;
 
     @Override
     public boolean equals(Object o){
@@ -51,6 +55,14 @@ public class Product {
             }else if(!deleveryType.equals(((Product) o).getDeleveryType())){
                 isEqual = false;
             }else if(!providerId.equals(((Product) o).getProviderId())){
+                isEqual = false;
+            }else if(!likes.equals(((Product) o).getLikes())){
+                isEqual = false;
+            }else if(!regDate.equals(((Product) o).getRegDate())){
+                isEqual = false;
+            }else if(!leastLeaseDay.equals(((Product) o).getLeastLeaseDay())){
+                isEqual = false;
+            }else if(!size.equals(((Product) o).getSize())){
                 isEqual = false;
             }
         }
