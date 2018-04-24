@@ -51,5 +51,6 @@ public class DaoFactory {
         return dataSource;
     }
 
-    
+    @Bean
+    public ProductDao productDao() {return new ProductDao(jdbcTemplate());}
 }

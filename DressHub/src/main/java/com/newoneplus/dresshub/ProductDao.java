@@ -23,19 +23,11 @@ public class ProductDao {
     private String password;
     @Value("${db.username}")
     private String username;
-    DataSource dataSource = null;
     JdbcTemplate jdbcTemplate = null;
 
-    public ProductDao() throws ClassNotFoundException {
-        dataSource = new SimpleDriverDataSource();
-        ((SimpleDriverDataSource) dataSource).setDriverClass((Class<? extends Driver>) Class.forName("com.mysql.jdbc.Driver"));
-        ((SimpleDriverDataSource) dataSource).setUrl("jdbc:mysql://localhost/dresshub?characterEncoding=utf-8");
-        ((SimpleDriverDataSource) dataSource).setUsername("root");
-        ((SimpleDriverDataSource) dataSource).setPassword("alswns8516!");
-
-        jdbcTemplate = new JdbcTemplate(dataSource);
+    public ProductDao(JdbcTemplate jdbcTemplate) {
+        this.jdbcTemplate = jdbcTemplate;
     }
-
     public Product get(int id) {
         Object[] params = {id};
         Product product = null;
