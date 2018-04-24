@@ -12,16 +12,15 @@ import java.util.ArrayList;
 public class MainService {
 
 //    productDao가 bean에 등록되어야 autowired를 쓸 수 있음
+    @Autowired
     private ProductDao productDao;
     private UserDao userDao;
 
     public ArrayList<Product> getProductList() throws ClassNotFoundException {
-        productDao = new ProductDao();
         return productDao.getList("ID DESC");
     }
 
     public Product getProduct(int id) throws ClassNotFoundException {
-        productDao = new ProductDao();
         return productDao.get(id);
     }
 }

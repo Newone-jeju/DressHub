@@ -44,6 +44,7 @@ public class ProductTest {
 
     //디비에 아무거나 들어가면 안되니까 3개 한꺼번에 테스트
     //넣고 업데이트해보고 지우기
+
     @Test
     public void insertUpdateDelete() throws ClassNotFoundException {
         Product product = new Product();
@@ -85,12 +86,13 @@ public class ProductTest {
         Product updatedProduct = productDao.get(insertedId);
 
         assertThat(product, is(updatedProduct));
-        //여기까지 갱신관련 테스트
-//
-//        productDao.delete(insertedId);
-//        Product deletedProduct = productDao.get(insertedId);
-//
-//        assertThat(deletedProduct, is(nullValue()));
-        //삭제 테스트
+
+//        여기까지 갱신관련 테스트
+
+        productDao.delete(insertedId);
+        Product deletedProduct = productDao.get(insertedId);
+
+        assertThat(deletedProduct, is(nullValue()));
+//        삭제 테스트
     }
 }
