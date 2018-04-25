@@ -2,16 +2,14 @@ package com.newoneplus.dresshub;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import org.springframework.context.annotation.PropertySource;
-import org.springframework.test.context.ContextConfiguration;
 
 import java.sql.SQLException;
 
-import static org.hamcrest.MatcherAssert.*;
-import static org.hamcrest.CoreMatchers.*;
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.MatcherAssert.assertThat;
+
 public class UserTest {
     private UserDao userDao;
     @Before
@@ -65,5 +63,4 @@ public class UserTest {
 //        assertThat(insertedUser.isCertification(), is(user.isCertification()));
 //        assertThat(insertedUser.getResisterDate(), is(user.getResisterDate()));
     }
-
 }
