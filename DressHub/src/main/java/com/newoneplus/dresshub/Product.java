@@ -10,7 +10,7 @@ import java.util.Date;
 public class Product {
     Integer id;
     String name;
-    String imageUrl;
+    String thumbnailImage;
     String contents;
     Integer costPerDay;
     Integer deposit;
@@ -34,7 +34,7 @@ public class Product {
         if (o instanceof Product){
             if(!name.equals(((Product) o).getName())){
                 isEqual = false;
-            }else if(!imageUrl.equals(((Product) o).getImageUrl())){
+            }else if(!thumbnailImage.equals(((Product) o).getThumbnailImage())){
                 isEqual = false;
             }else if(!contents.equals(((Product) o).getContents())){
                 isEqual = false;

@@ -48,15 +48,11 @@ public class ProductDao {
 
     public Integer insert(Product product) {
         KeyHolder keyHolder = new GeneratedKeyHolder();
-        Object[] params = {product.getName(), product.getImageUrl(), product.getContents(), product.getCostPerDay(),
-                        product.getDeposit(), product.getSalePrice(), product.getCategory(),
-                        product.getConsigmentStart(), product.getConsigmentEnd(), product.getState(),
-                        product.getDeleveryType(), product.getProviderId(), product.getLikes(),
-                        product.getRegDate(), product.getLeastLeaseDay(), product.getSize()};
+        Object[] params = getFullParams(product);
         jdbcTemplate.update(con -> {
             @Cleanup
             PreparedStatement preparedStatement = con.prepareStatement(
-                  "INSERT INTO PRODUCT(NAME, IMAGE, CONTENTS, COST_PER_DAY, DEPOSIT, SALE_PRICE," +
+                  "INSERT INTO PRODUCT(NAME, THUMBNAIL_IMAGE, CONTENTS, COST_PER_DAY, DEPOSIT, SALE_PRICE," +
                           "CATEGORY, CONSIGMENT_START, CONSIGMENT_END, STATE, DELEVERY_TYPE, PROVIDER," +
                           "LIKES, REGISTRATION_DATE, LEAST_LEASE_DAY, SIZE)" +
                           "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? ,?)",
@@ -71,12 +67,8 @@ public class ProductDao {
     }
 
     public void update(Product product) {
-        Object[] params = {product.getName(), product.getImageUrl(), product.getContents(), product.getCostPerDay(),
-                product.getDeposit(), product.getSalePrice(), product.getCategory(),
-                product.getConsigmentStart(), product.getConsigmentEnd(), product.getState(),
-                product.getDeleveryType(), product.getProviderId(), product.getLikes(),
-                product.getRegDate(), product.getLeastLeaseDay(), product.getSize()};
-        jdbcTemplate.update("UPDATE PRODUCT SET NAME = ?, IMAGE = ?, CONTENTS = ?, COST_PER_DAY = ?, DEPOSIT = ?," +
+        Object[] params = getFullParams(product);
+        jdbcTemplate.update("UPDATE PRODUCT SET NAME = ?, THUMBNAIL_IMAGE = ?, CONTENTS = ?, COST_PER_DAY = ?, DEPOSIT = ?," +
                 " SALE_PRICE = ?,CATEGORY = ?, CONSIGMENT_START = ?, CONSIGMENT_END = ?, STATE = ?, DELEVERY_TYPE = ?" +
                 ", PROVIDER = ?, LIKES = ?, REGISTRATION_DATE = ?, LEASET_LEASE_DAY = ?, SIZE = ?", params);
 
@@ -117,7 +109,7 @@ public class ProductDao {
         product.setDeposit(rs.getInt("DEPOSIT"));
         product.setId(rs.getInt("ID"));
 
-        product.setImageUrl(rs.getString("IMAGE"));
+        product.setThumbnailImage(rs.getString("THUMBNAIL_IMAGE"));
         product.setName(rs.getString("NAME"));
         product.setProviderId(rs.getString("PROVIDER"));
         product.setSalePrice(rs.getInt("SALE_PRICE"));
@@ -127,5 +119,13 @@ public class ProductDao {
         product.setLeastLeaseDay(rs.getInt("LEAST_LEASE_DAY"));
         product.setSize(rs.getString("SIZE"));
         return product;
+    }
+
+    private Object[] getFullParams(Product product) {
+        return new Object[]{product.getName(), product.getThumbnailImage(), product.getContents(), product.getCostPerDay(),
+                product.getDeposit(), product.getSalePrice(), product.getCategory(),
+                product.getConsigmentStart(), product.getConsigmentEnd(), product.getState(),
+                product.getDeleveryType(), product.getProviderId(), product.getLikes(),
+                product.getRegDate(), product.getLeastLeaseDay(), product.getSize()};
     }
 }
