@@ -1,16 +1,16 @@
-package com.newoneplus.dresshub;
+package com.newoneplus.dresshub.Dao;
 
-import org.apache.tomcat.jni.Time;
+import com.newoneplus.dresshub.Dao.DaoFactory;
+import com.newoneplus.dresshub.Dao.ProductDao;
+import com.newoneplus.dresshub.Data.Product;
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.matchers.JUnitMatchers.*;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
 
 import static org.hamcrest.CoreMatchers.is;

@@ -1,8 +1,6 @@
-package com.newoneplus.dresshub;
+package com.newoneplus.dresshub.Data;
 
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
 
 import java.util.Date;
 

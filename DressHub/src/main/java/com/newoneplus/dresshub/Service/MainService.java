@@ -1,7 +1,9 @@
-package com.newoneplus.dresshub;
+package com.newoneplus.dresshub.Service;
 
 
-import org.apache.catalina.User;
+import com.newoneplus.dresshub.Data.Product;
+import com.newoneplus.dresshub.Dao.ProductDao;
+import com.newoneplus.dresshub.Dao.UserDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

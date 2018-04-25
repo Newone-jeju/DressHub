@@ -1,16 +1,15 @@
-package com.newoneplus.dresshub;
+package com.newoneplus.dresshub.Dao;
 
+import com.newoneplus.dresshub.Dao.DaoFactory;
+import com.newoneplus.dresshub.Dao.UserDao;
+import com.newoneplus.dresshub.Data.User;
 import org.junit.Before;
 import org.junit.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import org.springframework.context.annotation.PropertySource;
-import org.springframework.test.context.ContextConfiguration;
 
 import java.sql.SQLException;
 
-import static org.hamcrest.MatcherAssert.*;
 import static org.hamcrest.CoreMatchers.*;
 public class UserTest {
     private UserDao userDao;
