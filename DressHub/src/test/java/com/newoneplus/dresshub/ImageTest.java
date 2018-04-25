@@ -11,20 +11,29 @@ import java.io.File;
 import java.io.IOException;
 
 public class ImageTest extends Component{
+    String path = System.getProperty("user.dir") + "/src/test/java/com/newoneplus/dresshub/";
 
     @Test
     public void samllImageTest() throws IOException {
+        System.out.println(path);
         ImageProcesser imageProcesser = new ImageProcesser();
-        File imageFile = new File("/home/voidbluelabtop/Desktop/javaprogramming/DressHub/DressHub/src/test/java/com/newoneplus/dresshub/big_jean.jpg");
+        File imageFile = new File(path + "big_jean.jpg");
         BufferedImage image = imageProcesser.getSmallImage(ImageIO.createImageInputStream(imageFile));
-        ImageIO.write(image,"jpg", new File("/home/voidbluelabtop/Desktop/javaprogramming/DressHub/DressHub/src/test/java/com/newoneplus/dresshub/smallSizeImage.jpg"));
+        ImageIO.write(image,"jpg", new File(path + "smallSizeImage.jpg"));
     }
     @Test
     public void mediumImageTest() throws IOException {
         ImageProcesser imageProcesser = new ImageProcesser();
-        File imageFile = new File("/home/voidbluelabtop/Desktop/javaprogramming/DressHub/DressHub/src/test/java/com/newoneplus/dresshub/big_jean.jpg");
+        File imageFile = new File(path + "big_jean.jpg");
         BufferedImage image = imageProcesser.getMediumImage(ImageIO.createImageInputStream(imageFile));
-        ImageIO.write(image,"jpg", new File("/home/voidbluelabtop/Desktop/javaprogramming/DressHub/DressHub/src/test/java/com/newoneplus/dresshub/mediumSizeImage.jpg"));
+        ImageIO.write(image,"jpg", new File(path + "mediumSizeImage.jpg"));
+    }
+    @Test
+    public void originImageTest() throws IOException {
+        ImageProcesser imageProcesser = new ImageProcesser();
+        File imageFile = new File(path + "big_jean.jpg");
+        BufferedImage image = imageProcesser.getOriginImage(ImageIO.createImageInputStream(imageFile));
+        ImageIO.write(image,"jpg", new File(path + "originSizeImage.jpg"));
 
     }
 
