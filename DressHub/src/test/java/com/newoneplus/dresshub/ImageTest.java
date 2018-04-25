@@ -15,7 +15,6 @@ public class ImageTest extends Component{
 
     @Test
     public void samllImageTest() throws IOException {
-        System.out.println(path);
         ImageProcesser imageProcesser = new ImageProcesser();
         File imageFile = new File(path + "big_jean.jpg");
         BufferedImage image = imageProcesser.getSmallImage(ImageIO.createImageInputStream(imageFile));
