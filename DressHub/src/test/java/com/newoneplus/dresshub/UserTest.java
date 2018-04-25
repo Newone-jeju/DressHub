@@ -63,4 +63,11 @@ public class UserTest {
 //        assertThat(insertedUser.isCertification(), is(user.isCertification()));
 //        assertThat(insertedUser.getResisterDate(), is(user.getResisterDate()));
     }
+
+    @Test
+    public void loginCheck(){
+        // 작업 예정
+        // get id, password 만 매핑하면 되겠지 .ㅎ
+        
+    }
 }
