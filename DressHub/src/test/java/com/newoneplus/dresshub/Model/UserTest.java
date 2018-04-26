@@ -1,6 +1,5 @@
-package com.newoneplus.dresshub.Dao;
+package com.newoneplus.dresshub.Model;
 
-import com.newoneplus.dresshub.Model.DaoFactory;
 import com.newoneplus.dresshub.UserDao;
 import com.newoneplus.dresshub.User;
 import org.junit.Before;
@@ -11,6 +10,8 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 import java.sql.SQLException;
 
 import static org.hamcrest.CoreMatchers.*;
+import static org.junit.Assert.assertThat;
+
 public class UserTest {
     private UserDao userDao;
     @Before

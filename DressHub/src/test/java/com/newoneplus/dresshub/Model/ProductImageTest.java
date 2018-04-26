@@ -1,8 +1,5 @@
-package com.newoneplus.dresshub.Dao;
+package com.newoneplus.dresshub.Model;
 
-import com.newoneplus.dresshub.Model.DaoFactory;
-import com.newoneplus.dresshub.Model.ProductImage;
-import com.newoneplus.dresshub.Model.ProductImageDao;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
@@ -51,12 +48,13 @@ public class ProductImageTest {
         ProductImage productImage = new ProductImage();
         productImage.setProductId(1);
         productImage.setImage("testurl");
-        productImage.setImageSize("testsize");
+        productImage.setImageSize("testSize");
 
         int id = productImageDao.insert(productImage);
 
         productImage.setImage("updateTestUrl");
-        productImage.setImage("updateTestSize");
+        productImage.setImageSize("updateTestSize");
+        productImage.setId(id);
         productImageDao.update(productImage);
 
         ProductImage updateProductImage = productImageDao.get(id);

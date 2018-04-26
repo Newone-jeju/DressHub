@@ -66,10 +66,7 @@ public class ProductImageDao {
     }
 
     public void update(ProductImage productImage) {
-        Object[] params = {};
-        jdbcTemplate.update("UPDATE PRODUCT SET NAME = ?, IMAGE = ?, CONTENTS = ?, COST_PER_DAY = ?, DEPOSIT = ?," +
-                " SALE_PRICE = ?,CATEGORY = ?, CONSIGMENT_START = ?, CONSIGMENT_END = ?, STATE = ?, DELEVERY_TYPE = ?" +
-                ", PROVIDER = ?", params);
-
+        Object[] params = {productImage.getProductId(), productImage.getImage(), productImage.getImageSize(), productImage.getId()};
+        jdbcTemplate.update("UPDATE PRODUCT_IMAGE SET PRODUCT_ID = ?, IMAGE = ?, IMAGE_SIZE = ?  WHERE ID = ?", params);
     }
 }

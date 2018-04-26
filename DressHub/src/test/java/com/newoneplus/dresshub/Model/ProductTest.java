@@ -1,8 +1,5 @@
-package com.newoneplus.dresshub.Dao;
+package com.newoneplus.dresshub.Model;
 
-import com.newoneplus.dresshub.Model.DaoFactory;
-import com.newoneplus.dresshub.Model.ProductDao;
-import com.newoneplus.dresshub.Model.Product;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
