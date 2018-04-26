@@ -25,6 +25,8 @@ public class ProductImageDao {
     @Value("${db.username}")
     private String username;
     JdbcTemplate jdbcTemplate = null;
+    private String sql;
+    private String sql1;
 
     public ProductImageDao(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
@@ -80,10 +82,24 @@ public class ProductImageDao {
     }
 
     public ArrayList<ProductImage> getProductImageList(int product_id, String arrangeQuery) {
-        ArrayList<ProductImage> productImageList = null;
+        String sql = "select * from product_image where product_id = ? order by ?";
         Object[] params = {product_id, arrangeQuery};
+        return getProductImages(sql, params);
+    }
+
+
+
+    public ArrayList<ProductImage> getProductImageList(String arrangeQuery) {
+        String sql = "select * from product_image  order by ?";
+        Object[] params = { arrangeQuery};
+        return getProductImages(sql, params);
+    }
+
+
+    private ArrayList<ProductImage> getProductImages(String sql, Object[] params) {
+        ArrayList<ProductImage> productImageList = null;
         try{
-            productImageList = (ArrayList<ProductImage>) jdbcTemplate.queryForObject("select * from product_image where product_id = ? order by ?",params, (RowMapper<Object>) (rs, rowNum) -> {
+            productImageList = (ArrayList<ProductImage>) jdbcTemplate.queryForObject(sql,params, (RowMapper<Object>) (rs, rowNum) -> {
                 List<ProductImage> productImages = new ArrayList<>();
                 do  {
                     ProductImage productImage = new ProductImage();
@@ -100,5 +116,4 @@ public class ProductImageDao {
         }
         return productImageList;
     }
-
 }

@@ -88,7 +88,12 @@ public class ProductImageTest {
     @Test
     public void getProductImageList(){
         ArrayList<ProductImage> productImageList= productImageDao.getProductImageList(1, "ID DESC");
-        assertThat(productImageList.size(), is(16));
+        assertThat(productImageList.size(), is(18));
+    }
 
+    @Test
+    public void getList(){
+        ArrayList<ProductImage> productImagesList = productImageDao.getProductImageList("ID DESC");
+        assertThat(productImagesList.size(), is(18));
     }
 }
