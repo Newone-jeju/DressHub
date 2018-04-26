@@ -6,6 +6,8 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.notNullValue;
+import static org.hamcrest.CoreMatchers.nullValue;
 import static org.junit.Assert.assertThat;
 
 public class ProductImageTest {
@@ -63,5 +65,26 @@ public class ProductImageTest {
     }
 
 
+    @Test
+    public void delete(){
+        ProductImage productImage = new ProductImage();
+        productImage.setProductId(1);
+        productImage.setImage("testurl");
+        productImage.setImageSize("testSize");
 
+        int id = productImageDao.insert(productImage);
+
+        productImageDao.delete(id);
+
+        ProductImage deleteProductImage= productImageDao.get(id);
+
+        assertThat(deleteProductImage, nullValue());
+
+
+    }
+
+    @Test
+    public void getProductImageList(){
+
+    }
 }

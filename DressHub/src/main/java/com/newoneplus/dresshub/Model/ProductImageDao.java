@@ -69,4 +69,11 @@ public class ProductImageDao {
         Object[] params = {productImage.getProductId(), productImage.getImage(), productImage.getImageSize(), productImage.getId()};
         jdbcTemplate.update("UPDATE PRODUCT_IMAGE SET PRODUCT_ID = ?, IMAGE = ?, IMAGE_SIZE = ?  WHERE ID = ?", params);
     }
+
+
+    public void delete(int id) {
+        Object[] params = {id};
+        jdbcTemplate.update("DELETE FROM PRODUCT_IMAGE WHERE ID = ?", params);
+    }
+
 }
