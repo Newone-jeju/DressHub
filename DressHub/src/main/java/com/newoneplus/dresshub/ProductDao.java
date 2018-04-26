@@ -23,7 +23,7 @@ public class ProductDao {
     private String password;
     @Value("${db.username}")
     private String username;
-    JdbcTemplate jdbcTemplate = null;
+        JdbcTemplate jdbcTemplate = null;
 
     public ProductDao(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
@@ -48,32 +48,29 @@ public class ProductDao {
 
     public Integer insert(Product product) {
         KeyHolder keyHolder = new GeneratedKeyHolder();
-        Object[] params = {product.getName(), product.getImageUrl(), product.getContents(), product.getCostPerDay(),
-                        product.getDeposit(), product.getSalePrice(), product.getCategory(),
-                        product.getConsigmentStart(), product.getConsigmentEnd(), product.getState(),
-                        product.getDeleveryType(), product.getProviderId()};
+        Object[] params = getFullParams(product);
         jdbcTemplate.update(con -> {
             @Cleanup
             PreparedStatement preparedStatement = con.prepareStatement(
-                  "INSERT INTO PRODUCT(NAME, IMAGE, CONTENTS, COST_PER_DAY, DEPOSIT, SALE_PRICE," +
-                          "CATEGORY, CONSIGMENT_START, CONSIGMENT_END, STATE, DELEVERY_TYPE, PROVIDER)" +
-                          "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+                  "INSERT INTO PRODUCT(NAME, THUMBNAIL_IMAGE, CONTENTS, COST_PER_DAY, DEPOSIT, SALE_PRICE," +
+                          "CATEGORY, CONSIGMENT_START, CONSIGMENT_END, STATE, DELEVERY_TYPE, PROVIDER," +
+                          "LIKES, REGISTRATION_DATE, LEAST_LEASE_DAY, SIZE)" +
+                          "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? ,?)",
                   Statement.RETURN_GENERATED_KEYS);
           for(int i = 0 ; i < params.length ; i++){
               preparedStatement.setObject(i+1, params[i]);
           }
           return preparedStatement;
+
         }, keyHolder);
         return keyHolder.getKey().intValue();
     }
 
     public void update(Product product) {
-        Object[] params = {product.getName(), product.getImageUrl(), product.getContents(), product.getCostPerDay(),
-                    product.getDeposit(), product.getSalePrice(), product.getCategory(), product.getConsigmentStart(),
-                    product.getConsigmentEnd(), product.getState(), product.getDeleveryType(), product.getProviderId()};
-        jdbcTemplate.update("UPDATE PRODUCT SET NAME = ?, IMAGE = ?, CONTENTS = ?, COST_PER_DAY = ?, DEPOSIT = ?," +
+        Object[] params = getFullParams(product);
+        jdbcTemplate.update("UPDATE PRODUCT SET NAME = ?, THUMBNAIL_IMAGE = ?, CONTENTS = ?, COST_PER_DAY = ?, DEPOSIT = ?," +
                 " SALE_PRICE = ?,CATEGORY = ?, CONSIGMENT_START = ?, CONSIGMENT_END = ?, STATE = ?, DELEVERY_TYPE = ?" +
-                ", PROVIDER = ?", params);
+                ", PROVIDER = ?, LIKES = ?, REGISTRATION_DATE = ?, LEASET_LEASE_DAY = ?, SIZE = ?", params);
 
     }
 
@@ -102,21 +99,33 @@ public class ProductDao {
 
 
     private Product makeValidProduct(ResultSet rs) throws SQLException {
-        Product selectesProduct = new Product();
-        selectesProduct.setCategory(rs.getString("CATEGORY"));
-        selectesProduct.setConsigmentEnd(rs.getDate("CONSIGMENT_END"));
-        selectesProduct.setConsigmentStart(rs.getDate("CONSIGMENT_START"));
-        selectesProduct.setContents(rs.getString("CONTENTS"));
-        selectesProduct.setCostPerDay(rs.getInt("COST_PER_DAY"));
-        selectesProduct.setDeleveryType(rs.getString("DELEVERY_TYPE"));
-        selectesProduct.setDeposit(rs.getInt("DEPOSIT"));
-        selectesProduct.setId(rs.getInt("ID"));
+        Product product = new Product();
+        product.setCategory(rs.getString("CATEGORY"));
+        product.setConsigmentEnd(rs.getDate("CONSIGMENT_END"));
+        product.setConsigmentStart(rs.getDate("CONSIGMENT_START"));
+        product.setContents(rs.getString("CONTENTS"));
+        product.setCostPerDay(rs.getInt("COST_PER_DAY"));
+        product.setDeleveryType(rs.getString("DELEVERY_TYPE"));
+        product.setDeposit(rs.getInt("DEPOSIT"));
+        product.setId(rs.getInt("ID"));
 
-        selectesProduct.setImageUrl(rs.getString("IMAGE"));
-        selectesProduct.setName(rs.getString("NAME"));
-        selectesProduct.setProviderId(rs.getString("PROVIDER"));
-        selectesProduct.setSalePrice(rs.getInt("SALE_PRICE"));
-        selectesProduct.setState(rs.getString("STATE"));
-        return selectesProduct;
+        product.setThumbnailImage(rs.getString("THUMBNAIL_IMAGE"));
+        product.setName(rs.getString("NAME"));
+        product.setProviderId(rs.getString("PROVIDER"));
+        product.setSalePrice(rs.getInt("SALE_PRICE"));
+        product.setState(rs.getString("STATE"));
+        product.setLikes(rs.getInt("LIKES"));
+        product.setRegDate(rs.getDate("REGISTRATION_DATE"));
+        product.setLeastLeaseDay(rs.getInt("LEAST_LEASE_DAY"));
+        product.setSize(rs.getString("SIZE"));
+        return product;
+    }
+
+    private Object[] getFullParams(Product product) {
+        return new Object[]{product.getName(), product.getThumbnailImage(), product.getContents(), product.getCostPerDay(),
+                product.getDeposit(), product.getSalePrice(), product.getCategory(),
+                product.getConsigmentStart(), product.getConsigmentEnd(), product.getState(),
+                product.getDeleveryType(), product.getProviderId(), product.getLikes(),
+                product.getRegDate(), product.getLeastLeaseDay(), product.getSize()};
     }
 }

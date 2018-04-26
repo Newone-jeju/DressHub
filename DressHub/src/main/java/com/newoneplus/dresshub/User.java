@@ -18,7 +18,4 @@ public class User {
     private boolean certification;
     private Date resisterDate;
     private boolean isEnabled;
-
-
-
 }
