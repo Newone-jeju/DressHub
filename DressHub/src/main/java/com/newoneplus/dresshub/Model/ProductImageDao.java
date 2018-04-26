@@ -1,9 +1,15 @@
 package com.newoneplus.dresshub.Model;
 
+import lombok.Cleanup;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.jdbc.support.KeyHolder;
+
+import java.sql.PreparedStatement;
+import java.sql.Statement;
 
 public class ProductImageDao {
 
@@ -42,7 +48,28 @@ public class ProductImageDao {
     }
 
 
+    public int insert(ProductImage productImage) {
+        KeyHolder keyHolder = new GeneratedKeyHolder();
+        Object[] params = {productImage.getProductId(), productImage.getImage(), productImage.getImageSize()};
+        jdbcTemplate.update(con -> {
+            @Cleanup
+            PreparedStatement preparedStatement = con.prepareStatement(
+                    "INSERT INTO PRODUCT_IMAGE(PRODUCT_ID, IMAGE, IMAGE_SIZE)" +
+                            "VALUES (?, ?, ?)",
+                    Statement.RETURN_GENERATED_KEYS);
+            for(int i = 0 ; i < params.length ; i++){
+                preparedStatement.setObject(i+1, params[i]);
+            }
+            return preparedStatement;
+        }, keyHolder);
+        return keyHolder.getKey().intValue();
+    }
 
+    public void update(ProductImage productImage) {
+        Object[] params = {};
+        jdbcTemplate.update("UPDATE PRODUCT SET NAME = ?, IMAGE = ?, CONTENTS = ?, COST_PER_DAY = ?, DEPOSIT = ?," +
+                " SALE_PRICE = ?,CATEGORY = ?, CONSIGMENT_START = ?, CONSIGMENT_END = ?, STATE = ?, DELEVERY_TYPE = ?" +
+                ", PROVIDER = ?", params);
 
-
+    }
 }

@@ -30,4 +30,40 @@ public class ProductImageTest {
 
     }
 
+    @Test
+    public void add(){
+        ProductImage productImage = new ProductImage();
+        productImage.setProductId(1);
+        productImage.setImage("testurl");
+        productImage.setImageSize("testsize");
+
+        int id = productImageDao.insert(productImage);
+
+        ProductImage insertProductImageDao = productImageDao.get(id);
+
+        assertThat(insertProductImageDao.getId(), is(id));
+        assertThat(insertProductImageDao.getImage(), is(productImage.getImage()));
+        assertThat(insertProductImageDao.getImageSize(), is(productImage.getImageSize()));
+    }
+
+    @Test
+    public void update(){
+        ProductImage productImage = new ProductImage();
+        productImage.setProductId(1);
+        productImage.setImage("testurl");
+        productImage.setImageSize("testsize");
+
+        int id = productImageDao.insert(productImage);
+
+        productImage.setImage("updateTestUrl");
+        productImage.setImage("updateTestSize");
+        productImageDao.update(productImage);
+
+        ProductImage updateProductImage = productImageDao.get(id);
+        assertThat(updateProductImage.getImage(), is(productImage.getImage()) );
+        assertThat(updateProductImage.getImageSize(), is(productImage.getImageSize()) );
+    }
+
+
+
 }

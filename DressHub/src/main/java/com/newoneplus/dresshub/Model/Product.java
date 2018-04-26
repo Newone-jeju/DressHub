@@ -1,7 +1,10 @@
 package com.newoneplus.dresshub.Model;
 
 import lombok.Data;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
+import java.util.ArrayList;
 import java.util.Date;
 
 @Data
@@ -9,6 +12,7 @@ public class Product {
     Integer id;
     String name;
     String thumbnailImage;
+    ArrayList<MultipartFile> image;
     String contents;
     Integer costPerDay;
     Integer deposit;
@@ -20,6 +24,8 @@ public class Product {
     String deleveryType;
     String providerId;
 
+
+
     @Override
     public boolean equals(Object o){
         boolean isEqual = true;
@@ -28,7 +34,7 @@ public class Product {
         if (o instanceof Product){
             if(!name.equals(((Product) o).getName())){
                 isEqual = false;
-            }else if(!thumbnailImage.equals(((Product) o).getThumbnailImage())){
+            }else if(!thumbnailImage.equals(((Product) o).getThumbnailImage())) {
                 isEqual = false;
             }else if(!contents.equals(((Product) o).getContents())){
                 isEqual = false;
