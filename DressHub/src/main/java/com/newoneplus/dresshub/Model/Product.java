@@ -23,6 +23,10 @@ public class Product {
     String state;
     String deleveryType;
     String providerId;
+    Integer likes;
+    Date regDate;
+    Integer leastLeaseDay;
+    String size;
 
 
 
@@ -34,7 +38,7 @@ public class Product {
         if (o instanceof Product){
             if(!name.equals(((Product) o).getName())){
                 isEqual = false;
-            }else if(!thumbnailImage.equals(((Product) o).getThumbnailImage())) {
+            }else if(!thumbnailImage.equals(((Product) o).getThumbnailImage())){
                 isEqual = false;
             }else if(!contents.equals(((Product) o).getContents())){
                 isEqual = false;
@@ -55,6 +59,14 @@ public class Product {
             }else if(!deleveryType.equals(((Product) o).getDeleveryType())){
                 isEqual = false;
             }else if(!providerId.equals(((Product) o).getProviderId())){
+                isEqual = false;
+            }else if(!likes.equals(((Product) o).getLikes())){
+                isEqual = false;
+            }else if(!regDate.equals(((Product) o).getRegDate())){
+                isEqual = false;
+            }else if(!leastLeaseDay.equals(((Product) o).getLeastLeaseDay())){
+                isEqual = false;
+            }else if(!size.equals(((Product) o).getSize())){
                 isEqual = false;
             }
         }
