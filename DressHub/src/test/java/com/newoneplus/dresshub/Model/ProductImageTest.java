@@ -5,6 +5,8 @@ import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
+import java.util.ArrayList;
+
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.hamcrest.CoreMatchers.nullValue;
@@ -85,6 +87,8 @@ public class ProductImageTest {
 
     @Test
     public void getProductImageList(){
+        ArrayList<ProductImage> productImageList= productImageDao.getProductImageList(1, "ID DESC");
+        assertThat(productImageList.size(), is(16));
 
     }
 }

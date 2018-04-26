@@ -85,10 +85,10 @@ public class ProductDao {
             productList = (ArrayList<Product>) jdbcTemplate.queryForObject
                     ("SELECT * FROM PRODUCT ORDER BY " + arrangeQuery, (RowMapper<Object>) (rs, rowNum) -> {
                 List<Product> products = new ArrayList<>();
-                while (rs.next()) {
+                do  {
                     Product selectesProduct = makeValidProduct(rs);
                     products.add(selectesProduct);
-                }
+                }while((rs.next()));
                 return products;
             });
         }catch (EmptyResultDataAccessException e){

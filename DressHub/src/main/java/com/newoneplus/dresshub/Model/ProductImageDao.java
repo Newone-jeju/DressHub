@@ -10,6 +10,9 @@ import org.springframework.jdbc.support.KeyHolder;
 
 import java.sql.PreparedStatement;
 import java.sql.Statement;
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ProductImageDao {
 
@@ -74,6 +77,28 @@ public class ProductImageDao {
     public void delete(int id) {
         Object[] params = {id};
         jdbcTemplate.update("DELETE FROM PRODUCT_IMAGE WHERE ID = ?", params);
+    }
+
+    public ArrayList<ProductImage> getProductImageList(int product_id, String arrangeQuery) {
+        ArrayList<ProductImage> productImageList = null;
+        Object[] params = {product_id, arrangeQuery};
+        try{
+            productImageList = (ArrayList<ProductImage>) jdbcTemplate.queryForObject("select * from product_image where product_id = ? order by ?",params, (RowMapper<Object>) (rs, rowNum) -> {
+                List<ProductImage> productImages = new ArrayList<>();
+                do  {
+                    ProductImage productImage = new ProductImage();
+                    productImage.setId(rs.getInt("id"));
+                    productImage.setProductId(rs.getInt("product_id"));
+                    productImage.setImage(rs.getString("image"));
+                    productImage.setImageSize(rs.getString("image_size"));
+                    productImages.add(productImage);
+                }while((rs.next()));
+                return productImages;
+            });
+        }catch (EmptyResultDataAccessException e){
+            productImageList = null;
+        }
+        return productImageList;
     }
 
 }
