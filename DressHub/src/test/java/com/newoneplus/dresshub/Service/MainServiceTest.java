@@ -1,12 +1,10 @@
 package com.newoneplus.dresshub.Service;
 
 
-import com.newoneplus.dresshub.Dao.DaoFactory;
-import com.newoneplus.dresshub.Data.Product;
-import com.newoneplus.dresshub.Service.MainService;
+import com.newoneplus.dresshub.Model.DaoFactory;
+import com.newoneplus.dresshub.Model.Product;
 import org.junit.Before;
 import org.junit.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 

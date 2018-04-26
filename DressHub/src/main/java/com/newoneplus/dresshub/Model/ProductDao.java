@@ -1,6 +1,5 @@
-package com.newoneplus.dresshub.Dao;
+package com.newoneplus.dresshub.Model;
 
-import com.newoneplus.dresshub.Data.Product;
 import lombok.Cleanup;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -47,7 +46,7 @@ public class ProductDao {
 
     public Integer insert(Product product) {
         KeyHolder keyHolder = new GeneratedKeyHolder();
-        Object[] params = {product.getName(), product.getImageUrl(), product.getContents(), product.getCostPerDay(),
+        Object[] params = {product.getName(), product.getThumbnailImage(), product.getContents(), product.getCostPerDay(),
                         product.getDeposit(), product.getSalePrice(), product.getCategory(),
                         product.getConsigmentStart(), product.getConsigmentEnd(), product.getState(),
                         product.getDeleveryType(), product.getProviderId()};
@@ -67,7 +66,7 @@ public class ProductDao {
     }
 
     public void update(Product product) {
-        Object[] params = {product.getName(), product.getImageUrl(), product.getContents(), product.getCostPerDay(),
+        Object[] params = {product.getName(), product.getThumbnailImage(), product.getContents(), product.getCostPerDay(),
                     product.getDeposit(), product.getSalePrice(), product.getCategory(), product.getConsigmentStart(),
                     product.getConsigmentEnd(), product.getState(), product.getDeleveryType(), product.getProviderId()};
         jdbcTemplate.update("UPDATE PRODUCT SET NAME = ?, IMAGE = ?, CONTENTS = ?, COST_PER_DAY = ?, DEPOSIT = ?," +
@@ -111,7 +110,7 @@ public class ProductDao {
         selectesProduct.setDeposit(rs.getInt("DEPOSIT"));
         selectesProduct.setId(rs.getInt("ID"));
 
-        selectesProduct.setImageUrl(rs.getString("IMAGE"));
+        selectesProduct.setThumbnailImage(rs.getString("IMAGE"));
         selectesProduct.setName(rs.getString("NAME"));
         selectesProduct.setProviderId(rs.getString("PROVIDER"));
         selectesProduct.setSalePrice(rs.getInt("SALE_PRICE"));

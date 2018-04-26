@@ -1,9 +1,9 @@
 package com.newoneplus.dresshub.Service;
 
 
-import com.newoneplus.dresshub.Data.Product;
-import com.newoneplus.dresshub.Dao.ProductDao;
-import com.newoneplus.dresshub.Dao.UserDao;
+import com.newoneplus.dresshub.Model.Product;
+import com.newoneplus.dresshub.Model.ProductDao;
+import com.newoneplus.dresshub.UserDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

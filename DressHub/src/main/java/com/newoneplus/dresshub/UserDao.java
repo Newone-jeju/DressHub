@@ -1,6 +1,5 @@
-package com.newoneplus.dresshub.Dao;
+package com.newoneplus.dresshub;
 
-import com.newoneplus.dresshub.Data.User;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import java.sql.SQLException;

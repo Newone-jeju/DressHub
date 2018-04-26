@@ -1,7 +1,7 @@
 package com.newoneplus.dresshub.Service;
 
-import com.newoneplus.dresshub.Dao.DaoFactory;
-import com.newoneplus.dresshub.Data.Product;
+import com.newoneplus.dresshub.Model.DaoFactory;
+import com.newoneplus.dresshub.Model.Product;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
@@ -21,13 +21,13 @@ public class ProductServiceTest {
     public void productResister(){
         Product product = new Product;
         product.setCategory("categoryTest");
-        product.setConsigmentEnd(2017-05-04);
-        product.setConsigmentStart(2017-04-04);
+        product.setConsigmentEnd("2017-05-04");
+        product.setConsigmentStart("2017-04-04");
         product.setContents("contentsTest");
         product.setCostPerDay(1);
         product.setDeleveryType("deleveryTypeTest");
         product.setDeposit(2);
-        product.setImageUrl("imageUrlTest");
+        product.setThumbnailImage(null);
         product.setName("nameTest");
         product.setProviderId("user1");
         product.setSalePrice(3);

@@ -1,9 +1,8 @@
-package com.newoneplus.dresshub.Dao;
+package com.newoneplus.dresshub.Model;
 
-import com.newoneplus.dresshub.Dao.ProductDao;
-import com.newoneplus.dresshub.Dao.UserDao;
 import com.newoneplus.dresshub.Service.MainService;
 import com.newoneplus.dresshub.Service.ProductService;
+import com.newoneplus.dresshub.UserDao;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -64,4 +63,6 @@ public class DaoFactory {
 
     @Bean
     public ProductService productService(){return new ProductService();}
+    @Bean
+    public ProductImageDao productImageDao(){return new ProductImageDao(jdbcTemplate());}
 }

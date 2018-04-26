@@ -2,7 +2,7 @@ package com.newoneplus.dresshub.Controller;
 
 
 import com.newoneplus.dresshub.Service.MainService;
-import com.newoneplus.dresshub.Data.Product;
+import com.newoneplus.dresshub.Model.Product;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

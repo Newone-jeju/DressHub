@@ -1,8 +1,8 @@
 package com.newoneplus.dresshub.Dao;
 
-import com.newoneplus.dresshub.Dao.DaoFactory;
-import com.newoneplus.dresshub.Dao.UserDao;
-import com.newoneplus.dresshub.Data.User;
+import com.newoneplus.dresshub.Model.DaoFactory;
+import com.newoneplus.dresshub.UserDao;
+import com.newoneplus.dresshub.User;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;

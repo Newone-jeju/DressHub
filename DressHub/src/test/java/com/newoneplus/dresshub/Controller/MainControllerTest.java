@@ -1,7 +1,7 @@
 package com.newoneplus.dresshub.Controller;
 
-import com.newoneplus.dresshub.Dao.DaoFactory;
-import com.newoneplus.dresshub.Dao.ProductDao;
+import com.newoneplus.dresshub.Model.DaoFactory;
+import com.newoneplus.dresshub.Model.ProductDao;
 import org.junit.Before;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;

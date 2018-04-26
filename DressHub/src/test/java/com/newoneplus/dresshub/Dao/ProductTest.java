@@ -1,8 +1,8 @@
 package com.newoneplus.dresshub.Dao;
 
-import com.newoneplus.dresshub.Dao.DaoFactory;
-import com.newoneplus.dresshub.Dao.ProductDao;
-import com.newoneplus.dresshub.Data.Product;
+import com.newoneplus.dresshub.Model.DaoFactory;
+import com.newoneplus.dresshub.Model.ProductDao;
+import com.newoneplus.dresshub.Model.Product;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
@@ -62,7 +62,7 @@ public class ProductTest {
         product.setCostPerDay(1);
         product.setDeleveryType("deleveryTypeTest");
         product.setDeposit(2);
-        product.setImageUrl("imageUrlTest");
+        product.setThumbnailImage("imageUrlTest");
         product.setName("nameTest");
         product.setProviderId("user1");
         product.setSalePrice(3);

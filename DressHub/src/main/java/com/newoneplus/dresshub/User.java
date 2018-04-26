@@ -1,4 +1,4 @@
-package com.newoneplus.dresshub.Data;
+package com.newoneplus.dresshub;
 
 import lombok.Data;
 
