@@ -14,16 +14,18 @@ public class MainController {
     private MainService mainService;
 
 
-    @RequestMapping(value = "/api/products", method = RequestMethod.GET)
+    @RequestMapping(value = "/products", method = RequestMethod.GET)
     @ResponseBody
     public List<Product> getProductList() throws ClassNotFoundException {
         return mainService.getProductList();
     }
 
-    @RequestMapping(value = "/api/products/{paramid}", method = RequestMethod.GET)
+    @RequestMapping(value = "/products/{paramid}", method = RequestMethod.GET)
     public Product getProduct(@PathVariable int paramid) throws ClassNotFoundException {
         return mainService.getProduct(paramid);
     }
+
+    @RequestMapping(value="/products/new")
 
 
 }
