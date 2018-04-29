@@ -5,10 +5,7 @@ import com.newoneplus.dresshub.Model.Product;
 import com.newoneplus.dresshub.Model.ProductImage;
 import com.newoneplus.dresshub.Service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
@@ -23,7 +20,7 @@ public class ProductController {
 
 
     @RequestMapping(value = "/products", method = RequestMethod.POST)
-    public String insert(Product product){
+    public String insert(@RequestBody Product product){
         String filename = "";
         // 첨부파일(상품사진)이 있으면
         if(!product.getImage().isEmpty()){
