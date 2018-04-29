@@ -1,16 +1,13 @@
 package com.newoneplus.dresshub;
 
-import org.apache.tomcat.jni.Time;
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.matchers.JUnitMatchers.*;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
 
 import static org.hamcrest.CoreMatchers.is;
@@ -62,7 +59,7 @@ public class ProductTest {
         product.setCostPerDay(1);
         product.setDeleveryType("deleveryTypeTest");
         product.setDeposit(2);
-        product.setImageUrl("imageUrlTest");
+//        product.setImageUrl("imageUrlTest");
         product.setName("nameTest");
         product.setProviderId("user1");
         product.setSalePrice(3);
