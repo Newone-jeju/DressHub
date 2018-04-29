@@ -35,8 +35,6 @@ public class UserTest {
 
     @Test
     public void insert() throws SQLException, ClassNotFoundException, ParseException {
-//        Date date = new Date(0);
-//         전부 삭제
         userDao.deleteAll();
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
         Date date = null;
@@ -66,20 +64,10 @@ public class UserTest {
         assertThat(insertedUser.isOpenPrivateInfo(), is(user.isOpenPrivateInfo()));
         assertThat(insertedUser.isCertification(), is(user.isCertification()));
         assertThat(insertedUser.getResisterDate(), is(user.getResisterDate()));
+
     }
 
 
-
-
-//    @Test
-//    public void userLogin(){
-//        String id = "user1";
-//        String password = "0405";
-//        User user = userDao.loginCheck(id, password);
-//        assertThat(user.getId(), is(id));
-//        assertThat(user.getPassword(), is(password));
-//
-//    }
 
 //
     @Test
