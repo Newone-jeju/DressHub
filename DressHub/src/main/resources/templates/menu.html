@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="utf-8">
-    <link rel="stylesheet" type="text/css" href="css/menu.css"  />
+    <link rel="stylesheet" type="text/css" th:href="@{/css/menu.css}"  />
 
     <title></title>
   </head>
@@ -46,7 +46,7 @@
 
     </ul>
   </nav>
-  <script src="js/menu.js">
+  <script th:src="@{/js/menu.js}">
 
   </script>
   </body>

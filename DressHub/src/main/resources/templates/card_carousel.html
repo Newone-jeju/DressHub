@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
 	<title></title>
-	<link rel="stylesheet" href="css/carousel.css">
+	<link rel="stylesheet" th:href="@{/css/carousel.css}">
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
@@ -38,7 +38,7 @@
 	
 
 
-	<script type="text/javascript" src="js/jquery-3.3.1.min.js" charset="utf-8"></script>
-	<script type="text/javascript" src="js/carousel.js" charset="utf-8"></script>
+	<script type="text/javascript" th:src="@{/js/jquery-3.3.1.min.js}" charset="utf-8"></script>
+	<script type="text/javascript" th:src="@{/js/carousel.js}" charset="utf-8"></script>
 </body>
 </html>

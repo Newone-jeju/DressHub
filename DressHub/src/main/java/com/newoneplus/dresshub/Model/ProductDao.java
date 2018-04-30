@@ -65,12 +65,12 @@ public class ProductDao {
         return keyHolder.getKey().intValue();
     }
 
-    public void update(Product product) {
+    public void update(Product product, int id) {
 
         Object[] params = getFullParams(product);
         jdbcTemplate.update("UPDATE PRODUCT SET NAME = ?, THUMBNAIL_IMAGE = ?, CONTENTS = ?, COST_PER_DAY = ?, DEPOSIT = ?," +
                 " SALE_PRICE = ?,CATEGORY = ?, CONSIGMENT_START = ?, CONSIGMENT_END = ?, STATE = ?, DELEVERY_TYPE = ?" +
-                ", PROVIDER = ?, LIKES = ?, REGISTRATION_DATE = ?, LEASET_LEASE_DAY = ?, SIZE = ?", params);
+                ", PROVIDER = ?, LIKES = ?, REGISTRATION_DATE = ?, LEAST_LEASE_DAY = ?, SIZE = ? WHERE id ="+ id, params);
 
     }
 
@@ -127,5 +127,6 @@ public class ProductDao {
                 product.getConsigmentStart(), product.getConsigmentEnd(), product.getState(),
                 product.getDeleveryType(), product.getProviderId(), product.getLikes(),
                 product.getRegDate(), product.getLeastLeaseDay(), product.getSize()};
+
     }
 }

@@ -22,11 +22,18 @@ public class ProductService {
        int a =productImageDao.insert(productImage);
     }
 
-    public void insertProduct(Product product) {
-        productDao.insert(product);
+    public Integer insertProduct(Product product) {
+       return productDao.insert(product);
+    }
+
+    public void updateProduct(int id, Product product){
+        productDao.update(product, id);
     }
 
     public ArrayList<ProductImage> getProductImageList(int id){
         return productImageDao.getProductImageList(id, "ID DESC");
+    }
+    public ArrayList<ProductImage> getProductImageList(){
+        return productImageDao.getProductImageList( "ID DESC");
     }
 }

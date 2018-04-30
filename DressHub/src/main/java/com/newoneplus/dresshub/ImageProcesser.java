@@ -5,30 +5,31 @@ import javax.imageio.stream.ImageInputStream;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.io.InputStream;
 
 
 //getBuffredImage시점에서 imageInputStream이 close됨
 public class ImageProcesser {
 
-    public BufferedImage getSmallImage(ImageInputStream imageInputStream) throws IOException {
+    public BufferedImage getSmallImage(InputStream inputStream) throws IOException {
         int smallXSize = 200;
         int smallYSize = 200;
 
-        BufferedImage newImage = getSizedImage(imageInputStream, smallXSize, smallYSize);
+        BufferedImage newImage = getSizedImage(inputStream, smallXSize, smallYSize);
         return newImage;
 
     }
 
-    public BufferedImage getMediumImage(ImageInputStream imageInputStream) throws IOException {
+    public BufferedImage getMediumImage(InputStream inputStream) throws IOException {
         int mediumXSize = 500;
         int mediumYSize = 500;
         
-        BufferedImage newImage = getSizedImage(imageInputStream, mediumXSize, mediumYSize);;
+        BufferedImage newImage = getSizedImage(inputStream, mediumXSize, mediumYSize);;
         return newImage;
     }
 
-    public BufferedImage getOriginImage(ImageInputStream imageInputStream) throws IOException {
-        BufferedImage image = ImageIO.read(imageInputStream);
+    public BufferedImage getOriginImage(InputStream inputStream) throws IOException {
+        BufferedImage image = ImageIO.read(inputStream);
         return image;
     }
 
@@ -37,9 +38,8 @@ public class ImageProcesser {
 
 
 
-    private BufferedImage getSizedImage(ImageInputStream imageInputStream, int X, int Y) throws IOException {
-        BufferedImage image= ImageIO.read(imageInputStream);
-
+    private BufferedImage getSizedImage(InputStream inputStream, int X, int Y) throws IOException {
+        BufferedImage image= ImageIO.read(inputStream);
         Image resizeImage = image.getScaledInstance(X, Y, Image.SCALE_SMOOTH);
         BufferedImage newImage = new BufferedImage(X, Y, BufferedImage.TYPE_INT_RGB);
         Graphics g = newImage.getGraphics();
