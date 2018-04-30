@@ -58,9 +58,9 @@ public class DaoFactory {
     @Bean
     public MainService mainService(){return new MainService();}
 
-//    @Bean
-//    public UserService userService()
-//    {
-//        return new UserService();
-//    }
+    @Bean
+    public UserController userController()
+    {
+        return new UserController();
+    }
 }

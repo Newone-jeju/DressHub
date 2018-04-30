@@ -73,9 +73,9 @@ public class UserTest {
     @Test
     public void loginCheck(){
         User user = new User();
-        String id = "user1";
+        String id = "user12323";
         String password = "0405";
-        boolean loginCheckUser = userDao.loginCheck(id, password);
+        boolean loginCheckUser = userDao.isValidUser(id, password);
         assertThat(true, is(loginCheckUser));
     }
 

@@ -2,9 +2,11 @@ package com.newoneplus.dresshub;
 
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Repository;
 
 import java.sql.SQLException;
 
+@Repository
 public class UserDao {
     private final JdbcTemplate jdbcTemplate;
 
@@ -55,21 +57,6 @@ public class UserDao {
         jdbcTemplate.update(sql);
     }
 
-    public boolean loginCheck(String id, String password) {
-        String sql = "select * from user where id = ? and password =?";
-        Object[] params = new Object[]{id, password};
-        try {
-                return jdbcTemplate.queryForObject(sql, params, (rs, rowNum) -> {
-                    User user = new User();
-                    user.setId(rs.getString("id"));
-                    user.setPassword(rs.getString("password"));
-                return true;
-            });
-        } catch (EmptyResultDataAccessException e) {
-            return false;
-        }
-//        return true;
-    }
 
     public User viewUser(User user) {
         String sql = "select * from user where id = ? and password = ?";
@@ -93,4 +80,21 @@ public class UserDao {
             return null;
         }
     }
+   // 로그인 처리
+    public boolean isValidUser(String id, String password) {
+        boolean retVal;
+        try {
+            String SQL = "select count(*) from user where id = ? and password = ?";
+            int count =  jdbcTemplate.queryForObject(SQL, new Object[]{id, password}, Integer.class);
+                if (count == 1) {
+                    retVal = true;
+                } else {
+                    retVal = false; 
+                }
+            } catch (Exception ex) {
+                retVal = false;
+            }
+            return retVal;
+        }
+
 }
