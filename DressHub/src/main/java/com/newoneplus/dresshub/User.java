@@ -5,7 +5,7 @@ import lombok.Data;
 import java.util.Date;
 
 @Data
-public class User {
+public class User  {
     private String id;
     private String password;
     private String name;
@@ -17,5 +17,5 @@ public class User {
     private boolean openPrivateInfo;
     private boolean certification;
     private Date resisterDate;
-    private boolean isEnabled;
+
 }

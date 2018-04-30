@@ -2,8 +2,11 @@ package com.newoneplus.dresshub;
 
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Repository;
+
 import java.sql.SQLException;
 
+@Repository
 public class UserDao {
     private final JdbcTemplate jdbcTemplate;
 
@@ -21,6 +24,14 @@ public class UserDao {
                     user.setId(rs.getString("id"));
                     user.setName(rs.getString("name"));
                     user.setPassword(rs.getString("password"));
+                    user.setEmail(rs.getString("email"));
+                    user.setAddress(rs.getString("address"));
+                    user.setPhoneNumber(rs.getString("phone_number"));
+                    user.setNickname(rs.getString("nickname"));
+                    user.setIntroduce(rs.getString("introduce"));
+                    user.setOpenPrivateInfo(rs.getBoolean("open_private_info"));
+                    user.setCertification(rs.getBoolean("certification"));
+                    user.setResisterDate(rs.getDate("resister_date"));
                     return user;
                 });
         } catch (EmptyResultDataAccessException e) {
@@ -45,4 +56,45 @@ public class UserDao {
         String sql = "delete from user";
         jdbcTemplate.update(sql);
     }
+
+
+    public User viewUser(User user) {
+        String sql = "select * from user where id = ? and password = ?";
+        Object[] params = new Object[]{user.getId(), user.getPassword()};
+        try {
+            return jdbcTemplate.queryForObject(sql, params, (rs, rowNum) -> {
+                user.setId(rs.getString("id"));
+                user.setName(rs.getString("name"));
+                user.setPassword(rs.getString("password"));
+                user.setEmail(rs.getString("email"));
+                user.setAddress(rs.getString("address"));
+                user.setPhoneNumber(rs.getString("phone_number"));
+                user.setNickname(rs.getString("nickname"));
+                user.setIntroduce(rs.getString("introduce"));
+                user.setOpenPrivateInfo(rs.getBoolean("open_private_info"));
+                user.setCertification(rs.getBoolean("certification"));
+                user.setResisterDate(rs.getDate("resister_date"));
+                return user;
+            });
+        } catch (EmptyResultDataAccessException e) {
+            return null;
+        }
+    }
+   // 로그인 처리
+    public boolean isValidUser(String id, String password) {
+        boolean retVal;
+        try {
+            String SQL = "select count(*) from user where id = ? and password = ?";
+            int count =  jdbcTemplate.queryForObject(SQL, new Object[]{id, password}, Integer.class);
+                if (count == 1) {
+                    retVal = true;
+                } else {
+                    retVal = false; 
+                }
+            } catch (Exception ex) {
+                retVal = false;
+            }
+            return retVal;
+        }
+
 }

@@ -57,4 +57,10 @@ public class DaoFactory {
 
     @Bean
     public MainService mainService(){return new MainService();}
+
+    @Bean
+    public UserController userController()
+    {
+        return new UserController();
+    }
 }

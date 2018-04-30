@@ -3,9 +3,7 @@ package com.newoneplus.dresshub;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import sun.applet.Main;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
