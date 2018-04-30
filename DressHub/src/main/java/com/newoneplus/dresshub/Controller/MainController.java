@@ -37,7 +37,7 @@ public class MainController {
 
     @RequestMapping("/viewTest")
     public String viewTest(Model model){
-        model.addAttribute("message","Hello Spring Boot thymeleaf");
+        model.addAttribute("message",   "Hello Spring Boot thymeleaf");
         return "view";
     }
 

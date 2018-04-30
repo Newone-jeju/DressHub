@@ -14,11 +14,12 @@ import java.util.ArrayList;
 public class ProductService {
     @Autowired
     private ProductDao productDao;
+    @Autowired
     private ProductImageDao productImageDao;
 
 
     public void insertProductImage(ProductImage productImage) {
-        productImageDao.insert(productImage);
+       int a =productImageDao.insert(productImage);
     }
 
     public void insertProduct(Product product) {
