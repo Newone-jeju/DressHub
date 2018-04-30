@@ -69,7 +69,7 @@ public class ProductController {
                     productService.insertProductImage(productImage);
 
                 }
-                productImage.setImage(filename);
+                productImage.setImage("origin"+filename);
                 productImage.setImageSize("일반");
                 productService.insertProductImage(productImage);
 
@@ -78,7 +78,7 @@ public class ProductController {
             productService.updateProduct(product_id, product);
 
         }
-        return "/products";
+        return "index";
     }
 
     @RequestMapping(value = "/productImages/{paramid}", method = RequestMethod.GET)
