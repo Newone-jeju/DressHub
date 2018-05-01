@@ -1,6 +1,12 @@
 var category = document.getElementsByClassName("category");
 var allcategory = document.getElementsByClassName("allcategory");
+var memu1 = document.getElementsByClassName("memu1");
+var memu2 = document.getElementsByClassName("memu2");
+var memu3 = document.getElementsByClassName("memu3");
+var memu4 = document.getElementsByClassName("memu4");
 var list_name=document.getElementsByClassName("name");
+
+// 전체카테고리
 var state=0;
 category[0].addEventListener("click", function(){
   if(state==0){
@@ -10,11 +16,12 @@ category[0].addEventListener("click", function(){
     state=1;
   }else{
     for(var i=0; i<allcategory.length; i++){
-      allcategory[i].style.display="none";
+      allcategory[i].style.display="";
     }
     state=0;
   }
 })
+
 
 // 퀵메뉴
 $(document).ready(function(){

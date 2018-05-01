@@ -13,6 +13,7 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -54,19 +55,23 @@ public class ProductController {
 
 
                 if(i==0){
-                    product.setThumbnailImage(filename);
-                    BufferedImage image = imageProcesser.getMediumImage(product.getImage().get(i).getInputStream());
-                    String mediumpath = "medium"+filename;
-                    ImageIO.write(image,"jpg", new File(path+mediumpath));
-                    productImage.setImage(mediumpath);
-                    productImage.setImageSize("중간");
-                    productService.insertProductImage(productImage);
-                    BufferedImage image2 = imageProcesser.getSmallImage(product.getImage().get(i).getInputStream());
-                    String smallpath = "small"+filename;
-                    ImageIO.write(image2,"jpg", new File(path+smallpath));
-                    productImage.setImage(smallpath);
-                    productImage.setImageSize("작은");
-                    productService.insertProductImage(productImage);
+                    try {
+                        product.setThumbnailImage("origin"+filename);
+                        BufferedImage image = imageProcesser.getMediumImage(product.getImage().get(i).getInputStream());
+                        String mediumpath = "medium"+filename;
+                        ImageIO.write(image,"jpg", new File(path+mediumpath));
+                        productImage.setImage(mediumpath);
+                        productImage.setImageSize("중간");
+                        productService.insertProductImage(productImage);
+                        BufferedImage image2 = imageProcesser.getSmallImage(product.getImage().get(i).getInputStream());
+                        String smallpath = "small"+filename;
+                        ImageIO.write(image2,"jpg", new File(path+smallpath));
+                        productImage.setImage(smallpath);
+                        productImage.setImageSize("작은");
+                        productService.insertProductImage(productImage);
+                    } catch (FileNotFoundException e) {
+                        e.printStackTrace();
+                    }
 
                 }
                 productImage.setImage("origin"+filename);
