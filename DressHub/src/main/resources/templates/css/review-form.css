@@ -1,0 +1,87 @@
+* {
+	margin:0;
+}
+.flex {
+	display: flex;
+}
+
+.flexcenter {
+	display: flex;
+	justify-content: center;
+}
+.flexcenter-align {
+	display: flex;
+	align-items: center;
+}
+.left-space{
+	margin: 0 3%;
+}
+
+.left-space-w {
+	margin: 0 6%;
+}
+
+
+.rental-product {
+	text-align:center;
+}
+.form-name {
+	background-color: #f5f5dc;
+	padding: 20px;
+	width: 80px;
+	text-align:center;
+}
+
+#rating {
+	
+}
+.text-area{
+	height: 250px;
+}
+
+textarea.text {
+	width: 73%;
+	height: 100%%;
+}
+
+input {
+
+}
+
+input.title {
+	width: 73%;
+	height: 1.5em;
+
+}
+
+
+
+.body {
+	margin-bottom: 5%;
+}
+
+.form-btn-style {
+	border-radius: 10px;
+	border: 1px solid #00ab33;
+	background-color: #00ab33;
+	padding: 7px 15px;
+	color: white;
+	font-weight: 600;
+	cursor: pointer;
+	width: 15%;
+}
+
+.form-btn-style:hover {
+	background-color: #4CAF89;
+}
+
+.send-btn {
+	margin-right: 10%;
+}
+
+.rental-product-area, .rental-duration-area {
+	width: 50%;
+}
+
+
+

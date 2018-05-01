@@ -69,10 +69,10 @@ public class UserTest {
 
 
 
-//
+// 로그인 테스트
     @Test
     public void loginCheck(){
-        User user = new User();
+//        User user = new User();
         String id = "user12323";
         String password = "0405";
         boolean loginCheckUser = userDao.isValidUser(id, password);
