@@ -59,7 +59,9 @@ public class ProductTest {
         product.setCostPerDay(1);
         product.setDeleveryType("deleveryTypeTest");
         product.setDeposit(2);
+
         product.setThumbnailImage("imageUrlTest");
+
         product.setName("nameTest");
         product.setProviderId("user1");
         product.setSalePrice(3);
