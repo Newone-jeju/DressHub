@@ -16,10 +16,10 @@ public class MainController {
     @Autowired
     private MainService mainService;
 
-    @RequestMapping("/")
-    public String index( ){
-        return "index";
-    }
+//    @RequestMapping("/")
+//    public String index( ){
+//        return "index";
+//    }
 
     @RequestMapping(value = "/products", method = RequestMethod.GET)
     @ResponseBody

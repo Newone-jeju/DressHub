@@ -39,17 +39,10 @@ public class ProductController {
             for(int i =0; i<product.getImage().size(); i++){
 
                 filename = product.getImage().get(i).getOriginalFilename();
-                // 개발디렉토리 - 파일 업로드 경로
-                //String path = "C:\\Users\\doubles\\Desktop\\workspace\\gitSpring\\"
-                //                + "spring02\\src\\main\\webapp\\WEB-INF\\views\\images";
-                // 배포디렉토리 - 파일 업로드 경로
                 String path = "C:\\workspace\\project\\DressHub\\DressHub\\src\\main\\resources\\static\\product_image\\";
-
-
                 ProductImage productImage = new ProductImage();
                 productImage.setProductId(product.getId());
-
-
+//              맨처음 파일만   파일 크기 3가지로 구분 해서 db및 file 저장
                 if(i==0){
                     try {
                         product.setThumbnailImage("origin"+filename);
@@ -68,6 +61,7 @@ public class ProductController {
                     } catch (FileNotFoundException e) {
                         e.printStackTrace();
                     }
+
                     try {
                         new File(path).mkdirs(); // 디렉토리 생성
                         // 임시디렉토리(서버)에 저장된 파일을 지정된 디렉토리로 전송
@@ -76,7 +70,6 @@ public class ProductController {
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
-
                 }
                 productImage.setImage("origin"+filename);
                 productImage.setImageSize("일반");
@@ -87,7 +80,8 @@ public class ProductController {
             productService.updateProduct(product_id, product);
 
         }
-        return "index";
+//        return "index";
+        return "productform";
     }
 
     @RequestMapping(value = "/productImages/{paramid}", method = RequestMethod.GET)
