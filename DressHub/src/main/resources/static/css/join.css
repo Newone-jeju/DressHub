@@ -1,5 +1,5 @@
 
-#addProduct h2{
+#join h2{
   margin-left: 10%;
   margin-top: 2%;
 }
@@ -19,16 +19,14 @@ table, th, td {
 }
 table th{
   background-color: #F7F9FF;
-  width: 10%;
 }
 table input{
-  height: 100%;
   border:1px solid #eee;
 }
 #Btn{
   text-align: center;
 }
-.addBtn{
+.joinBtn{
   background-color: #363636;
    border: none;
    color: white;
@@ -37,6 +35,7 @@ table input{
    text-align: center;
    text-decoration: none;
    font-size: 10px;
+
 }
 .cancle{
   background-color: #9B9B9B;
@@ -47,19 +46,13 @@ table input{
    text-decoration: none;
    font-size: 10px;
 }
-
 input[type=text]{
   height: 1.5rem;
 }
-select{
+input[type=password]{
   height: 1.5rem;
-  width: 30%;
 }
-input[type=date]{
-  height: 1.5rem;
-  width: 30%;
-}
-#contents{
+#introduce{
   width: 100%;
-  min-height: 10rem;
+  min-height: 5rem;
 }
