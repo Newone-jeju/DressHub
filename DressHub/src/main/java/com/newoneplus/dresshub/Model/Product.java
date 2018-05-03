@@ -1,9 +1,10 @@
-package com.newoneplus.dresshub;
+package com.newoneplus.dresshub.Model;
 
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
+import java.util.ArrayList;
 import java.util.Date;
 
 @Data
@@ -11,6 +12,7 @@ public class Product {
     Integer id;
     String name;
     String thumbnailImage;
+    ArrayList<MultipartFile> image;
     String contents;
     Integer costPerDay;
     Integer deposit;
@@ -25,6 +27,8 @@ public class Product {
     Date regDate;
     Integer leastLeaseDay;
     String size;
+
+
 
     @Override
     public boolean equals(Object o){

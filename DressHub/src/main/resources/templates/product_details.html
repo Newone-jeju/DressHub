@@ -10,6 +10,9 @@
 	<link rel="stylesheet" type="text/css" href="css/product_details.css"  />
   <!--slick plugin -->
   <link rel="stylesheet" type="text/css" href="css/cloud-zoom.css"  />
+  <!--star rating plugin -->
+  <link rel="stylesheet" type="text/css" href="css/star.css"  />
+
   <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
   <script type="text/JavaScript" src="js/cloud-zoom.1.0.2.min.js"></script>
 
@@ -83,13 +86,13 @@
 			<div class="image-area">
         <div class="main-image">
           <a href='image/big_jean.jpg' class = 'cloud-zoom' id='zoom1'
-             rel="adjustX: 10, adjustY:-4">
+              rel="adjustX: 10, adjustY:-4">
               <img class="big-img" src="image/small_jean.jpg" alt='' title="크게 보기" />
           </a>
         </div>
         <div class="thumnamil-bar">
           <a href='image/big_jean.jpg' class='cloud-zoom-gallery' title='Thumbnail 1'
-             rel="useZoom: 'zoom1', smallImage: 'image/small_jean.jpg' ">
+          rel="useZoom: 'zoom1', smallImage: 'image/small_jean.jpg' ">
           <img class="thumnail-img" src="image/tiny_jean.jpg" alt = "Thumbnail 1"/></a>
 
           <a href='image/big_jean2.jpg' class='cloud-zoom-gallery' title='Thumbnail 2'
@@ -177,9 +180,91 @@
 		<section class="review-area">
       <div class="header">
         <h1 class="title">리뷰 공간</h1>
+        
       </div>
       <div class="body">
-        
+        <div class="review-btn-wrap">
+          <button class="review-write-btn">리뷰쓰기</button>
+        </div>
+        <div class="review-table-wrap">
+          <table class="review-table">
+            <tr class="th-group">
+              <th class="th-no">번호</th>
+              <th class="th-rank">점수</th>
+              <th class="th-title">제목</th>
+              <th class="th-day">작성일</th>
+            </tr>
+            <tr class="review-head review1">
+              <!-- <td></td>
+              <td></td>
+              <td class="no-review flexcenter">
+                <img src="image/no-review.png" alt="no-review">
+              </td>
+              <td></td> -->
+              
+              <td>1</td>
+              <td>
+                <span class="star-input">
+                  <span class="input">
+                    <input type="radio" name="star-input" id="p1" value="1"><label for="p1">1</label>
+                    <input type="radio" name="star-input" id="p2" value="2"><label for="p2">2</label>
+                    <input type="radio" name="star-input" id="p3" value="3"><label for="p3">3</label>
+                    <input type="radio" name="star-input" id="p4" value="4"><label for="p4">4</label>
+                    <input type="radio" name="star-input" id="p5" value="5"><label for="p5">5</label>
+                    <input type="radio" name="star-input" id="p6" value="6"><label for="p6">6</label>
+                    <input type="radio" name="star-input" id="p7" value="7"><label for="p7">7</label>
+                    <input type="radio" name="star-input" id="p8" value="8"><label for="p8">8</label>
+                    <input type="radio" name="star-input" id="p9" value="9"><label for="p9">9</label>
+                    <input type="radio" name="star-input" id="p10" value="10"><label for="p10">10</label>
+                  </span>
+                </span>
+              </td>
+              <td>
+                정말좋은 바지
+              </td>
+              <td>2018-04-30</td>
+            </tr>
+            <tr>
+              <td colspan="4">
+                <div class="review-body hidd">
+                  <img src="image/tiny_jean.jpg" alt="review_img">
+                  <p>설레는 말이다 청춘! 너의 두손을 가슴에 대고 물방아 같은 심장의 고동을 들어 보라 청춘의 피는 끓는다 끓는 피에 뛰노는 심장은 거선의 기관과 같이 힘있다 이것이다 인류의 역사를 꾸며 내려온 동력은 바로 이것이다 이성은 투명하되 얼음과 같으며 지혜는 날카로우나 갑 속에 든 칼이다 청춘의 끓는 피가 아니더면 인간이 얼마나 쓸쓸하랴? 얼음에 싸인 만물은 얼음이 있을 뿐이다 그들에게 생명을 불어 넣는 것은 따뜻한 봄바람이다 풀밭에 속잎나고 가지에 싹이 트고 꽃 피고 새 우는 봄날의 천지는 얼마나 기쁘며 얼마나 아름다우냐? 이것을 얼음 속에서 불러 내는 것이 따뜻한 봄바람이다 인생에 따뜻한 봄바람을 불어 보내는 것은 청춘의 끓는 피다 청춘의 피가 뜨거운지라 인간의 동산에는 사랑의 풀이 돋고 이상의 꽃이 피고 희망의 놀이 뜨고 열락의 새가 운다사랑의 풀이 없으면 인간은 사막이다 오아이스도 없는 사막이다 보이는 끝까지 찾아다녀도 목숨이 있는 때까지 방황하여도</p>
+                
+                </div>
+              </td>
+            </tr>
+            <tr class="review-head review2">
+              <!-- <td></td>
+              <td></td>
+              <td class="no-review flexcenter">
+                <img src="image/no-review.png" alt="no-review">
+              </td>
+              <td></td> -->
+              
+              <td>2</td>
+              <td>
+                <span class="star-input">
+                  <span class="input">
+                    <input type="radio" name="star-input" id="p1" value="1"><label for="p1">1</label>
+                    <input type="radio" name="star-input" id="p2" value="2"><label for="p2">2</label>
+                    <input type="radio" name="star-input" id="p3" value="3"><label for="p3">3</label>
+                    <input type="radio" name="star-input" id="p4" value="4"><label for="p4">4</label>
+                    <input type="radio" name="star-input" id="p5" value="5"><label for="p5">5</label>
+                    <input type="radio" name="star-input" id="p6" value="6"><label for="p6">6</label>
+                    <input type="radio" name="star-input" id="p7" value="7"><label for="p7">7</label>
+                    <input type="radio" name="star-input" id="p8" value="8"><label for="p8">8</label>
+                    <input type="radio" name="star-input" id="p9" value="9"><label for="p9">9</label>
+                    <input type="radio" name="star-input" id="p10" value="10"><label for="p10">10</label>
+                  </span>
+                </span>
+              </td>
+              <td>
+                정말좋은 바지
+              </td>
+              <td>2018-04-30</td>
+            </tr>
+          </table>
+        </div>
       </div>
     </section>
     </main>
@@ -244,8 +329,9 @@
 </footer>
 
 
-<!-- <script type="text/javascript" src="js/jquery-3.3.1.min.js" charset="utf-8"></script>
-<script type="text/javascript" src="js/cloud-zoom.1.0.2.min.js" charset="utf-8"></script>
-<script type="text/javascript" src="js/product_details.js" charset="utf-8"></script> -->
+<script type="text/javascript" src="js/jquery-3.3.1.min.js" charset="utf-8"></script>
+<script type="text/javascript" src="js/star.js" charset="utf-8"></script>
+
+<script type="text/javascript" src="js/product_details.js" charset="utf-8"></script>
 </body>
 </html>
