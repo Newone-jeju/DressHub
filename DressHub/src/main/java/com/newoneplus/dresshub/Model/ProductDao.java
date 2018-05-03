@@ -9,7 +9,10 @@ import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 
 import java.sql.*;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class ProductDao {
@@ -22,6 +25,8 @@ public class ProductDao {
     @Value("${db.username}")
     private String username;
         JdbcTemplate jdbcTemplate = null;
+    SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+
 
     public ProductDao(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
@@ -101,14 +106,13 @@ public class ProductDao {
     private Product makeValidProduct(ResultSet rs) throws SQLException {
         Product product = new Product();
         product.setCategory(rs.getString("CATEGORY"));
-        product.setConsigmentEnd(rs.getDate("CONSIGMENT_END"));
-        product.setConsigmentStart(rs.getDate("CONSIGMENT_START"));
+        product.setConsigmentEnd(String.valueOf(rs.getDate("CONSIGMENT_END")));
+        product.setConsigmentStart(String.valueOf(rs.getDate("CONSIGMENT_START")));
         product.setContents(rs.getString("CONTENTS"));
         product.setCostPerDay(rs.getInt("COST_PER_DAY"));
         product.setDeleveryType(rs.getString("DELEVERY_TYPE"));
         product.setDeposit(rs.getInt("DEPOSIT"));
         product.setId(rs.getInt("ID"));
-
         product.setThumbnailImage(rs.getString("THUMBNAIL_IMAGE"));
         product.setName(rs.getString("NAME"));
         product.setProviderId(rs.getString("PROVIDER"));
@@ -121,10 +125,18 @@ public class ProductDao {
         return product;
     }
 
-    private Object[] getFullParams(Product product) {
+    private Object[] getFullParams(Product product)  {
+        java.util.Date getConsigmentStart = null;
+        java.util.Date getConsigmentEnd=null;
+        try {
+            getConsigmentStart  = format.parse(product.getConsigmentStart());
+            getConsigmentEnd = format.parse(product.getConsigmentEnd());
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
         return new Object[]{product.getName(), product.getThumbnailImage(), product.getContents(), product.getCostPerDay(),
-                product.getDeposit(), product.getSalePrice(), product.getCategory(),
-                product.getConsigmentStart(), product.getConsigmentEnd(), product.getState(),
+                product.getDeposit(), product.getSalePrice(), product.getCategory(),getConsigmentStart,getConsigmentEnd, product.getState(),
                 product.getDeleveryType(), product.getProviderId(), product.getLikes(),
                 product.getRegDate(), product.getLeastLeaseDay(), product.getSize()};
 

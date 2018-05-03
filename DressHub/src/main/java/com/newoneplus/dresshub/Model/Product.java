@@ -18,8 +18,10 @@ public class Product {
     Integer deposit;
     Integer salePrice;
     String category;
-    Date consigmentStart;
-    Date consigmentEnd;
+//    String receiveConsigmentStart;
+//    String receiveConsigmentEnd;
+    String consigmentStart;
+    String consigmentEnd;
     String state;
     String deleveryType;
     String providerId;

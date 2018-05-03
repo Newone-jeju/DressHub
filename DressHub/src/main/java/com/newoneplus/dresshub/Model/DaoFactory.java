@@ -24,11 +24,6 @@ public class DaoFactory {
     @Value("${db.password}")
     private String password;
 
-    @Bean
-    public UserDao userDao()
-    {
-        return new UserDao(jdbcTemplate());
-    }
 
     @Bean
     public JdbcTemplate jdbcTemplate() {
@@ -47,6 +42,12 @@ public class DaoFactory {
         dataSource.setUsername(username);
         dataSource.setPassword(password);
         return dataSource;
+    }
+
+    @Bean
+    public UserDao userDao()
+    {
+        return new UserDao(jdbcTemplate());
     }
 
     @Bean

@@ -38,11 +38,5 @@ public class MainController {
         return "productform";
     }
 
-
-    @RequestMapping("/viewTest")
-    public String viewTest(Model model){
-        model.addAttribute("message",   "Hello Spring Boot thymeleaf");
-        return "view";
-    }
-
+    
 }
