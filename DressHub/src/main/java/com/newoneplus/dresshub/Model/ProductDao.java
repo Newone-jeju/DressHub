@@ -128,12 +128,15 @@ public class ProductDao {
     private Object[] getFullParams(Product product)  {
         java.util.Date getConsigmentStart = null;
         java.util.Date getConsigmentEnd=null;
-        try {
-            getConsigmentStart  = format.parse(product.getConsigmentStart());
-            getConsigmentEnd = format.parse(product.getConsigmentEnd());
-        } catch (ParseException e) {
-            e.printStackTrace();
+        if(!product.getConsigmentStart().equals("")&&!product.getConsigmentEnd().equals("")){
+            try {
+                getConsigmentStart  = format.parse(product.getConsigmentStart());
+                getConsigmentEnd = format.parse(product.getConsigmentEnd());
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
         }
+
 
         return new Object[]{product.getName(), product.getThumbnailImage(), product.getContents(), product.getCostPerDay(),
                 product.getDeposit(), product.getSalePrice(), product.getCategory(),getConsigmentStart,getConsigmentEnd, product.getState(),
