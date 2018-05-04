@@ -1,11 +1,12 @@
-package com.newoneplus.dresshub;
+package com.newoneplus.dresshub.Service;
 
 
+import com.newoneplus.dresshub.Model.DaoFactory;
+import com.newoneplus.dresshub.Model.Product;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import sun.applet.Main;
 
 import java.util.ArrayList;
 
@@ -14,6 +15,7 @@ import static org.hamcrest.CoreMatchers.*;
 
 public class MainServiceTest {
 
+//    @Autowired
     private MainService mainService;
 
     @Before

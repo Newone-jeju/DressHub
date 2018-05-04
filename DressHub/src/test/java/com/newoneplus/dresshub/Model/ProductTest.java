@@ -1,4 +1,4 @@
-package com.newoneplus.dresshub;
+package com.newoneplus.dresshub.Model;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -59,7 +59,9 @@ public class ProductTest {
         product.setCostPerDay(1);
         product.setDeleveryType("deleveryTypeTest");
         product.setDeposit(2);
-//        product.setImageUrl("imageUrlTest");
+
+        product.setThumbnailImage("imageUrlTest");
+
         product.setName("nameTest");
         product.setProviderId("user1");
         product.setSalePrice(3);
