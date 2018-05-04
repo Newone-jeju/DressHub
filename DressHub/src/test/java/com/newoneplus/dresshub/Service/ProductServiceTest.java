@@ -19,7 +19,7 @@ public class ProductServiceTest {
 
     @Test
     public void productResister(){
-        Product product = new Product;
+        Product product = new Product();
         product.setCategory("categoryTest");
         product.setConsigmentEnd("2017-05-04");
         product.setConsigmentStart("2017-04-04");
