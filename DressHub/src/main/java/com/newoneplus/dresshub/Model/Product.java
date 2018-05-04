@@ -3,6 +3,7 @@ package com.newoneplus.dresshub.Model;
 import lombok.Data;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -17,8 +18,8 @@ public class Product {
     Integer deposit;
     Integer salePrice;
     String category;
-    Date consigmentStart;
-    Date consigmentEnd;
+    String consigmentStart;
+    String consigmentEnd;
     String state;
     String deleveryType;
     String providerId;
