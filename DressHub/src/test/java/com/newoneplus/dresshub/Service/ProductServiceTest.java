@@ -33,7 +33,7 @@ public class ProductServiceTest {
         product.setSalePrice(3);
         product.setState("stateTest");
 
-        Integer insertedId = productService.insert(product);
+        Integer insertedId = productService.insertProduct(product);
     }
 
 }

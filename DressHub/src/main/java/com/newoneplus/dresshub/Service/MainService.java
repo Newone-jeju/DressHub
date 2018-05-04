@@ -23,9 +23,11 @@ public class MainService {
 
     public ArrayList<Product> getProductList() throws ClassNotFoundException {
         return productDao.getList("ID DESC");
+
     }
 
     public Product getProduct(int id) throws ClassNotFoundException {
         return productDao.get(id);
     }
+
 }

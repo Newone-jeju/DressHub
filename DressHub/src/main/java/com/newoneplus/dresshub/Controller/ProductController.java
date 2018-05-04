@@ -77,7 +77,7 @@ public class ProductController {
 
 
             }
-            productService.updateProduct(product_id, product);
+            productService.updateProduct(product);
 
         }
 //        return "index";

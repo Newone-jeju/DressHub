@@ -3,6 +3,7 @@ package com.newoneplus.dresshub.Controller;
 import com.newoneplus.dresshub.Model.DaoFactory;
 import com.newoneplus.dresshub.Model.ProductDao;
 import org.junit.Before;
+import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 

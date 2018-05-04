@@ -26,8 +26,8 @@ public class ProductService {
        return productDao.insert(product);
     }
 
-    public void updateProduct(int id, Product product){
-        productDao.update(product, id);
+    public void updateProduct(Product product){
+        productDao.update(product);
     }
 
     public ArrayList<ProductImage> getProductImageList(int id){

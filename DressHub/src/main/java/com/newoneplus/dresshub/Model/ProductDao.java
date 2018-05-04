@@ -39,7 +39,6 @@ public class ProductDao {
             product = (Product) jdbcTemplate.queryForObject(
                     "SELECT * FROM PRODUCT WHERE ID = ?", params, (RowMapper) (rs, rowNum) -> {
                 Product selectesProduct = makeValidProduct(rs);
-
                 return selectesProduct;
             });
         }catch (EmptyResultDataAccessException e){
@@ -70,12 +69,12 @@ public class ProductDao {
         return keyHolder.getKey().intValue();
     }
 
-    public void update(Product product, int id) {
+    public void update(Product product) {
 
         Object[] params = getFullParams(product);
         jdbcTemplate.update("UPDATE PRODUCT SET NAME = ?, THUMBNAIL_IMAGE = ?, CONTENTS = ?, COST_PER_DAY = ?, DEPOSIT = ?," +
                 " SALE_PRICE = ?,CATEGORY = ?, CONSIGMENT_START = ?, CONSIGMENT_END = ?, STATE = ?, DELEVERY_TYPE = ?" +
-                ", PROVIDER = ?, LIKES = ?, REGISTRATION_DATE = ?, LEAST_LEASE_DAY = ?, SIZE = ? WHERE id ="+ id, params);
+                ", PROVIDER = ?, LIKES = ?, REGISTRATION_DATE = ?, LEAST_LEASE_DAY = ?, SIZE = ? WHERE id ="+ product.getId(), params);
 
     }
 

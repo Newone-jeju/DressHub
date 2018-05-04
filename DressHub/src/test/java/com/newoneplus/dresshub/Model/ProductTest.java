@@ -54,8 +54,8 @@ public class ProductTest {
             e.printStackTrace();
         }
         product.setCategory("categoryTest");
-        product.setConsigmentEnd(date);
-        product.setConsigmentStart(date);
+        product.setConsigmentEnd(date.toString());
+        product.setConsigmentStart(date.toString());
         product.setContents("contentsTest");
         product.setCostPerDay(1);
         product.setDeleveryType("deleveryTypeTest");
