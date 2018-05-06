@@ -21,7 +21,7 @@ public class ReviewDao {
 
 
     public ArrayList<Review> getByUser(String userId) {
-        String sql= "SELECT * FROM REVIEW WHERE USER = ?";
+        String sql= "SELECT * FROM REVIEW WHERE USER = ? ORDER BY ID DESC";
         Object[] params = {userId};
         try {
             return (ArrayList<Review>) jdbcTemplate.queryForObject(sql, params, (RowMapper) (rs, rowNum) -> {
@@ -37,8 +37,8 @@ public class ReviewDao {
         }
     }
 
-    public ArrayList<Review> getByProducr(int productId) {
-        String sql = "SELECT * FROM REVIEW WHERE PRODUCT = ?";
+    public ArrayList<Review> getByProduct(int productId) {
+        String sql = "SELECT * FROM REVIEW WHERE PRODUCT = ? ORDER BY ID DESC";
         Object[] params = {productId};
         try {
             return (ArrayList<Review>) jdbcTemplate.queryForObject(sql, params, (RowMapper) (rs, rowNum) -> {

@@ -2,15 +2,11 @@ package com.newoneplus.dresshub.Model;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.springframework.cache.support.NullValue;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 
-import javax.validation.constraints.Null;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.nullValue;
@@ -67,7 +63,7 @@ public class ReviewTest {
     public void getByProduct(){
         Review review = new Review();
         int productId = 0;
-        ArrayList<Review> reviews = reviewDao.getByProducr(productId);
+        ArrayList<Review> reviews = reviewDao.getByProduct(productId);
         Review returnedReview = reviews.get(0);
 
         review.setTitle("제목");
