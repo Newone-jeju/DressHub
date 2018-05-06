@@ -69,4 +69,6 @@ public class DaoFactory {
         return new UserController();
     }
 
+    @Bean
+    public BasketDao basketDao(){return new BasketDao();}
 }

@@ -80,8 +80,9 @@ public class ProductController {
             productService.updateProduct(product);
 
         }
-//        return "index";
+//        임시로 폼으로 다시
         return "productform";
+
     }
 
     @RequestMapping(value = "/productImages/{paramid}", method = RequestMethod.GET)

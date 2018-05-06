@@ -26,6 +26,7 @@ public class ProductDao {
     private String username;
         JdbcTemplate jdbcTemplate = null;
     SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+    public String sql;
 
 
     public ProductDao(JdbcTemplate jdbcTemplate) {
@@ -70,7 +71,6 @@ public class ProductDao {
     }
 
     public void update(Product product) {
-
         Object[] params = getFullParams(product);
         jdbcTemplate.update("UPDATE PRODUCT SET NAME = ?, THUMBNAIL_IMAGE = ?, CONTENTS = ?, COST_PER_DAY = ?, DEPOSIT = ?," +
                 " SALE_PRICE = ?,CATEGORY = ?, CONSIGMENT_START = ?, CONSIGMENT_END = ?, STATE = ?, DELEVERY_TYPE = ?" +
@@ -84,23 +84,38 @@ public class ProductDao {
     }
 
     public ArrayList<Product> getList(String arrangeQuery) {
+        return getProducts("SELECT * FROM PRODUCT ORDER BY " + arrangeQuery);
+    }
+
+//    일단 게시물 순서에 따른 번호는 안넣음 받을 수 있도록 만들어놓기만함
+//    맨처음 1페이지에 대한 페이징처리
+    public ArrayList<Product> getList(int page,  String arrangeQuery) {
+        String sql = "SELECT * FROM PRODUCT WHERE (@ROWNUM :=" + (page * 25 - 25) + ") =" + (page * 25 - 25) + " ORDER BY " + arrangeQuery + "LIMIT " + (page * 25 - 25) + ", 25;";
+        return getProducts(sql);
+    }
+//  두번째부터 페이징처리! 맨처음불러온 마지막 게시물에대한 아이디를 가지고 있다가 이보다 작은 부부처리 나중에 asc 정렬할 때에 대한 처리도 지원하도록 수정이 필요
+    public ArrayList<Product> getList(int page, int maxId,  String arrangeQuery) {
+        String sql = "SELECT * FROM PRODUCT WHERE (@ROWNUM :=" + (page * 25 - 25) + ") =" + (page * 25 - 25) + " AND id < "+ maxId  + " ORDER BY " + arrangeQuery + "LIMIT " + (page * 25 - 25) + ", 25;";
+        return getProducts(sql);
+    }
+
+    private ArrayList<Product> getProducts(String sql) {
         ArrayList<Product> productList = null;
         try {
             productList = (ArrayList<Product>) jdbcTemplate.queryForObject
-                    ("SELECT * FROM PRODUCT ORDER BY " + arrangeQuery, (RowMapper<Object>) (rs, rowNum) -> {
-                List<Product> products = new ArrayList<>();
-                do  {
-                    Product selectesProduct = makeValidProduct(rs);
-                    products.add(selectesProduct);
-                }while((rs.next()));
-                return products;
-            });
+                    (sql, (RowMapper<Object>) (rs, rowNum) -> {
+                        List<Product> products = new ArrayList<>();
+                        do  {
+                            Product selectesProduct = makeValidProduct(rs);
+                            products.add(selectesProduct);
+                        }while((rs.next()));
+                        return products;
+                    });
         }catch (EmptyResultDataAccessException e){
             productList = null;
         }
         return productList;
     }
-
 
     private Product makeValidProduct(ResultSet rs) throws SQLException {
         Product product = new Product();
@@ -143,4 +158,7 @@ public class ProductDao {
                 product.getRegDate(), product.getLeastLeaseDay(), product.getSize()};
 
     }
+
+
+
 }
