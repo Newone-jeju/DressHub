@@ -12,7 +12,8 @@
     <link rel="stylesheet" type="text/css" href="css/cloud-zoom.css" />
     <!--star rating plugin -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.3.2/jquery.rateyo.min.css">
-    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.4.1.min.js"></script>
     <script type="text/JavaScript" src="js/cloud-zoom.1.0.2.min.js"></script>
     <title>상품상세정보</title>
 </head>
@@ -165,7 +166,7 @@
             </div>
             <div class="body">
                 <div class="review-btn-wrap">
-                    <button class="review-write-btn">리뷰쓰기</button>
+                    <button class="review-write-btn review-btn">리뷰쓰기</button>
                 </div>
                 <div class="review-table-wrap">
                     <div class="review-table">
@@ -175,7 +176,12 @@
                             <div class="th-title">제목</div>
                             <div class="th-day">작성일</div>
                         </div>
-                        <div class="td-group"></div>
+                        <div class="td-group">
+                            <div class="loading flexcenter">
+                                <img src="image/loading.gif" alt="loading">
+                            </div>
+                        </div>
+                        <div class="review-pagination"></div>
                     </div>
                 </div>
             </div>
