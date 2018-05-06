@@ -1,4 +1,4 @@
-package com.newoneplus.dresshub;
+package com.newoneplus.dresshub.Model;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -8,6 +8,7 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 import static org.hamcrest.CoreMatchers.is;
@@ -53,13 +54,15 @@ public class ProductTest {
             e.printStackTrace();
         }
         product.setCategory("categoryTest");
-        product.setConsigmentEnd(date);
-        product.setConsigmentStart(date);
+        product.setConsigmentEnd(date.toString());
+        product.setConsigmentStart(date.toString());
         product.setContents("contentsTest");
         product.setCostPerDay(1);
         product.setDeleveryType("deleveryTypeTest");
         product.setDeposit(2);
-//        product.setImageUrl("imageUrlTest");
+
+        product.setThumbnailImage("imageUrlTest");
+
         product.setName("nameTest");
         product.setProviderId("user1");
         product.setSalePrice(3);

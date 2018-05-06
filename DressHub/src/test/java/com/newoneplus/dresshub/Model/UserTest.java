@@ -1,5 +1,7 @@
-package com.newoneplus.dresshub;
+package com.newoneplus.dresshub.Model;
 
+import com.newoneplus.dresshub.User;
+import com.newoneplus.dresshub.UserDao;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
@@ -11,8 +13,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.MatcherAssert.assertThat;
-
+import static org.junit.Assert.assertThat;
 public class UserTest {
     private UserDao userDao;
     @Before
@@ -69,10 +70,10 @@ public class UserTest {
 
 
 
-//
+// 로그인 테스트
     @Test
     public void loginCheck(){
-        User user = new User();
+//        User user = new User();
         String id = "user12323";
         String password = "0405";
         boolean loginCheckUser = userDao.isValidUser(id, password);

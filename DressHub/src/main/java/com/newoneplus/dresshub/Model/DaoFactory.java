@@ -1,5 +1,9 @@
-package com.newoneplus.dresshub;
+package com.newoneplus.dresshub.Model;
 
+import com.newoneplus.dresshub.Service.MainService;
+import com.newoneplus.dresshub.Service.ProductService;
+import com.newoneplus.dresshub.UserController;
+import com.newoneplus.dresshub.UserDao;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -20,17 +24,6 @@ public class DaoFactory {
     @Value("${db.password}")
     private String password;
 
-    @Bean
-    public UserDao userDao()
-    {
-        return new UserDao(jdbcTemplate());
-    }
-
-//    @Bean
-//    public ProductDao productDao()
-//    {
-//        return new ProductDao(jdbcTemplate());
-//    }
 
     @Bean
     public JdbcTemplate jdbcTemplate() {
@@ -52,6 +45,12 @@ public class DaoFactory {
     }
 
     @Bean
+    public UserDao userDao()
+    {
+        return new UserDao(jdbcTemplate());
+    }
+
+    @Bean
     public ProductDao productDao() {return new ProductDao(jdbcTemplate());}
 
 
@@ -59,8 +58,15 @@ public class DaoFactory {
     public MainService mainService(){return new MainService();}
 
     @Bean
+
+    public ProductService productService(){return new ProductService();}
+    @Bean
+    public ProductImageDao productImageDao(){return new ProductImageDao(jdbcTemplate());}
+
+    @Bean
     public UserController userController()
     {
         return new UserController();
     }
+
 }

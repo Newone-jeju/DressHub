@@ -1,5 +1,6 @@
 package com.newoneplus.dresshub;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -8,7 +9,16 @@ import java.sql.SQLException;
 
 @Repository
 public class UserDao {
-    private final JdbcTemplate jdbcTemplate;
+    @Value("${db.classname}")
+    private String classname;
+    @Value("${db.url}")
+    private String url;
+    @Value("${db.password}")
+    private String password;
+    @Value("${db.username}")
+    private String username;
+
+    JdbcTemplate jdbcTemplate = null;
 
     public UserDao(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
@@ -89,7 +99,7 @@ public class UserDao {
                 if (count == 1) {
                     retVal = true;
                 } else {
-                    retVal = false; 
+                    retVal = false;
                 }
             } catch (Exception ex) {
                 retVal = false;

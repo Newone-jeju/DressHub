@@ -16,7 +16,7 @@ public class UserController {
     UserDao userDao;
 
     // 테스트용으로 임시 매핑
-    @RequestMapping(value = "/index", method = RequestMethod.GET)
+    @RequestMapping(value = "", method = RequestMethod.GET)
     public String index(){
         return "index";
     }
@@ -48,13 +48,18 @@ public class UserController {
         return "login";
     }
 
-//    @RequestMapping(value = "/signUp", method = RequestMethod.GET)
-//    public String signUp(HttpServletRequest httpServletRequest) throws ParseException, ClassNotFoundException {
-//
-//
-//
-//
-//    }
+    @RequestMapping(value = "/join", method = RequestMethod.GET)
+    public String signUp(){
+        return "join";
+    }
+
+    // 회원가입
+    @RequestMapping(value = "/userSignUp", method = RequestMethod.POST)
+    public String userSignUp(){
+        return null;
+    }
+
+
 
 
 

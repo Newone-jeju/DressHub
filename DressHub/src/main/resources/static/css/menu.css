@@ -1,5 +1,4 @@
-
- body{
+body{
   /* margin:50px; */
   /* margin-left: 30px;
   margin-right: 30px; */
@@ -22,6 +21,8 @@
    margin-right: 30px;
    margin-top: 20px;
  }
+
+
 .topul{
   display:flex;
   font-size: 10px;
@@ -46,10 +47,11 @@ text-decoration: none;
 .menu {
   margin: 0;
   padding: 0;
-  width:100px;
-  height: 35px;
+  width:10%;
+  height: 3.5%;
   list-style: none;
   display: flex;
+	border: 0;
   flex:1;
   justify-content: space-between;
 }
@@ -58,8 +60,8 @@ text-decoration: none;
   flex:1;
   border-left: 1px solid #fff;
   background-color: #000;
-  line-height: 35px;
-  vertical-align: middle;
+  line-height: 350%;
+  /* vertical-align: middle; */
 }
 .menu li:link { text-decoration: none;}
 .menu li a:hover, .menu ul li:hover a{
@@ -68,7 +70,7 @@ color:#FFFFFF;
 text-decoration:none;
 }
 .menu li a {
-  font-size: 10px;
+  font-size: 0.6rem;
   font-weight: bold;
   color:#fff;
 	display:block;
@@ -79,12 +81,12 @@ text-decoration:none;
 background: rgb(109,109,109);
 display:none;
 height:auto;
-padding:0px;
-margin:0px;
-border:0px;
+padding:0;
+border:none;
+margin:-0.1vh;
 position:absolute;
-width:15.8%;
-z-index:150;
+width:15.70%;
+z-index: 1;
 /*top:1em;*/
 }
 
@@ -105,8 +107,8 @@ background:none;
 
 .menu li ul a{
 display:block;
-height:40px;
-font-size:10px;
+height:3.5%;
+font-size:0.6rem;
 font-style:normal;
 margin:0px;
 padding:0px 5px 0px 10px;
@@ -125,12 +127,12 @@ text-decoration:none;
 /* 카드 */
 .card_section{
   width: 90%;
-  height:200px;
+  height:30%;
   display: block;
   margin-left: auto;
   margin-right: auto;
-  margin-top:80px;
-  margin-bottom:30px;
+  margin-top:8%;
+  margin-bottom:3%;
 }
 .card_section img{
   width: 30%;
@@ -143,24 +145,30 @@ footer{
   background-color: #000;
 }
 footer .container{
-  padding:40px 20px;
+  padding:2% 1%;
 }
 .foota{
-  margin-bottom:30px;
+  margin-bottom:4%;
+	margin-top:4%;
+	line-height: 1.5rem;
+
 }
 .footb div{
-  margin-bottom:20px;
+  margin-bottom:4%;
+	margin-top:4%;
+
 }
 .footb h3{
   margin-top:0;
-  margin-bottom:10px;
+  margin-bottom:0.8rem;
+	line-height:1.5rem;
   border-bottom:solid 1px currentColor;
-  font-size:14px;
+  font-size:1rem;
 }
 .footb ul{
   margin:0px;
   padding:0;
-
+	line-height: 1.2rem;
   list-style:none;
 }
 @media (min-width: 768px){
@@ -171,36 +179,36 @@ footer .container{
     flex:1;
   }
   .footb div:not(:first-child){
-    margin-left:40px;
+    margin-left:9%;
   }
 }
 @media(min-width: 768px){
   footer .container{
     display: flex;
     flex-wrap: wrap;
-    max-width:1000px;
+    max-width:100%;
     max-width: var(--large-width);
-    margin-left: 100px;
-    margin-right: 100px;
+    margin-left: 7%;
+    margin-right: 7%;
   }
   .foota{
-    flex: 0 0 40%;
+    flex: 0 0 30%;
   }
   .footb{
-    flex:0 0 60%;
+    flex:0 0 70%;
   }
 }
 
 /* 퀵메뉴 */
 .quick-menu-area{
   position:fixed;
-  right:5%;
+  left:90%;
   z-index: 99;
 }
 .quick-menu-area a{
   display: block;
 }
 .quick-menu-area img{
-  max-width: 80%;
-  width: 100px;
+  max-width: 60%;
+  width: 60%;
 }
