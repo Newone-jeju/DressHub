@@ -91,6 +91,12 @@ public class ProductController {
         return productService.getProductImageList(paramid);
     }
 
+    @RequestMapping(value = "/products/search", method = RequestMethod.GET)
+    @ResponseBody
+    public List<Product> getProductList(@RequestParam(value = "page") int page, @RequestParam(value = "category") String category, @RequestParam(value = "order") String order){
+        return productService.getProductList(page, category, order);
+    }
+
     @RequestMapping(value = "/productImages", method = RequestMethod.GET)
     @ResponseBody
     public List<ProductImage> getProductImageList(){

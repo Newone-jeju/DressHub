@@ -36,4 +36,8 @@ public class ProductService {
     public ArrayList<ProductImage> getProductImageList(){
         return productImageDao.getProductImageList("ID DESC" );
     }
+    public ArrayList<Product> getProductList(int page, String category, String array ){
+        return productDao.getList(page, category, array);
+    };
+
 }

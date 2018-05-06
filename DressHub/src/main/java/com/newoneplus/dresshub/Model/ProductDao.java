@@ -89,15 +89,11 @@ public class ProductDao {
 
 //    일단 게시물 순서에 따른 번호는 안넣음 받을 수 있도록 만들어놓기만함
 //    맨처음 1페이지에 대한 페이징처리
-    public ArrayList<Product> getList(int page,  String arrangeQuery) {
-        String sql = "SELECT * FROM PRODUCT WHERE (@ROWNUM :=" + (page * 25 - 25) + ") =" + (page * 25 - 25) + " ORDER BY " + arrangeQuery + "LIMIT " + (page * 25 - 25) + ", 25;";
+    public ArrayList<Product> getList(int page, String category, String arrangeQuery) {
+        String sql = "SELECT * FROM PRODUCT WHERE (@ROWNUM :=" + (page * 25 - 25) + ") =" + (page * 25 - 25) + " AND CATEGORY = '"+ category +"' ORDER BY " + arrangeQuery + " LIMIT " + (page * 25 - 25) + ", 25;";
         return getProducts(sql);
     }
-//  두번째부터 페이징처리! 맨처음불러온 마지막 게시물에대한 아이디를 가지고 있다가 이보다 작은 부부처리 나중에 asc 정렬할 때에 대한 처리도 지원하도록 수정이 필요
-    public ArrayList<Product> getList(int page, int maxId,  String arrangeQuery) {
-        String sql = "SELECT * FROM PRODUCT WHERE (@ROWNUM :=" + (page * 25 - 25) + ") =" + (page * 25 - 25) + " AND id < "+ maxId  + " ORDER BY " + arrangeQuery + "LIMIT " + (page * 25 - 25) + ", 25;";
-        return getProducts(sql);
-    }
+
 
     private ArrayList<Product> getProducts(String sql) {
         ArrayList<Product> productList = null;
