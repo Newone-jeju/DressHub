@@ -69,4 +69,7 @@ public class DaoFactory {
         return new UserController();
     }
 
+    @Bean
+    public ReviewDao reviewDao(){return  new ReviewDao(jdbcTemplate());}
+
 }
