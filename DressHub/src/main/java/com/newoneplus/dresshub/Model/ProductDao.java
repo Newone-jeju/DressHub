@@ -87,9 +87,9 @@ public class ProductDao {
         return getProducts("SELECT * FROM PRODUCT ORDER BY " + arrangeQuery);
     }
 
-
+//page에 따라 데이터 가져오기 위한 코드
+//    @RowNUM은 없어도 되는데 나중에 어떻게 될 지몰라서 일단 들여놓음 가져오는 게시물에 순서대로 id 매기는 코드
     public ArrayList<Product> getList(int page, String category, String arrangeQuery) {
-
         if(!category.equals("null")){
             category = " AND CATEGORY = '" + category + "'";
         }else{
@@ -99,6 +99,8 @@ public class ProductDao {
         return getProducts(sql);
     }
 
+
+//    Product가져오는 부분이 중복되서 리팩토링 기존의 코드는 변경없음
     private ArrayList<Product> getProducts(String sql) {
         ArrayList<Product> productList = null;
         try {
@@ -161,6 +163,7 @@ public class ProductDao {
     }
 
 
+//   페이징 처리를 위해서 db count하는 코드
     public int getCount(String category) {
         String sql = "SELECT COUNT(*) FROM PRODUCT";
         if( !category.equals("null") ){
