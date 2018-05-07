@@ -70,5 +70,8 @@ public class DaoFactory {
     }
 
     @Bean
+    public ReviewDao reviewDao(){return  new ReviewDao(jdbcTemplate());}
+
+    @Bean
     public BasketDao basketDao(){return new BasketDao();}
 }
