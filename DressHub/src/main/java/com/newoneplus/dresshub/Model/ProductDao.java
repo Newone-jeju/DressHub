@@ -87,8 +87,7 @@ public class ProductDao {
         return getProducts("SELECT * FROM PRODUCT ORDER BY " + arrangeQuery);
     }
 
-//    일단 게시물 순서에 따른 번호는 안넣음 받을 수 있도록 만들어놓기만함
-//    맨처음 1페이지에 대한 페이징처리
+
     public ArrayList<Product> getList(int page, String category, String arrangeQuery) {
 
         if(!category.equals("null")){
