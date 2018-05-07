@@ -26,6 +26,7 @@ public class ProductDao {
     private String username;
         JdbcTemplate jdbcTemplate = null;
     SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+    public String sql;
 
 
     public ProductDao(JdbcTemplate jdbcTemplate) {
@@ -70,7 +71,6 @@ public class ProductDao {
     }
 
     public void update(Product product) {
-
         Object[] params = getFullParams(product);
         jdbcTemplate.update("UPDATE PRODUCT SET NAME = ?, THUMBNAIL_IMAGE = ?, CONTENTS = ?, COST_PER_DAY = ?, DEPOSIT = ?," +
                 " SALE_PRICE = ?,CATEGORY = ?, CONSIGMENT_START = ?, CONSIGMENT_END = ?, STATE = ?, DELEVERY_TYPE = ?" +
@@ -84,17 +84,35 @@ public class ProductDao {
     }
 
     public ArrayList<Product> getList(String arrangeQuery) {
+        return getProducts("SELECT * FROM PRODUCT ORDER BY " + arrangeQuery);
+    }
+
+//page에 따라 데이터 가져오기 위한 코드
+//    @RowNUM은 없어도 되는데 나중에 어떻게 될 지몰라서 일단 들여놓음 가져오는 게시물에 순서대로 id 매기는 코드
+    public ArrayList<Product> getList(int page, String category, String arrangeQuery) {
+        if(!category.equals("null")){
+            category = " AND CATEGORY = '" + category + "'";
+        }else{
+            category="";
+        }
+        String sql = "SELECT * FROM PRODUCT WHERE (@ROWNUM :=" + (page * 25 - 25) + ") =" + (page * 25 - 25) + category +" ORDER BY " + arrangeQuery + " LIMIT " + (page * 25 - 25) + ", 25;";
+        return getProducts(sql);
+    }
+
+
+//    Product가져오는 부분이 중복되서 리팩토링 기존의 코드는 변경없음
+    private ArrayList<Product> getProducts(String sql) {
         ArrayList<Product> productList = null;
         try {
             productList = (ArrayList<Product>) jdbcTemplate.queryForObject
-                    ("SELECT * FROM PRODUCT ORDER BY " + arrangeQuery, (RowMapper<Object>) (rs, rowNum) -> {
-                List<Product> products = new ArrayList<>();
-                do  {
-                    Product selectesProduct = makeValidProduct(rs);
-                    products.add(selectesProduct);
-                }while((rs.next()));
-                return products;
-            });
+                    (sql, (RowMapper<Object>) (rs, rowNum) -> {
+                        List<Product> products = new ArrayList<>();
+                        do  {
+                            Product selectesProduct = makeValidProduct(rs);
+                            products.add(selectesProduct);
+                        }while((rs.next()));
+                        return products;
+                    });
         }catch (EmptyResultDataAccessException e){
             productList = null;
         }
@@ -142,5 +160,16 @@ public class ProductDao {
                 product.getDeleveryType(), product.getProviderId(), product.getLikes(),
                 product.getRegDate(), product.getLeastLeaseDay(), product.getSize()};
 
+    }
+
+
+//   페이징 처리를 위해서 db count하는 코드
+    public int getCount(String category) {
+        String sql = "SELECT COUNT(*) FROM PRODUCT";
+        if( !category.equals("null") ){
+            category = " where category = '"+ category+"'";
+            sql = sql + category;
+        }
+         return  jdbcTemplate.queryForObject(sql, Integer.class);
     }
 }
