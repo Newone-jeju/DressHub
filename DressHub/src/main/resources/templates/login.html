@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
   <head>
     <meta charset="utf-8">
-      <script src="js/menu.js"></script>
-    <link rel="stylesheet" type="text/css" href="css/menu.css"  />
-<link rel="stylesheet" href="css/login.css">
+      <script src="../js/menu.js"></script>
+    <link rel="stylesheet" href="../css/menu.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/login.css"/>
     <title></title>
   </head>
   <body>
@@ -59,8 +59,18 @@
 <section class="container">
     <div class="login">
         <h1 class=h1_login>MEMBER LOGIN</h1>
-      <form method="post" action="index.html">
-        <p><input class='id' type="text" name="login" value="" placeholder="  ID"></p>
+        <div th:if="${param.error}">
+            <div class="alert alert-danger">
+                아이디 혹은 비밀번호를 확인해주세요.
+            </div>
+        </div>
+        <div th:if="${param.logout}">
+            <div class="alert alert-info">
+                로그아웃이 완료되었습니다.
+            </div>
+        </div>
+      <form method="post" th:action="@{/login}">
+        <p><input class='id' type="text" name="id" value="" placeholder="  ID"></p>
         <p><input class='password' type="password" name="password" value="" placeholder="  Password"></p>
         <p ><input class="btn_login" type="submit" name="commit" value="LOGIN"></p>
       </form>
@@ -69,11 +79,11 @@
     <div class="login_help">
             <ul class="topul">
               <li><a href=#>아이디/비밀번호찾기</a></li>
-              <li><a href="join.html">회원가입</a></li>
+              <li><a href="../static/join.html">회원가입</a></li>
             </ul>
     </div>
   </section>
-  <script src="js/menu.js">
+  <script src="../js/menu.js">
   </script>
   </body>
 </html>
