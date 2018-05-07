@@ -92,7 +92,7 @@ public class ProductDao {
     public ArrayList<Product> getList(int page, String category, String arrangeQuery) {
 
         if(!category.equals("null")){
-            category = "AND CATEGORY = '" + category + "'";
+            category = " AND CATEGORY = '" + category + "'";
         }else{
             category="";
         }

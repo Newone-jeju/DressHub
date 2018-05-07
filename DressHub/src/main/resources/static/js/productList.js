@@ -1,113 +1,115 @@
-$(document).ready(function() {
-	var pageNumber = 1;
-	var
-	$.ajax({
-					 url:'./products/search?page=1&category=캐쥬얼>남성&order=id desc',
-					 dataType:'json',
-					 type:'get',
-					 success:function(data){
-						 var product ={};
-					 	product.max_cardnum = 11;
-					 	product.mapcard = function(){
-					 			var cards = '';
-					 			for(var i=0 ; i <data.length; i++){
-					 				cards +=
-					 				'<a href="'+data[i].url+'" class="product_container_content_card">'+
-					 					'<div class="card_img_wrap">'+
-					 						'<img src="../product_image/'+data[i].thumbnailImage+'" alt="blank" class="card_img">'+
-					 					'</div>'+
-					 					'<div class="card_text_wrap">'+
-					 						'<h3 class="text_name">'+data[i].name+'</h3>'+
-					 						'<p class="text_deposit">보증금 : '+data[i].deposit+'</p>'+
-					 						'<p class="text_costPerDay">1일 렌탈료 : '+data[i].costPerDay+'</p>'+
-					 					'</div>'+
-					 				'</a>';
-					 			}
-					 			$('.product_container_content').html(cards);
-					 	}
-					 	product.mapcard();
 
-					 	//페이징
-					 			var totalData = data.length;    // 총 데이터 수
-					 	    var dataPerPage = 16;    // 한 페이지에 나타낼 데이터 수
-					 	    var pageCount = parseInt(data.length/16)+1;        // 한 화면에 나타낼 페이지 수
+$(document).ready(function () {
 
-					 	    function paging(totalData, dataPerPage, pageCount, currentPage){
+    paging(1, 25, 10, 1);
 
-					 	        console.log("currentPage : " + currentPage);
+    function paging(totalData, dataPerPage, pageCount, currentPage) {
 
-					 	        var totalPage = Math.ceil(totalData/dataPerPage);    // 총 페이지 수
-					 	        var pageGroup = Math.ceil(currentPage/pageCount);    // 페이지 그룹
+        console.log("currentPage : " + currentPage);
+        console.log("totalData :" + totalData);
+        var totalPage = Math.ceil(totalData / dataPerPage);    // 총 페이지 수
+        var pageGroup = Math.ceil(currentPage / pageCount);    // 페이지 그룹
+        console.log("totalPage : " + totalPage);
+        console.log("pageGroup : " + pageGroup);
 
-					 	        console.log("pageGroup : " + pageGroup);
+        var last = pageGroup * pageCount;    // 화면에 보여질 마지막 페이지 번호
+        if (last > totalPage)
+            last = totalPage;
+        var first = last - (pageCount - 1);    // 화면에 보여질 첫번째 페이지 번호
+        if(first<=0){
+            first=1;
+        }
+        var next = last + 1;
+        var prev = first - 1;
 
-					 	        var last = pageGroup * pageCount;    // 화면에 보여질 마지막 페이지 번호
-					 	        if(last > totalPage)
-					 	            last = totalPage;
-					 	        var first = last - (pageCount-1);    // 화면에 보여질 첫번째 페이지 번호
-					 	        var next = last+1;
-					 	        var prev = first-1;
+        console.log("last : " + last);
+        console.log("first : " + first);
+        console.log("next : " + next);
+        console.log("prev : " + prev);
+        console.log("total:" + totalPage);
 
-					 	        console.log("last : " + last);
-					 	        console.log("first : " + first);
-					 	        console.log("next : " + next);
-					 	        console.log("prev : " + prev);
+        var $pingingView = $("#paging");
 
-					 	        var $pingingView = $("#paging");
+        var html = "";
 
-					 	        var html = "";
+        if (prev > 0)
+            html += "<a href=# id='prev'><</a> ";
 
-					 	        if(prev > 0)
-					 	            html += "<a href=# id='prev'><</a> ";
+        for (var i = first; i <= last; i++) {
+            html += "<a href='#' id=" + i + ">" + i + "</a> ";
+        }
 
-					 	        for(var i=first; i <= last; i++){
-					 	            html += "<a href='#' id=" + i + ">" + i + "</a> ";
-					 	        }
+        if (last < totalPage)
+            html += "<a href=# id='next'>></a>";
 
-					 	        if(last < totalPage)
-					 	            html += "<a href=# id='next'>></a>";
+        $("#paging").html(html);    // 페이지 목록 생성
+        $("#paging a").css("color", "black");
+        $("#paging a#" + currentPage).css({
+            "text-decoration": "none",
+            "color": "red",
+            "font-weight": "bold"
+        });    // 현재 페이지 표시
+        $("#paging a").click(function () {
+            var $item = $(this);
+            var $id = $item.attr("id");
+            selectedPage = $item.text();
+            console.log("selectPage = " + selectedPage);
+            if ($id == "next") selectedPage = next;
+            if ($id == "prev") selectedPage = prev;
+            $.ajax({
+                url: './products/search?page='+selectedPage,
+                dataType: 'json',
+                type: 'get',
+                success: function (data) {
+                    totalCount = data.count;
+                    var product = {};
+                    console.log("$item=" + $item);
+                    data = data.list;
+                    console.log(data);
+                    product.max_cardnum = 11;
 
-					 	        $("#paging").html(html);    // 페이지 목록 생성
-					 	        $("#paging a").css("color", "black");
-					 	        $("#paging a#" + currentPage).css({"text-decoration":"none",
-					 	                                           "color":"red",
-					 	                                           "font-weight":"bold"});    // 현재 페이지 표시
+                    product.mapcard = function () {
+                        var cards = '';
+                        for (var i = 0; i < data.length; i++) {
+                            cards +=
+                                '<a href="' + data[i].url + '" class="product_container_content_card">' +
+                                '<div class="card_img_wrap">' +
+                                '<img src="../product_image/' + data[i].thumbnailImage + '" alt="blank" class="card_img">' +
+                                '</div>' +
+                                '<div class="card_text_wrap">' +
+                                '<h3 class="text_name">' + data[i].name + '</h3>' +
+                                '<p class="text_deposit">보증금 : ' + data[i].deposit + '</p>' +
+                                '<p class="text_costPerDay">1일 렌탈료 : ' + data[i].costPerDay + '</p>' +
+                                '</div>' +
+                                '</a>';
+                        }
+                        $('.product_container_content').html(cards);
+                    }
+                    product.mapcard();
+                    //페이징
 
-					 	        $("#paging a").click(function(){
+                    paging(totalCount, 25, 10, selectedPage);
+                }
+            })
 
-					 	            var $item = $(this);
-					 	            var $id = $item.attr("id");
-					 	            var selectedPage = $item.text();
+        });
+    }
 
-					 	            if($id == "next")    selectedPage = next;
-					 	            if($id == "prev")    selectedPage = prev;
-
-					 	            paging(totalData, dataPerPage, pageCount, selectedPage);
-					 	        });
-
-					 	    }
-
-					 	    $("document").ready(function(){
-					 	        paging(totalData, dataPerPage, pageCount, 1);
-					 	    });
-					  }
-			 })
-
-
- // 퀵메뉴
- $(document).ready(function(){
-   $(function(){
-     $(window).scroll(function() {
-       var position = $(window).scrollTop(); // 현재 스크롤바의 위치
-			 console.log(position);
-       if (position == 0) {
-         $(".quick-menu-area").stop().animate({"top":-position+750+"px"},500);//750은 현재top값
-       }else if(position > 0 && position < 699){
-         $(".quick-menu-area").stop().animate({"top":-position+750-25+"px"},500);//고정된 header가 있는데, 그 높이가 25
-       }else if (position > 700) {
-         $(".quick-menu-area").stop().animate({"top":70+"px"},500);
-       }
-     });
-   });
- })
+    $("#paging a").trigger("click");
+    // 퀵메뉴
+    $(document).ready(function () {
+        $(function () {
+            $(window).scroll(function () {
+                var position = $(window).scrollTop(); // 현재 스크롤바의 위치
+                console.log(position);
+                if (position == 0) {
+                    $(".quick-menu-area").stop().animate({"top": -position + 750 + "px"}, 500);//750은 현재top값
+                } else if (position > 0 && position < 699) {
+                    $(".quick-menu-area").stop().animate({"top": -position + 750 - 25 + "px"}, 500);//고정된 header가 있는데, 그 높이가 25
+                } else if (position > 700) {
+                    $(".quick-menu-area").stop().animate({"top": 70 + "px"}, 500);
+                }
+            });
+        });
+    })
 })
