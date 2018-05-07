@@ -61,4 +61,11 @@ public class DaoFactory {
     @Bean
     public ProductImageDao productImageDao(){return new ProductImageDao(jdbcTemplate());}
 
-}
+
+
+    @Bean
+    public ReviewDao reviewDao(){return  new ReviewDao(jdbcTemplate());}
+
+    @Bean
+    public BasketDao basketDao(){return new BasketDao();}
+
