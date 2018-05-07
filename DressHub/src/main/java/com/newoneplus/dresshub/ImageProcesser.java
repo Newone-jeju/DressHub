@@ -1,7 +1,6 @@
 package com.newoneplus.dresshub;
 
 import javax.imageio.ImageIO;
-import javax.imageio.stream.ImageInputStream;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
