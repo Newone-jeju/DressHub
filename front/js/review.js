@@ -62,7 +62,6 @@ $(function() {
             $.each(data, function(i, review_data)
             {
                 review_cards.unshift(
-                '<div class="edit-btn-state hidd">false</div>'+
                 //리뷰 카드
                 '<div class="review-head review'+review_data.head.no+'">'+        
                     '<div class="td-no">'+review_data.head.no+'</div>'+
