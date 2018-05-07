@@ -1,6 +1,8 @@
 $(document).ready(function() {
+	var pageNumber = 1;
+	var
 	$.ajax({
-					 url:'./product/',
+					 url:'./products/search?page=1&category=캐쥬얼>남성&order=id desc',
 					 dataType:'json',
 					 type:'get',
 					 success:function(data){
@@ -12,7 +14,7 @@ $(document).ready(function() {
 					 				cards +=
 					 				'<a href="'+data[i].url+'" class="product_container_content_card">'+
 					 					'<div class="card_img_wrap">'+
-					 						'<img src="'+data[i].image+'" alt="blank" class="card_img">'+
+					 						'<img src="../product_image/'+data[i].thumbnailImage+'" alt="blank" class="card_img">'+
 					 					'</div>'+
 					 					'<div class="card_text_wrap">'+
 					 						'<h3 class="text_name">'+data[i].name+'</h3>'+
@@ -88,9 +90,7 @@ $(document).ready(function() {
 					 	    $("document").ready(function(){
 					 	        paging(totalData, dataPerPage, pageCount, 1);
 					 	    });
-					  })
-
-					 }
+					  }
 			 })
 
 
@@ -110,3 +110,4 @@ $(document).ready(function() {
      });
    });
  })
+})

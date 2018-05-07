@@ -17,10 +17,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @Controller
 public class ProductController {
@@ -93,7 +90,7 @@ public class ProductController {
 
     @RequestMapping(value = "/products/search", method = RequestMethod.GET)
     @ResponseBody
-    public List<Product> getProductList(@RequestParam(value = "page") int page, @RequestParam(value = "category") String category, @RequestParam(value = "order") String order){
+    public HashMap<String, Object> getProductList(@RequestParam(value = "page", defaultValue = "1") int page, @RequestParam(value = "category", defaultValue = "null") String category, @RequestParam(value = "order" , defaultValue = "id desc") String order){
         return productService.getProductList(page, category, order);
     }
 

@@ -90,10 +90,15 @@ public class ProductDao {
 //    일단 게시물 순서에 따른 번호는 안넣음 받을 수 있도록 만들어놓기만함
 //    맨처음 1페이지에 대한 페이징처리
     public ArrayList<Product> getList(int page, String category, String arrangeQuery) {
-        String sql = "SELECT * FROM PRODUCT WHERE (@ROWNUM :=" + (page * 25 - 25) + ") =" + (page * 25 - 25) + " AND CATEGORY = '"+ category +"' ORDER BY " + arrangeQuery + " LIMIT " + (page * 25 - 25) + ", 25;";
+
+        if(!category.equals("null")){
+            category = "AND CATEGORY = '" + category + "'";
+        }else{
+            category="";
+        }
+        String sql = "SELECT * FROM PRODUCT WHERE (@ROWNUM :=" + (page * 25 - 25) + ") =" + (page * 25 - 25) + category +" ORDER BY " + arrangeQuery + " LIMIT " + (page * 25 - 25) + ", 25;";
         return getProducts(sql);
     }
-
 
     private ArrayList<Product> getProducts(String sql) {
         ArrayList<Product> productList = null;
@@ -112,6 +117,7 @@ public class ProductDao {
         }
         return productList;
     }
+
 
     private Product makeValidProduct(ResultSet rs) throws SQLException {
         Product product = new Product();
@@ -156,5 +162,12 @@ public class ProductDao {
     }
 
 
-
+    public int getCount(String category) {
+        String sql = "SELECT COUNT(*) FROM PRODUCT";
+        if( !category.equals("null") ){
+            category = " where category = '"+ category+"'";
+            sql = sql + category;
+        }
+         return  jdbcTemplate.queryForObject(sql, Integer.class);
+    }
 }

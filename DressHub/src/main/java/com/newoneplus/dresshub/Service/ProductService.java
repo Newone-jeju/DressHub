@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 @Service
 public class ProductService {
@@ -36,8 +38,11 @@ public class ProductService {
     public ArrayList<ProductImage> getProductImageList(){
         return productImageDao.getProductImageList("ID DESC" );
     }
-    public ArrayList<Product> getProductList(int page, String category, String array ){
-        return productDao.getList(page, category, array);
+    public HashMap<String,Object > getProductList(int page, String category, String array ){
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("list", productDao.getList(page,category,array));
+        map.put("page", productDao.getCount(category));
+        return map;
     };
 
 }
