@@ -36,6 +36,7 @@ public class BasketDao {
         return basket;
     }
 
+//    user에 따른 장바구니 리스트 가져오기
     public ArrayList<Basket> getBasketList(String userId) {
         Object[] params = {userId};
         ArrayList<Basket> basketArrayList= null;
