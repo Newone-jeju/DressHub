@@ -19,7 +19,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     public void configure(WebSecurity web) throws Exception {
-        web.ignoring().antMatchers("/resources/**");
+        web.ignoring().antMatchers("/resources/**", "/css/**", "/js/**","/image/**", "/static/**");
     }
 
 
@@ -28,7 +28,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests()
                 .antMatchers("/user/**").access("ROLE_USER")
                 .antMatchers("/admin/**").access("ROLE_ADMIN")
-                .antMatchers("/", "/login", "/login&error").permitAll()
+                .antMatchers("/", "/login", "/login?error", "/login?logout").permitAll()
                 .antMatchers("/**").authenticated();
 
         http.csrf().disable();
