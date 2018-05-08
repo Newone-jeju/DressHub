@@ -69,6 +69,11 @@
                 로그아웃이 완료되었습니다.
             </div>
         </div>
+        <div th:if="${param.duplicate}">
+            <div class="alert alert-info">
+                다른 기기에서 접속이 발생하여 로그아웃 되었습니다.
+            </div>
+        </div>
       <form method="post" th:action="@{/login}">
         <p><input class='id' type="text" name="id" value="" placeholder="  ID"></p>
         <p><input class='password' type="password" name="password" value="" placeholder="  Password"></p>

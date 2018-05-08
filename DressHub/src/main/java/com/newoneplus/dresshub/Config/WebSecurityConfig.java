@@ -28,10 +28,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests()
                 .antMatchers("/user/**").access("ROLE_USER")
                 .antMatchers("/admin/**").access("ROLE_ADMIN")
-                .antMatchers("/", "/login", "/login?error", "/login?logout", "/products/**").permitAll()
+                .antMatchers("/", "/login", "/login?error", "/login?logout", "/products/**", "/login?duplicate").permitAll()
                 .antMatchers("/**").authenticated();
 
         http.csrf().disable();
+        http.sessionManagement().
+                maximumSessions(1).
+                maxSessionsPreventsLogin(false).
+                expiredUrl("/login?duplicate");
 
         http.formLogin()
                 .loginPage("/login")
@@ -46,6 +50,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .invalidateHttpSession(true);
 
         http.authenticationProvider(authProvider);
+
+
 
 
 
