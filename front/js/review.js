@@ -10,8 +10,9 @@ $(function() {
 
     //숫자로 된 점수를 별점화
     review.getStar = function(i) {
-        var rank = $("div.td-rank:eq("+i+")").text();
-        $("div.td-rank:eq("+i+")").rateYo({
+        var $td_rank = $("div.td-rank:eq("+i+")");
+        var rank = $td_rank.text();
+        $td_rank.rateYo({
             starWidth: "20px",
             rating: rank,
             readOnly: true,
@@ -23,18 +24,20 @@ $(function() {
     review.folding = function(){
         $(".review-head").click(function() {
             var index = ($(this).index()+1 - Math.floor($(this).index() / 2) - 1);
-            if ($("div.review-body:eq(" + index + ")").css('display') == "none") {
-                $("div.review-body:eq(" + index + ")").removeClass('hidd');
+            var $review_body = $("div.review-body:eq(" + index + ")");
+            if ($review_body.css('display') == "none") {
+                $($review_body).removeClass('hidd');
             } else {
-                $("div.review-body:eq(" + index + ")").addClass('hidd');
+                $($review_body).addClass('hidd');
             }
         });
     }
 
     //페이지네이션 포함 리뷰 매핑 addhook 없으면 안됨
     review.map_review = function(review_data) {
-        $(".review-pagination").addHook('beforeInit', function () {});
-        $(".review-pagination").pagination({
+        var $review_pagination = $(".review-pagination");
+        $review_pagination.addHook('beforeInit', function () {});
+        $review_pagination.pagination({
             dataSource: review_data,
             pageSize: 5,
             showPrevious: true,
@@ -45,7 +48,7 @@ $(function() {
                 $.each(data, function (index, item) {
                   html += item;
                 });
-                $(".review-pagination").prev().html(html);
+                $review_pagination.prev().html(html);
                 //별점
                  for(i=0; i<5; i++){
                     review.getStar(i);
@@ -96,7 +99,6 @@ $(function() {
         }); 
     }
 
-    
     //review write review
     review.write_review = function(url, w, h, name, option) {
         var pozX, pozY = 0;
@@ -122,9 +124,10 @@ $(function() {
     //review body 내 수정버튼
     review.edit_btn = function(){
         $(".review-edit-btn").click(function(){
-            $(".edit-btn-state").text("true");
+            var $edit_btn_state = $(".edit-btn-state");
+            $edit_btn_state.text("true");
             review.write_review("review-form.html", 660, 600, "리뷰쓰기","none");
-            $(".edit-btn-state").text("false");
+            $edit_btn_state.text("false");
         })
     }
     //review body 내 삭제버튼

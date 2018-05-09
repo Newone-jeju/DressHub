@@ -1,8 +1,9 @@
 function getName(){
-	$('.rental-product-content').text(window.opener.$("#product-details h1.title:eq(0)").text());
-	console.log($('.rental-product-content').text());
+	var $rental_product_content = $('.rental-product-content');
+	$rental_product_content.text(window.opener.$("#product-details h1.title:eq(0)").text());
+	console.log($rental_product_content.text());
 	//부모창인 상품상세정보페이지로 부터 접근하지 않은 경우
-	if($('.rental-product-content').text() ==''){
+	if($rental_product_content.text() ==''){
 		alert('잘못된 경로로 접근');
 		window.open('about:blank', '_self').close();
 	}
@@ -13,11 +14,12 @@ function setHiddenName(){
 }
 
 function setHiddenRating(){
-	$("#rating").rateYo({
+	var $rating = $("#rating"); 
+	$rating.rateYo({
 		starWidth: "30px",
 		halfStar: true,
   	onSet: function (rating, rateYoInstance) {
-    $("#rating").after('<input type="hidden" name="rank" value="'+rating+'">');
+    $rating.after('<input type="hidden" name="rank" value="'+rating+'">');
   }
 });
 }
