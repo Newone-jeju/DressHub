@@ -1,19 +1,60 @@
 package com.newoneplus.dresshub.Controller;
 
 import com.newoneplus.dresshub.Model.DaoFactory;
+import com.newoneplus.dresshub.Model.Product;
 import com.newoneplus.dresshub.Model.ProductDao;
+import com.newoneplus.dresshub.Service.MainService;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.SpringBootConfiguration;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.web.WebAppConfiguration;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.MockMvcBuilder;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
+import java.util.ArrayList;
+
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.verifyNoMoreInteractions;
+import static org.mockito.Mockito.when;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
+@RunWith(SpringJUnit4ClassRunner.class)
+@SpringBootTest(classes = DaoFactory.class)
+@WebAppConfiguration
 public class MainControllerTest {
-    private ProductDao productDao;
+
+
+    @Mock
+    MainService mainService;
+    @InjectMocks
+    MainController mainController;
+
+    private MockMvc mockMvc;
 
     @Before
     public void setup() throws ClassNotFoundException {
-        ApplicationContext applicationContext = new AnnotationConfigApplicationContext(DaoFactory.class);
-        productDao = applicationContext.getBean("productDao", ProductDao.class);    }
+        MockitoAnnotations.initMocks(this);
+        mockMvc= MockMvcBuilders.standaloneSetup(mainController).build();
+    }
 
-//    현재 요구사항이 적어 아직 Controller와 Service하는 일이 똑같다!!
+
+    @Test
+    public void getProductListTest() throws Exception {
+        mockMvc.perform(get("/products")).andExpect(status().isOk());
+
+        verify(mainService).getProductList();
+        verifyNoMoreInteractions(mainService);
+    }
 }
