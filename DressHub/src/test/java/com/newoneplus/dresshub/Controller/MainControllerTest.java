@@ -21,6 +21,7 @@ import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MockMvcBuilder;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import org.springframework.web.context.WebApplicationContext;
 
 import java.util.ArrayList;
 
@@ -40,6 +41,9 @@ public class MainControllerTest {
     MainService mainService;
     @InjectMocks
     MainController mainController;
+
+    @Autowired
+    private WebApplicationContext wac;
 
     private MockMvc mockMvc;
 
