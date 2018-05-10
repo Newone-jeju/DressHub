@@ -17,4 +17,6 @@ public class LoginController {
     public String test(){
         return "test";
     }
+
+
 }
