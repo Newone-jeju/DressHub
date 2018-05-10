@@ -3,17 +3,16 @@
 <head>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.3.2/jquery.rateyo.min.css">
 	<link rel="stylesheet" type="text/css" href="css/review-form.css" />
-
+	<title>리뷰 쓰기</title>
 </head>
 <body>
 	<section class="reviewform-wrap">
-		<form action="" method="POST" enctype="multipart/form-data">
-			<div class="head flex">
+		<form action="form url 입력해야됨" method="POST" enctype="multipart/form-data">
+			<div class="head flex border-bot">
 				<div class="rental-product-area flexcenter-align">
 					<div class="rental-product form-name">상품명</div>
 					<div class="rental-product rental-product-content left-space-w"></div>
 				</div>
-				<input type="hidden" name="rental-product" value="">
 				<div class="rental-duration-area flex">
 					<div class="rental-duration form-name">대여기간</div>
 					<div class="rental-duration flexcenter-align left-space">2018-04-05 ~ 2018-05-06</div>
@@ -21,23 +20,22 @@
 			</div>
 
 			<div class="body">
-				<div class="rating-area flexcenter-align">
+				<div class="rating-area flexcenter-align border-bot">
 					<div class="rating form-name">
 						별점
 					</div>
 					<div class="rating left-space" id="rating"></div>
-					<input type="hidden" name="rank" value="">
 				</div>
 				<div class="title-area flexcenter-align">
-					<div class="title form-name">제목</div>
+					<div class="title form-name border-bot">제목</div>
 					<input type="text" name="title" class="title left-space"></input>
 				</div>
 				<div class="text-area flex">
-					<div class="text form-name">내용</div>
+					<div class="text form-name border-bot">내용</div>
 					<textarea name="text" class="text left-space"></textarea>
 				</div>
 				<div class="img-area flexcenter-align">
-					<div class="img form-name">첨부 이미지</div>
+					<div class="img form-name border-bot">첨부 이미지</div>
 					<input type="file" name="img" class="img left-space"></input>
 				</div>
 			</div>

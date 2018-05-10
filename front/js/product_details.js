@@ -8,23 +8,23 @@ $(document).ready(function() {
         );
     }
 
-    review.map_review = function(review_data) {
+    review.map_review = function(review_data, page) {
+        console.log(review_data);
         var i;
         var html = '';
-        for(i=0; i<5; i++){
+        for(i=(page-1)*5; i<page*5; i++){
             html += review_data[i];
         }
         $(".td-group").html(html);
+        
         for(i=0; i<5; i++){
             review.getStar(i);
         }
         review.folding();
-
-        
     }
 
     review.init = function() {
-    	$.getJSON('js/reviewData.json', function(data) {
+        $.getJSON('js/reviewData.json', function(data) {
            var review_cards = [];
             $.each(data, function(i, review_data)
             {
@@ -37,6 +37,12 @@ $(document).ready(function() {
                 '</div>'+
   
               '<div class="review-body hidd">'+
+                '<div class="review-btn-wrap">'+
+                        '<button class="review-btn review-body-btn review-edit-btn">수정</button>'+
+                    '<form action="review-delete/'+review_data.head.no+'" method="post">'+
+                        '<button type="submit" class="review-btn review-body-btn review-delete-btn">삭제</button>'+
+                    '</form>'+
+                '</div>'+
                 '<img src="'+review_data.body.img+'" alt="review_img">'+
                 '<p>'+review_data.body.text+'</p>'+
               '</div>'
@@ -45,13 +51,11 @@ $(document).ready(function() {
             if (review_cards == []) {
             review.no_review();
             } else {
-                review.map_review(review_cards);
+                window.setTimeout(function(){
+                    review.map_review(review_cards,1);
+                },500);               
             }
-        });
-        $(".review-write-btn").click(function(){
-            review.write_btn("review-form.html", 660, 600, "리뷰쓰기","none");
-        })
-            
+        }); 
     }
 
     review.getStar = function(i) {
@@ -92,9 +96,15 @@ $(document).ready(function() {
         console.log(pozX);
         window.open(url, name, "location=no,status=0,scrollbars=" + scroll + ",resizable=1,width=" + w + ",height=" + h + 
         ",left=" + pozX + ",top=" + pozY +"resizable=no");
-    }    
-    review.init();
+        window.close()
+    }
 
-    
-    
+    review.delete_btn = function(){
+        $(".review-delete-btn").click(function(){
+            location.reload();
+        })
+    }
+
+
+    review.init();
 });

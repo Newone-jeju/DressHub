@@ -1,6 +1,10 @@
 * {
 	margin:0;
 }
+.border-bot {
+	border-bottom: 1px solid #d5d5d5;
+}
+
 .flex {
 	display: flex;
 }
