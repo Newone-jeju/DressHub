@@ -30,4 +30,8 @@ public class ReviewService {
         reviewDao.delete(id);
     }
 
+    public void insert(Review review){ reviewDao.insert(review);}
+
+    public Review get(int id){return reviewDao.get(id);}
+
 }
