@@ -95,4 +95,11 @@ public class ProductTest {
         assertThat(deletedProduct, is(nullValue()));
 //        삭제 테스트
     }
+
+    @Test
+    public void productCount(){
+        int totalCount = productDao.getCount(null);
+
+        assertThat(totalCount, is(61));
+    }
 }

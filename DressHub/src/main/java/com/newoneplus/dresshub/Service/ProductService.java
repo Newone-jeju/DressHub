@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 @Service
 public class ProductService {
@@ -34,6 +36,14 @@ public class ProductService {
         return productImageDao.getProductImageList(id, "ID DESC");
     }
     public ArrayList<ProductImage> getProductImageList(){
-        return productImageDao.getProductImageList( "ID DESC");
+        return productImageDao.getProductImageList("ID DESC" );
     }
+//    전체 카운트와 리스트정보 같이 보내줌
+    public HashMap<String,Object > getProductList(int page, String category, String array ){
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("list", productDao.getList(page,category,array));
+        map.put("count", productDao.getCount(category));
+        return map;
+    };
+
 }
