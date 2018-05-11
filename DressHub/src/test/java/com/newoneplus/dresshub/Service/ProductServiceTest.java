@@ -16,24 +16,24 @@ public class ProductServiceTest {
         ApplicationContext applicationContext = new AnnotationConfigApplicationContext(DaoFactory.class);
         productService = applicationContext.getBean("productService", ProductService.class);
     }
-
-    @Test
-    public void productResister(){
-        Product product = new Product();
-        product.setCategory("categoryTest");
-        product.setConsigmentEnd("2017-05-04");
-        product.setConsigmentStart("2017-04-04");
-        product.setContents("contentsTest");
-        product.setCostPerDay(1);
-        product.setDeleveryType("deleveryTypeTest");
-        product.setDeposit(2);
-        product.setThumbnailImage(null);
-        product.setName("nameTest");
-        product.setProviderId("user1");
-        product.setSalePrice(3);
-        product.setState("stateTest");
-
-        Integer insertedId = productService.insertProduct(product);
-    }
+//
+//    @Test
+//    public void productResister(){
+//        Product product = new Product();
+//        product.setCategory("categoryTest");
+//        product.setConsigmentEnd("2017-05-04");
+//        product.setConsigmentStart("2017-04-04");
+//        product.setContents("contentsTest");
+//        product.setCostPerDay(1);
+//        product.setDeleveryType("deleveryTypeTest");
+//        product.setDeposit(2);
+//        product.setThumbnailImage(null);
+//        product.setName("nameTest");
+//        product.setProviderId("user1");
+//        product.setSalePrice(3);
+//        product.setState("stateTest");
+//
+//        Integer insertedId = productService.insertProduct(product);
+//    }
 
 }

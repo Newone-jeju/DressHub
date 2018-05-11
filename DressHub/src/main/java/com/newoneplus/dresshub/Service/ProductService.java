@@ -75,9 +75,6 @@ public class ProductService {
             productDao.update(product);
         }
     }
-    public void updateProduct(Product product){
-        productDao.update(product);
-    }
 
     public ArrayList<ProductImage> getProductImageList(int id){
         return productImageDao.getProductImageList(id, "ID DESC");
