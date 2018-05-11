@@ -2,6 +2,7 @@ package com.newoneplus.dresshub.Controller;
 
 
 import com.newoneplus.dresshub.ImageProcesser;
+import com.newoneplus.dresshub.Model.Basket;
 import com.newoneplus.dresshub.Model.Product;
 import com.newoneplus.dresshub.Model.ProductImage;
 import com.newoneplus.dresshub.Service.ProductService;
@@ -25,18 +26,14 @@ public class ProductController {
 
     @Autowired
     ProductService productService;
+
+
     @RequestMapping(value = "/products", method = RequestMethod.POST)
     public String insert(@ModelAttribute Product product) throws IOException, ParseException {
         productService.insertProduct(product);
 //        임시로 폼으로 다시
         return "productform";
 
-    }
-
-    @RequestMapping(value = "/productImages/search", method = RequestMethod.GET)
-    @ResponseBody
-    public List<ProductImage> getProductImages(@RequestParam(value = "productId") int paramId){
-        return productService.getProductImageList(paramId);
     }
 
     @RequestMapping(value = "/products/search", method = RequestMethod.GET)
@@ -47,8 +44,12 @@ public class ProductController {
 
     @RequestMapping(value = "/productImages", method = RequestMethod.GET)
     @ResponseBody
-    public List<ProductImage> getProductImageList(){
-        return productService.getProductImageList();
+    public List<ProductImage> getProductImageList(@RequestParam(value = "productId",required = false) Integer paramId){
+        if(paramId == null){
+            return productService.getProductImageList();
+        }else{
+            return productService.getProductImageList(paramId);
+        }
     }
 
     @RequestMapping(value = "/productList", method= RequestMethod.GET)
@@ -57,5 +58,9 @@ public class ProductController {
         return "productList";
     }
 
-
+    @RequestMapping(value = "/basketList", method = RequestMethod.GET)
+    @ResponseBody
+    public List<Basket> getBasketList(@RequestParam(value = "userId") String userId){
+        return productService.getBasketList(userId);
+    }
 }

@@ -2,10 +2,7 @@ package com.newoneplus.dresshub.Service;
 
 
 import com.newoneplus.dresshub.ImageProcesser;
-import com.newoneplus.dresshub.Model.Product;
-import com.newoneplus.dresshub.Model.ProductDao;
-import com.newoneplus.dresshub.Model.ProductImage;
-import com.newoneplus.dresshub.Model.ProductImageDao;
+import com.newoneplus.dresshub.Model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,7 +21,8 @@ public class ProductService {
     private ProductDao productDao;
     @Autowired
     private ProductImageDao productImageDao;
-
+    @Autowired
+    private BasketDao basketDao;
 
     public void insertProduct(Product product) throws IOException {
         ImageProcesser imageProcesser = new ImageProcesser();
@@ -90,4 +88,7 @@ public class ProductService {
         return map;
     };
 
+    public ArrayList<Basket> getBasketList(String userId){
+        return basketDao.getBasketList(userId);
+    }
 }
