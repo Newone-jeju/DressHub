@@ -75,4 +75,6 @@ public class DaoFactory {
     @Bean
     public LeaseInfoDao leaseInfoDao(){return new LeaseInfoDao(jdbcTemplate());}
 
+    @Bean
+    public BasketDao basketDao(){return new BasketDao();}
 }
