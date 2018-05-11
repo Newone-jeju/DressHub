@@ -28,7 +28,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests()
                 .antMatchers("/user/**").access("hasRole('ROLE_USER')")
                 .antMatchers("/admin/**").access("hasRole('ROLE_ADMIN')")
-                .antMatchers("/", "/login", "/login?error", "/login?logout", "/products/**", "/login?duplicate").permitAll()
+                .antMatchers("/", "/login", "/login?error", "/login?logout", "/products/**", "/login?duplicate", "/join/**").permitAll()
                 .antMatchers("/**").authenticated();
 
         http.csrf().disable();
@@ -36,6 +36,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 maximumSessions(1).
                 maxSessionsPreventsLogin(false).
                 expiredUrl("/login?duplicate");
+
 
         http.formLogin()
                 .loginPage("/login")
@@ -47,6 +48,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.logout()
                 .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
                 .logoutSuccessUrl("/login?logout")
+                .deleteCookies("JSESSIONID")
                 .invalidateHttpSession(true);
 
         http.authenticationProvider(authProvider);
