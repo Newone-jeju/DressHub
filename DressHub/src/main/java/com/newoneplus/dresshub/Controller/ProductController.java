@@ -33,10 +33,10 @@ public class ProductController {
 
     }
 
-    @RequestMapping(value = "/productImages/{paramid}", method = RequestMethod.GET)
+    @RequestMapping(value = "/productImages/search", method = RequestMethod.GET)
     @ResponseBody
-    public List<ProductImage> getProductImages(@PathVariable int paramid){
-        return productService.getProductImageList(paramid);
+    public List<ProductImage> getProductImages(@RequestParam(value = "productId") int paramId){
+        return productService.getProductImageList(paramId);
     }
 
     @RequestMapping(value = "/products/search", method = RequestMethod.GET)
@@ -56,4 +56,6 @@ public class ProductController {
         model.addAttribute("category", category);
         return "productList";
     }
+
+
 }
