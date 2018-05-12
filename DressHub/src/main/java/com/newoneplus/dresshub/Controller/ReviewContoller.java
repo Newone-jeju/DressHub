@@ -21,12 +21,13 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 
-@RestController
+@Controller
 public class ReviewContoller {
     @Autowired
     private ReviewService reviewService;
 
     @RequestMapping(value = "/review", method = RequestMethod.GET)
+    @ResponseBody
     public String get(@RequestParam(defaultValue = "null") String productId, @RequestParam(defaultValue = "null") String userId) {
         String reviewsJsonString = null;
         if (!productId.equals("null")) {
@@ -42,7 +43,10 @@ public class ReviewContoller {
     public String insert(@ModelAttribute Review review) {
 //        (@RequestParam String title, @RequestParam String comment, @RequestParam String rate,
 //                @RequestParam String userId, @RequestParam String productId + 이미지
-        reviewService.newReview(review);
+
+
+        //TODO 테스트코드, 개발완료시 newReview사용할것
+        reviewService.newReviewTest(review);
         return null;
     }
 
@@ -64,5 +68,4 @@ public class ReviewContoller {
         return null;
     }
 }
-
 
