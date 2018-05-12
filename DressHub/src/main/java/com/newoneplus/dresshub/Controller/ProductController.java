@@ -17,10 +17,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @Controller
 public class ProductController {
@@ -80,14 +77,21 @@ public class ProductController {
             productService.updateProduct(product);
 
         }
-//        return "index";
+//        임시로 폼으로 다시
         return "productform";
+
     }
 
     @RequestMapping(value = "/productImages/{paramid}", method = RequestMethod.GET)
     @ResponseBody
     public List<ProductImage> getProductImages(@PathVariable int paramid){
         return productService.getProductImageList(paramid);
+    }
+
+    @RequestMapping(value = "/products/search", method = RequestMethod.GET)
+    @ResponseBody
+    public HashMap<String, Object> getProductList(@RequestParam(value = "page", defaultValue = "1") int page, @RequestParam(value = "category", defaultValue = "null") String category, @RequestParam(value = "order" , defaultValue = "id desc") String order){
+        return productService.getProductList(page, category, order);
     }
 
     @RequestMapping(value = "/productImages", method = RequestMethod.GET)
