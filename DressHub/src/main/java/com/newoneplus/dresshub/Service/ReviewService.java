@@ -21,12 +21,11 @@ import java.util.Date;
 
 @Service
 public class ReviewService {
-
-    //    productDao가 bean에 등록되어야 autowired를 쓸 수 있음
     @Autowired
     private ReviewDao reviewDao;
     @Autowired
     private LeaseInfoDao leaseInfoDao;
+
     public void update(Review review){
         Review reviewForUpdate = reviewDao.get(review.getId());
 
@@ -50,24 +49,44 @@ public class ReviewService {
         reviewDao.delete(id);
     }
 
-
-
     public void newReview(Review review) {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
         String today = simpleDateFormat.format(new Date());
         review.setDate(today);
 
         ArrayList<LeaseInfo> leaseInfos = leaseInfoDao.getInfosByUserAndProduct(review.getUserId(), review.getProductId());
-        LeaseInfo leaseInfo= leaseInfos.get(leaseInfos.size()-1); // 가장 최신 대여 정보
+        LeaseInfo leaseInfo = leaseInfos.get(leaseInfos.size() - 1);
+
         String leaseStart = leaseInfo.getLeaseDay();
         String leaseEnd = leaseInfo.getReturnDay();
-
-
         String filepath = saveImageAndGetPath(review.getImage());
 
         review.setLeaseEnd(leaseEnd);
         review.setLeaseStart(leaseStart);
         review.setImageUrl(filepath);
+
+        reviewDao.insert(review);
+    }
+    @Deprecated
+    //TODO 테스트용 코드 반드시 지울것
+    public void newReviewTest(Review review){
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        String today = simpleDateFormat.format(new Date());
+        review.setDate(today);
+
+        String leaseEnd = "2000-01-01";
+        String leaseStart = "2000-01-01";
+        String filepath = saveImageAndGetPath(review.getImage());
+
+        review.setLeaseEnd(leaseEnd);
+        review.setLeaseStart(leaseStart);
+        review.setImageUrl(filepath);
+
+
+
+        review.setProductId(0);
+        review.setUserId("testuser");
+
 
         reviewDao.insert(review);
     }
@@ -112,14 +131,14 @@ public class ReviewService {
     }
 
     private String saveImageAndGetPath(MultipartFile reviewImage) {
-        String path = System.getProperty("user.dir") + "src/main/resouces/static/image/reivew";
+        String path = System.getProperty("user.dir") + "/src/main/resources/static/image/review/";
         String filename = reviewImage.getOriginalFilename();
 
         ImageProcesser imageProcesser = new ImageProcesser();
 
         try {
             BufferedImage image = imageProcesser.getOriginImage(reviewImage.getInputStream());
-            ImageIO.write(image,"jpg", new File(path));
+            ImageIO.write(image,"jpg", new File(path + filename));
         } catch (IOException e) {
             e.printStackTrace();
         }
