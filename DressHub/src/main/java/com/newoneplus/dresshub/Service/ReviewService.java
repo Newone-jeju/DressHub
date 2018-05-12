@@ -1,0 +1,128 @@
+package com.newoneplus.dresshub.Service;
+
+import com.newoneplus.dresshub.ImageProcesser;
+import com.newoneplus.dresshub.Model.LeaseInfo;
+import com.newoneplus.dresshub.Model.LeaseInfoDao;
+import com.newoneplus.dresshub.Model.Review;
+import com.newoneplus.dresshub.Model.ReviewDao;
+import org.json.JSONArray;
+import org.json.JSONObject;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
+
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+
+@Service
+public class ReviewService {
+
+    //    productDao가 bean에 등록되어야 autowired를 쓸 수 있음
+    @Autowired
+    private ReviewDao reviewDao;
+    @Autowired
+    private LeaseInfoDao leaseInfoDao;
+    public void update(Review review){
+        Review reviewForUpdate = reviewDao.get(review.getId());
+
+        reviewForUpdate.setTitle(review.getTitle());
+
+        reviewForUpdate.setComment(review.getComment());
+        if(review.getImage() != null) {
+            String filepath = saveImageAndGetPath(review.getImage());
+            reviewForUpdate.setImageUrl(filepath);
+        }
+
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        String today = simpleDateFormat.format(new Date());
+        reviewForUpdate.setDate(today);
+        reviewForUpdate.setRate(review.getRate());
+
+        reviewDao.update(reviewForUpdate);
+    }
+
+    public void delete(int id){
+        reviewDao.delete(id);
+    }
+
+
+
+    public void newReview(Review review) {
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        String today = simpleDateFormat.format(new Date());
+        review.setDate(today);
+
+        ArrayList<LeaseInfo> leaseInfos = leaseInfoDao.getInfosByUserAndProduct(review.getUserId(), review.getProductId());
+        LeaseInfo leaseInfo= leaseInfos.get(leaseInfos.size()-1); // 가장 최신 대여 정보
+        String leaseStart = leaseInfo.getLeaseDay();
+        String leaseEnd = leaseInfo.getReturnDay();
+
+
+        String filepath = saveImageAndGetPath(review.getImage());
+
+        review.setLeaseEnd(leaseEnd);
+        review.setLeaseStart(leaseStart);
+        review.setImageUrl(filepath);
+
+        reviewDao.insert(review);
+    }
+
+    public String getReviewsJsonStringFormByProduct(int productId) {
+        ArrayList<Review> reviews = null;
+        reviews = reviewDao.getByProduct(productId);
+        JSONArray jsonArray = getReviewsJsonArray(reviews);
+
+        return jsonArray.toString();
+    }
+
+    public String getReviewsJsonStringFormByUser(String userId) {
+        ArrayList<Review> reviews = null;
+        reviews = reviewDao.getByUser(userId);
+        JSONArray jsonArray = getReviewsJsonArray(reviews);
+
+        return jsonArray.toString();
+    }
+
+    private JSONArray getReviewsJsonArray(ArrayList<Review> reviews) {
+        JSONArray jsonArray = new JSONArray();
+        try {
+            for (Review r : reviews) {
+                JSONObject jsonObject = new JSONObject();
+                jsonObject.append("id", r.getId());
+                jsonObject.append("title", r.getTitle());
+                jsonObject.append("comment", r.getComment());
+                jsonObject.append("rate", r.getRate());
+                jsonObject.append("date", r.getDate());
+                jsonObject.append("userId", r.getUserId());
+                jsonObject.append("productId", r.getProductId());
+                jsonObject.append("leaseStart", r.getLeaseStart());
+                jsonObject.append("leaseEnd", r.getLeaseEnd());
+                jsonObject.append("imageUrl", r.getImageUrl());
+                jsonArray.put(jsonObject);
+            }
+        }catch (NullPointerException e){
+            e.printStackTrace();
+        }
+        return jsonArray;
+    }
+
+    private String saveImageAndGetPath(MultipartFile reviewImage) {
+        String path = System.getProperty("user.dir") + "src/main/resouces/static/image/reivew";
+        String filename = reviewImage.getOriginalFilename();
+
+        ImageProcesser imageProcesser = new ImageProcesser();
+
+        try {
+            BufferedImage image = imageProcesser.getOriginImage(reviewImage.getInputStream());
+            ImageIO.write(image,"jpg", new File(path));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return path + filename;
+    }
+}
