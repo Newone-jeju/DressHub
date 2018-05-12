@@ -60,7 +60,7 @@ public class ProductController {
 
     @RequestMapping(value = "/basketList", method = RequestMethod.GET)
     @ResponseBody
-    public List<Basket> getBasketList(@RequestParam(value = "userId") String userId){
+    public HashMap<String, Object> getBasketList(@RequestParam(value = "userId") String userId){
         return productService.getBasketList(userId);
     }
 }

@@ -88,7 +88,7 @@ public class ProductService {
         return map;
     };
 
-    public ArrayList<Basket> getBasketList(String userId){
+    public HashMap<String, Object> getBasketList(String userId){
         return basketDao.getBasketList(userId);
     }
 }

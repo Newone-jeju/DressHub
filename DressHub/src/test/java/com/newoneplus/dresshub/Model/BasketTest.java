@@ -6,6 +6,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.nullValue;
@@ -28,8 +29,8 @@ public class BasketTest {
 
     @Test
     public void getBasketList(){
-        ArrayList<Basket> basketList = basketDao.getBasketList("user1");
-        assertThat(basketList.size(), is(8));
+        HashMap<String,Object > basketList = basketDao.getBasketList("user1");
+        assertThat(basketList.size(), is(1));
     }
 
     @Test
