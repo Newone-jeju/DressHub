@@ -105,6 +105,38 @@
 	border-bottom: 2px double #bfbfbf;
 }
 
+.review-date-info {
+	width: 40%;
+	min-width: 260px;
+	overflow: hidden;
+	margin-bottom: 20px;
+}
+
+.review-date-info > * {
+	width:100%;
+	display:flex;
+	align-items: center;
+}
+
+.review-date-info > * > .title{
+	width: 20%;
+}
+
+.review-date-info > * > .content{
+	flex-grow: 1;
+}
+
+
+
+.review-date-info > * > *{
+	border:1px solid grey;
+	border-style:collapse;
+	font-size: 0.8rem;
+	padding:5px;
+	text-align:center;
+}
+
+
 .review-body img, p {
 	text-align: left;
 	padding:10px;

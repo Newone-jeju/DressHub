@@ -31,6 +31,7 @@ public class MainController {
     @RequestMapping(value = "/products/{paramid}", method = RequestMethod.GET)
     @ResponseBody
     public Product getProduct(@PathVariable int paramid) throws ClassNotFoundException {
+
         return mainService.getProduct(paramid);
     }
 
