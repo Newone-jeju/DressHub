@@ -28,8 +28,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests()
                 .antMatchers("/user/**").access("hasRole('ROLE_USER')")
                 .antMatchers("/admin/**").access("hasRole('ROLE_ADMIN')")
-                .antMatchers("/", "/login", "/login?error", "/login?logout", "/products/**", "/login?duplicate", "/join/**").permitAll()
-                .antMatchers("/**").authenticated();
+                .antMatchers("/**").permitAll();
+//                .antMatchers("/", "/login", "/login?error", "/login?logout", "/products/**", "/login?duplicate", "/join/**").permitAll()
+//                .antMatchers("/**").authenticated();
 
         http.csrf().disable();
         http.sessionManagement().
