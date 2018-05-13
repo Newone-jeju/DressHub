@@ -75,6 +75,15 @@ $(document).ready(function () {
                                 '<a href="' + data[i].url + '" class="product_container_content_card">' +
                                 '<div class="card_img_wrap">' +
                                 '<img src="../product_image/' + data[i].thumbnailImage + '" alt="blank" class="card_img">' +
+                                //added 호버 버튼
+                                '<div class="hover-content">'+
+                                    '<img src="image/'+data[i].state+'_icon.png" alt="" class="hover-size">'+
+                                    '<div class="hover-btn-wrap">'+
+                                        '<img src="image/like_btn_'data[i].likes'.png" alt="" class="like_btn '+data[i].likes+'" name="'+data[i].id+'">'+
+                                        '<img src="image/cart_btn_0.png" alt="" class="cart_btn '+data[i].likes+'" name="'+data[i].id+'">'+// json 추가 필요
+                                    '</div>'+
+                                '</div>'+
+                                //
                                 '</div>' +
                                 '<div class="card_text_wrap">' +
                                 '<h3 class="text_name">' + data[i].name + '</h3>' +
@@ -94,6 +103,53 @@ $(document).ready(function () {
 
         });
     }
+
+    $(".like_btn").click(function(){
+        var id = $(this).attr('name');
+        var state = $(".like_btn").hasClass("0");
+        $.ajax({ 
+          type: "POST",
+          url: "", //좋아요 눌렀을 때 상태정보 전달할 url
+          data: {'id': id, 'like' : state }, // 서버로 보낼 데이터
+          dataType: "json", 
+          success: function(response){
+            if(state){
+                $(this).attr('src', 'image/like_btn_1');
+                $(this).removeClass("0");
+                $(this).addClass("1");
+            }
+            else{
+                $(this).attr('src', 'image/like_btn_0');
+                $(this).removeClass("1");
+                $(this).addClass("0");
+            }
+          }
+        });
+      })
+
+    $(".cart_btn").click(function(){
+        var id = $(this).attr('name');
+        var state = $(".cart_btn").hasClass("0");
+        $.ajax({ 
+          type: "POST",
+          url: "", //좋아요 눌렀을 때 상태정보 전달할 url
+          data: {'id': id, 'like' : state }, // 서버로 보낼 데이터
+          dataType: "json", 
+          success: function(response){
+            if(state){
+                $(this).attr('src', 'image/cart_btn_1');
+                $(this).removeClass("0");
+                $(this).addClass("1");
+            }
+            else{
+                $(this).attr('src', 'image/cart_btn_0');
+                $(this).removeClass("1");
+                $(this).addClass("0");
+            }
+          }
+        });
+      })
+
 
     $("#paging a").trigger("click");
     // 퀵메뉴
