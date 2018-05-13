@@ -134,7 +134,7 @@ $(function() {
     //리뷰쓰기 버튼
     review.write_btn = function(){
         $(".review-write-btn").click(function(){
-            review.write_review("review_form.html", 660, 600, "review_form","none");
+            review.write_review("review-form.html", 660, 600, "review_form","none");
         })
     }
 
@@ -142,7 +142,7 @@ $(function() {
     review.edit_btn = function(){
         $(".review-edit-btn").click(function(){
             var $post_no = Math.floor($(this).parent().parent().index()/2);
-            var review_form = review.write_review("review_form.html", 660, 600, "review_form","none");
+            var review_form = review.write_review("review-form.html", 660, 600, "review_form","none");
             var review_edit = $('#review_edit');
             var review_id = $('#review_id').val();
             $("review_form.document.body .form-url").attr("action", "dresshub.co.kr/reveiw/update/"+review_id);
