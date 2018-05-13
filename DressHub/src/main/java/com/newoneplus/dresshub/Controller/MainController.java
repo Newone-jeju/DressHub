@@ -1,13 +1,14 @@
 package com.newoneplus.dresshub.Controller;
 
 
-import com.newoneplus.dresshub.Service.MainService;
 import com.newoneplus.dresshub.Model.Product;
+import com.newoneplus.dresshub.Service.MainService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
 
@@ -30,6 +31,7 @@ public class MainController {
     @RequestMapping(value = "/products/{paramid}", method = RequestMethod.GET)
     @ResponseBody
     public Product getProduct(@PathVariable int paramid) throws ClassNotFoundException {
+
         return mainService.getProduct(paramid);
     }
 
