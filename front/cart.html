@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <script src="js/menu.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/menu.css"  />
+<link rel="stylesheet" href="css/cart.css">
+    <title></title>
+  </head>
+  <body>
+    <div id="top">
+        <h1 id="logo">DRESS HUB</h1>
+        <ul class="topul">
+          <li><a href="login.html">LOGIN</a></li>
+          <li><a href="login.html">회원가입</a></li>
+          <li><a href="cart.html">장바구니</a></li>
+          <li><a href="mypage.html">MYPAGE</a></li>
+        </ul>
+  </div>
+    <nav id="nav">
+    <ul class="menu">
+      <li><a class="category">전체카테고리</a> </li>
+        <li><a id="clothes" class="name">캐쥬얼</a>
+        <ul class="allcategory">
+           <li><a href="#">남성</a></li>
+           <li><a href="#">여성</a></li>
+           <li><a href="#">신발</a></li>
+           <li><a href="#">기타</a></li>
+          </ul>
+        </li>
+        <li><a id="suit"  class="name">예복</a>
+        <ul class="allcategory">
+           <li><a href="#">경조사</a></li>
+           <li><a href="#">면접</a></li>
+           <li><a href="#">실생활</a></li>
+           <li><a href="#">기타</a></li>
+          </ul>
+          </li>
+        <li><a id="accessory"  class="name">악세사리</a>
+        <ul class="allcategory">
+           <li><a href="#">남성</a></li>
+           <li><a href="#">여성</a></li>
+           <li><a href="#">고가</a></li>
+           <li><a href="#">특수한 경우</a></li>
+          </ul>
+          </li>
+        <li><a >할인/기획</a>
+          <ul class="allcategory">
+             <li><a href="#">의류</a></li>
+             <li><a href="#">악세사리</a></li>
+             <li><a href="#">신발</a></li>
+             <li><a href="#">기타</a></li>
+            </ul>
+        </li>
+        <li><a href=#>MYPAGE</a></li>
+    </ul>
+  </nav>
+
+<!-- 장바구니 -->
+<h1 class="header_name">cart</h1>
+<div id="cart">
+  <!-- 테이블 -->
+  <table id="cart_table">
+    <tr>
+      <th>이미지</th>
+      <th>상품정보</th>
+      <th>상품금액</th>
+      <th>배송비</th>
+    </tr>
+    <div class="cartAdd_container"></div>
+    <!-- <tr>
+      <td class="image"></td>
+      <td class="information"></td>
+      <td class="accout"></td>
+      <td class="shipping"></td>
+    </tr> -->
+  </table>
+
+<!-- 삭제하기 버튼 -->
+  <div class="removeBtn">
+    <button class="remove">삭제하기</button>
+    <button class="remove_all">전체삭제하기</button>
+  </div>
+
+  <!-- 상품 총 가격 -->
+    <table id="total_price_table">
+      <tr>
+        <th>총 상품금액</th>
+        <th>총 배송비</th>
+        <th>결제 예정 금액</th>
+      </tr>
+      <tr>
+        <td class="total_price"></td>
+        <td class="total_shipping"></td>
+        <td class="payment_amount"></td>
+      </tr>
+    </table>
+
+  <!-- 버튼 -->
+  <div id="btn">
+    <button class="cancle">취소하기</button>
+    <input type="button" class="order" value="주문하기"></input>
+  </div>
+
+</div>
+  <script src="js/menu.js"></script>
+  <script src="js/cart.js"></script>
+
+  </body>
+</html>
