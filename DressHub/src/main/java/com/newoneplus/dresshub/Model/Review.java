@@ -18,7 +18,7 @@ public class Review {
     String leaseEnd; //0000-00-00
     String imageUrl;
     //로컬에 저장을 위한 이미지
-    MultipartFile image;
+    MultipartFile img;
     @Override
     public boolean equals(Object o){
         boolean isEqual = true;

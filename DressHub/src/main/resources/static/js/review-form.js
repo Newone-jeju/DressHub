@@ -20,6 +20,7 @@ function setHiddenRating(){
 		halfStar: true,
   	onSet: function (rating, rateYoInstance) {
     $rating.after('<input type="hidden" name="rank" value="'+rating+'">');
+    console.log(rating)
   }
 });
 }

@@ -32,8 +32,8 @@ public class ReviewService {
         reviewForUpdate.setTitle(review.getTitle());
 
         reviewForUpdate.setComment(review.getComment());
-        if(review.getImage() != null) {
-            String filepath = saveImageAndGetPath(review.getImage());
+        if(review.getImg() != null) {
+            String filepath = saveImageAndGetPath(review.getImg());
             reviewForUpdate.setImageUrl(filepath);
         }
 
@@ -59,7 +59,7 @@ public class ReviewService {
 
         String leaseStart = leaseInfo.getLeaseDay();
         String leaseEnd = leaseInfo.getReturnDay();
-        String filepath = saveImageAndGetPath(review.getImage());
+        String filepath = saveImageAndGetPath(review.getImg());
 
         review.setLeaseEnd(leaseEnd);
         review.setLeaseStart(leaseStart);
@@ -76,7 +76,7 @@ public class ReviewService {
 
         String leaseEnd = "2000-01-01";
         String leaseStart = "2000-01-01";
-        String filepath = saveImageAndGetPath(review.getImage());
+        String filepath = saveImageAndGetPath(review.getImg());
 
         review.setLeaseEnd(leaseEnd);
         review.setLeaseStart(leaseStart);
