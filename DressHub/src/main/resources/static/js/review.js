@@ -143,12 +143,8 @@ $(function() {
         $(".review-edit-btn").click(function(){
             var $post_no = Math.floor($(this).parent().parent().index()/2);
             var review_form = review.write_review("review-form.html", 660, 600, "review_form","none");
-            var review_edit = $('#review_edit');
             var review_id = $('#review_id').val();
-            $("review_form.document.body .form-url").attr("action", "dresshub.co.kr/reveiw/update/"+review_id);
-            review_edit.target = "review_form";
-            review_edit.method="post"
-            review_edit.submit();
+            review_form.getEditInfo(review_id);
         })
     }
 
