@@ -34,12 +34,12 @@ public class UserTest {
 
     @Test
     public void insert() throws SQLException, ClassNotFoundException, ParseException {
-        userDao.deleteAll();
+//        userDao.deleteAll();
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
         Date date = null;
         date = simpleDateFormat.parse(simpleDateFormat.format(new Date()));
         User user = new User();
-        user.setId("user1");
+        user.setId("user1ddd");
         user.setPassword("0405");
         user.setName("ming");
         user.setEmail("hello");

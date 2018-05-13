@@ -19,9 +19,4 @@ public class LoginController {
     }
 
 
-    @RequestMapping(value = "/join", method = RequestMethod.GET)
-    public String join(){
-        return "/join";
-    }
-
 }

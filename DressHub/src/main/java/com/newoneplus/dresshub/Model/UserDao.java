@@ -48,16 +48,17 @@ public class UserDao {
         }
     }
 
-    public void insert(User user) throws ClassNotFoundException {
-        String sql = "insert into user(id, password, name, email, address, " +
-                "phone_number, nickname, introduce, open_private_info," +
+    public String insert(User user) throws ClassNotFoundException {
+        String sql = "insert into user(name, id, password, email, address, " +
+                "phone_number, user_type, nickname, introduce, open_private_info," +
                 " certification, resister_date) " +
                 "values(?, ?, ?, ?, ?," +
-                " ?, ?, ?, ?, ?, ? )";
-        Object[] params = new Object[]{user.getId(), user.getPassword(), user.getName(), user.getEmail(), user.getAddress(),
-        user.getPhoneNumber(), user.getNickname(), user.getIntroduce(), user.isOpenPrivateInfo(), user.isCertification(),
+                " ?, ?, ?, ?, ?, ?, ?)";
+        Object[] params = new Object[]{user.getName(), user.getId(), user.getPassword(), user.getEmail(), user.getAddress(),
+        user.getPhoneNumber(), user.getUserType(), user.getNickname(), user.getIntroduce(), user.isOpenPrivateInfo(), user.isCertification(),
                 user.getResisterDate()};
         jdbcTemplate.update(sql, params);
+        return sql;
     }
 
 
