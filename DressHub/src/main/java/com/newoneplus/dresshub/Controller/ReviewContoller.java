@@ -28,9 +28,13 @@ public class ReviewContoller {
 
     @RequestMapping(value = "/review", method = RequestMethod.GET)
     @ResponseBody
-    public String get(@RequestParam(defaultValue = "null") String productId, @RequestParam(defaultValue = "null") String userId) {
+    public String get(@RequestParam(defaultValue = "null") String productId,
+                      @RequestParam(defaultValue = "null") String userId,
+                      @RequestParam(defaultValue = "null") String id) {
         String reviewsJsonString = null;
-        if (!productId.equals("null")) {
+        if(!id.equals("null")) {
+            reviewsJsonString = reviewService.getReviewById(Integer.parseInt(id));
+        }else if (!productId.equals("null")) {
             reviewsJsonString = reviewService.getReviewsJsonStringFormByProduct(Integer.parseInt(productId));
         } else if (!userId.equals("null")) {
             reviewsJsonString = reviewService.getReviewsJsonStringFormByUser(userId);

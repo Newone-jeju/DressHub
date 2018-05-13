@@ -144,4 +144,25 @@ public class ReviewService {
         }
         return path + filename;
     }
+
+    public String getReviewJsonStringById(int id) {
+        Review review = reviewDao.get(id);
+        JSONArray jsonArray = new JSONArray();
+
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.append("id", review.getId());
+        jsonObject.append("title", review.getTitle());
+        jsonObject.append("comment", review.getComment());
+        jsonObject.append("rate", review.getRate());
+        jsonObject.append("date", review.getDate());
+        jsonObject.append("userId", review.getUserId());
+        jsonObject.append("productId", review.getProductId());
+        jsonObject.append("leaseStart", review.getLeaseStart());
+        jsonObject.append("leaseEnd", review.getLeaseEnd());
+        jsonObject.append("imageUrl", review.getImageUrl());
+        jsonArray.put(jsonObject);
+
+        return jsonArray.toString();
+
+    }
 }
