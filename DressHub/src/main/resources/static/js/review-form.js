@@ -34,7 +34,7 @@ function getEditInfo(review_id) {
 	var id = review_id;
     $.ajax({ 
       type: "POST",
-      url: "review?id={"+id+"}",// id로 받아올 리뷰 url 
+      url: "review?id="+id+"",// id로 받아올 리뷰 url 
       data: {'id': id },
       dataType: "json", // 서버에서 받을 데이터 형식
       success: function(response){
@@ -58,6 +58,8 @@ function reviewFormInit() {
 	getauthor();
 	setHiddenName();
 	setHiddenRating();
+	var id = window.opener.getReviewId();
+	getEditInfo(id);
 }
 
 reviewFormInit();
