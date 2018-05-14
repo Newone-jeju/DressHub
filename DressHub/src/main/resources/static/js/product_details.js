@@ -3,7 +3,7 @@ $(document).ready(function() {
     review.no_review = function() {
         $(".td-group").html(
             '<div class="no-review flexcenter">' +
-            '<img src="image/no-review.png" alt="no-review">' +
+            '<img src="img/no-review.png" alt="no-review">' +
             '</div>'
         );
     }
