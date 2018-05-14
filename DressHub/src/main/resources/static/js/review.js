@@ -61,8 +61,12 @@ $(function() {
     }
 
     review.init = function() {
-        $.getJSON('dresshub.co.kr/review?productId=0', function(data) {
-           var review_cards = [];
+        $.ajax({
+            url: 'review?productId=0',
+            dataType: 'json',
+            type:'get',
+            success: function(data){
+                var review_cards = [];
             $.each(data, function(i, review_data)
             {  
                 i = i+1;
@@ -83,8 +87,9 @@ $(function() {
                         '<button class="review-btn review-body-btn review-edit-btn">수정</button>'+
                     '</form>'+
                     //리뷰 삭제버튼
-                    '<form action="dresshub.co.kr/review/delete/'+review_data.id+'" method="post">'+
-                        '<button type="submit" class="review-btn review-body-btn review-delete-btn">삭제</button>'+
+                    '<form action="review/delete/" method="post">'+
+                        '<input type="hidden" name="id" value="'+review_data.id+'">'+
+                        '<button type="submit" name="id" class="review-btn review-body-btn review-delete-btn ">삭제</button>'+
                     '</form>'+
                 '</div>'+
                 //리뷰 날짜정보
@@ -112,8 +117,9 @@ $(function() {
                     review.map_review(review_cards,1);
                 },500);               
             }
-            review.write_btn();
-        }); 
+            review.write_btn();     
+            }
+        }) 
     }
 
     //review write review
