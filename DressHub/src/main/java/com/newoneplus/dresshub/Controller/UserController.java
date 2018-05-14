@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.validation.Valid;
-import javax.validation.constraints.NotNull;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -35,7 +34,7 @@ public class UserController {
     }
 
     @PostMapping("")
-    public String create(@ModelAttribute @Valid @NotNull() User user) throws ClassNotFoundException, ParseException {
+    public String create(@ModelAttribute @Valid User user) throws ClassNotFoundException, ParseException {
 
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
         Date date = null;
