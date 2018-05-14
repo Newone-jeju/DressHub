@@ -74,31 +74,28 @@ $(document).ready(function () {
 
                     product.mapcard = function () {
                         var cards = '';
-                        console.log("datalengh=" + data);
-                        if (data == null) {
-                            alert("아직 등록된 상품이 없습니다.");
-                        } else {
-                            for (var i = 0; i < data.length; i++) {
-                                cards +=
-                                    '<a href="/productDetail?productId=' + data[i].id +'" class="product_container_content_card">' +
-                                    '<div class="card_img_wrap">' +
-                                    '<img src="../product_image/' + data[i].thumbnailImage + '" alt="blank" class="card_img">' +
-                                    '<div class="hover-content">' +
-                                    '<img src="image/' + data[i].state + '_icon.png" alt="" class="hover-size">' +
-                                    '<div class="hover-btn-wrap">' +
-                                    '<img src="image/like_btn.png" alt="" class="like_btn ' + data[i].likes + '" name="' + data[i].id + '">' +
-                                    '<img src="image/cart_btn_0.png" alt="" class="cart_btn ' + data[i].likes + '" name="' + data[i].id + '">' +// json 추가 필요
-                                    '</div>' +
-                                    '</div>' +
-                                    '</div>' +
-                                    '<div class="card_text_wrap">' +
-                                    '<h3 class="text_name">' + data[i].name + '</h3>' +
-                                    '<p class="text_deposit">보증금 : ' + data[i].deposit + '</p>' +
-                                    '<p class="text_costPerDay">1일 렌탈료 : ' + data[i].costPerDay + '</p>' +
-                                    '</div>' +
-                                    '</a>';
-                            }
-                            $('.product_container_content').html(cards);
+
+                        for (var i = 0; i < data.length; i++) {
+                            cards +=
+                                '<a href="/productDetail?productId=' + data[i].id +'" class="product_container_content_card">' +
+                                '<div class="card_img_wrap">' +
+                                '<img src="../product_image/' + data[i].thumbnailImage + '" alt="blank" class="card_img">' +
+                                //added 호버 버튼
+                                '<div class="hover-content">'+
+                                    '<img src="img/'+data[i].state+'_icon.png" alt="" class="hover-size">'+
+                                    '<div class="hover-btn-wrap">'+
+                                        '<img src="img/like_btn.png" alt="" class="like_btn" name="'+data[i].id+'">'+
+                                        '<img src="img/cart_btn.png" alt="" class="cart_btn" name="'+data[i].id+'">'+// json 추가 필요
+                                    '</div>'+
+                                '</div>'+
+                                //
+                                '</div>' +
+                                '<div class="card_text_wrap">' +
+                                '<h3 class="text_name">' + data[i].name + '</h3>' +
+                                '<p class="text_deposit">보증금 : ' + data[i].deposit + '</p>' +
+                                '<p class="text_costPerDay">1일 렌탈료 : ' + data[i].costPerDay + '</p>' +
+                                '</div>' +
+                                '</a>';
                         }
 
                     }
@@ -112,6 +109,7 @@ $(document).ready(function () {
 
         });
     }
+
 
     function categoryCodeConvert(category) {
         switch (category) {
@@ -204,6 +202,53 @@ $(document).ready(function () {
             }
         });
     })
+
+    $(".like_btn").click(function(){
+        var id = $(this).attr('name');
+        var state = $(".like_btn").hasClass("0");
+        $.ajax({ 
+          type: "POST",
+          url: "", //좋아요 눌렀을 때 상태정보 전달할 url
+          data: {'id': id, 'like' : state }, // 서버로 보낼 데이터
+          dataType: "json", 
+          success: function(response){
+            if(state){
+                $(this).attr('src', 'img/like_btn_1');
+                $(this).removeClass("0");
+                $(this).addClass("1");
+            }
+            else{
+                $(this).attr('src', 'img/like_btn_0');
+                $(this).removeClass("1");
+                $(this).addClass("0");
+            }
+          }
+        });
+      })
+
+    $(".cart_btn").click(function(){
+        var id = $(this).attr('name');
+        var state = $(".cart_btn").hasClass("0");
+        $.ajax({ 
+          type: "POST",
+          url: "", //좋아요 눌렀을 때 상태정보 전달할 url
+          data: {'id': id, 'like' : state }, // 서버로 보낼 데이터
+          dataType: "json", 
+          success: function(response){
+            if(state){
+                $(this).attr('src', 'img/cart_btn_1');
+                $(this).removeClass("0");
+                $(this).addClass("1");
+            }
+            else{
+                $(this).attr('src', 'img/cart_btn_0');
+                $(this).removeClass("1");
+                $(this).addClass("0");
+            }
+          }
+        });
+      })
+
 
     $("#paging a").trigger("click");
     // 퀵메뉴

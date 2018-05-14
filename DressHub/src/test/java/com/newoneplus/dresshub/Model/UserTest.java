@@ -1,7 +1,5 @@
 package com.newoneplus.dresshub.Model;
 
-import com.newoneplus.dresshub.User;
-import com.newoneplus.dresshub.UserDao;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;

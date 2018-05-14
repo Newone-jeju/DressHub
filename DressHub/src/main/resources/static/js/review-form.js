@@ -1,32 +1,72 @@
-if(window.opener.$("#product-details h1.title:eq(0)").text() != null) {
-	$('.rental-product-content').text(window.opener.$("#product-details h1.title:eq(0)").text());
+function getName(){
+	var $rental_product_content = $('.rental-product-content');
+	$rental_product_content.text(window.opener.$("#product-details h1.title:eq(0)").text());
+	console.log($rental_product_content.text());
+	//부모창인 상품상세정보페이지로 부터 접근하지 않은 경우
+	if($rental_product_content.text() ==''){
+		alert('잘못된 경로로 접근');
+		window.open('about:blank', '_self').close();
+	}
 }
-else{
 
+function getauthor(){
+	//작성자 이름 가져오기
 }
 
 
+function setHiddenName(){
+	$('.rental-product-content').after('<input type="hidden" name="rental-product" value="'+$('.rental-product-content').text()+'">')
+}
 
-$("#rating").rateYo({
-            starWidth: "30px",
-            halfStar: true
-        });
+function setHiddenRating(){
+	var $rating = $("#rating");
+	$rating.rateYo({
+		starWidth: "30px",
+		halfStar: true,
+  	onSet: function (rating, rateYoInstance) {
+    $rating.after('<input type="hidden" name="rank" value="'+rating+'">');
+    console.log(rating)
+  }
+});
+}
+
+function getEditInfo(review_id) {
+	var id = review_id;
+    $.ajax({ 
+      type: "POST",
+      url: "dresshub.co.kr/review?id={"+id+"}",// id로 받아올 리뷰 url 
+      data: {'id': id },
+      dataType: "json", // 서버에서 받을 데이터 형식
+      success: function(response){
+      	$(".form-url").attr("action", "dresshub.co.kr/reveiw/update/"+id);
+      	$(".author-content").val(response[0].userId)
+      	$("#rating").rateYo({
+      		starWidth: "30px",
+      		rating: response[0].rate,
+			halfStar: true,
+      	});
+        $(".title-content").val(response[0].title);
+        $(".text-content").val(response[0].comment);
+      }
+    });
+}
 
 
-$("send-btn").click(function(){
+function reviewFormInit() {
+	getName();
+	getauthor();
+	setHiddenName();
+	setHiddenRating();
+}
+
+reviewFormInit();
+
+
+$(".send-btn").click(function(){
 	opener.parent.location.reload();
-	window.close(); 
-	self.close(); 
-	window.opener = window.location.href; 
-	self.close(); 
-	window.open('about:blank','_self').close();
-	
+	window.open('about:blank', '_self').close();	
 });
 
-$("cancel-btn").click(function(){
-	window.close(); 
-	self.close(); 
-	window.opener = window.location.href; 
-	self.close(); 
-	window.open('about:blank','_self').close();
+$(".cancel-btn").click(function(){
+	window.open('about:blank', '_self').close();
 });

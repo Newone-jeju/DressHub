@@ -1,13 +1,11 @@
-package com.newoneplus.dresshub;
+package com.newoneplus.dresshub.Model;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.stereotype.Repository;
 
 import java.sql.SQLException;
 
-@Repository
 public class UserDao {
     @Value("${db.classname}")
     private String classname;
@@ -37,6 +35,7 @@ public class UserDao {
                     user.setEmail(rs.getString("email"));
                     user.setAddress(rs.getString("address"));
                     user.setPhoneNumber(rs.getString("phone_number"));
+                    user.setUserType(rs.getInt("user_type"));
                     user.setNickname(rs.getString("nickname"));
                     user.setIntroduce(rs.getString("introduce"));
                     user.setOpenPrivateInfo(rs.getBoolean("open_private_info"));
@@ -67,29 +66,6 @@ public class UserDao {
         jdbcTemplate.update(sql);
     }
 
-
-    public User viewUser(User user) {
-        String sql = "select * from user where id = ? and password = ?";
-        Object[] params = new Object[]{user.getId(), user.getPassword()};
-        try {
-            return jdbcTemplate.queryForObject(sql, params, (rs, rowNum) -> {
-                user.setId(rs.getString("id"));
-                user.setName(rs.getString("name"));
-                user.setPassword(rs.getString("password"));
-                user.setEmail(rs.getString("email"));
-                user.setAddress(rs.getString("address"));
-                user.setPhoneNumber(rs.getString("phone_number"));
-                user.setNickname(rs.getString("nickname"));
-                user.setIntroduce(rs.getString("introduce"));
-                user.setOpenPrivateInfo(rs.getBoolean("open_private_info"));
-                user.setCertification(rs.getBoolean("certification"));
-                user.setResisterDate(rs.getDate("resister_date"));
-                return user;
-            });
-        } catch (EmptyResultDataAccessException e) {
-            return null;
-        }
-    }
    // 로그인 처리
     public boolean isValidUser(String id, String password) {
         boolean retVal;
