@@ -41,14 +41,14 @@ public class ReviewContoller {
 
     //권한 점검 필요
 
-    @RequestMapping(value = "/review/delete", method = RequestMethod.DELETE)
+    @RequestMapping(value = "/review/delete", method = RequestMethod.POST)
     public String delete(@RequestParam String id) {
         int idForReview = Integer.parseInt(id);
         reviewService.delete(idForReview);
-        return null;
+        return "redirect:/product_details.html";
     }
 
-    @RequestMapping(value = "/reveiw/update", method = RequestMethod.PUT)
+    @RequestMapping(value = "/reveiw/update", method = RequestMethod.POST)
     public String update(@ModelAttribute Review review) {
 //        @RequestParam String id, @RequestParam String title, @RequestParam  String comment,
 //        @RequestParam String rate + 이미지
