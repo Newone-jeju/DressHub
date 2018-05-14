@@ -33,7 +33,7 @@
 
 .card_img_wrap{
 	height: auto;
-	positiion: relative;
+	position: relative;
 }
 
 .card_img{
@@ -109,6 +109,7 @@
 	width:25%;
 	height:90%;
 	padding-right:4%;
+	z-index: 1000;
 }
 
 .hover-btn-wrap > .cart_btn {
