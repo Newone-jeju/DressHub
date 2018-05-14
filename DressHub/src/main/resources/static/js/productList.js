@@ -80,7 +80,7 @@ $(document).ready(function () {
                         } else {
                             for (var i = 0; i < data.length; i++) {
                                 cards +=
-                                    '<a href="/productDetail?productId=' + data[i].id +'" class="product_container_content_card">' +
+                                    '<span  class="product_container_content_card" data-href="/productDetail?productId=' + data[i].id + '">' +
                                     '<div class="card_img_wrap">' +
                                     '<img src="../product_image/' + data[i].thumbnailImage + '" alt="blank" class="card_img">' +
                                     '<div class="hover-content">' +
@@ -96,7 +96,7 @@ $(document).ready(function () {
                                     '<p class="text_deposit">보증금 : ' + data[i].deposit + '</p>' +
                                     '<p class="text_costPerDay">1일 렌탈료 : ' + data[i].costPerDay + '</p>' +
                                     '</div>' +
-                                    '</a>';
+                                    '</span>';
                             }
                             $('.product_container_content').html(cards);
                         }
@@ -107,6 +107,11 @@ $(document).ready(function () {
 
                     paging(totalCount, 25, 10, selectedPage);
                     console.log("test");
+
+                    $(".product_container_content_card").click(function (e) {
+                        console.log($(this).attr("data-href"));
+                        window.location.href=$(this).attr("data-href");
+                    })
 
                     $(".like_btn").click(function(e){
                         console.log("likebtntest");
