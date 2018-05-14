@@ -14,8 +14,11 @@ import java.util.HashMap;
 
 public class BasketDao {
 
-    @Autowired
     JdbcTemplate jdbcTemplate;
+
+    public BasketDao(JdbcTemplate jdbcTemplate) {
+       this.jdbcTemplate = jdbcTemplate;
+    }
 
     public Basket get(int id) {
         Object[] params = {id};

@@ -3,6 +3,7 @@ package com.newoneplus.dresshub.Service;
 
 import com.newoneplus.dresshub.ImageProcesser;
 import com.newoneplus.dresshub.Model.*;
+import com.newoneplus.dresshub.ThumbupDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,6 +24,8 @@ public class ProductService {
     private ProductImageDao productImageDao;
     @Autowired
     private BasketDao basketDao;
+    @Autowired
+    private ThumbupDao thumbupDao;
 
     public void insertProduct(Product product) throws IOException {
         ImageProcesser imageProcesser = new ImageProcesser();
@@ -91,4 +94,10 @@ public class ProductService {
     public HashMap<String, Object> getBasketList(String userId){
         return basketDao.getBasketList(userId);
     }
+
+    public Product getProduct(int id) throws ClassNotFoundException {
+        return productDao.get(id);
+    }
+
+
 }

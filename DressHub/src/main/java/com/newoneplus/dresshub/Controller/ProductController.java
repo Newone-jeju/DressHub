@@ -63,4 +63,16 @@ public class ProductController {
     public HashMap<String, Object> getBasketList(@RequestParam(value = "userId") String userId){
         return productService.getBasketList(userId);
     }
+
+    @RequestMapping(value = "/product", method = RequestMethod.GET)
+    @ResponseBody
+    public Product getProduct(@RequestParam(value="productId") int productId) throws ClassNotFoundException {
+        return productService.getProduct(productId);
+    }
+
+    @RequestMapping(value = "/productDetail", method = RequestMethod.GET)
+    public String getProductDetail(@RequestParam(value="productId") int productId, Model model) throws ClassNotFoundException {
+        model.addAttribute("productId", productId);
+        return "product_details";
+    }
 }

@@ -17,6 +17,11 @@
 	text-decoration: none;
 	color:black;
 	flex-basis:15%;
+	transition-property: border;
+	transition-duration: 0.5s;
+}
+.product_container_content_card:hover{
+	border:2px solid #b5e51d;
 }
 
 .card_img_wrap{
@@ -32,7 +37,52 @@
 .card_text_wrap{
 	padding:0.9rem;
 }
+.hover-content{
+	display:flex;
+	position:absolute;
+	left: 5%;
+	bottom: 0;
+	z-index: 9;
+	width:90%;
+	visibility: hidden;
+	transition-property: visibility;
+	transition-duration: 0.1s;
+}
 
+.card_carousel_container_content_card:hover .hover-content{
+	visibility: visible;
+}
+
+.hover-content img {
+	border: none;
+	border-radius: 11px;
+}
+
+.hover-content .hover-size {
+	width:25%;
+	height:10%;
+}
+.hover-btn-wrap {
+	flex-grow: 1;
+	display:flex;
+	justify-content: flex-end;
+}
+
+.hover-btn-wrap ~ img {
+    cursor: pointer;
+}
+
+.hover-btn-wrap > .like_btn {
+	width:25%;
+	height:90%;
+	padding-right:4%;
+}
+
+.hover-btn-wrap > .cart_btn {
+	width:25%;
+	height:90%;
+}
+/*/added*/
 .card_text_wrap .text_name{
 text-align: center;
 margin-bottom: 0.5rem;

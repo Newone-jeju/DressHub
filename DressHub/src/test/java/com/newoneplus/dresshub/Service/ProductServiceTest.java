@@ -7,16 +7,20 @@ import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.MatcherAssert.assertThat;
+
 public class ProductServiceTest {
 
     private ProductService productService;
 
     @Before
-    public void setup(){
+    public void setup() {
         ApplicationContext applicationContext = new AnnotationConfigApplicationContext(DaoFactory.class);
         productService = applicationContext.getBean("productService", ProductService.class);
     }
-//
+
+    //
 //    @Test
 //    public void productResister(){
 //        Product product = new Product();
@@ -35,5 +39,10 @@ public class ProductServiceTest {
 //
 //        Integer insertedId = productService.insertProduct(product);
 //    }
-
+    @Test
+    public void getProduct() throws ClassNotFoundException {
+        Product product = new Product();
+        product = productService.getProduct(1);
+        assertThat(product.getName(), is("changedName"));
+    }
 }

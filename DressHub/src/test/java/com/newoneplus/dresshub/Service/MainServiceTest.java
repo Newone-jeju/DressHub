@@ -31,10 +31,5 @@ public class MainServiceTest {
         assertThat(productList.size(), is(6));
     }
 
-    @Test
-    public void getProduct() throws ClassNotFoundException {
-        Product product = new Product();
-        product = mainService.getProduct(1);
-        assertThat(product.getName(), is("changedName"));
-    }
+
 }

@@ -22,12 +22,6 @@ public class MainController {
         return mainService.getProductList();
     }
 
-    @RequestMapping(value = "/products/{paramid}", method = RequestMethod.GET)
-    @ResponseBody
-    public Product getProduct(@PathVariable int paramid) throws ClassNotFoundException {
-        return mainService.getProduct(paramid);
-    }
-
     @RequestMapping(value = "/products/new", method = RequestMethod.GET)
     public String productform(){
         return "productform";
