@@ -17,22 +17,10 @@ public class MainController {
     @Autowired
     private MainService mainService;
 
-//    @RequestMapping("/")
-//    public String index( ){
-//        return "index";
-//    }
-
     @RequestMapping(value = "/products", method = RequestMethod.GET)
     @ResponseBody
     public List<Product> getProductList() throws ClassNotFoundException {
         return mainService.getProductList();
-    }
-
-    @RequestMapping(value = "/products/{paramid}", method = RequestMethod.GET)
-    @ResponseBody
-    public Product getProduct(@PathVariable int paramid) throws ClassNotFoundException {
-
-        return mainService.getProduct(paramid);
     }
 
     @RequestMapping(value = "/products/new", method = RequestMethod.GET)
