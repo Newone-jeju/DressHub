@@ -62,7 +62,7 @@ $(function() {
 
     review.init = function() {
         $.ajax({
-            url: 'dresshub.co.kr/review?productId=0',
+            url: 'review?productId=0',
             dataType: 'json',
             type:'get',
             success: function(data){
