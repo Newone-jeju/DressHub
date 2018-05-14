@@ -91,7 +91,7 @@ public class ReviewService {
         reviewDao.insert(review);
     }
 
-    public String getReviewsJsonStringFormByProduct(int productId) {
+    public String getReviewsByProductToJson(int productId) {
         ArrayList<Review> reviews = null;
         reviews = reviewDao.getByProduct(productId);
         JSONArray jsonArray = getReviewsJsonArray(reviews);
@@ -145,7 +145,7 @@ public class ReviewService {
         return path + filename;
     }
 
-    public String getReviewJsonStringById(int id) {
+    public String getReviewByIdToJson(int id) {
         Review review = reviewDao.get(id);
         JSONArray jsonArray = new JSONArray();
 

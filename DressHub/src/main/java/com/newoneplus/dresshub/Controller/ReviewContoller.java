@@ -1,25 +1,10 @@
 package com.newoneplus.dresshub.Controller;
 
-import com.newoneplus.dresshub.ImageProcesser;
 import com.newoneplus.dresshub.Model.Review;
 import com.newoneplus.dresshub.Service.ReviewService;
-import org.json.JSONArray;
-import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
-
-import javax.imageio.ImageIO;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
-import java.lang.reflect.Array;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Date;
 
 @Controller
 public class ReviewContoller {
@@ -33,9 +18,9 @@ public class ReviewContoller {
                       @RequestParam(defaultValue = "null") String id) {
         String reviewsJsonString = null;
         if(!id.equals("null")) {
-            reviewsJsonString = reviewService.getReviewById(Integer.parseInt(id));
+            reviewsJsonString = reviewService.getReviewByIdToJson(Integer.parseInt(id));
         }else if (!productId.equals("null")) {
-            reviewsJsonString = reviewService.getReviewsJsonStringFormByProduct(Integer.parseInt(productId));
+            reviewsJsonString = reviewService.getReviewsByProductToJson(Integer.parseInt(productId));
         } else if (!userId.equals("null")) {
             reviewsJsonString = reviewService.getReviewsJsonStringFormByUser(userId);
         }
