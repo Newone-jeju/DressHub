@@ -38,6 +38,7 @@ function getEditInfo(review_id) {
       data: {'id': id },
       dataType: "json", // 서버에서 받을 데이터 형식
       success: function(response){
+      	console.log(response)
       	$(".form-url").attr("action", "reveiw/update/"+id);
       	$(".author-content").val(response[0].userId)
       	$("#rating").rateYo({

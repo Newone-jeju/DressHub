@@ -87,8 +87,9 @@ $(function() {
                         '<button class="review-btn review-body-btn review-edit-btn">수정</button>'+
                     '</form>'+
                     //리뷰 삭제버튼
-                    '<form action="dresshub.co.kr/review/delete/'+review_data.id+'" method="post">'+
-                        '<button type="submit" class="review-btn review-body-btn review-delete-btn">삭제</button>'+
+                    '<form action="review/delete/" method="post">'+
+                        '<input type="hidden" name="id" value="'+review_data.id+'">'+
+                        '<button type="submit" name="id" class="review-btn review-body-btn review-delete-btn ">삭제</button>'+
                     '</form>'+
                 '</div>'+
                 //리뷰 날짜정보
