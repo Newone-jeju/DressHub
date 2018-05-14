@@ -77,10 +77,10 @@ $(document).ready(function () {
                                 '<img src="../product_image/' + data[i].thumbnailImage + '" alt="blank" class="card_img">' +
                                 //added 호버 버튼
                                 '<div class="hover-content">'+
-                                    '<img src="image/'+data[i].state+'_icon.png" alt="" class="hover-size">'+
+                                    '<img src="img/'+data[i].state+'_icon.png" alt="" class="hover-size">'+
                                     '<div class="hover-btn-wrap">'+
-                                        '<img src="image/like_btn_'data[i].likes'.png" alt="" class="like_btn '+data[i].likes+'" name="'+data[i].id+'">'+
-                                        '<img src="image/cart_btn_0.png" alt="" class="cart_btn '+data[i].likes+'" name="'+data[i].id+'">'+// json 추가 필요
+                                        '<img src="img/like_btn_'data[i].likes'.png" alt="" class="like_btn '+data[i].likes+'" name="'+data[i].id+'">'+
+                                        '<img src="img/cart_btn_0.png" alt="" class="cart_btn '+data[i].likes+'" name="'+data[i].id+'">'+// json 추가 필요
                                     '</div>'+
                                 '</div>'+
                                 //
@@ -114,12 +114,12 @@ $(document).ready(function () {
           dataType: "json", 
           success: function(response){
             if(state){
-                $(this).attr('src', 'image/like_btn_1');
+                $(this).attr('src', 'img/like_btn_1');
                 $(this).removeClass("0");
                 $(this).addClass("1");
             }
             else{
-                $(this).attr('src', 'image/like_btn_0');
+                $(this).attr('src', 'img/like_btn_0');
                 $(this).removeClass("1");
                 $(this).addClass("0");
             }
@@ -137,12 +137,12 @@ $(document).ready(function () {
           dataType: "json", 
           success: function(response){
             if(state){
-                $(this).attr('src', 'image/cart_btn_1');
+                $(this).attr('src', 'img/cart_btn_1');
                 $(this).removeClass("0");
                 $(this).addClass("1");
             }
             else{
-                $(this).attr('src', 'image/cart_btn_0');
+                $(this).attr('src', 'img/cart_btn_0');
                 $(this).removeClass("1");
                 $(this).addClass("0");
             }
