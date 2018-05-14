@@ -32,7 +32,7 @@ public class ProductController {
     public String insert(@ModelAttribute Product product) throws IOException, ParseException {
         productService.insertProduct(product);
 //        임시로 폼으로 다시
-        return "productform";
+        return "productList";
 
     }
 

@@ -77,7 +77,7 @@ public class BasketDao {
                             productArrayList.add(product);
                         }while(rs.next());
                         hashMap1.put("basket", basketArrayList);
-                        hashMap1.put("prdocut", productArrayList);
+                        hashMap1.put("product", productArrayList);
 
                         return hashMap1;
                     });
