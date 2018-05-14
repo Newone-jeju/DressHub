@@ -61,8 +61,12 @@ $(function() {
     }
 
     review.init = function() {
-        $.getJSON('dresshub.co.kr/review?productId=0', function(data) {
-           var review_cards = [];
+        $.ajax({
+            url: 'dresshub.co.kr/review?productId=0',
+            dataType: 'json',
+            type:'get',
+            success: function(data){
+                var review_cards = [];
             $.each(data, function(i, review_data)
             {  
                 i = i+1;
@@ -112,8 +116,9 @@ $(function() {
                     review.map_review(review_cards,1);
                 },500);               
             }
-            review.write_btn();
-        }); 
+            review.write_btn();     
+            }
+        }) 
     }
 
     //review write review
