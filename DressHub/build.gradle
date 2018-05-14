@@ -28,7 +28,8 @@ repositories {
 dependencies {
     compile('org.springframework.boot:spring-boot-starter-web')
     compile "org.springframework.boot:spring-boot-starter-jdbc"
-
+    compile("org.springframework.boot:spring-boot-starter-security")
+//    compile("org.springframework.boot:spring-boot-starter-data-jpa")
     runtime('mysql:mysql-connector-java')
     testCompile group: 'junit', name: 'junit', version: '4.11'
     testCompile('org.springframework.boot:spring-boot-starter-test')
@@ -36,6 +37,7 @@ dependencies {
     compile('org.springframework.boot:spring-boot-starter-thymeleaf')
     compile group: 'org.projectlombok', name: 'lombok', version: '1.16.8'
     compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.4'
+    compile 'org.json:json:20171018'
 //    compile group: 'commons-io', name: 'commons-io', version: '2.5'
 //    compile group: 'servlets.com', name: 'cos', version: '05Nov2002'
 

@@ -1,18 +1,18 @@
 <!DOCTYPE html>
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
   <head>
     <meta charset="utf-8">
-      <script src="js/menu.js"></script>
-    <link rel="stylesheet" type="text/css" href="css/menu.css"  />
-    <link rel="stylesheet" href="css/productList.css">
+      <script src="../js/menu.js"></script>
+    <link rel="stylesheet" href="../css/menu.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/login.css"/>
     <title></title>
   </head>
   <body>
     <div id="top">
         <h1 id="logo">DRESS HUB</h1>
         <ul class="topul">
-          <li><a href="login.html">LOGIN</a></li>
-          <li><a href="login.html">회원가입</a></li>
+          <li><a href="../login">LOGIN</a></li>
+          <li><a href="../join">회원가입</a></li>
           <li><a href="cart.html">장바구니</a></li>
           <li><a href="mypage.html">MYPAGE</a></li>
         </ul>
@@ -56,39 +56,39 @@
     </ul>
   </nav>
 
-<!-- 상품목록 -->
-
-  <div class="product_wrap">
-    <!-- <div class="product_container"></div> -->
-      <div class="product_container_content"></div>
+<section class="container">
+    <div class="login">
+        <h1 class=h1_login>MEMBER LOGIN</h1>
+        <div th:if="${param.error}">
+            <div class="alert alert-danger">
+                아이디 혹은 비밀번호를 확인해주세요.
+            </div>
+        </div>
+        <div th:if="${param.logout}">
+            <div class="alert alert-info">
+                로그아웃이 완료되었습니다.
+            </div>
+        </div>
+        <div th:if="${param.duplicate}">
+            <div class="alert alert-info">
+                다른 기기에서 접속이 발생하여 로그아웃 되었습니다.
+            </div>
+        </div>
+      <form method="post" th:action="@{/login}">
+        <p><input class='id' type="text" name="id" value="" placeholder="  ID"></p>
+        <p><input class='password' type="password" name="password" value="" placeholder="  Password"></p>
+        <p ><input class="btn_login" type="submit" name="submit" value="LOGIN"></p>
+      </form>
     </div>
 
-
-      <!-- 퀵메뉴 -->
-      <aside class="quick-menu-area">
-        <!-- <h3>  TOP MENU</h3> -->
-        <a href="#" target="_blank">
-          <img src="image/recently.png" alt="최근본상품" >
-        </a>
-        <a href="#" target="_blank">
-           <img src="image/cart.png" alt="장바구니" >
-         </a>
-        <a href="#" target="_blank">
-           <img src="image/add.png" alt="상품등록" >
-         </a>
-        <a href="#" target="_blank">
-           <img src="image/contact.png" alt="문의하기" >
-         </a>
-      </aside>
-
-      <!-- 페이징 -->
-      <div id="test"></div>
-
-      <div id="paging"></div>
-
-	<script type="text/javascript" src="js/jquery-3.3.1.min.js" charset="utf-8"></script>
-  <script src="js/productList.js"></script>
-  <script src="js/menu.js"></script>
-
+    <div class="login_help">
+            <ul class="topul">
+              <li><a href=#>아이디/비밀번호찾기</a></li>
+              <li><a href="join.html">회원가입</a></li>
+            </ul>
+    </div>
+  </section>
+  <script src="../js/menu.js">
+  </script>
   </body>
 </html>

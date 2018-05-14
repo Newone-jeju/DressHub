@@ -2,8 +2,6 @@ package com.newoneplus.dresshub.Model;
 
 import com.newoneplus.dresshub.Service.MainService;
 import com.newoneplus.dresshub.Service.ProductService;
-import com.newoneplus.dresshub.UserController;
-import com.newoneplus.dresshub.UserDao;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -63,10 +61,18 @@ public class DaoFactory {
     @Bean
     public ProductImageDao productImageDao(){return new ProductImageDao(jdbcTemplate());}
 
-    @Bean
-    public UserController userController()
-    {
-        return new UserController();
-    }
+//    @Bean
+//    public UserController userController()
+//    {
+//        return new UserController();
+//    }
 
+    @Bean
+    public ReviewDao reviewDao(){return  new ReviewDao(jdbcTemplate());}
+
+    @Bean
+    public LeaseInfoDao leaseInfoDao(){return new LeaseInfoDao(jdbcTemplate());}
+
+    @Bean
+    public BasketDao basketDao(){return new BasketDao();}
 }
