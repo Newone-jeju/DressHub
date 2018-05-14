@@ -26,8 +26,6 @@ public class MainService {
 
     }
 
-    public Product getProduct(int id) throws ClassNotFoundException {
-        return productDao.get(id);
-    }
+
 
 }
