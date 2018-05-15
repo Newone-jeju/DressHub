@@ -24,7 +24,7 @@ function setHiddenRating(){
 		starWidth: "30px",
 		halfStar: true,
   	onSet: function (rating, rateYoInstance) {
-    $(".hid-rank").html('<input type="hidden" name="rank" value="'+rating+'">');
+    $(".hid-rank").attr("value", rating);
     console.log(rating);
   }
 });

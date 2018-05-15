@@ -96,8 +96,20 @@ $(function() {
         $(".card-td").html(html);
 	}
 
-	status.msg_send() =function(data){
-		
+	status.msg_send() = function(data){
+		$("card-write-btn").click(function(){
+			var comment = $(this).prev()
+			$.ajax({
+                type: "POST",
+                url: "", //좋아요 눌렀을 때 상태정보 전달할 url
+                data: {'comment': comment }, // 서버로 보낼 데이터
+                dataType: "json",
+                success: function(response){
+                    
+                }
+            });
+			$($(this))
+		})
 	}
 
 	status.folding();
