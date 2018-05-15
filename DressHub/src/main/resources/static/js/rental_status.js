@@ -96,6 +96,10 @@ $(function() {
         $(".card-td").html(html);
 	}
 
+	status.msg_send() =function(data){
+		
+	}
+
 	status.folding();
 	status.map_card(status.getData());
 })
