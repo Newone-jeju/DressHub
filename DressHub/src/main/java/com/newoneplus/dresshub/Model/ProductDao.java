@@ -90,8 +90,9 @@ public class ProductDao {
 //page에 따라 데이터 가져오기 위한 코드
 //    @RowNUM은 없어도 되는데 나중에 어떻게 될 지몰라서 일단 들여놓음 가져오는 게시물에 순서대로 id 매기는 코드
     public ArrayList<Product> getList(int page, String category, String arrangeQuery) {
+
         if(!category.equals("null")){
-            category = " AND CATEGORY = '" + category + "'";
+            category = " AND CATEGORY LIKE'" + category + "%'";
         }else{
             category="";
         }
@@ -167,7 +168,7 @@ public class ProductDao {
     public int getCount(String category) {
         String sql = "SELECT COUNT(*) FROM PRODUCT";
         if( !category.equals("null") ){
-            category = " where category = '"+ category+"'";
+            category = " where category LIKE '"+ category+"%'";
             sql = sql + category;
         }
          return  jdbcTemplate.queryForObject(sql, Integer.class);

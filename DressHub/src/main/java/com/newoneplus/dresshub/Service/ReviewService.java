@@ -32,8 +32,8 @@ public class ReviewService {
         reviewForUpdate.setTitle(review.getTitle());
 
         reviewForUpdate.setComment(review.getComment());
-        if(review.getImage() != null) {
-            String filepath = saveImageAndGetPath(review.getImage());
+        if(review.getImg() != null) {
+            String filepath = saveImageAndGetPath(review.getImg());
             reviewForUpdate.setImageUrl(filepath);
         }
 
@@ -59,7 +59,7 @@ public class ReviewService {
 
         String leaseStart = leaseInfo.getLeaseDay();
         String leaseEnd = leaseInfo.getReturnDay();
-        String filepath = saveImageAndGetPath(review.getImage());
+        String filepath = saveImageAndGetPath(review.getImg());
 
         review.setLeaseEnd(leaseEnd);
         review.setLeaseStart(leaseStart);
@@ -76,7 +76,7 @@ public class ReviewService {
 
         String leaseEnd = "2000-01-01";
         String leaseStart = "2000-01-01";
-        String filepath = saveImageAndGetPath(review.getImage());
+        String filepath = saveImageAndGetPath(review.getImg());
 
         review.setLeaseEnd(leaseEnd);
         review.setLeaseStart(leaseStart);
@@ -91,7 +91,7 @@ public class ReviewService {
         reviewDao.insert(review);
     }
 
-    public String getReviewsJsonStringFormByProduct(int productId) {
+    public String getReviewsByProductToJson(int productId) {
         ArrayList<Review> reviews = null;
         reviews = reviewDao.getByProduct(productId);
         JSONArray jsonArray = getReviewsJsonArray(reviews);
@@ -143,5 +143,26 @@ public class ReviewService {
             e.printStackTrace();
         }
         return path + filename;
+    }
+
+    public String getReviewByIdToJson(int id) {
+        Review review = reviewDao.get(id);
+        JSONArray jsonArray = new JSONArray();
+
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.append("id", review.getId());
+        jsonObject.append("title", review.getTitle());
+        jsonObject.append("comment", review.getComment());
+        jsonObject.append("rate", review.getRate());
+        jsonObject.append("date", review.getDate());
+        jsonObject.append("userId", review.getUserId());
+        jsonObject.append("productId", review.getProductId());
+        jsonObject.append("leaseStart", review.getLeaseStart());
+        jsonObject.append("leaseEnd", review.getLeaseEnd());
+        jsonObject.append("imageUrl", review.getImageUrl());
+        jsonArray.put(jsonObject);
+
+        return jsonArray.toString();
+
     }
 }
