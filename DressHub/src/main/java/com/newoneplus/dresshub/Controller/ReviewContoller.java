@@ -1,25 +1,10 @@
 package com.newoneplus.dresshub.Controller;
 
-import com.newoneplus.dresshub.ImageProcesser;
 import com.newoneplus.dresshub.Model.Review;
 import com.newoneplus.dresshub.Service.ReviewService;
-import org.json.JSONArray;
-import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
-
-import javax.imageio.ImageIO;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
-import java.lang.reflect.Array;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Date;
 
 @Controller
 public class ReviewContoller {
@@ -28,10 +13,14 @@ public class ReviewContoller {
 
     @RequestMapping(value = "/review", method = RequestMethod.GET)
     @ResponseBody
-    public String get(@RequestParam(defaultValue = "null") String productId, @RequestParam(defaultValue = "null") String userId) {
+    public String get(@RequestParam(defaultValue = "null") String productId,
+                      @RequestParam(defaultValue = "null") String userId,
+                      @RequestParam(defaultValue = "null") String id) {
         String reviewsJsonString = null;
-        if (!productId.equals("null")) {
-            reviewsJsonString = reviewService.getReviewsJsonStringFormByProduct(Integer.parseInt(productId));
+        if(!id.equals("null")) {
+            reviewsJsonString = reviewService.getReviewByIdToJson(Integer.parseInt(id));
+        }else if (!productId.equals("null")) {
+            reviewsJsonString = reviewService.getReviewsByProductToJson(Integer.parseInt(productId));
         } else if (!userId.equals("null")) {
             reviewsJsonString = reviewService.getReviewsJsonStringFormByUser(userId);
         }
@@ -52,14 +41,14 @@ public class ReviewContoller {
 
     //권한 점검 필요
 
-    @RequestMapping(value = "/review/delete", method = RequestMethod.DELETE)
+    @RequestMapping(value = "/review/delete", method = RequestMethod.POST)
     public String delete(@RequestParam String id) {
         int idForReview = Integer.parseInt(id);
         reviewService.delete(idForReview);
-        return null;
+        return "redirect:/product_details.html";
     }
 
-    @RequestMapping(value = "/reveiw/update", method = RequestMethod.PUT)
+    @RequestMapping(value = "/reveiw/update", method = RequestMethod.POST)
     public String update(@ModelAttribute Review review) {
 //        @RequestParam String id, @RequestParam String title, @RequestParam  String comment,
 //        @RequestParam String rate + 이미지
