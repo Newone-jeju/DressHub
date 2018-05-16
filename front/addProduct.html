@@ -62,43 +62,25 @@
       <form method="GET" name="product"  id="inputForm" action="/products">
   <table id="addTable">
   <tr>
-      <th>
-          <label for="name">상품이름
-      </th>
-      <td>
-          <input type="text" name="name" id="name" size="40%">
-      </td>
+      <th><label for="name">상품이름</th>
+      <td><input type="text" name="name" id="name" size="40%"></td>
   </tr>
   <tr>
-      <th>
-          <label for="costPerDay">1일 렌탈료
-      </th>
-      <td>
-          <input type="text" name="costPerDay" id="costPerDay" size="20%"> 원
-      </td>
+      <th><label for="costPerDay">1일 렌탈료</th>
+      <td><input type="text" name="costPerDay" id="costPerDay" size="20%"> 원</td>
   </tr>
   <tr>
-      <th>
-          <label for="deposit">보증금
-      </th>
-      <td>
-          <input type="text" name="deposit" id="deposit" size="20%"> 원
-      </td>
+      <th><label for="deposit">보증금</th>
+      <td><input type="text" name="deposit" id="deposit" size="20%"> 원</td>
   </tr>
   <tr>
-      <th>
-          <label for="salePrice">판매가격
-      </th>
-      <td>
-          <input type="text" name="salePrice" id="salePrice" size="20%"> 원
-      </td>
+      <th><label for="salePrice">판매가격  </th>
+      <td>  <input type="text" name="salePrice" id="salePrice" size="20%"> 원</td>
   </tr>
   <tr>
-      <th>
-          <label for="category">카테고리
-      </th>
+      <th><label for="category">카테고리  </th>
       <td>
-        <select>
+        <select name="category" form="inputForm">
           <option > 캐쥬얼>남성 </option>
           <option > 캐쥬얼>여성 </option>
           <option > 캐쥬얼>신발 </option>
@@ -115,65 +97,35 @@
       </td>
   </tr>
   <tr>
-      <th>
-          <label for="consigmentStart">시작 대여일
-      </th>
-      <td>
-          <input type="date" name="consigmentStart" id="consigmentStart" >
-      </td>
+      <th><label for="consigmentStart">시작 대여일</th>
+      <td><input type="date" name="consigmentStart" id="consigmentStart" ></td>
   </tr>
   <tr>
-      <th>
-          <label for="consigmentEnd">종료 대여일
-      </th>
-      <td>
-          <input type="date" name="consigmentEnd" id="consigmentEnd" size="20px">
-      </td>
+      <th><label for="consigmentEnd">종료 대여일</th>
+      <td><input type="date" name="consigmentEnd" id="consigmentEnd" size="20px"></td>
   </tr>
   <tr>
-      <th>
-          <label for="leastLeaseDay">최소 대여일
-      </th>
-      <td>
-          <input type="text" name="leastLeaseDay" id="leastLeaseDay" size="20px"> 일
-      </td>
+      <th><label for="leastLeaseDay">최소 대여일</th>
+      <td><input type="text" name="leastLeaseDay" id="leastLeaseDay" size="20px"> 일</td>
   </tr>
   <tr>
-      <th>
-          <label for="location">지역
-      </th>
-      <td>
-          <input type="text" name="location" id="location" size="100%">
-      </td>
+      <th>  <label for="location">지역</th>
+      <td><input type="text" name="location" id="location" size="100%"></td>
   </tr>
   <tr>
-      <th>
-          <label for="state">상태
-      </th>
-      <td>
-          <input type="text" name="state" id="state" size="100%">
-      </td>
+      <th><label for="state">상태</th>
+      <td><input type="text" name="state" id="state" size="100%"></td>
   </tr>
   <tr>
-      <th>
-          <label for="size">사이즈
-      </th>
-      <td>
-          <input type="text" name="size" id="size" size="20%">
-      </td>
+      <th><label for="size">사이즈  </th>
+      <td><input type="text" name="size" id="size" size="20%">  </td>
   </tr>
   <tr>
-      <th>
-          <label for="contents">설명
-      </th>
-      <td>
-          <textarea name="contents" id="contents"></textarea>
-      </td>
+      <th><label for="contents">설명  </th>
+      <td><textarea name="contents" id="contents"></textarea></td>
   </tr>
   <tr>
-      <th>
-          <label for="image">이미지
-      </th>
+      <th><label for="image">이미지</th>
       <td>
         <!-- <input type="file" value="" name="upload[]" multiple> -->
         <h3>파일(들)을 선택하세요.</h3>

@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" type="text/css" href="css/menu.css" />
+  <!-- pagination plugin -->
+  <link rel="stylesheet" href="css/pagination.css">
+  <link rel="stylesheet" type="text/css" href="css/rental_status.css" />
+  <title></title>
+</head>
+
+<body>
+  <div id="top">
+    <h1 id="logo">DRESS HUB</h1>
+    <ul class="topul">
+      <li><a href="../login">LOGIN</a></li>
+      <li><a href="../join">회원가입</a></li>
+      <li><a href="cart.html">장바구니</a></li>
+      <li><a href="mypage.html">MYPAGE</a></li>
+    </ul>
+  </div>
+  <nav id="nav">
+    <ul class="menu">
+      <li><a class="category">전체카테고리</a> </li>
+      <li><a id="clothes" class="name">캐쥬얼</a>
+        <ul class="allcategory">
+          <li><a href="#">남성</a></li>
+          <li><a href="#">여성</a></li>
+          <li><a href="#">신발</a></li>
+          <li><a href="#">기타</a></li>
+        </ul>
+      </li>
+      <li><a id="suit" class="name">예복</a>
+        <ul class="allcategory">
+          <li><a href="#">경조사</a></li>
+          <li><a href="#">면접</a></li>
+          <li><a href="#">another</a></li>
+          <li><a href="#">another</a></li>
+        </ul>
+      </li>
+      <li><a id="accessory" class="name">악세사리</a>
+        <ul class="allcategory">
+          <li><a href="#">경조사</a></li>
+          <li><a href="#">면접</a></li>
+          <li><a href="#">another</a></li>
+          <li><a href="#">another</a></li>
+        </ul>
+      </li>
+      <li><a>할인/기획</a>
+        <ul class="allcategory">
+          <li><a href="#">의류</a></li>
+          <li><a href="#">악세사리</a></li>
+          <li><a href="#">another</a></li>
+          <li><a href="#">another</a></li>
+        </ul>
+      </li>
+      <li><a href=#>MYPAGE</a></li>
+
+    </ul>
+  </nav>
+  
+  
+
+<main id="rental-status">
+  <div class="header">
+    <nav class="page-head-category">
+      <a href=""><span class="text">마이페이지</span></a>
+      <span class="text"> > </span>
+      <a href=""><span class="text">내 상품</span></a>
+    </nav>
+  </div>
+
+  <article class="rentaling-area">
+    <header>
+      <h1>빌린 옷</h1>
+      <a class="rentaling-more" href=""><span>더보기</span></a>
+    </header>
+    <main class="retaling-list">
+      <div class="card-th">
+        <div class="thumnail">
+          <p class="text flexcenter-align">이미지</p>
+        </div>
+        <div class="title flexcenter-align">
+          <p class="text">상품명</p>
+        </div>
+        <div class="order-day flexcenter-align">
+          <p class="text">주문날짜</p>
+        </div>
+        <div class="recent-status flexcenter-align">
+          <p class="text">최근상태</p>
+        </div>
+      </div>
+
+
+      <div class="card-td">
+        <!-- onecard -->
+        <div class="product-card">
+          <div class="card-header">
+            <div class="thumnail">
+              <img src="image/5.jpg" alt="thumnail_img">
+            </div>
+            <div class="title flexcenter-align">
+              <p class="text">멋진 청바지</p>
+            </div>
+            <div class="order-day flexcenter-align">
+              <p class="text">2013-12-14</p>
+            </div>
+            <div class="recent-status flexcenter-align">
+              <p class="text">세탁중</p>
+            </div>
+          </div>
+          <div class="card-body hidd">
+            <div class="card-btn-wrap">
+                <input type="text" name="msg" value="" placeholder="수령한 대여의상에 특이사항이 발생하면 입력해 주세요.... " class="msg-box">
+                <button class="card-write-btn card-btn">메시지작성</button>
+            </div>
+            <table class="log-list">
+              <tbody class="log-card">
+                <tr>
+                  <td rowspan="3" class="log-no">3</td>
+                  <td rowspan="3" class="status log-title">세탁중</td>
+                  <td class="name-phonenum log-content">dresshub : 010-0000-0001</td>
+                </tr>
+                <tr>
+                  <td class="how-long log-content">2013-12-14 ~ 2013-12-16</td>
+                </tr>
+                <tr>
+                  <td class="msg log-content">세탁중 구멍 발견</td>
+                </tr>
+              </tbody>
+              <tbody class="log-card">
+                <tr>
+                  <td rowspan="3" class="log-no">2</td>
+                  <td rowspan="3" class="status log-title">배송중</td>
+                  <td class="name-phonenum log-content">dresshub : 010-0000-0001</td>
+                </tr>
+                <tr>
+                  <td class="how-long log-content">2013-12-14 ~ 2013-12-16</td>
+                </tr>
+                <tr>
+                  <td class="msg log-content">메시지 없음</td>
+                </tr>
+              </tbody>
+              <tbody class="log-card">
+                <tr>
+                  <td rowspan="3" class="log-no">1</td>
+                  <td rowspan="3" class="status log-title">주문</td>
+                  <td class="name-phonenum log-content">dresshub : 010-0000-0001</td>
+                </tr>
+                <tr>
+                  <td class="how-long log-content">2013-12-14 ~ 2013-12-16</td>
+                </tr>
+                <tr>
+                  <td class="msg log-content">메시지 없음</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <!-- onecard -->
+      </div>
+          
+
+    </main>
+  </article>
+</main>
+
+
+  <!-- footer -->
+  <footer>
+    <div class="container">
+      <div class="foota">
+        <h2>DRESS HUB</h2>
+        <p>드레스 허브 FOOTER</p>
+      </div>
+
+      <div class="footb">
+        <div>
+          <h3>ABOUT</h3>
+          <ul>
+            <li>설립</li>
+            <li>주소</li>
+            <li>지도</li>
+            <li>스태프</li>
+          </ul>
+        </div>
+        <div>
+          <h3>SUPPORT</h3>
+          <ul>
+            <li>다운로드</li>
+            <li>매뉴얼</li>
+            <li>자주 묻는 질문</li>
+            <li>문의</li>
+          </ul>
+        </div>
+        <div>
+          <h3>CONTENTS</h3>
+          <ul>
+            <li>공지사항</li>
+            <li>비즈니스</li>
+            <li>프로필</li>
+            <li>스태프</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script type="text/javascript" src="js/jquery-3.3.1.min.js" charset="utf-8"></script>
+  <!-- 페이지네이션 플러그인 -->
+  <script type="text/javascript" src="js/pagination.min.js" charset="utf-8"></script>
+  <script type="text/javascript" src="js/rental_status.js"></script>
+</body>
+
+</html>

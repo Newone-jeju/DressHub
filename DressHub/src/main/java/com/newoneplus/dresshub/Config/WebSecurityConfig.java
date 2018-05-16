@@ -17,6 +17,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     AuthProvider authProvider;
 
 
+
     @Override
     public void configure(WebSecurity web) throws Exception {
         web.ignoring().antMatchers("/resources/**", "/css/**", "/js/**","/image/**", "/static/**");
@@ -25,17 +26,25 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
+
         http.authorizeRequests()
                 .antMatchers("/user/**").access("hasRole('ROLE_USER')")
                 .antMatchers("/admin/**").access("hasRole('ROLE_ADMIN')")
                 .antMatchers("/**").permitAll();
 //                .antMatchers("/", "/login", "/login?error", "/login?logout", "/products/**", "/login?duplicate", "/join/**").permitAll()
 //                .antMatchers("/**").authenticated();
-
-        http.csrf().disable();
+//        https test code
+//        http.requiresChannel()
+//        .antMatchers("/**").requiresSecure();
+//        csrf config
+//        http.csrf().disable();
         http.sessionManagement().
+                sessionFixation().
+                migrateSession().
+                invalidSessionUrl("/").
                 maximumSessions(1).
                 maxSessionsPreventsLogin(false).
+
                 expiredUrl("/login?duplicate");
 
 
@@ -58,6 +67,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 
     }
+
+
 
 
 }

@@ -2,9 +2,9 @@
 <html>
   <head>
     <meta charset="utf-8">
-      <script src="/js/menu.js"></script>
-    <link rel="stylesheet" type="text/css" href="/css/menu.css"  />
-    <link rel="stylesheet" href="css/productList.css">
+      <script src="js/menu.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/menu.css"  />
+<link rel="stylesheet" href="css/cart.css">
     <title></title>
   </head>
   <body>
@@ -56,39 +56,56 @@
     </ul>
   </nav>
 
-<!-- 상품목록 -->
+<!-- 장바구니 -->
+<h1 class="header_name">cart</h1>
+<div id="cart">
+  <!-- 테이블 -->
+  <table id="cart_table">
+    <tr>
+      <th>이미지</th>
+      <th>상품정보</th>
+      <th>상품금액</th>
+      <th>배송비</th>
+    </tr>
+    <tr class="cartAdd_container"></tr>
+    <!-- <tr>
+      <td class="image"></td>
+      <td class="information"></td>
+      <td class="accout"></td>
+      <td class="shipping"></td>
+    </tr> -->
+  </table>
 
-  <div class="product_wrap">
-    <!-- <div class="product_container"></div> -->
-      <div class="product_container_content"></div>
-    </div>
+<!-- 삭제하기 버튼 -->
+  <div class="removeBtn">
+    <button class="remove">삭제하기</button>
+    <button class="remove_all">전체삭제하기</button>
+  </div>
 
+  <!-- 상품 총 가격 -->
+    <table id="total_price_table">
+      <tr>
+        <th>총 상품금액</th>
+        <th>총 배송비</th>
+        <th>결제 예정 금액</th>
+      </tr>
+      <tr>
+        <td class="total_price"></td>
+        <td class="total_shipping"></td>
+        <td class="payment_amount"></td>
+      </tr>
+    </table>
 
-      <!-- 퀵메뉴 -->
-      <aside class="quick-menu-area">
-        <!-- <h3>  TOP MENU</h3> -->
-        <a href="#" target="_blank">
-          <img src="/image/recently.png" alt="최근본상품" >
-        </a>
-        <a href="#" target="_blank">
-           <img src="/image/cart.png" alt="장바구니" >
-         </a>
-        <a href="#" target="_blank">
-           <img src="/image/add.png" alt="상품등록" >
-         </a>
-        <a href="#" target="_blank">
-           <img src="/image/contact.png" alt="문의하기" >
-         </a>
-      </aside>
+  <!-- 버튼 -->
+  <div id="btn">
+    <button class="cancle">취소하기</button>
+    <input type="button" class="order" value="주문하기"></input>
+  </div>
 
-      <!-- 페이징 -->
-      <div id="test"></div>
-
-      <div id="paging"></div>
-
-	<script type="text/javascript" src="/js/jquery-3.3.1.min.js" charset="utf-8"></script>
-  <script src="/js/productList.js"></script>
-  <script src="/js/menu.js"></script>
+</div>
+    <script type="text/javascript" src="js/jquery-3.3.1.min.js" charset="utf-8"></script>
+  <script src="js/menu.js"></script>
+  <script src="js/cart.js"></script>
 
   </body>
 </html>

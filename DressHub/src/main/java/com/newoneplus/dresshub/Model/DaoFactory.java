@@ -2,6 +2,9 @@ package com.newoneplus.dresshub.Model;
 
 import com.newoneplus.dresshub.Service.MainService;
 import com.newoneplus.dresshub.Service.ProductService;
+
+import com.newoneplus.dresshub.ThumbupDao;
+
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -74,5 +77,12 @@ public class DaoFactory {
     public LeaseInfoDao leaseInfoDao(){return new LeaseInfoDao(jdbcTemplate());}
 
     @Bean
-    public BasketDao basketDao(){return new BasketDao();}
+
+    public BasketDao basketDao(){return new BasketDao(jdbcTemplate());}
+
+    @Bean
+    public ThumbupDao thumbupDao(){return new ThumbupDao(jdbcTemplate());}
 }
+
+
+
