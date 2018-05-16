@@ -42,12 +42,15 @@ $(function() {
             dataType: 'json',
             type:'get',
             error: function(jqXHR, textStatus, errorThrown) {
-                alert('An error occurred');
+                alert(textStatus);
+                alert(errorThrown);
+
             },
             success: function(data){
 
             	var cards =[];
             	$.each(data, function(i,p_data){
+
             		if(i==3){
             			return cards;
             		}
@@ -94,6 +97,23 @@ $(function() {
           html += item;
         });
         $(".card-td").html(html);
+	}
+
+
+	status.msg_send() = function(data){
+		$("card-write-btn").click(function(){
+			var comment = $(this).prev()
+			$.ajax({
+                type: "POST",
+                url: "", //좋아요 눌렀을 때 상태정보 전달할 url
+                data: {'comment': comment }, // 서버로 보낼 데이터
+                dataType: "json",
+                success: function(response){
+                    
+                }
+            });
+			$($(this))
+		})
 	}
 
 	status.folding();
