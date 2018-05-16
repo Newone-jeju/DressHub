@@ -33,7 +33,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/**").permitAll();
 //                .antMatchers("/", "/login", "/login?error", "/login?logout", "/products/**", "/login?duplicate", "/join/**").permitAll()
 //                .antMatchers("/**").authenticated();
-
+//        https test code
+//        http.requiresChannel()
+//        .antMatchers("/**").requiresSecure();
+//        csrf config
 //        http.csrf().disable();
         http.sessionManagement().
                 sessionFixation().

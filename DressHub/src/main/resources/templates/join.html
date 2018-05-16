@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
   <head>
       <meta charset="UTF-8"/>
       <script src="../js/menu.js"></script>
@@ -60,6 +60,7 @@
   <div id="join">
     <h2>회원가입</h2><hr width="90%"/>
       <form method="post" name="inputForm" id="inputForm">
+          <input type ="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
             <table id="joinTable">
                 <tr>
                     <th>
