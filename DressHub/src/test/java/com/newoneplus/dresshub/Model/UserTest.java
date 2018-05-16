@@ -82,5 +82,15 @@ public class UserTest {
         assertThat(true, is(loginCheckUser));
     }
 
+    @Test
+    public void update() {
+
+    }
+
+
+    @Test
+    public void delete() {
+
+    }
 
 }
