@@ -42,12 +42,14 @@ $(function() {
             dataType: 'json',
             type:'get',
             error: function(jqXHR, textStatus, errorThrown) {
-                alert('An error occurred');
+                alert(textStatus);
+                alert(errorThrown);
             },
             success: function(data){
 
             	var cards =[];
             	$.each(data, function(i,p_data){
+            		console.log(cards)
             		if(i==3){
             			return cards;
             		}
@@ -96,9 +98,9 @@ $(function() {
         $(".card-td").html(html);
 	}
 
-	status.msg_send() =function(data){
+	// status.msg_send() =function(data){
 		
-	}
+	// }
 
 	status.folding();
 	status.map_card(status.getData());
