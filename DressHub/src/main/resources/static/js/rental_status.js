@@ -42,12 +42,15 @@ $(function() {
             dataType: 'json',
             type:'get',
             error: function(jqXHR, textStatus, errorThrown) {
-                alert('An error occurred');
+                alert(textStatus);
+                alert(errorThrown);
+
             },
             success: function(data){
 
             	var cards =[];
             	$.each(data, function(i,p_data){
+
             		if(i==3){
             			return cards;
             		}
@@ -95,6 +98,7 @@ $(function() {
         });
         $(".card-td").html(html);
 	}
+
 
 	status.msg_send() = function(data){
 		$("card-write-btn").click(function(){

@@ -48,45 +48,47 @@
 
 .review-head {
 	display: flex;
+	cursor: pointer;
 }
 
 .review-head > div, .th-group * {
-	padding: 10px;
+	
 	text-align: center;
 	font-size: 1.3em;
 }
 
 .th-group {
 	border: 1px solid gray;
-	text-align: center;
+	display:flex;
+	padding: 8px 0;
 	font-weight:600;
 	box-shadow: 2px 1px 1px grey;
 	background-color: #f5f3f3;
 }
 
-
-.review-head {
-	cursor: pointer;
-}
-
 .review-table .th-no, .review-table .td-no  {
-	width:10%;
+	flex-basis:15%;
 }
+
+.review-table .th-rank, .th-title {
+	padding-right: 0.6%;
+}
+
 .review-table .th-rank, .review-table .td-rank {
-	width: 10%;
+	flex-basis:10%;
 }
 
 .review-table .th-title, .review-table .td-title{
-	width:60%;
+	flex-basis: 60%;
 }
 .review-table .th-day, .review-table .td-day {
-	width: 20%;
+	flex-basis: 10%;
 }
 
 .review-head {
 	background-color: #f8f7fc;
 	border: 1px solid #bfbfbf;
-	padding:1% 0%;
+	padding:1.5% 0%;
 }
 
 .td-group {
@@ -106,20 +108,20 @@
 }
 
 .review-date-info {
-	width: 40%;
+	width:40%;
 	min-width: 260px;
 	overflow: hidden;
 	margin-bottom: 20px;
+	margin:0 auto;
 }
 
 .review-date-info > * {
-	width:100%;
 	display:flex;
-	align-items: center;
+	justify-content:center;
 }
 
 .review-date-info > * > .title{
-	width: 20%;
+	flex-basis: 20%;
 }
 
 .review-date-info > * > .content{

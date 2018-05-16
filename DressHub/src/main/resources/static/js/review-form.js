@@ -13,39 +13,38 @@ function getauthor(){
 	//작성자 이름 가져오기
 }
 
-
 function setHiddenName(){
 	$('.rental-product-content').after('<input type="hidden" name="rental-product" value="'+$('.rental-product-content').text()+'">')
 }
 
 function setHiddenRating(){
-	var $rating = $("#rating");
+	var $rating = $("#rating"); 
+	console.log($rating.text());
 	$rating.rateYo({
 		starWidth: "30px",
 		halfStar: true,
+		rating: $rating.text(),
   	onSet: function (rating, rateYoInstance) {
     $(".hid-rank").attr("value", rating);
-    console.log(rating);
   }
 });
 }
+
+
 
 function getEditInfo(review_id) {
 	var id = review_id;
     $.ajax({ 
       type: "POST",
-      url: "review?id={"+id+"}",// id로 받아올 리뷰 url 
+      url: "review?id="+id,// id로 받아올 리뷰 url 
       data: {'id': id },
       dataType: "json", // 서버에서 받을 데이터 형식
       success: function(response){
       	console.log(response)
-      	$(".form-url").attr("action", "reveiw/update/"+id);
-      	$(".author-content").val(response[0].userId)
-      	$("#rating").rateYo({
-      		starWidth: "30px",
-      		rating: response[0].rate,
-			halfStar: true,
-      	});
+      	$(".form-url").attr("action", "reveiw/update/");
+      	$(".author-content").val(response[0].userId);
+      	$("#rating").text(response[0].rate);
+		setHiddenRating();
         $(".title-content").val(response[0].title);
         $(".text-content").val(response[0].comment);
       }
@@ -57,7 +56,9 @@ function reviewFormInit() {
 	getName();
 	getauthor();
 	setHiddenName();
-	setHiddenRating();
+	var edit_id = opener.parent.getEditNum(); 
+	console.log(edit_id);
+	getEditInfo(edit_id);
 }
 
 reviewFormInit();
@@ -71,3 +72,6 @@ $(".send-btn").click(function(){
 $(".cancel-btn").click(function(){
 	window.open('about:blank', '_self').close();
 });
+
+
+
