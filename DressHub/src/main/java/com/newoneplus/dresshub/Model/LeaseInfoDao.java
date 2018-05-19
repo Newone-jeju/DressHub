@@ -27,6 +27,8 @@ public class LeaseInfoDao {
         return leaseInfo;
 
     }
+
+
     public ArrayList<LeaseInfo> getInfosByLeaser(String userId) {
         String sql = "SELECT * FROM lease_info WHERE leaser = ?";
         Object[] params = {userId};
@@ -42,10 +44,13 @@ public class LeaseInfoDao {
         return leaseInfos;
     }
 
+
     public int insert(LeaseInfo leaseInfo) {
         String sql = "INSERT INTO lease_info(lease_day, return_day, " +
-                "total_price, lease_site, return_site , leaser, product)" +
-                "VALUES (?, ?, ?, ?, ?, ? ,?)";
+                "total_price, lease_site, return_site , leaser, product, status, order_time, order_wait_start," +
+                "order_waite_end, release_time, lease_deliver_start, lease_deliver_end, lease_start, lease_end" +
+                "return_start, return_end, laundry_start, laundry_end, ready" +
+                "VALUES (?, ?, ?, ?, ?, ? ,?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         Object[] params = {leaseInfo.getLeaseDay(), leaseInfo.getReturnDay(), leaseInfo.getTotalPrice(),
                 leaseInfo.getLeaseSite(), leaseInfo.getReturnSite(),
                 leaseInfo.getLeaser(), leaseInfo.getProduct()};
@@ -101,7 +106,11 @@ public class LeaseInfoDao {
 
     public void update(LeaseInfo leaseInfo) {
         String sql = "UPDATE lease_info SET lease_day = ?, return_day = ?, " +
-                "total_price = ?, lease_site = ?, return_site = ? , leaser = ?, product = ? WHERE id = ? ";
+                "total_price = ?, lease_site = ?, return_site = ? , leaser = ?, product = ?," +
+                "status = ? , order_time = ? , order_wait_start = ? ," +
+                "order_waite_end = ?, release_time = ?, lease_deliver_start = ?, lease_deliver_end = ?, " +
+                "lease_start = ?, lease_end = ?" +
+                "return_start = ?, return_end = ?, laundry_start = ?, laundry_end = ?, ready = ? WHERE id = ? ";
         Object[] params = {leaseInfo.getLeaseDay(), leaseInfo.getReturnDay(), leaseInfo.getTotalPrice(),
                 leaseInfo.getLeaseSite(), leaseInfo.getReturnSite(), leaseInfo.getLeaser(), leaseInfo.getProduct(),
                 leaseInfo.getId()};
