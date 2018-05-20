@@ -49,7 +49,7 @@ public class LeaseInfoDao {
         String sql = "INSERT INTO lease_info(lease_day, return_day, " +
                 "total_price, lease_site, return_site , leaser, product, status, order_time, order_wait_start," +
                 "order_waite_end, release_time, lease_deliver_start, lease_deliver_end, lease_start, lease_end" +
-                "return_start, return_end, laundry_start, laundry_end, ready" +
+                "return_start, return_end, laundry_start, laundry_end, ready)" +
                 "VALUES (?, ?, ?, ?, ?, ? ,?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         Object[] params = {leaseInfo.getLeaseDay(), leaseInfo.getReturnDay(), leaseInfo.getTotalPrice(),
                 leaseInfo.getLeaseSite(), leaseInfo.getReturnSite(),
@@ -109,12 +109,17 @@ public class LeaseInfoDao {
                 "total_price = ?, lease_site = ?, return_site = ? , leaser = ?, product = ?," +
                 "status = ? , order_time = ? , order_wait_start = ? ," +
                 "order_waite_end = ?, release_time = ?, lease_deliver_start = ?, lease_deliver_end = ?, " +
-                "lease_start = ?, lease_end = ?" +
+                "lease_start = ?, lease_end = ?," +
                 "return_start = ?, return_end = ?, laundry_start = ?, laundry_end = ?, ready = ? WHERE id = ? ";
         Object[] params = {leaseInfo.getLeaseDay(), leaseInfo.getReturnDay(), leaseInfo.getTotalPrice(),
                 leaseInfo.getLeaseSite(), leaseInfo.getReturnSite(), leaseInfo.getLeaser(), leaseInfo.getProduct(),
                 leaseInfo.getId()};
         jdbcTemplate.update(sql,params);
 
+    }
+
+    public void delete(Integer leaseInfoId) {
+        String sql = "DELETE FROM lease_info WHERE id=" + leaseInfoId;
+        jdbcTemplate.update(sql);
     }
 }
