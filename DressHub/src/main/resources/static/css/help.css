@@ -1,0 +1,83 @@
+
+#my-main article > header {
+	display: block;
+}
+
+#my-main article > header > p {
+	color: gray;
+	width:60%;
+
+}
+
+#switch-nav {
+	width: 100%;
+	margin: 10px 0 20px 0;
+	display: flex;
+}
+
+#switch-nav > .head-space, #switch-nav > .head-space {
+	align-items: baseline;
+}
+
+#switch-nav > .head-space {
+	flex-basis: 8%;
+	border-bottom: 1px solid #999;
+}
+
+#switch-nav > .tail-space {
+	flex-grow: 1;
+	border-bottom: 1px solid #999;
+}
+
+#switch-nav > ul {
+	padding:0;
+	display: flex;
+	list-style: none;
+	margin-bottom: 0px;
+	align-items: baseline;
+}
+
+#switch-nav > ul > li {
+	border: 1px solid #999;
+	border-collapse: collapse;
+	padding: 10px;
+	cursor:pointer;
+}
+
+#switch-nav > ul > li:hover {
+	border: 1px solid #797979;
+	border-bottom: none;
+	border-top: 5px solid black;
+	font-size: 120%;
+}
+
+#switch-nav .active {
+	border: 1px solid #797979;
+	border-bottom: none;
+	border-top: 5px solid black;
+	font-size: 120%;
+}
+
+
+.go-top {
+	position: fixed;
+	right: 4%;
+	bottom: 4%;
+	border: none;
+	cursor: pointer;
+	width:45px;
+	height: 32px;
+	background:no-repeat;
+	background-image: url("../image/go-top.png");
+	background-size: 100%;
+	border: 2px solid #aaa;
+}
+
+#content h1 {
+	font-size:1.3rem;
+}
+
+#content img {
+	width:100%;
+	height: auto;
+}
