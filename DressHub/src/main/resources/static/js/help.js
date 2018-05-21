@@ -1,48 +1,64 @@
-var title = $(".help-content > header > h1");
-var description = $(".help-content > header > p");
-var nav_ul = $("#switch-nav > ul");
+var title = $(".help-content > header");
+var nav_ul = $("#nav-tab > ul");
 var content_area = $("#content");
 var data = "";
 var helpData = "";
 var helpUi = "";
 
-function Map(){
-	//title
-	helpUi.prototype.setCard = function() {
-		cards.push('<h1>'+this.data.title+'</h1>');
-	}
-	helpUi.mapCard(title, cards.length);
 
-	// //switch-nav
-	// helpUi.prototype.setCard = function() {
-	// 	cards.push('<li class="active">'+this.data.title+'</li>');
-	// 	cards.push('<li>'+this.data.title+'</li>');
-	// 	cards.push('<li>'+this.data.title+'</li>');
-	// }
-	// helpUi.mapCard(nav_ul, cards.length);
-
-	//description
-	helpUi.prototype.setCard = function() {
-		cards.push('<p>'+this.data.description+'</p>');
-	}
-	helpUi.mapCard(description, cards.length);
+function mapHelp(i){
+	//title description
+	helpUi.setCard('<h1>'+data[i].title+'</h1>');
+	helpUi.setCard('<p>'+data[i].description+'</p>');
+	helpUi.mapCard(title);
 
 	//contents
-	helpUi.prototype.setCard = function() {
-		cards.push(this.data.content);
-	}
-	helpUi.mapCard(content_area, cards.length);
+	helpUi.setCard(data[i].content);
+	helpUi.mapCard(content_area);
 }
 
-function Init() {
-	helpData = new AjaxData("js/help.json", true);
+function NavTabInit(){
+	helpUi.setCard('<li class="active">'+data[0].title+'</li>');
+	for(var i=1; i<data.length; i++){
+		helpUi.setCard('<li>'+data[i].title+'</li>');
+	}	
+	helpUi.mapCard(nav_ul);
+}
+
+function navTabClickListen(){
+	var nav_li = $("#nav-tab > ul > li");
+	nav_li.click(function(){
+		if(!$(this).hasClass("active")){
+			nav_li.removeClass("active");
+			$(this).addClass("active");
+			mapHelp(nav_li.index(this));
+		}
+	})
+}
+
+function go_top(){
+	$(".go-top").click(function(){
+		$( 'html, body' ).animate( { scrollTop : 0 }, 400 );
+  		return false;
+	})
+}
+
+function helpInit() {
+	//get data array
+	helpData = new AjaxData("js/help.json", false);
+	helpData.setData();
 	data = helpData.getData();
-	helpUi = new AjaxCard(data[0]);
-	map();
-
-	
+	helpData = undefined;
+	helpUi = new AjaxCard(data);
+	//map nav-tab
+	NavTabInit();
+	//map title, description, content
+	mapHelp(0);
+	navTabClickListen();
+	go_top();
 }
 
+helpInit();
 
 
 

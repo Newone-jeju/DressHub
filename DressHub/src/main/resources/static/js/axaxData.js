@@ -1,13 +1,17 @@
+
 //class AjaxData
 function AjaxData(url, async) {
 	this.url = url;
 	this.async = async;
-	var data = function(){
-		$.ajax(
+	var data = [];
+}
+
+AjaxData.prototype.setData = function(){
+	$.ajax(
 		{
 			url: this.url,
 		    dataType: 'json',
-		    async: async,
+		    async: this.async,
 		    type:'get',
 		    error: function(jqXHR, textStatus, errorThrown) {
 		        alert(textStatus);
@@ -17,28 +21,28 @@ function AjaxData(url, async) {
 		    	data = json_data;
 		    }
 		})
-	};
 }
 
 AjaxData.prototype.getData = function(){
-	return this.data;
+	return data;
 }
+
 
 //class AjaxCard
 function AjaxCard(data){
 	this.data = data;
-	var cards = [];
+	this.cards = []; //push 메소드를 쓸때는 this를 써줘야 한다.. 참 이상한 언어
 }
 
-AjaxCard.prototype.setCard = function(){}
+AjaxCard.prototype.setCard = function(string){
+	this.cards.push(string); 
+}
 
-AjaxCard.prototype.mapCard = function(target, quantity){
-	for(var i=0; i<quantity; i++){
-		cards.push(this.setCard(i));
-	}
+AjaxCard.prototype.mapCard = function(target){
 	var html = "";
-	$.each(cards, function(i, card) {
+	$.each(this.cards, function(i, card) {
       html += card;
     });
     target.html(html);
+    this.cards = [];
 }
