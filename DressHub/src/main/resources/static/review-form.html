@@ -28,7 +28,7 @@
 					별점
 				</div>
 				<div class="rating left-space" id="rating"></div>
-				<input type="hidden" name="rank" value="">
+				<input type="hidden" class="hid-rank" name="rate" value="">
 			</div>
 			<div class="title-area flexcenter-align">
 				<div class="title form-name">제목</div>
@@ -36,11 +36,11 @@
 			</div>
 			<div class="text-area flex">
 				<div class="text form-name">내용</div>
-				<textarea name="text" class="text text-content left-space"></textarea>
+				<textarea name="comment" class="text text-content left-space"></textarea>
 			</div>
 			<div class="img-area flexcenter-align">
 				<div class="img form-name">첨부 이미지</div>
-				<input type="file" name="img" class="img left-space"></input>
+				<input type="file" name="image" class="img left-space"></input>
 			</div>
 		</div>
 		<div class="footer">
@@ -49,6 +49,7 @@
 				<button class="cancel-btn form-btn-style">취소</button>
 			</div>
 		</div>
+		<input type="hidden" class="hid-id" name="id" value="">
 	</form>
 </section>
 

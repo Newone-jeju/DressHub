@@ -32,16 +32,16 @@ public class ReviewService {
         reviewForUpdate.setTitle(review.getTitle());
 
         reviewForUpdate.setComment(review.getComment());
-        if(review.getImg() != null) {
-            String filepath = saveImageAndGetPath(review.getImg());
+        try {
+            String filepath = saveImageAndGetUrl(review.getImage());
             reviewForUpdate.setImageUrl(filepath);
+        }catch (IllegalArgumentException e){
         }
 
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
         String today = simpleDateFormat.format(new Date());
         reviewForUpdate.setDate(today);
         reviewForUpdate.setRate(review.getRate());
-
         reviewDao.update(reviewForUpdate);
     }
 
@@ -59,7 +59,7 @@ public class ReviewService {
 
         String leaseStart = leaseInfo.getLeaseDay();
         String leaseEnd = leaseInfo.getReturnDay();
-        String filepath = saveImageAndGetPath(review.getImg());
+        String filepath = saveImageAndGetUrl(review.getImage());
 
         review.setLeaseEnd(leaseEnd);
         review.setLeaseStart(leaseStart);
@@ -76,7 +76,7 @@ public class ReviewService {
 
         String leaseEnd = "2000-01-01";
         String leaseStart = "2000-01-01";
-        String filepath = saveImageAndGetPath(review.getImg());
+        String filepath = saveImageAndGetUrl(review.getImage());
 
         review.setLeaseEnd(leaseEnd);
         review.setLeaseStart(leaseStart);
@@ -130,7 +130,7 @@ public class ReviewService {
         return jsonArray;
     }
 
-    private String saveImageAndGetPath(MultipartFile reviewImage) {
+    private String saveImageAndGetUrl(MultipartFile reviewImage) {
         String path = System.getProperty("user.dir") + "/src/main/resources/static/image/review/";
         String filename = reviewImage.getOriginalFilename();
 
@@ -142,7 +142,7 @@ public class ReviewService {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return path + filename;
+        return "/image/review/" + filename;
     }
 
     public String getReviewByIdToJson(int id) {

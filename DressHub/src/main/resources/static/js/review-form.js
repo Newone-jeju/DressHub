@@ -13,43 +13,51 @@ function getauthor(){
 	//작성자 이름 가져오기
 }
 
-
 function setHiddenName(){
 	$('.rental-product-content').after('<input type="hidden" name="rental-product" value="'+$('.rental-product-content').text()+'">')
 }
 
 function setHiddenRating(){
-	var $rating = $("#rating");
+	var $rating = $("#rating"); 
+	console.log($rating.text());
+    $(".hid-rank").attr("value", $rating.text());
 	$rating.rateYo({
 		starWidth: "30px",
 		halfStar: true,
+		rating: $rating.text(),
   	onSet: function (rating, rateYoInstance) {
-    $rating.after('<input type="hidden" name="rank" value="'+rating+'">');
-    console.log(rating)
+    $(".hid-rank").attr("value", rating);
   }
 });
 }
 
+
+
 function getEditInfo(review_id) {
-	var id = review_id;
-    $.ajax({ 
-      type: "POST",
-      url: "review?id={"+id+"}",// id로 받아올 리뷰 url 
-      data: {'id': id },
-      dataType: "json", // 서버에서 받을 데이터 형식
-      success: function(response){
-      	console.log(response)
-      	$(".form-url").attr("action", "reveiw/update/"+id);
-      	$(".author-content").val(response[0].userId)
-      	$("#rating").rateYo({
-      		starWidth: "30px",
-      		rating: response[0].rate,
-			halfStar: true,
-      	});
-        $(".title-content").val(response[0].title);
-        $(".text-content").val(response[0].comment);
-      }
-    });
+    if ( review_id == "null"){
+        $("#rating").text(0);
+        $("#rating").attr("value", 0);
+        setHiddenRating();
+    }else {
+        var id = review_id;
+        console.log(id)
+        $.ajax({
+            type: "get",
+            url: "review",// id로 받아올 리뷰 url
+            data: {'id': id},
+            dataType: "json", // 서버에서 받을 데이터 형식
+            success: function (response) {
+                console.log(response);
+                $(".form-url").attr("action", "review/update");
+                $(".author-content").val(response[0].userId);
+                $("#rating").text(response[0].rate);
+                setHiddenRating();
+                $(".title-content").val(response[0].title);
+                $(".text-content").val(response[0].comment);
+                $(".hid-id").val(response[0].id);
+            }
+        });
+    }
 }
 
 
@@ -57,7 +65,9 @@ function reviewFormInit() {
 	getName();
 	getauthor();
 	setHiddenName();
-	setHiddenRating();
+	var edit_id = opener.parent.getEditNum(); 
+	console.log(edit_id);
+	getEditInfo(edit_id);
 }
 
 reviewFormInit();
@@ -65,9 +75,12 @@ reviewFormInit();
 
 $(".send-btn").click(function(){
 	opener.parent.location.reload();
-	window.open('about:blank', '_self').close();	
+	// window.open('about:blank', '_self').close();
 });
 
 $(".cancel-btn").click(function(){
-	window.open('about:blank', '_self').close();
+	// window.open('about:blank', '_self').close();
 });
+
+
+
