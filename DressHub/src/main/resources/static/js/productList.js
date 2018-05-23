@@ -65,6 +65,7 @@ $(document).ready(function () {
                 dataType: 'json',
                 type: 'get',
                 success: function (data) {
+                    var like = data.like;
                     totalCount = data.count;
                     var product = {};
                     console.log("$item=" + $item);
@@ -80,14 +81,17 @@ $(document).ready(function () {
                         } else {
                             for (var i = 0; i < data.length; i++) {
                                 cards +=
-                                    '<span  class="product_container_content_card" data-href="/productDetail?productId=' + data[i].id + '">' +
+                                    '<span class="product_container_content_card" data-href="/productDetail?productId=' + data[i].id + '">' +
                                     '<div class="card_img_wrap">' +
                                     '<img src="../product_image/' + data[i].thumbnailImage + '" alt="blank" class="card_img">' +
                                     '<div class="hover-content">' +
                                     '<img src="../image/' + data[i].state + '_icon.png}" alt="" class="hover-size">' +
                                     '<div class="hover-btn-wrap">' +
-                                    '<img src="../image/like_btn.png" alt="" class="like_btn" name="' + data[i].id + '">' +
-                                    '<img src="../image/cart_btn_0.png" alt="" class="cart_btn" name="' + data[i].id + '">' +// json 추가 필요
+                                    '<img src="../image/cart_btn_0.png" alt="" class="cart_btn" name="' + data[i].id + '">'+
+                                    '<img src="../image/like_btn_'+like[data[i].id]+'.png" alt="" class="like_btn '+like[data[i].id]+'" name="' + data[i].id + '">'
+                                cards +=
+                                    '<span class="like-num">'+data[i].likes+'</span>'+
+                                    // json 추가 필요
                                     '</div>' +
                                     '</div>' +
                                     '</div>' +
@@ -138,13 +142,36 @@ $(document).ready(function () {
                         });
                     })
 
+                    $(".like_btn").click(function(){
+                        var id = $(this).attr('name');
+                        var state = $(".like_btn").hasClass("0");
+                        var likeNum = $(this).next();
+                        $.ajax({
+                            type: "POST",
+                            url: "", //좋아요 눌렀을 때 상태정보 전달할 url
+                            data: {'id': id, 'like' : state }, // 서버로 보낼 데이터
+                            dataType: "json",
+                            success: function(response){
+                                if(state){
+                                    $(this).attr("src", "../image/like_btn_0.png");
+                                    likeNum.text(Number( likeNum.text() )+1);
+                                }
+                                else{
+                                    $(this).attr("src", "../image/like_btn_1.png");
+                                    likeNum.text(Number( likeNum.text() )-1);
+                                }
+                            }
+                        });
+
+                    });
+
                     $(".cart_btn").click(function(){
                         var id = $(this).attr('name');
                         var state = $(".cart_btn").hasClass("0");
                         $.ajax({
                             type: "POST",
                             url: "", //좋아요 눌렀을 때 상태정보 전달할 url
-                            data: {'id': id, 'like' : state }, // 서버로 보낼 데이터
+                            data: {'id': id, 'cart' : state }, // 서버로 보낼 데이터
                             dataType: "json",
                             success: function(response){
                                 if(state){
