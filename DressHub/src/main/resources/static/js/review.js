@@ -2,7 +2,7 @@ var review = new Object();
 review.no_review = function() {
     $(".td-group").html(
         '<div class="no-review flexcenter">' +
-        '<img src="image/no-review.png" alt="no-review">' +
+        '<image src="image/no-review.png" alt="no-review">' +
         '</div>'
     );
 }
@@ -61,7 +61,7 @@ review.map_review = function(review_data) {
 
 review.init = function() {
     $.ajax({
-        url: 'review?productid=0', //TODO 
+        url: 'review?productId=0', //TODO 나중에 변수로 받아올것!
         dataType: 'json',
         type:'get',
         success: function(data){
@@ -71,7 +71,7 @@ review.init = function() {
             i = i+1;
             review_cards.push(
             //리뷰 카드
-            '<div class="review-head review'+i+'">'+        
+            '<div class="review-head review'+i+'">'+
                 '<div class="td-no">'+i+'</div>'+
                 '<div class="td-rank">'+review_data.rate+'</div>'+
                 '<div class="td-title">'+review_data.title+'</div>'+
@@ -101,7 +101,8 @@ review.init = function() {
             '</div>'+
 
             //리뷰내용
-            '<img src="'+review_data.image+'" alt="review_img">'+
+            '<image src="'+review_data.imageUrl+'" alt="review_img">'+
+
             '<p>'+review_data.comment+'</p>'+
           '</div>'
           )
@@ -140,7 +141,7 @@ review.write_btn = function(){
     })
 }
 
-var edit_id = 0;
+var edit_id = "null";
 //review body 내 수정버튼
 review.edit_btn = function(){
     $(".review-edit-btn").click(function(){

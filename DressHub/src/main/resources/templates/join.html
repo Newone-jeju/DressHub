@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
   <head>
-    <meta charset="utf-8">
+      <meta charset="UTF-8"/>
       <script src="../js/menu.js"></script>
     <link rel="stylesheet" type="text/css" href="../css/menu.css"  />
 <link rel="stylesheet" href="../css/join.css">
@@ -60,6 +60,7 @@
   <div id="join">
     <h2>회원가입</h2><hr width="90%"/>
       <form method="post" name="inputForm" id="inputForm">
+          <input type ="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
             <table id="joinTable">
                 <tr>
                     <th>
@@ -100,7 +101,6 @@
                         <label for="email">이메일
                     </th>
                     <td>
-                        <input type="text" name="email" id="email" size="30%"> @
                         <input type="text" name="email" id="email" size="30%">
                     </td>
                 </tr>
@@ -114,12 +114,12 @@
                 </tr>
                 <tr>
                     <th>
-                        <label for="phone_number">연락처
+                        <label for="phoneNumber">연락처
                     </th>
                     <td>
-                        <input type="text" name="phone_number" id="phone_number" size="10%"> -
-                        <input type="text" name="phone_number" id="phone_number" size="10%"> -
-                        <input type="text" name="phone_number" id="phone_number" size="10%">
+                        <input type="text" name="phoneNumber" id="phoneNumber" size="10%">
+                        <!--<input type="text" name="phone_number" id="phone_number" size="10%"> - -->
+                        <!--<input type="text" name="phone_number" id="phone_number" size="10%">-->
                     </td>
                 </tr>
                 <tr>
@@ -156,11 +156,12 @@
                     </td>
                 </tr>
             </table>
+          <div id="Btn">
+              <input type="submit" class="joinBtn" value="회원가입">
+              <input type="button" class="cancle" value="취소하기">
+          </div>
         </form>
-        <div id="Btn">
-          <input type="button" class="joinBtn" value="회원가입">
-            <input type="button" class="cancle" value="취소하기">
-        </div>
+
               </div>
               <script src="../js/menu.js">
               </script>

@@ -48,10 +48,8 @@ public class ReviewContoller {
         return "redirect:/product_details.html";
     }
 
-    @RequestMapping(value = "/reveiw/update", method = RequestMethod.POST)
+    @RequestMapping(value = "/review/update", method = RequestMethod.POST)
     public String update(@ModelAttribute Review review) {
-//        @RequestParam String id, @RequestParam String title, @RequestParam  String comment,
-//        @RequestParam String rate + 이미지
 
         reviewService.update(review);
         return null;

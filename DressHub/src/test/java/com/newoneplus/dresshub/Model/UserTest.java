@@ -4,6 +4,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import java.sql.SQLException;
 import java.text.ParseException;
@@ -23,24 +24,27 @@ public class UserTest {
 
     @Test
     public void get() throws ClassNotFoundException, SQLException {
-
-        String id = "user1";
+        BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
+//        bCryptPasswordEncoder.
+        String id = "user1dddaaaaa";
         String password = "0405";
         User user = userDao.get(id);
         assertThat(user.getId(), is(id));
-        assertThat(user.getPassword(), is(password));
+        assertThat(bCryptPasswordEncoder.matches(password, user.getPassword()), is(true));
 
     }
 
     @Test
     public void insert() throws SQLException, ClassNotFoundException, ParseException {
-        userDao.deleteAll();
+//        userDao.deleteAll();
+
+        BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
         Date date = null;
         date = simpleDateFormat.parse(simpleDateFormat.format(new Date()));
         User user = new User();
-        user.setId("user1");
-        user.setPassword("0405");
+        user.setId("user1dddaaaaa123");
+        user.setPassword(bCryptPasswordEncoder.encode("0405"));
         user.setName("ming");
         user.setEmail("hello");
         user.setAddress("new");

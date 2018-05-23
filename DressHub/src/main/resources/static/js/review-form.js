@@ -20,6 +20,7 @@ function setHiddenName(){
 function setHiddenRating(){
 	var $rating = $("#rating"); 
 	console.log($rating.text());
+    $(".hid-rank").attr("value", $rating.text());
 	$rating.rateYo({
 		starWidth: "30px",
 		halfStar: true,
@@ -33,22 +34,30 @@ function setHiddenRating(){
 
 
 function getEditInfo(review_id) {
-	var id = review_id;
-    $.ajax({ 
-      type: "POST",
-      url: "review?id="+id,// id로 받아올 리뷰 url 
-      data: {'id': id },
-      dataType: "json", // 서버에서 받을 데이터 형식
-      success: function(response){
-      	console.log(response)
-      	$(".form-url").attr("action", "reveiw/update/");
-      	$(".author-content").val(response[0].userId);
-      	$("#rating").text(response[0].rate);
-		setHiddenRating();
-        $(".title-content").val(response[0].title);
-        $(".text-content").val(response[0].comment);
-      }
-    });
+    if ( review_id == "null"){
+        $("#rating").text(0);
+        $("#rating").attr("value", 0);
+        setHiddenRating();
+    }else {
+        var id = review_id;
+        console.log(id)
+        $.ajax({
+            type: "get",
+            url: "review",// id로 받아올 리뷰 url
+            data: {'id': id},
+            dataType: "json", // 서버에서 받을 데이터 형식
+            success: function (response) {
+                console.log(response);
+                $(".form-url").attr("action", "review/update");
+                $(".author-content").val(response[0].userId);
+                $("#rating").text(response[0].rate);
+                setHiddenRating();
+                $(".title-content").val(response[0].title);
+                $(".text-content").val(response[0].comment);
+                $(".hid-id").val(response[0].id);
+            }
+        });
+    }
 }
 
 
@@ -66,11 +75,11 @@ reviewFormInit();
 
 $(".send-btn").click(function(){
 	opener.parent.location.reload();
-	window.open('about:blank', '_self').close();	
+	// window.open('about:blank', '_self').close();
 });
 
 $(".cancel-btn").click(function(){
-	window.open('about:blank', '_self').close();
+	// window.open('about:blank', '_self').close();
 });
 
 
