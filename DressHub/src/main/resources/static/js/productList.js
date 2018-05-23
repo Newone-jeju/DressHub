@@ -117,32 +117,9 @@ $(document).ready(function () {
                         window.location.href=$(this).attr("data-href");
                     })
 
-                    $(".like_btn").click(function(e){
+                    $(".like_btn").click(function(){
                         console.log("likebtntest");
                         e.stopPropagation();
-                        var id = $(this).attr('name');
-                        var state = $(".like_btn").hasClass("0");
-                        $.ajax({
-                            type: "POST",
-                            url: "", //좋아요 눌렀을 때 상태정보 전달할 url
-                            data: {'id': id, 'like' : state }, // 서버로 보낼 데이터
-                            dataType: "json",
-                            success: function(response){
-                                if(state){
-                                    $(this).attr('src', 'img/like_btn_1');
-                                    $(this).removeClass("0");
-                                    $(this).addClass("1");
-                                }
-                                else{
-                                    $(this).attr('src', 'img/like_btn_0');
-                                    $(this).removeClass("1");
-                                    $(this).addClass("0");
-                                }
-                            }
-                        });
-                    })
-
-                    $(".like_btn").click(function(){
                         var id = $(this).attr('name');
                         var state = $(".like_btn").hasClass("0");
                         var likeNum = $(this).next();
