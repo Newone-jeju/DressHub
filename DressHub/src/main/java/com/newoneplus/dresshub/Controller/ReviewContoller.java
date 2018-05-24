@@ -66,14 +66,14 @@ public class ReviewContoller{
         return "redirect:/close.html";
     }
 
-//    @RequestMapping(value = "/review-form.html", method = RequestMethod.GET)
-//    public String updateAuthentication(){
-//        User user = AuthorizationService.getCurrentUser();
-//        if(user==null) {
-//            return "redirect:/login";
-//        }else {
-//            return "redirect:/review-form.html";
-//        }
-//    }
+    @RequestMapping(value = "/review-form.html", method = RequestMethod.GET)
+    public String updateAuthentication(){
+        User user = AuthorizationService.getCurrentUser();
+        if(user==null) {
+            return "redirect:/login";
+        }else {
+            return "redirect:/review-form.html";
+        }
+    }
 }
 
