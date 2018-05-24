@@ -8,6 +8,7 @@ import com.newoneplus.dresshub.Model.ProductImage;
 import com.newoneplus.dresshub.Model.User;
 import com.newoneplus.dresshub.Service.AuthorizationService;
 import com.newoneplus.dresshub.Service.ProductService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,6 +24,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
+
+@Slf4j
 @Controller
 public class ProductController {
 
@@ -49,7 +52,6 @@ public class ProductController {
             user= AuthorizationService.getCurrentUser();
         }else{
             //TODO 일단 로그인으로 나중에 팝업을 띄울지 고민
-            redirectLogin();
         }
         return productService.getProductList(page, category, order, user );
     }
@@ -89,18 +91,20 @@ public class ProductController {
     }
 
     @RequestMapping(value= "/productAddLike", method=RequestMethod.GET)
-    public void addLike(@RequestParam(value="productid") int productId){
+    @ResponseBody
+    public Product addLike(@RequestParam(value="productId") int productId, @RequestParam(value="state") int state) throws ClassNotFoundException {
+         //TODO state를 이용한 delete 추후 예정
+        log.info("productId"+ productId);
         User user = new User();
-        if(AuthorizationService.getCurrentUser()!=null){
-           user= AuthorizationService.getCurrentUser();
-        }else{
-            //TODO 일단 로그인으로 나중에 팝업을 띄울지 고민
-            redirectLogin();
-        }
+        user.setId("user1");
+//        if(AuthorizationService.getCurrentUser()!=null){
+//           user= AuthorizationService.getCurrentUser();
+//        }else{
+//            //TODO 일단 로그인으로 나중에 팝업을 띄울지 고민
+//        }
         productService.insertThumup(user.getId(), productId);
+        return productService.getProduct(productId);
 
     }
-    public String redirectLogin(){
-        return "login";
-    }
+
 }
