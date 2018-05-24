@@ -75,7 +75,7 @@
             </div>
         </div>
       <form method="post" th:action="@{/login}"  >
-          <!--<input type ="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>-->
+          <input type ="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
           <p><input class='id' type="text" name="id" value="" placeholder="  ID"></p>
         <p><input class='password' type="password" name="password" value="" placeholder="  Password"></p>
         <p ><input class="btn_login" type="submit" name="submit" value="LOGIN"></p>
