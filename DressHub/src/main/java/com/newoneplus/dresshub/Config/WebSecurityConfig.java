@@ -37,11 +37,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 //        http.requiresChannel()
 //        .antMatchers("/**").requiresSecure();
 //        csrf config
-//        http.csrf().disable();
+        http.csrf().disable();
         http.sessionManagement().
                 sessionFixation().
                 migrateSession().
-                invalidSessionUrl("/").
+//                invalidSessionUrl("/").
                 maximumSessions(1).
                 maxSessionsPreventsLogin(false).
 
