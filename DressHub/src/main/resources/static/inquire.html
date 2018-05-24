@@ -77,11 +77,11 @@
 			<h1>고객문의</h1>
 			<p>상품에 대한 문의사항과 함께 저희 서비스 개선을 위한 고객님들의 소중한 의견을 받고있습니다. 문의하신 사항은 검토후에 입력하신 이메일로 답변드립니다.</p>
 		</header>
-		<form action="" class="inquire-form" method="POST" enctype="multipart/form-data">
+		<form action="/" class="inquire-form" method="POST" enctype="multipart/form-data">
 			<section class="classification">
 				<div class="name">분류</div>
 				<div class="content">
-					<select name="class" id="">
+					<select name="class" id="dropdown">
 						<option value="product-failure">상품 불량</option>
 						<option value="dissatisfaction">서비스 불만족</option>
 						<option value="improvements">서비스 개선</option>
@@ -91,29 +91,29 @@
 			<section class="email">
 				<div class="name">회신 E-Mail</div>
 				<div class="content">
-					<input type="email" name="email">
+					<input type="email" name="email" id="email">
 				</div>
 			</section>
 			<section class="title">
 				<div class="name">제목</div>
 				<div class="content">
-					<input type="text" name="title">
+					<input type="text" name="title" id="title">
 				</div>
 			</section>
 			<section class="comment">
 				<div class="name">내용</div>
 				<div class="content">
-					<textarea name="comment" id="" cols="30" rows="10"></textarea>
+					<textarea name="comment" id="comment" cols="30" rows="12"></textarea>
 				</div>
 			</section>
 			<section class="file">
 				<div class="name">첨부</div>
 				<div class="content">
-					<input type="file">
+					<input type="file" id="file">
 				</div>
 			</section>
 			<section class="sub-btn">
-				<button type="submit" class="form-btn-style">작성완료</button>
+				<button type="submit" id="btn-submit" class="form-btn-style">작성완료</button>
 			</section>
 		</form>
 	</article>
