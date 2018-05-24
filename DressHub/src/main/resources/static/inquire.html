@@ -1,22 +1,18 @@
 <!DOCTYPE html>
 <html>
-
-<head>
   <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <link rel="stylesheet" type="text/css" href="css/menu.css" />
   <!-- 페이지 상단 카테고리 ex) 마이페이지 > 도움말  -->
   <link rel="stylesheet" type="text/css" href="css/page_category.css" />
   <link rel="stylesheet" type="text/css" href="css/mypage-style.css" />
-  <link rel="stylesheet" type="text/css" href="css/help.css" />
+  <link rel="stylesheet" type="text/css" href="css/inquire.css" />
 
-
-
-
-  <title>도움말</title>
+<head>
+	<title>상품 문의</title>
 </head>
-
 <body>
-  <div id="top">
+	  <div id="top">
     <h1 id="logo">DRESS HUB</h1>
     <ul class="topul">
       <li><a href="../login">LOGIN</a></li>
@@ -68,28 +64,61 @@
   
 
 <main id="my-main">
-  <div class="header">
-    <nav class="page-head-category">
-      <a href=""><span class="text">마이페이지</span></a>
-      <span class="text"> > </span>
-      <a href=""><span class="text">도움말</span></a>
-    </nav>
-  </div>
-  <article class="help-content">
-    <header>
-    </header>
-    <nav id="nav-tab">
-      <div class="head-space"></div>
-      <ul></ul>
-      <div class="tail-space"></div>
-    </nav>
-    
-    <main id="content"></main>
+	<div class="header">
+		<nav class="page-head-category">
+			<a href=""><span class="text">마이페이지</span></a>
+			<span class="text"> > </span>
+			<a href=""><span class="text">고객문의</span></a>
+		</nav>
+	</div>
 
-    
-    
-  </article>
-  <button class="go-top"></button>
+	<article class="inquire-content">
+		<header>
+			<h1>고객문의</h1>
+			<p>상품에 대한 문의사항과 함께 저희 서비스 개선을 위한 고객님들의 소중한 의견을 받고있습니다. 문의하신 사항은 검토후에 입력하신 이메일로 답변드립니다.</p>
+		</header>
+		<form action="" class="inquire-form" method="POST" enctype="multipart/form-data">
+			<section class="classification">
+				<div class="name">분류</div>
+				<div class="content">
+					<select name="class" id="">
+						<option value="product-failure">상품 불량</option>
+						<option value="dissatisfaction">서비스 불만족</option>
+						<option value="improvements">서비스 개선</option>
+					</select>
+				</div>
+			</section>
+			<section class="email">
+				<div class="name">회신 E-Mail</div>
+				<div class="content">
+					<input type="email" name="email">
+				</div>
+			</section>
+			<section class="title">
+				<div class="name">제목</div>
+				<div class="content">
+					<input type="text" name="title">
+				</div>
+			</section>
+			<section class="comment">
+				<div class="name">내용</div>
+				<div class="content">
+					<textarea name="comment" id="" cols="30" rows="10"></textarea>
+				</div>
+			</section>
+			<section class="file">
+				<div class="name">첨부</div>
+				<div class="content">
+					<input type="file">
+				</div>
+			</section>
+			<section class="sub-btn">
+				<button type="submit" class="form-btn-style">작성완료</button>
+			</section>
+		</form>
+	</article>
+
+
 </main>
 
 
@@ -135,12 +164,5 @@
       </div>
     </div>
   </footer>
-
-  <script type="text/javascript" src="js/jquery-3.3.1.min.js" charset="utf-8"></script>
-  <script type="text/javascript" src="js/axaxData.js" charset="utf-8"></script>
-  <script type="text/javascript" src="js/help.js" charset="utf-8"></script>
 </body>
-
 </html>
-
-

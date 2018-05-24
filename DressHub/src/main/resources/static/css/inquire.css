@@ -1,0 +1,35 @@
+#my-main article > header {
+	display: block;
+	
+
+}
+
+#my-main article > header > p {
+	color: gray;
+	width:60%;
+}
+
+.inquire-form {
+	border-top: 2px solid #333;
+	padding-top: 2rem;
+}
+
+.inquire-form > section {
+	display: flex;
+}
+
+
+.form-btn-style {
+	border-radius: 10px;
+	border: 1px solid #00ab33;
+	background-color: #00ab33;
+	padding: 7px 15px;
+	color: white;
+	font-weight: 600;
+	cursor: pointer;
+	width: 15%;
+}
+
+.form-btn-style:hover {
+	background-color: #4CAF89;
+}
