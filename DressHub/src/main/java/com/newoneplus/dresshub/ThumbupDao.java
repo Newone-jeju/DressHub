@@ -42,7 +42,7 @@ public class ThumbupDao {
         ArrayList<Integer> productIds = null;
         try {
             productIds = (ArrayList<Integer>) jdbcTemplate.queryForObject(
-                    "SELECT * FROM THUMB_UP WHERE PRODUCT = ?", params, (RowMapper) (rs, rowNum) -> {
+                    "SELECT * FROM THUMB_UP WHERE PRODUCT_id = ?", params, (RowMapper) (rs, rowNum) -> {
                         ArrayList<Integer> arrayList = new ArrayList();
                         while(rs.next()){
                             //TODO 아직 PRODUCT ID가 이름이 없음  , 왜래키 그냥 이대로 가져올 수 있는지도 모름
@@ -55,7 +55,6 @@ public class ThumbupDao {
         }
         return productIds;
     }
-
 
     //좋아요 누르고 좋아요가 생성되어야 하는 경우 호출
     public Integer insert(String userId, int productId) {

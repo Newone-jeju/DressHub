@@ -5,6 +5,8 @@ import com.newoneplus.dresshub.ImageProcesser;
 import com.newoneplus.dresshub.Model.Basket;
 import com.newoneplus.dresshub.Model.Product;
 import com.newoneplus.dresshub.Model.ProductImage;
+import com.newoneplus.dresshub.Model.User;
+import com.newoneplus.dresshub.Service.AuthorizationService;
 import com.newoneplus.dresshub.Service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -28,6 +30,9 @@ public class ProductController {
     ProductService productService;
 
 
+
+
+
     @RequestMapping(value = "/products", method = RequestMethod.POST)
     public String insert(@ModelAttribute Product product) throws IOException, ParseException {
         productService.insertProduct(product);
@@ -39,7 +44,14 @@ public class ProductController {
     @RequestMapping(value = "/products/search", method = RequestMethod.GET)
     @ResponseBody
     public HashMap<String, Object> getProductList(@RequestParam(value = "page", defaultValue = "1") int page, @RequestParam(value = "category", defaultValue = "null") String category, @RequestParam(value = "order" , defaultValue = "id desc") String order){
-        return productService.getProductList(page, category, order);
+        User user = new User();
+        if(AuthorizationService.getCurrentUser()!=null){
+            user= AuthorizationService.getCurrentUser();
+        }else{
+            //TODO 일단 로그인으로 나중에 팝업을 띄울지 고민
+            redirectLogin();
+        }
+        return productService.getProductList(page, category, order, user );
     }
 
     @RequestMapping(value = "/productImages", method = RequestMethod.GET)
@@ -74,5 +86,21 @@ public class ProductController {
     public String getProductDetail(@RequestParam(value="productId") int productId, Model model) throws ClassNotFoundException {
         model.addAttribute("productId", productId);
         return "product_details";
+    }
+
+    @RequestMapping(value= "/productAddLike", method=RequestMethod.GET)
+    public void addLike(@RequestParam(value="productid") int productId){
+        User user = new User();
+        if(AuthorizationService.getCurrentUser()!=null){
+           user= AuthorizationService.getCurrentUser();
+        }else{
+            //TODO 일단 로그인으로 나중에 팝업을 띄울지 고민
+            redirectLogin();
+        }
+        productService.insertThumup(user.getId(), productId);
+
+    }
+    public String redirectLogin(){
+        return "login";
     }
 }

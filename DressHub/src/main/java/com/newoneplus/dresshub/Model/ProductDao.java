@@ -143,6 +143,7 @@ public class ProductDao {
         return product;
     }
 
+
     private Object[] getFullParams(Product product)  {
         java.util.Date getConsigmentStart = null;
         java.util.Date getConsigmentEnd=null;
@@ -155,14 +156,12 @@ public class ProductDao {
             }
         }
 
-
         return new Object[]{product.getName(), product.getThumbnailImage(), product.getContents(), product.getCostPerDay(),
                 product.getDeposit(), product.getSalePrice(), product.getCategory(),getConsigmentStart,getConsigmentEnd, product.getState(),
                 product.getDeleveryType(), product.getProviderId(), product.getLikes(),
                 product.getRegDate(), product.getLeastLeaseDay(), product.getSize()};
 
     }
-
 
 //   페이징 처리를 위해서 db count하는 코드
     public int getCount(String category) {
