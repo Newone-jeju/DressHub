@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <form class="signup-form" action="/member" method="POST">
+        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+        <div class="row">
+            <div class="input-field col s12">
+                <input id="id" name="uid" type="text" class="validate"/>
+                <label for="id">Username</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s12">
+                <input id="email" name="email" type="email" class="validate"/>
+                <label for="email">Email</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s12">
+                <input id="password" name="password" type="password" class="validate"/>
+                <label for="password">Password</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s12">
+                <input id="name" name="name" type="text" class="validate"/>
+                <label for="name">name</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s12">
+                <input id="address" name="address" type="text" class="validate"/>
+                <label for="address">address</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s12">
+                <input id="phoneNumber" name="phoneNumber" type="text" class="validate"/>
+                <label for="phoneNumber">phone_number</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s12">
+                <input id="nickname" name="nickname" type="text" class="validate"/>
+                <label for="nickname">nickname</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s12">
+                <input id="introduce" name="introduce" type="text" class="validate"/>
+                <label for="introduce">introduce</label>
+            </div>
+        </div>
+        <input class="signup-btn waves-effect waves-light btn" type="submit" value="가입하기" />
+    </form>
+</body>
+</html>
