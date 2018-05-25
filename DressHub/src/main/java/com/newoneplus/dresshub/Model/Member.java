@@ -1,6 +1,7 @@
 package com.newoneplus.dresshub.Model;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 
@@ -22,6 +23,7 @@ public class Member {
     @Column(nullable = false, unique = true, length = 20)
     private String uid;
 
+    @JsonIgnore // 클라이언트 비밀번호 전달 제한
     @Column(nullable = false, length = 255)
     private String password;
 
