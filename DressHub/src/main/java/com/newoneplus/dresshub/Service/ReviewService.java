@@ -1,10 +1,7 @@
 package com.newoneplus.dresshub.Service;
 
 import com.newoneplus.dresshub.ImageProcesser;
-import com.newoneplus.dresshub.Model.LeaseInfo;
-import com.newoneplus.dresshub.Model.LeaseInfoDao;
-import com.newoneplus.dresshub.Model.Review;
-import com.newoneplus.dresshub.Model.ReviewDao;
+import com.newoneplus.dresshub.Model.*;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +22,7 @@ public class ReviewService {
     private ReviewDao reviewDao;
     @Autowired
     private LeaseInfoDao leaseInfoDao;
+
 
     public void update(Review review){
         Review reviewForUpdate = reviewDao.get(review.getId());
@@ -164,5 +162,11 @@ public class ReviewService {
 
         return jsonArray.toString();
 
+    }
+
+    public boolean hasAuthority(Integer reviewId) {
+        User user = AuthorizationService.getCurrentUser();
+        Review review = reviewDao.get(reviewId);
+        return review.getUserId().equals(user.getId());
     }
 }
