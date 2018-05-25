@@ -1,5 +1,6 @@
 package com.newoneplus.dresshub.Model;
 
+import com.newoneplus.dresshub.Repository.MemberRepository;
 import com.newoneplus.dresshub.Service.MainService;
 import com.newoneplus.dresshub.Service.ProductService;
 
@@ -26,6 +27,7 @@ public class DaoFactory {
     private String password;
 
 
+
     @Bean
     public JdbcTemplate jdbcTemplate() {
         return new JdbcTemplate(datasource());
@@ -45,11 +47,11 @@ public class DaoFactory {
         return dataSource;
     }
 
-    @Bean
-    public UserDao userDao()
-    {
-        return new UserDao(jdbcTemplate());
-    }
+//    @Bean
+//    public UserDao userDao()
+//    {
+//        return new UserDao(jdbcTemplate());
+//    }
 
     @Bean
     public ProductDao productDao() {return new ProductDao(jdbcTemplate());}
