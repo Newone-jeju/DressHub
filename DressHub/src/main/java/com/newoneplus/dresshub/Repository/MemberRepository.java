@@ -9,4 +9,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface MemberRepository extends JpaRepository<Member, Long> {
     Member findByUid(String uid);
+    void deleteById(String uid);
 }
