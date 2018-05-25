@@ -28,7 +28,7 @@ public class LeaseInfoService {
         return leaseInfos;
     }
 
-    public ArrayList getLeaseInfoHashMapByUser(String user) {
+    public ArrayList getLeaseInfoHashsMapByUser(String user) {
         ArrayList leaseInfos = leaseInfoDao.getInfosByLeaser(user);
         for(int i = 0 ; i < leaseInfos.size() ; i++){
             leaseInfos.add(leaseInfos.remove(i));  //코드 줄 수를 그냥 줄일려고 하긴 한건데 맞는건가
@@ -50,5 +50,9 @@ public class LeaseInfoService {
 
     public void delete(Integer leaseInfoId) {
         leaseInfoDao.delete(leaseInfoId);
+    }
+
+    public boolean askAuthority(Integer leaseInfoId) {
+        return leaseInfoDao.get(leaseInfoId).getLeaser().equals(AuthorizationService.getCurrentUser());
     }
 }
