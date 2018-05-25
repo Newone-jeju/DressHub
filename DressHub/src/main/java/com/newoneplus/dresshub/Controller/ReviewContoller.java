@@ -1,13 +1,23 @@
 package com.newoneplus.dresshub.Controller;
 
+import com.newoneplus.dresshub.Config.MyAuthentication;
 import com.newoneplus.dresshub.Model.Review;
+import com.newoneplus.dresshub.Model.User;
+import com.newoneplus.dresshub.Service.AuthorizationService;
 import com.newoneplus.dresshub.Service.ReviewService;
+
+import org.omg.CORBA.Request;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+import java.util.List;
+import java.util.concurrent.ExecutionException;
+
 @Controller
-public class ReviewContoller {
+public class ReviewContoller{
     @Autowired
     private ReviewService reviewService;
 
@@ -36,23 +46,34 @@ public class ReviewContoller {
 
         //TODO 테스트코드, 개발완료시 newReview사용할것
         reviewService.newReviewTest(review);
-        return null;
+        return "redirect:/close.html";
     }
 
-    //권한 점검 필요
 
     @RequestMapping(value = "/review/delete", method = RequestMethod.POST)
-    public String delete(@RequestParam String id) {
+    public String delete(@RequestParam String id, @RequestHeader String Referer) {
         int idForReview = Integer.parseInt(id);
         reviewService.delete(idForReview);
-        return "redirect:/product_details.html";
+        System.out.println(Referer);
+        return "redirect:"+Referer;
     }
 
     @RequestMapping(value = "/review/update", method = RequestMethod.POST)
     public String update(@ModelAttribute Review review) {
-
+        User user = AuthorizationService.getCurrentUser();
         reviewService.update(review);
-        return null;
+
+        return "redirect:/close.html";
+    }
+
+    @RequestMapping(value = "/review-form.html", method = RequestMethod.GET)
+    public String updateAuthentication(){
+        User user = AuthorizationService.getCurrentUser();
+        if(user==null) {
+            return "redirect:/login";
+        }else {
+            return "redirect:/review-form.html";
+        }
     }
 }
 

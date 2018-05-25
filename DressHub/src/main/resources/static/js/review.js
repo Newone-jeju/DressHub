@@ -83,7 +83,7 @@ review.init = function() {
                 //리뷰 수정 버튼
                     '<button class="review-btn review-body-btn review-edit-btn" data-editId="'+review_data.id+'">수정</button>'+
                 //리뷰 삭제버튼
-                '<form action="dresshub.co.kr/review/delete/" method="post">'+
+                '<form action="/review/delete" method="post">'+
                     '<input type="hidden" name="id" value="'+review_data.id+'">'+
                     '<button type="submit" class="review-btn review-body-btn review-delete-btn">삭제</button>'+
                 '</form>'+
