@@ -16,4 +16,9 @@ public class LoginController {
         req.getSession().setAttribute("prevPage", referer);
         return "login";
     }
+
+    @GetMapping("/test")
+    public String loginTest(){
+        return "test";
+    }
 }

@@ -38,20 +38,20 @@ public class RestMemberControllerTest {
                 .webAppContextSetup(wac)
                 .build();
     }
-
-    @Test
-    public void loginTest() throws Exception {
-        AuthenticationRequest request = new AuthenticationRequest();
-        request.setUid("test");
-        request.setPassword("test");
-        ObjectMapper om = new ObjectMapper();
-        mvc.perform(post("/rest/login")
-                .contentType(MediaType.APPLICATION_JSON_UTF8)
-                .content(om.writeValueAsString(request)))
-                .andExpect(status().isOk()) .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
-                .andExpect(jsonPath("$.username", is(request.getUid())))
-                .andExpect(jsonPath("$.roles[*].authority", hasItem("USER")));
-    }
+//
+//    @Test
+//    public void loginTest() throws Exception {
+//        AuthenticationRequest request = new AuthenticationRequest();
+//        request.setUid("test");
+//        request.setPassword("test");
+//        ObjectMapper om = new ObjectMapper();
+//        mvc.perform(post("/rest/login")
+//                .contentType(MediaType.APPLICATION_JSON_UTF8)
+//                .content(om.writeValueAsString(request)))
+//                .andExpect(status().isOk()) .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
+//                .andExpect(jsonPath("$.username", is(request.getUid())))
+//                .andExpect(jsonPath("$.roles[*].authority", hasItem("USER")));
+//    }
 
 
 

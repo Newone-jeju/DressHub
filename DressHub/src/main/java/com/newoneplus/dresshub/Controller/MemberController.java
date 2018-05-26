@@ -20,9 +20,9 @@ import java.util.Arrays;
 public class MemberController {
     @Autowired
     MemberRepository memberRepository;
-    @GetMapping
+    @GetMapping("/")
     public String showJoinForm() {
-        return "testjoin";
+        return "join";
     }
 
     @PostMapping("")
