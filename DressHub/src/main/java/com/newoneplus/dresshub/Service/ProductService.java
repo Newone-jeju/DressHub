@@ -6,15 +6,16 @@ import com.newoneplus.dresshub.Model.*;
 import com.newoneplus.dresshub.ThumbupDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import javax.imageio.ImageIO;
+import javax.validation.constraints.Null;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
 @Service
 public class ProductService {
@@ -84,13 +85,23 @@ public class ProductService {
         return productImageDao.getProductImageList("ID DESC" );
     }
 //    전체 카운트와 리스트정보 같이 보내줌
-    public HashMap<String,Object > getProductList(int page, String category, String array, User user){
+    public HashMap<String,Object > getProductList(int page, String category, String array) {
         HashMap<String, Object> map = new HashMap<>();
         map.put("list", productDao.getList(page,category,array));
         map.put("count", productDao.getCount(category));
-        map.put("likelist", thumbupDao.getLikeProductIdList(user.getId()));
+        User user = new User();
+        user.setId("user1");
+        try{
+//            user= AuthorizationService.getCurrentUser();
+            map.put("like", thumbupDao.getLikeProductIdList(user.getId()));
+        }catch (NullPointerException e){
+            map.put("like", null);
+            e.printStackTrace();
+            return map;
+        }
         return map;
     };
+
 
     public HashMap<String, Object> getBasketList(String userId){
         return basketDao.getBasketList(userId);
@@ -108,4 +119,10 @@ public class ProductService {
     }
 
 
+    public void deleteThumup( String userId, int productId) {
+        thumbupDao.delete(userId, productId);
+        Product product = productDao.get(productId);
+        product.setLikes(product.getLikes()-1);
+        productDao.update(product);
+    }
 }

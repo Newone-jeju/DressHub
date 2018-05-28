@@ -1,5 +1,6 @@
 package com.newoneplus.dresshub;
 
+import com.newoneplus.dresshub.Model.ThumbUp;
 import lombok.Cleanup;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -37,17 +38,21 @@ public class ThumbupDao {
     }
 
     //유저가 좋아요를 누른 상품들의 id를 반환하는 기능
-    public ArrayList<Integer> getLikeProductIdList(String userId){
+    public ArrayList<ThumbUp> getLikeProductIdList(String userId){
         Object[] params = {userId};
-        ArrayList<Integer> productIds = null;
+        ArrayList<ThumbUp> productIds = null;
         try {
-            productIds = (ArrayList<Integer>) jdbcTemplate.queryForObject(
-                    "SELECT * FROM THUMB_UP WHERE PRODUCT= ?", params, (RowMapper) (rs, rowNum) -> {
-                        ArrayList<Integer> arrayList = new ArrayList();
-                        while(rs.next()){
+            productIds = (ArrayList<ThumbUp>) jdbcTemplate.queryForObject(
+                    "SELECT * FROM THUMB_UP WHERE USER= ?", params, (RowMapper) (rs, rowNum) -> {
+                        ArrayList<ThumbUp> arrayList = new ArrayList();
+                        do{
+                            ThumbUp thumbUp = new ThumbUp();
+                            thumbUp.setId(rs.getInt("id"));
+                            thumbUp.setUser(rs.getString("user"));
+                            thumbUp.setProduct(rs.getInt("product"));
                             //TODO 아직 PRODUCT ID가 이름이 없음  , 왜래키 그냥 이대로 가져올 수 있는지도 모름
-                            arrayList.add(rs.getInt("PRODUCT"));
-                        }
+                            arrayList.add(thumbUp);
+                        }while(rs.next());
                         return arrayList;
                     });
         }catch (EmptyResultDataAccessException e){

@@ -1,6 +1,5 @@
 package com.newoneplus.dresshub.Controller;
 
-
 import com.newoneplus.dresshub.ImageProcesser;
 import com.newoneplus.dresshub.Model.Basket;
 import com.newoneplus.dresshub.Model.Product;
@@ -24,16 +23,12 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
-
 @Slf4j
 @Controller
 public class ProductController {
 
     @Autowired
-    ProductService productService;
-
-
-
+    ProductService      productService;
 
 
     @RequestMapping(value = "/products", method = RequestMethod.POST)
@@ -41,19 +36,12 @@ public class ProductController {
         productService.insertProduct(product);
 //        임시로 폼으로 다시
         return "productList";
-
     }
 
     @RequestMapping(value = "/products/search", method = RequestMethod.GET)
     @ResponseBody
     public HashMap<String, Object> getProductList(@RequestParam(value = "page", defaultValue = "1") int page, @RequestParam(value = "category", defaultValue = "null") String category, @RequestParam(value = "order" , defaultValue = "id desc") String order){
-        User user = new User();
-        if(AuthorizationService.getCurrentUser()!=null){
-            user= AuthorizationService.getCurrentUser();
-        }else{
-            //TODO 일단 로그인으로 나중에 팝업을 띄울지 고민
-        }
-        return productService.getProductList(page, category, order, user );
+        return productService.getProductList(page, category, order);
     }
 
     @RequestMapping(value = "/productImages", method = RequestMethod.GET)
@@ -92,19 +80,29 @@ public class ProductController {
 
     @RequestMapping(value= "/productAddLike", method=RequestMethod.GET)
     @ResponseBody
-    public Product addLike(@RequestParam(value="productId") int productId, @RequestParam(value="state") int state) throws ClassNotFoundException {
-         //TODO state를 이용한 delete 추후 예정
+    public Product addLike(@RequestParam(value="productId") int productId, @RequestParam(value="state") boolean state) throws ClassNotFoundException {
+
         log.info("productId"+ productId);
         User user = new User();
         user.setId("user1");
-//        if(AuthorizationService.getCurrentUser()!=null){
-//           user= AuthorizationService.getCurrentUser();
-//        }else{
-//            //TODO 일단 로그인으로 나중에 팝업을 띄울지 고민
-//        }
-        productService.insertThumup(user.getId(), productId);
+
+        //TODO 나중에 보안정책 끝나면 가져와서 넣을 것
+//        user= AuthorizationService.getCurrentUser();
+
+
+        if(state ){
+            productService.insertThumup(user.getId(), productId);
+        }else{
+            productService.deleteThumup(user.getId(), productId);
+        }
+
         return productService.getProduct(productId);
 
+    }
+//TODO 나중에 user정보 NULL 나올 때 로그인창으로 이동
+    @ExceptionHandler(NullPointerException.class)
+    public String requestLogin(NullPointerException e){
+        return "login";
     }
 
 }
