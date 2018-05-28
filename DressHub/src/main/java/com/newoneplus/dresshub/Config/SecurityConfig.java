@@ -31,10 +31,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 
 
-    @Autowired
-    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(customUserDetailsService).passwordEncoder(passwordEncoder());
-    }
+//    @Autowired
+//    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
+//        auth.userDetailsService(customUserDetailsService).passwordEncoder(passwordEncoder());
+//    }
 
     @Override
     public void configure(WebSecurity web) throws Exception {
@@ -76,7 +76,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //                expiredUrl("/login?duplicate");
 
 //                and().
-                sessionCreationPolicy(SessionCreationPolicy.NEVER);
+                sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
 
 
@@ -114,6 +114,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         return super.authenticationManagerBean();
     }
 
+    @Override
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+        auth.userDetailsService(customUserDetailsService).passwordEncoder(passwordEncoder());
+    }
 
     @Bean
     public HttpSessionIdResolver httpSessionStrategy(){
@@ -121,13 +125,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         return HeaderHttpSessionIdResolver.xAuthToken();
 //        return new HeaderHttpSessionIdResolver("x-auth-token");
     }
-
-//"Access-Control-Allow-Headers", "x-auth-token, content-type"
-//    @Bean
-//    public HttpSessionStrategy httpSessionStrategy()
-//    {
-//        return new HeaderHttpSessionStrategy();
-//    }
 
 
 
