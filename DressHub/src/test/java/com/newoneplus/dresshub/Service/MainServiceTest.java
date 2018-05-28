@@ -1,7 +1,7 @@
 package com.newoneplus.dresshub.Service;
 
 
-import com.newoneplus.dresshub.Model.DaoFactory;
+//import com.newoneplus.dresshub.Model.DaoFactory;
 import com.newoneplus.dresshub.Model.Product;
 import org.junit.Before;
 import org.junit.Test;
@@ -20,8 +20,8 @@ public class MainServiceTest {
 
     @Before
     public void setup() throws ClassNotFoundException {
-        ApplicationContext applicationContext = new AnnotationConfigApplicationContext(DaoFactory.class);
-        mainService = applicationContext.getBean("mainService", MainService.class);
+//        ApplicationContext applicationContext = new AnnotationConfigApplicationContext(DaoFactory.class);
+//        mainService = applicationContext.getBean("mainService", MainService.class);
     }
 
     @Test

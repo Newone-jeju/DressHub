@@ -1,9 +1,9 @@
 package com.newoneplus.dresshub.Controller;
 
-import com.newoneplus.dresshub.Config.MyAuthentication;
+//import com.newoneplus.dresshub.Config.MyAuthentication;
 import com.newoneplus.dresshub.Model.Review;
-import com.newoneplus.dresshub.Model.User;
-import com.newoneplus.dresshub.Service.AuthorizationService;
+//import com.newoneplus.dresshub.Model.User;
+//import com.newoneplus.dresshub.Service.AuthorizationService;
 import com.newoneplus.dresshub.Service.ReviewService;
 
 import org.omg.CORBA.Request;
@@ -62,23 +62,28 @@ public class ReviewContoller{
 
     @RequestMapping(value = "/review/update", method = RequestMethod.POST)
     public String update(@ModelAttribute Review review) {
+
+//        User user = AuthorizationService.getCurrentUser();
+        reviewService.update(review);
+
         if(reviewService.hasAuthority(review.getId())){
             reviewService.update(review);
         }else{
             return "redirect:/errorpage/403.html";
         }
 
+
         return "redirect:/close.html";
     }
 
-    @RequestMapping(value = "/review-form.html", method = RequestMethod.GET)
-    public String updateAuthentication(){
-        User user = AuthorizationService.getCurrentUser();
-        if(user==null) {
-            return "redirect:/login";
-        }else {
-            return "redirect:/review-form.html";
-        }
-    }
+//    @RequestMapping(value = "/review-form.html", method = RequestMethod.GET)
+//    public String updateAuthentication(){
+////        User user = AuthorizationService.getCurrentUser();
+////        if(user==null) {
+////            return "redirect:/login";
+////        }else {
+////            return "redirect:/review-form.html";
+////        }
+//    }
 }
 

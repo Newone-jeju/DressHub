@@ -10,13 +10,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 
 @SpringBootApplication
-
 public class DressHubApplication extends SpringBootServletInitializer {
 
     public static void main(String[] args) {
         SpringApplication.run(DressHubApplication.class, args);
         System.out.println("Spring boot start");
     }
+
+
 
     @Override protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) { return builder.sources(DressHubApplication.class); }
 }

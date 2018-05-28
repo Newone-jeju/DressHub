@@ -1,28 +1,24 @@
 package com.newoneplus.dresshub.Controller;
 
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.security.core.Authentication;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+
+import javax.servlet.http.HttpServletRequest;
 
 @Controller
-@Slf4j
 public class LoginController {
 
-    @RequestMapping(value = "/login" ,method = RequestMethod.GET)
-    public String login(Authentication authentication){
-        if (authentication != null) {
-            return "redirect:/";
-        }
+    @GetMapping("/login")
+    public String loginForm(HttpServletRequest req) {
+        // 이전 페이지 정보
+        String referer = req.getHeader("Referer");
+        req.getSession().setAttribute("prevPage", referer);
         return "login";
     }
 
-    @RequestMapping(value = "/test" ,method = RequestMethod.GET)
-    public String test(){
+    @GetMapping("/test")
+    public String loginTest(){
         return "test";
     }
-
-
 }

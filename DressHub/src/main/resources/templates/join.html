@@ -13,8 +13,8 @@
         <ul class="topul">
           <li><a href="../login">LOGIN</a></li>
           <li><a href="../join">회원가입</a></li>
-          <li><a href="cart.html">장바구니</a></li>
-          <li><a href="mypage.html">MYPAGE</a></li>
+          <li><a href="../static/cart.html">장바구니</a></li>
+          <li><a href="../static/mypage.html">MYPAGE</a></li>
         </ul>
   </div>
     <nav id="nav">
@@ -59,7 +59,7 @@
   <!-- 회원가입 -->
   <div id="join">
     <h2>회원가입</h2><hr width="90%"/>
-      <form method="post" name="inputForm" id="inputForm">
+      <form method="post" name="inputForm" id="inputForm" action="/member">
           <input type ="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
             <table id="joinTable">
                 <tr>
@@ -75,7 +75,7 @@
                         <label for="id">아이디
                     </th>
                     <td>
-                        <input type="text" name="id" id="id" size="20%">
+                        <input type="text" name="uid" id="id" size="20%">
                            *영문소문자/숫자, 4~16자
                     </th>
                 </tr>
@@ -138,27 +138,27 @@
                         <textarea name="introduce" id="introduce"></textarea>
                     </td>
                 </tr>
-                <tr>
-                    <th>
-                        <label for="open_private_info">정보공개여부
-                    </th>
-                    <td>
-                        <input type="radio" id="agree" name="radio">동의함
-                        <input type="radio" id="disagree" name="radio">동의하지 않음
-                    </td>
-                </tr>
-                <tr>
-                    <th>
-                        <label for="certification">본인인증
-                    </th>
-                    <td>
-                        처리해야함
-                    </td>
-                </tr>
+                <!--<tr>-->
+                    <!--<th>-->
+                        <!--<label for="open_private_info">정보공개여부-->
+                    <!--</th>-->
+                    <!--<td>-->
+                        <!--<input type="radio" id="agree" name="radio">동의함-->
+                        <!--<input type="radio" id="disagree" name="radio">동의하지 않음-->
+                    <!--</td>-->
+                <!--</tr>-->
+                <!--<tr>-->
+                    <!--<th>-->
+                        <!--<label for="certification">본인인증-->
+                    <!--</th>-->
+                    <!--<td>-->
+                        <!--처리해야함-->
+                    <!--</td>-->
+                <!--</tr>-->
             </table>
           <div id="Btn">
               <input type="submit" class="joinBtn" value="회원가입">
-              <input type="button" class="cancle" value="취소하기">
+              <input type="button" class="cancle" value="취소하기" onclick=window.location='../login'>
           </div>
         </form>
 
