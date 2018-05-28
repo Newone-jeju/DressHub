@@ -15,8 +15,12 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+import org.springframework.session.web.http.HeaderHttpSessionIdResolver;
+import org.springframework.session.web.http.HttpSessionIdResolver;
 import org.springframework.web.cors.CorsUtils;
 
+import org.springframework.session.*;
 @EnableWebSecurity
 @Slf4j
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
@@ -44,7 +48,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/admin/**").hasRole("ADMIN")
                 .antMatchers("/user/**").hasRole("USER")
                 .antMatchers("/**").permitAll()
-                .and()
+                .anyRequest().authenticated();
+//                .and()
 //                .formLogin()
 
 //                .formLogin()
@@ -54,15 +59,22 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //                .successHandler(successHandler())
 //                .failureUrl("/login?error")
 //                .and()
-                .logout();
+//                .logout();
+                http.logout();
+//                .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+//                .logoutSuccessUrl("/login?logout")
+//                .deleteCookies("JSESSIONID")
+//                .invalidateHttpSession(true);
 
         http.sessionManagement().
+
 //                sessionFixation().
 //                migrateSession().
 //                invalidSessionUrl("/").
 //                maximumSessions(1).
-//                maxSessionsPreventsLogin(false).
-//                expiredUrl("/login?duplicate").
+//                maxSessionsPreventsLogin(true).
+//                expiredUrl("/login?duplicate");
+
 //                and().
                 sessionCreationPolicy(SessionCreationPolicy.NEVER);
 
@@ -101,6 +113,21 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     {
         return super.authenticationManagerBean();
     }
+
+
+    @Bean
+    public HttpSessionIdResolver httpSessionStrategy(){
+        log.info("=========== HttpSession Resolver =============== ");
+        return HeaderHttpSessionIdResolver.xAuthToken();
+//        return new HeaderHttpSessionIdResolver("x-auth-token");
+    }
+
+//"Access-Control-Allow-Headers", "x-auth-token, content-type"
+//    @Bean
+//    public HttpSessionStrategy httpSessionStrategy()
+//    {
+//        return new HeaderHttpSessionStrategy();
+//    }
 
 
 

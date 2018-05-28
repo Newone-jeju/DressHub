@@ -1,13 +1,12 @@
 package com.newoneplus.dresshub.Controller;
 
 
+import com.newoneplus.dresshub.Model.AuthenticationRequest;
 import com.newoneplus.dresshub.Model.AuthenticationToken;
 import com.newoneplus.dresshub.Model.Member;
 import com.newoneplus.dresshub.Repository.MemberRepository;
-import com.sun.tools.javac.comp.Todo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
