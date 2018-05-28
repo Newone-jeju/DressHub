@@ -3,10 +3,11 @@
 function AjaxData(url, async) {
 	this.url = url;
 	this.async = async;
-	var data = [];
+	this.data = [];
 }
 
 AjaxData.prototype.setData = function(){
+	var ajaxData = ""
 	$.ajax(
 		{
 			url: this.url,
@@ -18,20 +19,21 @@ AjaxData.prototype.setData = function(){
 		        alert(errorThrown);
 		    },
 		    success: function(json_data){
-		    	data = json_data;
+		    	ajaxData = json_data;
 		    }
 		})
+	this.data = ajaxData;
 }
 
 AjaxData.prototype.getData = function(){
-	return data;
+	return this.data;
 }
 
 
 //class AjaxCard
 function AjaxCard(data){
 	this.data = data;
-	this.cards = []; //push 메소드를 쓸때는 this를 써줘야 한다.. 참 이상한 언어
+	this.cards = [];
 }
 
 AjaxCard.prototype.setCard = function(string){

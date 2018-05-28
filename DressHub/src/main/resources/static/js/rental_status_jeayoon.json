@@ -1,0 +1,80 @@
+[
+	{
+	    "id": 1,
+	    "leaseDay": "2000-02-02",
+	    "returnDay": "2000-02-02",
+	    "totalPrice": 15000,
+	    "leaseSite": "jeju",
+	    "returnSite": "jeju",
+	    "leaser": "testuser",
+	    "product": 0,
+	    //상품이미지
+	    //상품타이틀
+	    "status": null, //상태
+
+	    "orderTime": null, //주문시간
+	    //책임자
+	    //책임자 연락처
+	    //책임자 상태메시지
+
+	    "orderWaitStart": null, //주문 대기중
+	    "orderWaitEnd": null, 
+	    //책임자
+	    //책임자 연락처
+	    //책임자 상태메시지
+	    
+	    "releaseTime": null, // 출고
+		//책임자
+	    //책임자 연락처
+	    //책임자 상태메시지
+
+	    "leaseDeliverStart": null, //배송중
+	    "leaseDeliverEnd": null,
+	    //책임자
+	    //책임자 연락처
+	    //책임자 상태메시지
+	    "leaseStart": null, // 대여중
+	    "leaseEnd": null,
+	    //대여자
+	    //
+	    //대여자 입력가능 상태메시지
+	    "returnStart": null, // 반납중
+	    "returnEnd": null,
+	    //책임자
+	    //책임자 연락처
+	    //책임자 상태메시지
+	    "laundryStart": null, // 세탁중
+	    "laundryEnd": null,
+	    //책임자
+	    //책임자 연락처
+	    //책임자 상태메시지
+	    "ready": null //입고
+	    //드레스허브
+	    //드레스 허브 연락처
+	    //입고 상태
+	},
+	{
+	    "id": 0,
+	    "leaseDay": "2000-01-01",
+	    "returnDay": "2000-01-01",
+	    "totalPrice": 15000,
+	    "leaseSite": "jeju",
+	    "returnSite": "jeju",
+	    "leaser": "testuser",
+	    "product": 0,
+	    "status": null,
+	    "orderTime": null,
+	    "orderWaitStart": null,
+	    "orderWaitEnd": null,
+	    "releaseTime": null,
+	    "leaseDeliverStart": null,
+	    "leaseDeliverEnd": null,
+	    "leaseStart": null,
+	    "leaseEnd": null,
+	    "returnStart": null,
+	    "returnEnd": null,
+	    "laundryStart": null,
+	    "laundryEnd": null,
+	    "ready": null
+	}
+]

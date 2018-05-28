@@ -120,28 +120,32 @@ $(document).ready(function () {
                     $(".like_btn").click(function(){
                         console.log("likebtntest");
                         e.stopPropagation();
-                        var id = $(this).attr('name');
+                        var productId = $(this).attr('name');
                         var state = $(".like_btn").hasClass("0");
                         var likeNum = $(this).next();
                         $.ajax({
-                            type: "get",
-                            url: "", //좋아요 눌렀을 때 상태정보 전달할 url
-                            data: {'id': id, 'like' : state }, // 서버로 보낼 데이터
-                            dataType: "json"
+                            type: "GET",
+                            url: "./productAddLike?productId="+productId+"&state="+state, //좋아요 눌렀을 때 상태정보 전달할 url
+                            dataType: "json",
+                            success: function(response){
+                                conosole.log("like누름 ajax실행됨");
+                                if(state){
+                                    $(this).attr("src", "../image/like_btn_0.png");
+                                    likeNum.text(Number( likeNum.text() )+1);
+                                }
+                                else{
+                                    $(this).attr("src", "../image/like_btn_1.png");
+                                    likeNum.text(Number( likeNum.text() )-1);
+                                }
+                            }
                         });
-                        if(state){
-                            $(this).attr("src", "../image/like_btn_0.png");
-                            likeNum.text(Number( likeNum.text() )+1);
-                        }
-                        else{
-                            $(this).attr("src", "../image/like_btn_1.png");
-                            likeNum.text(Number( likeNum.text() )-1);
-                        }
+
                     });
 
                     $(".cart_btn").click(function(){
                         var id = $(this).attr('name');
                         var state = $(".cart_btn").hasClass("0");
+
                         $.ajax({
                             type: "POST",
                             url: "", //좋아요 눌렀을 때 상태정보 전달할 url
