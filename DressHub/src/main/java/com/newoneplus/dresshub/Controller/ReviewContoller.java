@@ -51,17 +51,27 @@ public class ReviewContoller{
 
 
     @RequestMapping(value = "/review/delete", method = RequestMethod.POST)
-    public String delete(@RequestParam String id, @RequestHeader String Referer) {
-        int idForReview = Integer.parseInt(id);
-        reviewService.delete(idForReview);
-        System.out.println(Referer);
-        return "redirect:"+Referer;
+    public String delete(@RequestParam Integer reivewId, @RequestHeader String Referer) {
+        if(reviewService.hasAuthority(reivewId)) {
+            reviewService.delete(reivewId);
+            return "redirect:"+Referer;
+        }else{
+            return "redirect:/errorpage/403.html";
+        }
     }
 
     @RequestMapping(value = "/review/update", method = RequestMethod.POST)
     public String update(@ModelAttribute Review review) {
+
 //        User user = AuthorizationService.getCurrentUser();
         reviewService.update(review);
+
+        if(reviewService.hasAuthority(review.getId())){
+            reviewService.update(review);
+        }else{
+            return "redirect:/errorpage/403.html";
+        }
+
 
         return "redirect:/close.html";
     }

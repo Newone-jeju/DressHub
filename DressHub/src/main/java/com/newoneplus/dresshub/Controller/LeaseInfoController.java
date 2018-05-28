@@ -32,23 +32,29 @@ public class LeaseInfoController {
             ArrayList leaseInfoHashMaps = leaseInfoService.getLeaseInfoHashMapsByProduct(Integer.parseInt(product));
             returnValue = leaseInfoHashMaps.toString();
         }else if(!user.equals("null")){
-            ArrayList leaseInfoHashMaps = leaseInfoService.getLeaseInfoHashMapByUser(user);
+            ArrayList leaseInfoHashMaps = leaseInfoService.getLeaseInfoHashsMapByUser(user);
             returnValue = leaseInfoHashMaps.toString();
         }
         return returnValue;
     }
 
-    //TODO 권한검사 필요
-    @RequestMapping(value = "/leaseInfo/update/", method = RequestMethod.GET)
-    @ResponseBody
+    @RequestMapping(value = "/leaseInfo/update/", method = RequestMethod.POST)
     public String update(@ModelAttribute LeaseInfo leaseInfo){
-        leaseInfoService.update(leaseInfo);
-        return "redirect:/";
+        if(leaseInfoService.askAuthority(leaseInfo.getId())){
+            leaseInfoService.update(leaseInfo);
+            return "redirect:/";
+        }else{
+            return "redirect:/errorpage/403.html";
+        }
     }
 
-    //TODO 권한 검사 필요
+    @RequestMapping(value = "/leaseInfo/delete/", method = RequestMethod.POST)
     public String delete(@RequestParam Integer leaseInfoId){
-        leaseInfoService.delete(leaseInfoId);
-        return "redirect:/";
+        if(leaseInfoService.askAuthority(leaseInfoId)){
+            leaseInfoService.delete(leaseInfoId);
+            return "redirect:/";
+        }else{
+            return "redirect:/errorpage/403.html";
+        }
     }
 }
