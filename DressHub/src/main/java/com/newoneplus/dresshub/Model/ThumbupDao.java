@@ -1,4 +1,4 @@
-package com.newoneplus.dresshub;
+package com.newoneplus.dresshub.Model;
 
 import com.newoneplus.dresshub.Model.ThumbUp;
 import lombok.Cleanup;
@@ -11,6 +11,7 @@ import org.springframework.jdbc.support.KeyHolder;
 import java.sql.PreparedStatement;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.List;
 
 public class ThumbupDao {
     private JdbcTemplate jdbcTemplate;
@@ -86,6 +87,41 @@ public class ThumbupDao {
         jdbcTemplate.update("DELETE FROM THUMB_UP WHERE USER = ? AND PRODUCT = ?", params);
     }
 
+    //   페이징 처리를 위해서 db count하는 코드
+    public int getCount(String user) {
+        String sql = "SELECT COUNT(*) FROM thumb_up WHERE USER ='"+user+"'";
+        return  jdbcTemplate.queryForObject(sql, Integer.class);
+    }
+
+    // user가 thumb_up한 product 가져오는 코드
+    public ArrayList<Product> getThumbUpProductList(int page, User user) {
+        ArrayList<Product> productList = null;
+        try {
+            productList = (ArrayList<Product>) jdbcTemplate.queryForObject
+                    ("SELECT PRODUCT, NAME, THUMBNAIL_IMAGE, DEPOSIT, COST_PER_DAY, CONTENTS, CATEGORY, STATE, SIZE " +
+                            "FROM THUMB_UP JOIN PRODUCT ON THUMB_UP.PRODUCT= PRODUCT.ID " +
+                            "WHERE (@ROWNUM :=" + (page * 25 - 25) + ") =" + (page * 25 - 25) +  " LIMIT " + (page * 25 - 25) + ", 25;", (RowMapper<Object>) (rs, rowNum) -> {
+                        List<Product> products = new ArrayList<>();
+                        do  {
+                            Product product = new Product();
+                            product.setId(rs.getInt("product"));
+                            product.setName(rs.getString("name"));
+                            product.setThumbnailImage(rs.getString("thumbnail_image"));
+                            product.setContents(rs.getString("contents"));
+                            product.setCategory(rs.getString("category"));
+                            product.setState(rs.getString("state"));
+                            product.setSize(rs.getString("size"));
+                            product.setDeposit(rs.getInt("deposit"));
+                            product.setCostPerDay(rs.getInt("cost_per_day"));
+                            products.add(product);
+                        }while((rs.next()));
+                        return products;
+                    });
+        }catch (EmptyResultDataAccessException e){
+            productList = null;
+        }
+        return productList;
+    }
 
     //업데이트문은 필요 없을듯
 }

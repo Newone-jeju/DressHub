@@ -148,7 +148,7 @@ $(document).ready(function () {
                         var target = $(this);
                         $.ajax({
                             type: "GET",
-                            url: "./productAddLike?productId="+productId+"&state="+state, //좋아요 눌렀을 때 상태정보 전달할 url
+                            url: "./thumbUp?productId="+productId+"&state="+state, //좋아요 눌렀을 때 상태정보 전달할 url
                             dataType: "json",
                             success: function(response){
                                 console.log("like누름 ajax실행됨");

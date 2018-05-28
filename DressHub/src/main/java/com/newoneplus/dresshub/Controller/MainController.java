@@ -18,21 +18,6 @@ import java.util.List;
 public class MainController {
     @Autowired
     private MainService mainService;
-//    @RequestMapping("/")
-//    public String index( ){
-//        return "index";
-//    }
-
-    @RequestMapping(value = "/products", method = RequestMethod.GET)
-    @ResponseBody
-    public List<Product> getProductList() throws ClassNotFoundException {
-        return mainService.getProductList();
-    }
-
-    @RequestMapping(value = "/products/new", method = RequestMethod.GET)
-    public String productform(){
-        return "productform";
-    }
 
     // User 인증정보 test
     @RequestMapping(value = "/getuser" , method = RequestMethod.GET)

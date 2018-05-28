@@ -21,10 +21,7 @@ public class MainService {
     @Autowired
     private UserDao userDao;
 
-    public ArrayList<Product> getProductList() throws ClassNotFoundException {
-        return productDao.getList("ID DESC");
 
-    }
 
 
 

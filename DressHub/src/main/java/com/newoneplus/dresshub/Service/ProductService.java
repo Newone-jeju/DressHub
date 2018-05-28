@@ -3,13 +3,11 @@ package com.newoneplus.dresshub.Service;
 
 import com.newoneplus.dresshub.ImageProcesser;
 import com.newoneplus.dresshub.Model.*;
-import com.newoneplus.dresshub.ThumbupDao;
+import com.newoneplus.dresshub.Model.ThumbupDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import javax.imageio.ImageIO;
-import javax.validation.constraints.Null;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -28,7 +26,8 @@ public class ProductService {
     @Autowired
     private ThumbupDao thumbupDao;
 
-    public void insertProduct(Product product) throws IOException {
+    //product 등록
+    public void createProduct(Product product) throws IOException {
         ImageProcesser imageProcesser = new ImageProcesser();
         int product_id = productDao.insert(product);
         product.setId(product_id);
@@ -78,17 +77,29 @@ public class ProductService {
         }
     }
 
-    public ArrayList<ProductImage> getProductImageList(int id){
-        return productImageDao.getProductImageList(id, "ID DESC");
+    public ArrayList<Product> getProductList() throws ClassNotFoundException {
+        return productDao.getList("ID DESC");
     }
+    // productid에 맞는 프로덕트 불러오기
+    public Product getProduct(int id) throws ClassNotFoundException {
+        return productDao.get(id);
+    }
+
+
+    //product이미지리스트 프로덕트id에 맞게 불러오기
+    public ArrayList<ProductImage> getProductImageList(int id){ return productImageDao.getProductImageList(id, "ID DESC"); }
+
+    //product이미지리스트 모두 정렬해서 불러오기
     public ArrayList<ProductImage> getProductImageList(){
         return productImageDao.getProductImageList("ID DESC" );
     }
-//    전체 카운트와 리스트정보 같이 보내줌
+
+//   카테고리와 페이징처리를 위한 상품 불러오기
     public HashMap<String,Object > getProductList(int page, String category, String array) {
         HashMap<String, Object> map = new HashMap<>();
         map.put("list", productDao.getList(page,category,array));
         map.put("count", productDao.getCount(category));
+        //Todo 현재 user1로 임시로 지정 나중에 보안정책 완료 후 User가져오는 것으로 수정
         User user = new User();
         user.setId("user1");
         try{
@@ -103,14 +114,13 @@ public class ProductService {
     };
 
 
+    //유저에 대한 장바구니 불러오기
     public HashMap<String, Object> getBasketList(String userId){
         return basketDao.getBasketList(userId);
     }
 
-    public Product getProduct(int id) throws ClassNotFoundException {
-        return productDao.get(id);
-    }
 
+    //좋아요 등록하기
     public void insertThumup(String userId, int productId){
         thumbupDao.insert(userId, productId);
         Product product = productDao.get(productId);
@@ -118,11 +128,18 @@ public class ProductService {
         productDao.update(product);
     }
 
-
+    //좋아요 삭제하기
     public void deleteThumup( String userId, int productId) {
         thumbupDao.delete(userId, productId);
         Product product = productDao.get(productId);
         product.setLikes(product.getLikes()-1);
         productDao.update(product);
+    }
+
+    public HashMap<String,Object> getThumbUpProductList(int page, User user) {
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("count", thumbupDao.getCount(user.getId()));
+        map.put("list", thumbupDao.getThumbUpProductList(page, user));
+        return map;
     }
 }
