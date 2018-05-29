@@ -1,6 +1,7 @@
 package com.newoneplus.dresshub.Controller;
 
 import com.newoneplus.dresshub.Model.LeaseInfo;
+import com.newoneplus.dresshub.Model.ResultMessage;
 import com.newoneplus.dresshub.Service.LeaseInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -39,22 +40,31 @@ public class LeaseInfoController {
     }
 
     @RequestMapping(value = "/leaseInfo/update/", method = RequestMethod.POST)
-    public String update(@ModelAttribute LeaseInfo leaseInfo){
+    public ResultMessage update(@ModelAttribute LeaseInfo leaseInfo){
+        ResultMessage resultMessage = new ResultMessage();
         if(leaseInfoService.askAuthority(leaseInfo.getId())){
             leaseInfoService.update(leaseInfo);
-            return "redirect:/";
+            resultMessage.setCode(200);
+            resultMessage.setMessage("승인");
         }else{
-            return "redirect:/errorpage/403.html";
+            resultMessage.setCode(301);
+            resultMessage.setMessage("권한이 없습니다.");
         }
+        return resultMessage;
     }
 
     @RequestMapping(value = "/leaseInfo/delete/", method = RequestMethod.POST)
-    public String delete(@RequestParam Integer leaseInfoId){
+    public ResultMessage delete(@RequestParam Integer leaseInfoId){
+        ResultMessage resultMessage = new ResultMessage();
         if(leaseInfoService.askAuthority(leaseInfoId)){
             leaseInfoService.delete(leaseInfoId);
-            return "redirect:/";
+            resultMessage.setCode(200);
+            resultMessage.setMessage("승인");
         }else{
-            return "redirect:/errorpage/403.html";
+            resultMessage.setCode(301);
+            resultMessage.setMessage("권한이 없습니다.");
         }
+
+        return resultMessage;
     }
 }
