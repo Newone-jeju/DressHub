@@ -2,8 +2,8 @@ package com.newoneplus.dresshub.Controller;
 
 import com.newoneplus.dresshub.Model.ResultMessage;
 import com.newoneplus.dresshub.Model.Review;
-import com.newoneplus.dresshub.Model.User;
-import com.newoneplus.dresshub.Service.AuthorizationService;
+//import com.newoneplus.dresshub.Model.User;
+//import com.newoneplus.dresshub.Service.AuthorizationService;
 import com.newoneplus.dresshub.Service.ReviewService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,24 +44,31 @@ public class ReviewContoller{
     }
 
 
-    @RequestMapping(value = "/review", method = RequestMethod.DELETE)
-    public ResultMessage delete(@RequestParam String id) {
-        int idForReview = Integer.parseInt(id);
-        reviewService.delete(idForReview);
-        ResultMessage resultMessage = new ResultMessage();
-        resultMessage.setCode(200);
-        resultMessage.setMessage("승인");
-        return resultMessage;
+
+    @RequestMapping(value = "/review/delete", method = RequestMethod.POST)
+    public String delete(@RequestParam Integer reivewId, @RequestHeader String Referer) {
+        return null;
     }
 
-    @RequestMapping(value = "/review", method = RequestMethod.PUT)
-    public ResultMessage update(@ModelAttribute Review review) {
+    @RequestMapping(value = "/review/update", method = RequestMethod.POST)
+    public String update(@ModelAttribute Review review) {
+
+//        User user = AuthorizationService.getCurrentUser();
         reviewService.update(review);
-        ResultMessage resultMessage = new ResultMessage();
-        resultMessage.setCode(200);
-        resultMessage.setMessage("승인");
-        return resultMessage;
+
+
+
+        return "redirect:/close.html";
     }
 
+//    @RequestMapping(value = "/review-form.html", method = RequestMethod.GET)
+//    public String updateAuthentication(){
+////        User user = AuthorizationService.getCurrentUser();
+////        if(user==null) {
+////            return "redirect:/login";
+////        }else {
+////            return "redirect:/review-form.html";
+////        }
+//    }
 }
 
