@@ -4,6 +4,7 @@ package com.newoneplus.dresshub.Service;
 import com.newoneplus.dresshub.ImageProcesser;
 import com.newoneplus.dresshub.Model.*;
 import com.newoneplus.dresshub.Model.ThumbupDao;
+import com.newoneplus.dresshub.Repository.ThumbUpRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -25,6 +26,8 @@ public class ProductService {
     private BasketDao basketDao;
     @Autowired
     private ThumbupDao thumbupDao;
+    @Autowired
+    ThumbUpRepository thumbUpRepository;
 
     //product 등록
     public void createProduct(Product product) throws IOException {
@@ -121,17 +124,17 @@ public class ProductService {
 
 
     //좋아요 등록하기
-    public void insertThumup(String userId, int productId){
-        thumbupDao.insert(userId, productId);
-        Product product = productDao.get(productId);
+    public void insertThumup(ThumbUp thumbUp){
+        thumbUpRepository.save(thumbUp);
+        Product product = productDao.get(thumbUp.getProduct());
         product.setLikes(product.getLikes()+1);
         productDao.update(product);
     }
 
     //좋아요 삭제하기
-    public void deleteThumup( String userId, int productId) {
-        thumbupDao.delete(userId, productId);
-        Product product = productDao.get(productId);
+    public void deleteThumup( ThumbUp thumbUp) {
+        thumbUpRepository.delete(thumbUp);
+        Product product = productDao.get(thumbUp.getProduct());
         product.setLikes(product.getLikes()-1);
         productDao.update(product);
     }

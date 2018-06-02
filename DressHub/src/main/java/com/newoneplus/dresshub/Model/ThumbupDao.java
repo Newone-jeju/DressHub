@@ -122,6 +122,5 @@ public class ThumbupDao {
         }
         return productList;
     }
-
     //업데이트문은 필요 없을듯
 }

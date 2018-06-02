@@ -2,7 +2,9 @@ package com.newoneplus.dresshub.Controller;
 
 import com.newoneplus.dresshub.Model.Product;
 import com.newoneplus.dresshub.Model.ProductImage;
+import com.newoneplus.dresshub.Model.ThumbUp;
 import com.newoneplus.dresshub.Model.User;
+import com.newoneplus.dresshub.Repository.ThumbUpRepository;
 import com.newoneplus.dresshub.Service.ProductService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +22,7 @@ public class ProductController {
 
     @Autowired
     ProductService  productService;
+
 
     //=================================================prdouct CRUD
 
@@ -87,14 +90,18 @@ public class ProductController {
         log.info("productId"+ productId);
         User user = new User();
         user.setId("user1");
+        ThumbUp thumbUp = new ThumbUp();
+        thumbUp.setUser(user.getId());
+        thumbUp.setProduct(productId);
 
         //TODO 나중에 보안정책 끝나면 가져와서 넣을 것
 //        user= AuthorizationService.getCurrentUser();
 
         if(state ){
-            productService.insertThumup(user.getId(), productId);
+            productService.insertThumup(thumbUp);
+
         }else{
-            productService.deleteThumup(user.getId(), productId);
+            productService.deleteThumup(thumbUp);
         }
 
         return productService.getProduct(productId);
@@ -109,12 +116,6 @@ public class ProductController {
 //        return productService.getProductList(page, category, order);
         return productService.getThumbUpProductList(page, user);
     }
-
-
-
-
-
-
 
     //TODO restapi에 맞지않지만 현재 이것보다 좋은 방법x 나중에 생각해 보자.
     @RequestMapping(value = "/productList", method= RequestMethod.GET)
