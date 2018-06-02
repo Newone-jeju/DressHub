@@ -85,7 +85,7 @@ $(document).ready(function () {
                                 cards +=
                                     '<span class="product_container_content_card" data-href="/productDetail?productId=' + data[i].id + '">' +
                                     '<div class="card_img_wrap">' +
-                                    '<img src="../product_image/' + data[i].thumbnailImage + '" alt="blank" class="card_img">' +
+                                    '<img src="./product_image/' + data[i].thumbnailImage + '" alt="blank" class="card_img">' +
                                     '<div class="hover-content">' +
                                     '<img src="../image/' + data[i].state + '_icon.png}" alt="" class="hover-size">' +
                                     '<div class="hover-btn-wrap">' +

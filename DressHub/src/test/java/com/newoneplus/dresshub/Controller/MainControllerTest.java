@@ -54,11 +54,11 @@ public class MainControllerTest {
     }
 
 
-    @Test
-    public void getProductListTest() throws Exception {
-        mockMvc.perform(get("/products")).andExpect(status().isOk());
-
-        verify(mainService).getProductList();
-        verifyNoMoreInteractions(mainService);
-    }
+//    @Test
+//    public void getProductListTest() throws Exception {
+//        mockMvc.perform(get("/products")).andExpect(status().isOk());
+//
+//        verify(mainService).getProductList();
+//        verifyNoMoreInteractions(mainService);
+//    }
 }

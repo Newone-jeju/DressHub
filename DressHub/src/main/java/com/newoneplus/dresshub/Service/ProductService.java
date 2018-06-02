@@ -37,7 +37,7 @@ public class ProductService {
             for (int i = 0; i < product.getImage().size(); i++) {
 
                 filename = product.getImage().get(i).getOriginalFilename();
-                String path = System.getProperty("user.dir") + "/src/main/resources/static/product_image/";
+                String path = System.getProperty("user.dir") + "/out/main/resources/static/product_image/";
                 ProductImage productImage = new ProductImage();
                 productImage.setProductId(product.getId());
 //              맨처음 파일만   파일 크기 3가지로 구분 해서 db및 file 저장

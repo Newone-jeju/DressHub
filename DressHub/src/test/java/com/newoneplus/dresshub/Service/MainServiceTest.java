@@ -24,12 +24,12 @@ public class MainServiceTest {
         mainService = applicationContext.getBean("mainService", MainService.class);
     }
 
-    @Test
-    public void getProductList() throws ClassNotFoundException {
-        ArrayList<Product> productList = new ArrayList<>();
-        productList= mainService.getProductList();
-        assertThat(productList.size(), is(6));
-    }
+//    @Test
+//    public void getProductList() throws ClassNotFoundException {
+//        ArrayList<Product> productList = new ArrayList<>();
+//        productList= mainService.getProductList();
+//        assertThat(productList.size(), is(6));
+//    }
 
 
 }
