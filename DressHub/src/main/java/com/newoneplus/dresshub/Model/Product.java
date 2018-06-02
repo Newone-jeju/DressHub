@@ -1,15 +1,23 @@
 package com.newoneplus.dresshub.Model;
 
 import lombok.Data;
+import org.hibernate.annotations.GeneratorType;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Date;
 
 @Data
+@Entity
 public class Product {
-    Integer id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    Long id;
     String name;
     String thumbnailImage;
     ArrayList<MultipartFile> image;

@@ -2,17 +2,16 @@ package com.newoneplus.dresshub.Model;
 
 import lombok.Data;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Data
-@Entity(name="thumb_up")
+@Entity
 public class ThumbUp{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    int id;
+    Long id;
+    @OneToMany
     String user;
+    @OneToMany
     int product;
 }

@@ -107,7 +107,7 @@ public class ProductService {
         user.setId("user1");
         try{
 //            user= AuthorizationService.getCurrentUser();
-            map.put("like", thumbupDao.getLikeProductIdList(user.getId()));
+            map.put("like", thumbUpRepository.findAllByUser(user.getId()));
         }catch (NullPointerException e){
             map.put("like", null);
             e.printStackTrace();
@@ -133,7 +133,7 @@ public class ProductService {
 
     //좋아요 삭제하기
     public void deleteThumup( ThumbUp thumbUp) {
-        thumbUpRepository.delete(thumbUp);
+        thumbUpRepository.deleteByUserAndProduct(thumbUp.getUser(), thumbUp.getProduct());
         Product product = productDao.get(thumbUp.getProduct());
         product.setLikes(product.getLikes()-1);
         productDao.update(product);
@@ -141,7 +141,7 @@ public class ProductService {
 
     public HashMap<String,Object> getThumbUpProductList(int page, User user) {
         HashMap<String, Object> map = new HashMap<>();
-        map.put("count", thumbupDao.getCount(user.getId()));
+        map.put("count", thumbUpRepository.countByUser(user.getId()));
         map.put("list", thumbupDao.getThumbUpProductList(page, user));
         return map;
     }
