@@ -1,28 +1,22 @@
 package com.newoneplus.dresshub.Controller;
 
-//import com.newoneplus.dresshub.Config.MyAuthentication;
+import com.newoneplus.dresshub.Model.ResultMessage;
 import com.newoneplus.dresshub.Model.Review;
 //import com.newoneplus.dresshub.Model.User;
 //import com.newoneplus.dresshub.Service.AuthorizationService;
 import com.newoneplus.dresshub.Service.ReviewService;
 
-import org.omg.CORBA.Request;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletRequest;
-import java.util.List;
-import java.util.concurrent.ExecutionException;
-
 @Controller
+@ResponseBody
 public class ReviewContoller{
     @Autowired
     private ReviewService reviewService;
 
     @RequestMapping(value = "/review", method = RequestMethod.GET)
-    @ResponseBody
     public String get(@RequestParam(defaultValue = "null") String productId,
                       @RequestParam(defaultValue = "null") String userId,
                       @RequestParam(defaultValue = "null") String id) {
@@ -38,26 +32,22 @@ public class ReviewContoller{
     }
 
 
-    @RequestMapping(value = "/review/new", method = RequestMethod.POST)
-    public String insert(@ModelAttribute Review review) {
-//        (@RequestParam String title, @RequestParam String comment, @RequestParam String rate,
-//                @RequestParam String userId, @RequestParam String productId + 이미지
-
-
+    @RequestMapping(value = "/review", method = RequestMethod.POST)
+    public ResultMessage insert(@ModelAttribute Review review) {
         //TODO 테스트코드, 개발완료시 newReview사용할것
         reviewService.newReviewTest(review);
-        return "redirect:/close.html";
+
+        ResultMessage resultMessage = new ResultMessage();
+        resultMessage.setCode(200);
+        resultMessage.setMessage("accepted");
+        return resultMessage;
     }
+
 
 
     @RequestMapping(value = "/review/delete", method = RequestMethod.POST)
     public String delete(@RequestParam Integer reivewId, @RequestHeader String Referer) {
-        if(reviewService.hasAuthority(reivewId)) {
-            reviewService.delete(reivewId);
-            return "redirect:"+Referer;
-        }else{
-            return "redirect:/errorpage/403.html";
-        }
+        return null;
     }
 
     @RequestMapping(value = "/review/update", method = RequestMethod.POST)
@@ -66,11 +56,6 @@ public class ReviewContoller{
 //        User user = AuthorizationService.getCurrentUser();
         reviewService.update(review);
 
-        if(reviewService.hasAuthority(review.getId())){
-            reviewService.update(review);
-        }else{
-            return "redirect:/errorpage/403.html";
-        }
 
 
         return "redirect:/close.html";

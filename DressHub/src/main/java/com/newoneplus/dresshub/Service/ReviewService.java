@@ -163,10 +163,4 @@ public class ReviewService {
         return jsonArray.toString();
 
     }
-
-    public boolean hasAuthority(Integer reviewId) {
-        User user = AuthorizationService.getCurrentUser();
-        Review review = reviewDao.get(reviewId);
-        return review.getUserId().equals(user.getId());
-    }
 }
