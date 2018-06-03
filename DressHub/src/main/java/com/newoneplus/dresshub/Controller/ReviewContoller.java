@@ -4,39 +4,50 @@ import com.newoneplus.dresshub.Model.ResultMessage;
 import com.newoneplus.dresshub.Model.Review;
 //import com.newoneplus.dresshub.Model.User;
 //import com.newoneplus.dresshub.Service.AuthorizationService;
+import com.newoneplus.dresshub.Repository.ReviewRepository;
 import com.newoneplus.dresshub.Service.ReviewService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-@Controller
+import java.util.List;
+import java.util.Optional;
+
+@Controller("/review")
 @ResponseBody
 public class ReviewContoller{
     @Autowired
-    private ReviewService reviewService;
+    ReviewRepository reviewRepository;
+    @Autowired
+    ReviewService reviewService;
 
-    @RequestMapping(value = "/review", method = RequestMethod.GET)
-    public String get(@RequestParam(defaultValue = "null") String productId,
-                      @RequestParam(defaultValue = "null") String userId,
-                      @RequestParam(defaultValue = "null") String id) {
-        String reviewsJsonString = null;
-        if(!id.equals("null")) {
-            reviewsJsonString = reviewService.getReviewByIdToJson(Integer.parseInt(id));
-        }else if (!productId.equals("null")) {
-            reviewsJsonString = reviewService.getReviewsByProductToJson(Integer.parseInt(productId));
-        } else if (!userId.equals("null")) {
-            reviewsJsonString = reviewService.getReviewsJsonStringFormByUser(userId);
-        }
-        return reviewsJsonString;
+    @GetMapping("/{id}")
+    public Optional get(@PathVariable Integer id){
+        return reviewRepository.findById(id);
     }
 
 
-    @RequestMapping(value = "/review", method = RequestMethod.POST)
-    public ResultMessage insert(@ModelAttribute Review review) {
-        //TODO 테스트코드, 개발완료시 newReview사용할것
-        reviewService.newReviewTest(review);
 
+    @GetMapping("/list")
+    public List get(@RequestParam(defaultValue = "-1") Integer productId,
+                      @RequestParam(defaultValue = "null") String userId) {
+        List<Review> result = null;
+        if (!productId.equals("null")) {
+            result = reviewRepository.findAllByProduct(productId);
+        } else if (!userId.equals("null")){
+            result = reviewRepository.findAllByUser(userId);
+        }
+        return result;
+    }
+
+
+    @PostMapping
+    public ResultMessage insert(@RequestBody Review review) {
+        //TODO 테스트코드, 개발완료시 newReview사용할것
+        String iamgeUrl = reviewService.saveImageAndGetUrl(review.getImage());
+        review.setImageUrl(iamgeUrl);
+        reviewRepository.save(review);
         ResultMessage resultMessage = new ResultMessage();
         resultMessage.setCode(200);
         resultMessage.setMessage("accepted");
@@ -44,21 +55,25 @@ public class ReviewContoller{
     }
 
 
+    @DeleteMapping(value = "/{id}")
+    public ResultMessage delete(@RequestParam Integer id) {
+        reviewRepository.deleteById(id);
+        ResultMessage resultMessage = new ResultMessage();
+        resultMessage.setCode(200);
+        resultMessage.setMessage("accepted");
 
-    @RequestMapping(value = "/review/delete", method = RequestMethod.POST)
-    public String delete(@RequestParam Integer reivewId, @RequestHeader String Referer) {
-        return null;
+
+        return resultMessage;
     }
 
-    @RequestMapping(value = "/review/update", method = RequestMethod.POST)
-    public String update(@ModelAttribute Review review) {
-
-//        User user = AuthorizationService.getCurrentUser();
-        reviewService.update(review);
-
-
-
-        return "redirect:/close.html";
+    @PutMapping
+    public ResultMessage update(@RequestBody Review review) {
+        reviewRepository.save(review);
+        ResultMessage resultMessage = new ResultMessage();
+        resultMessage.setCode(200);
+        resultMessage.setMessage("accepted");
+        
+        return resultMessage;
     }
 
 //    @RequestMapping(value = "/review-form.html", method = RequestMethod.GET)
