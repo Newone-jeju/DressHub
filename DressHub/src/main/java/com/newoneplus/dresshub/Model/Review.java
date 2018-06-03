@@ -21,7 +21,4 @@ public class Review {
     String leaseStart; //0000-00-00
     String leaseEnd; //0000-00-00
     String imageUrl;
-    //로컬에 저장을 위한 이미지
-    MultipartFile image;
-
 }
