@@ -2,7 +2,6 @@ package com.newoneplus.dresshub.Model;
 
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.PreparedStatementSetter;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
@@ -70,7 +69,7 @@ public class ReviewDao {
     public int insert(Review review) {
         String sql = "INSERT INTO REVIEW(TITLE, COMMENT, RATE, DATE, USER, PRODUCT, LEASE_START, LEASE_END, IMAGE_URL) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
         Object[] params = {review.getTitle(), review.getComment(), review.getRate(), review.getDate(),
-                        review.getUserId(), review.getProductId(), review.getLeaseStart(), review.getLeaseEnd(),
+                        review.getUser(), review.getProductId(), review.getLeaseStart(), review.getLeaseEnd(),
                         review.getImageUrl()};
 
         KeyHolder keyHolder = new GeneratedKeyHolder();
@@ -88,7 +87,7 @@ public class ReviewDao {
         String sql = "UPDATE REVIEW SET TITLE = ?, COMMENT = ?, RATE = ?, DATE = ?, USER= ?, PRODUCT = ?," +
                 " LEASE_START = ?, LEASE_END = ?, IMAGE_URL = ? WHERE ID =" + review.getId();
         Object[] params = {review.getTitle(), review.getComment(), review.getRate(), review.getDate(),
-                review.getUserId(), review.getProductId(), review.getLeaseStart(), review.getLeaseEnd(),
+                review.getUser(), review.getProductId(), review.getLeaseStart(), review.getLeaseEnd(),
                 review.getImageUrl()};
         jdbcTemplate.update(sql, params);
     }
@@ -100,7 +99,7 @@ public class ReviewDao {
         review.setComment(rs.getString("COMMENT"));
         review.setRate(rs.getFloat("RATE"));
         review.setDate(rs.getString("DATE"));
-        review.setUserId(rs.getString("USER"));
+        review.setUser(rs.getString("USER"));
         review.setProductId(rs.getInt("PRODUCT"));
         review.setLeaseStart(rs.getString("LEASE_START"));
         review.setLeaseEnd(rs.getString("LEASE_END"));
