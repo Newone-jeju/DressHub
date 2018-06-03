@@ -17,7 +17,9 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.nio.file.InvalidPathException;
 import java.util.List;
 import java.util.Optional;
 
@@ -82,19 +84,6 @@ public class ReviewContoller {
         return resultMessage;
     }
 
-//    @RequestMapping(value = "/review-form.html", method = RequestMethod.GET)
-//    public String updateAuthentication(){
-////        User user = AuthorizationService.getCurrentUser();
-////        if(user==null) {
-////            return "redirect:/login";
-////        }else {
-////            return "redirect:/review-form.html";
-////        }
-//
-//
-//
-//
-// }
     private static final String IMAGE_PATH = System.getProperty("user.dir") + "/src/main/resources/static/review";
 
     @PostMapping("/{id}/image")
@@ -106,8 +95,18 @@ public class ReviewContoller {
         try {
             BufferedImage image = imageProcesser.getOriginImage(Image.getInputStream());
             ImageIO.write(image, "jpg", new File(IMAGE_PATH + "/" + id + "/image"));
-        } catch (IOException e) {
+        } catch (InvalidPathException e) {
+            try {
+                File reviewIdFolder = new File(IMAGE_PATH + "/" + id);
+                reviewIdFolder.mkdir();
+                BufferedImage image = imageProcesser.getOriginImage(Image.getInputStream());
+                ImageIO.write(image, "jpg", new File(IMAGE_PATH + "/" + id + "/image"));
+            } catch (IOException e1) {
+                e1.printStackTrace();
+            }
             e.printStackTrace();
+        } catch (IOException e1) {
+            e1.printStackTrace();
         }
 
         ResultMessage resultMessage = new ResultMessage();
