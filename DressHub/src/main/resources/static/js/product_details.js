@@ -2,7 +2,6 @@
 
     var ajaxData ="";
     var ajaxCard ="";
-    var ajaxUtil ="";
 
     var data =[];
 
@@ -14,8 +13,8 @@
         ajaxData = undefined;
 
         //상품 헤더 정보 카테고리, 이름
-        ajaxUtil.editVal($(".page-head-category span.category2"), "value", data[0].list.category);
-        ajaxUtil.editVal($(".productName"), "value", data[0].list.name);
+        $(".page-head-category span.category2").attr("value", data[0].list.category);
+        $(".productName").attr("value", data[0].list.name);
 
         //카드매핑
         var cardString ="";
@@ -80,8 +79,7 @@
         ]
 
         $.each(productInfo, function(i, v){
-            //ajaxUtil.editVal(target, property, val)
-            ajaxUtil.editVal($(v.target+" > info"), "value", v.value);
+            $(v.target+" > info").attr("value", v.value);
         });
 
         //사이즈 아이콘 처리
@@ -99,23 +97,31 @@
         ajaxCard = undefined;
     }
 
-    function restSend(){
-
-        $(".submit-btn > button.request").click(function(){
-            var postData = {
-                id: data[0].list.id,
-                
-            };
-            AjaxUtil.sendData()
-        })
-        $(".submit-btn > button.add-cart").click(function(){
-
-        })
-    }
-
-    ajaxUtil = new AjaxUtil();
+    
     initMap();
+    restSend();
 
+    $(".submit-btn > button.request").click(function(){
+        var ajaxUtil = new AjaxUtil(); // 주문URL 필요
+        var postData = {
+            id: data[0].list.id,
+            lease_day: $("#s-date").attr("value"),
+            return_day: $("#e-date").attr("value")
+        };
+        AjaxUtil.sendData(postData, "POST", function(){
+            window.location.href = '';//결제페이지
+        })
+    })
+
+    $(".submit-btn > button.add-cart").click(function(){
+        var ajaxUtil = new AjaxUtil(); // 장바구니URL 필요
+        var postData = {
+            id: data[0].list.id
+        };
+        AjaxUtil.sendData(postData, "POST", function(){
+            window.location.href = '';//장바구니 페이지
+        })
+    })
 
 })();
 

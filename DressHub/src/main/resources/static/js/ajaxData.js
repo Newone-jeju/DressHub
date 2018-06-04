@@ -28,22 +28,20 @@ AjaxData.prototype.getData = function(){
 
 
 //class AjaxUtil
-function AjaxUtil(){}
-
-AjaxUtil.prototype.editVal = function(target, property, val){
-	target.attr(property, val);
+function AjaxUtil(url){
+	this.url = url;
 }
 
-AjaxUtil.prototype.sendData = function(postData, func){
+AjaxUtil.prototype.CrudData = function(crudData, type ,func){
 	$.ajax(
 		{
 			url: this.url,
 		    dataType: 'json',
 		    async: true,
-		    type: 'POST',
-		    data: JSON.stringfy(postData),
+		    type: type,
+		    data: JSON.stringfy(crudData),
 		    error: function(jqXHR, textStatus, errorThrown) {
-		        alert("failed sending");
+		        alert("failed crud");
 		    },
 		    success: function(json_data){
 		    	func();
