@@ -46,7 +46,6 @@ function go_top(){
 function helpInit() {
 	//get data array
 	helpData = new AjaxData("js/help.json", false);
-	helpData.setData();
 	data = helpData.getData();
 	helpData = undefined;
 	helpUi = new AjaxCard(data);

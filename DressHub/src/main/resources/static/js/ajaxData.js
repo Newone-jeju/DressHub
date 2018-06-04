@@ -2,18 +2,14 @@
 //class AjaxData
 function AjaxData(url, async) {
 	this.url = url;
-	this.async = async;
-	this.data = [];
-}
-
-AjaxData.prototype.setData = function(){
+	this.data = (function(){
 	var ajaxData = ""
 	$.ajax(
 		{
-			url: this.url,
+			url: url,
 		    dataType: 'json',
-		    async: this.async,
-		    type:'get',
+		    async: async,
+		    type:'GET',
 		    error: function(jqXHR, textStatus, errorThrown) {
 		        alert(textStatus);
 		        alert(errorThrown);
@@ -22,11 +18,37 @@ AjaxData.prototype.setData = function(){
 		    	ajaxData = json_data;
 		    }
 		})
-	this.data = ajaxData;
+	return ajaxData;
+	})();
 }
 
 AjaxData.prototype.getData = function(){
 	return this.data;
+}
+
+
+//class AjaxUtil
+function AjaxUtil(){}
+
+AjaxUtil.prototype.editVal = function(target, property, val){
+	target.attr(property, val);
+}
+
+AjaxUtil.prototype.sendData = function(postData, func){
+	$.ajax(
+		{
+			url: this.url,
+		    dataType: 'json',
+		    async: true,
+		    type: 'POST',
+		    data: JSON.stringfy(postData),
+		    error: function(jqXHR, textStatus, errorThrown) {
+		        alert("failed sending");
+		    },
+		    success: function(json_data){
+		    	func();
+		    }
+		})
 }
 
 

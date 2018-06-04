@@ -127,3 +127,75 @@ map_card(card, target);
 
 folding($(".card-header"));
 
+/////////////////// 수정 후 ///////////////////////////
+
+
+
+var target = "";
+var data = "";
+var ajaxData = "";
+var ajaxCard = "";
+
+
+function makeList(data, target, quantity){
+	var cardString = "";
+	for(var i=0; i<quantity; i++){
+		cardString = 			
+			'<div class="product-card" data-id="'+data[i].id+'">'+
+		        '<div class="card-header">'+
+		          '<div class="thumnail">'+
+		            '<img src="'+data[i].thumnailUrl+'" alt="thumnail_img">'+
+		          '</div>'+
+		          '<div class="title flexcenter-align">'+
+		            '<p class="text">'+data[i].name+'</p>'+
+		          '</div>'+
+		          '<div class="order-day flexcenter-align">'+
+		            '<p class="text">'+data[i].orderStart+'</p>'+
+		          '</div>'+
+		          '<div class="recent-status flexcenter-align">'+
+		            '<p class="text">'+data[i].log[0].status+'</p>'+
+		          '</div>'+
+		        '</div>'+
+		        '<div class="card-body hidd">'+
+		          '<div class="card-btn-wrap">'+
+		              '<input type="text" name="msg" value="" placeholder="수령한 대여의상에 특이사항이 발생하면 입력해 주세요.... " class="msg-box">'+
+		              '<button class="card-write-btn card-btn">메시지작성</button>'+
+		          '</div>'+
+		          '<table class="log-list">'
+					'</table>'+
+		        '</div>'+
+		      '</div>'
+
+		ajaxCard.setCard(cardString);
+		ajaxCard.mapCard(target);
+	}
+}
+
+function addLog(){
+
+}
+
+
+//빌린옷
+ajaxData = new AjaxData("js/rental_status_jeayoon.json", false);
+data = ajaxData.getData();
+ajaxData = undefined;
+ajaxCard = new AjaxCard(data);
+target = $(".rentaling-area .card-td");
+makeList(data, target, 3);
+addLog();
+
+//빌려준옷
+
+
+//공통
+
+
+
+
+
+
+
+
+
+
