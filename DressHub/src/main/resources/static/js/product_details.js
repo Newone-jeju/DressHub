@@ -8,7 +8,7 @@
     function initMap(url){
 
         //데이터 가져오고
-        ajaxData = new AjaxData(url);
+        ajaxData = new AjaxData(url, false);
         data = ajaxData.getData();
         ajaxData = undefined;
 
@@ -98,7 +98,7 @@
     }
 
     
-    initMap();
+    initMap(url, false);
     restSend();
 
     $(".submit-btn > button.request").click(function(){
@@ -108,7 +108,7 @@
             lease_day: $("#s-date").attr("value"),
             return_day: $("#e-date").attr("value")
         };
-        AjaxUtil.sendData(postData, "POST", function(){
+        AjaxUtil.crudData(postData, "POST", function(){
             window.location.href = '';//결제페이지
         })
     })
@@ -118,7 +118,7 @@
         var postData = {
             id: data[0].list.id
         };
-        AjaxUtil.sendData(postData, "POST", function(){
+        AjaxUtil.crudData(postData, "POST", function(){
             window.location.href = '';//장바구니 페이지
         })
     })

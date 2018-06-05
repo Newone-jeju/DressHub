@@ -32,7 +32,7 @@ function AjaxUtil(url){
 	this.url = url;
 }
 
-AjaxUtil.prototype.CrudData = function(crudData, type ,func){
+AjaxUtil.prototype.crudData = function(crudData, type ,func){
 	$.ajax(
 		{
 			url: this.url,
