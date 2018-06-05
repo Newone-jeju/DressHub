@@ -5,8 +5,8 @@ import lombok.Data;
 
 @Data
 public class ProductImage {
-    Integer id;
-    Integer productId;
+    long id;
+    long productId;
     String image;
     String imageSize;
 }

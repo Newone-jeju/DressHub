@@ -4,8 +4,13 @@ package com.newoneplus.dresshub.Service;
 import com.newoneplus.dresshub.ImageProcesser;
 import com.newoneplus.dresshub.Model.*;
 import com.newoneplus.dresshub.Model.ThumbupDao;
+import com.newoneplus.dresshub.Repository.BasketRepository;
+import com.newoneplus.dresshub.Repository.ProductRepository;
 import com.newoneplus.dresshub.Repository.ThumbUpRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import javax.imageio.ImageIO;
@@ -15,6 +20,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 @Service
 public class ProductService {
@@ -28,12 +34,16 @@ public class ProductService {
     private ThumbupDao thumbupDao;
     @Autowired
     ThumbUpRepository thumbUpRepository;
+    @Autowired
+    ProductRepository productRepository;
+    @Autowired
+    BasketRepository basketRepository;
 
     //product 등록
     public void createProduct(Product product) throws IOException {
         ImageProcesser imageProcesser = new ImageProcesser();
-        int product_id = productDao.insert(product);
-        product.setId(product_id);
+        long product_id = productRepository.save(product).getId();
+        product.setId( product_id);
         String filename = "";
         // 첨부파일(상품사진)이 있으면
         if (!product.getImage().get(0).isEmpty()) {
@@ -76,16 +86,16 @@ public class ProductService {
                 productImage.setImageSize("일반");
                 productImageDao.insert(productImage);
             }
-            productDao.update(product);
+            productRepository.save(product);
         }
     }
 
-    public ArrayList<Product> getProductList() throws ClassNotFoundException {
-        return productDao.getList("ID DESC");
+    public List<Product> getProductList() throws ClassNotFoundException {
+        return productRepository.findAllByOrderByIdDesc();
     }
     // productid에 맞는 프로덕트 불러오기
-    public Product getProduct(int id) throws ClassNotFoundException {
-        return productDao.get(id);
+    public Product getProduct(long id) throws ClassNotFoundException {
+        return productRepository.findById(id);
     }
 
 
@@ -126,23 +136,24 @@ public class ProductService {
     //좋아요 등록하기
     public void insertThumup(ThumbUp thumbUp){
         thumbUpRepository.save(thumbUp);
-        Product product = productDao.get(thumbUp.getProduct());
+        Product product = productRepository.findById(thumbUp.getProduct());
         product.setLikes(product.getLikes()+1);
-        productDao.update(product);
+        productRepository.save(product);
     }
 
     //좋아요 삭제하기
     public void deleteThumup( ThumbUp thumbUp) {
         thumbUpRepository.deleteByUserAndProduct(thumbUp.getUser(), thumbUp.getProduct());
-        Product product = productDao.get(thumbUp.getProduct());
+        Product product = productRepository.findById(thumbUp.getProduct());
         product.setLikes(product.getLikes()-1);
-        productDao.update(product);
+        productRepository.save(product);
     }
 
-    public HashMap<String,Object> getThumbUpProductList(int page, User user) {
-        HashMap<String, Object> map = new HashMap<>();
-        map.put("count", thumbUpRepository.countByUser(user.getId()));
-        map.put("list", thumbupDao.getThumbUpProductList(page, user));
-        return map;
+    public Page<Product> getThumbUpProductList(int page, User user) {
+//        HashMap<String, Object> map = new HashMap<>();
+//        map.put("count", thumbUpRepository.countByUser(user.getId()));
+//        map.put("list", thumbupDao.getThumbUpProductList(page, user));
+        PageRequest pageRequest = PageRequest.of(0, 25, Sort.Direction.ASC, "id");
+        return productRepository.findAllByUser(user.getId(),pageRequest);
     }
 }

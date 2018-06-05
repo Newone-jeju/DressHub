@@ -8,6 +8,7 @@ import com.newoneplus.dresshub.Repository.ThumbUpRepository;
 import com.newoneplus.dresshub.Service.ProductService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -57,7 +58,7 @@ public class ProductController {
     @RequestMapping(value = "/products/search", method = RequestMethod.GET)
     @ResponseBody
     public HashMap<String, Object> getProductList(@RequestParam(value = "page", defaultValue = "1") int page, @RequestParam(value = "category", defaultValue = "null") String category, @RequestParam(value = "order" , defaultValue = "id desc") String order){
-        return productService.getProductList(page, category, order);
+        return productService.getProductList(page-1, category, order);
     }
     //=============================================여기까지 product 검색
 
@@ -85,7 +86,7 @@ public class ProductController {
     //TODO 나중에 보안정책 정해지면 POST로 바꿔야 한다.
     @RequestMapping(value= "/thumbUp", method=RequestMethod.GET)
     @ResponseBody
-    public Product likeCreate(@RequestParam(value="productId") int productId, @RequestParam(value="state") boolean state) throws ClassNotFoundException {
+    public Product likeCreate(@RequestParam(value="productId") long productId, @RequestParam(value="state") boolean state) throws ClassNotFoundException {
 
         log.info("productId"+ productId);
         User user = new User();
@@ -110,7 +111,7 @@ public class ProductController {
     //
     @RequestMapping(value="/thumbUp/search", method=RequestMethod.GET)
     @ResponseBody
-    public HashMap<String, Object> getThumbUpProductList(@RequestParam(value = "page", defaultValue = "1") int page){
+    public Page<Product> getThumbUpProductList(@RequestParam(value = "page", defaultValue = "1") int page){
          User user = new User();
          user.setId("user1");
 //        return productService.getProductList(page, category, order);

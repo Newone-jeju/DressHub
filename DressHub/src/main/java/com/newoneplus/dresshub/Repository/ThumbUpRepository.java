@@ -19,10 +19,12 @@ public interface ThumbUpRepository extends JpaRepository<ThumbUp, Integer>{
     @Query("delete from ThumbUp t where t.user = :user and t.product = :product")
     @Modifying
     @Transactional
-    void deleteByUserAndProduct(@Param("user") String user,@Param("product") int product);
+    void deleteByUserAndProduct(@Param("user") String user,@Param("product") long product);
+
 
     List<ThumbUp> findAllByUser(String user);
 
-    long countByUser(String user);
-   
+//    long countByUser(String user);
+//    @Query(value = "select u from ThumbUp u join u.comment c where u.name = :name and u.password = :password")
+//    Page<Product> findAllByNameAndPassword(@Param("name") String name, @Param("password") String password, Pageable pageable);
 }

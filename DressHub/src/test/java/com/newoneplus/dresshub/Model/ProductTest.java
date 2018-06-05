@@ -1,5 +1,6 @@
 package com.newoneplus.dresshub.Model;
 
+import com.newoneplus.dresshub.Repository.ProductRepository;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
@@ -19,23 +20,23 @@ public class ProductTest {
     static final String ID_DESC = "ID DESC";
 
 
-    private ProductDao productDao;
+    private ProductRepository productRepository;
     @Before
     public void setup() throws ClassNotFoundException {
         ApplicationContext applicationContext = new AnnotationConfigApplicationContext(DaoFactory.class);
-        productDao = applicationContext.getBean("productDao", ProductDao.class);
+        productRepository = applicationContext.getBean("productRepository", ProductRepository.class);
     }
 
 
     @Test
     public void get() throws SQLException, ClassNotFoundException {
         int id = 1;
-        Product product = productDao.get(id);
+        Product product = productRepository.findById(id);
     }
 
     @Test
     public void getList(){
-        productDao.getList("ID DESC");
+        productRepository.findAllByOrderByIdDesc();
         //테스트할 방법이없노
     }
 
@@ -64,15 +65,15 @@ public class ProductTest {
         product.setThumbnailImage("imageUrlTest");
 
         product.setName("nameTest");
-        product.setProviderId("user1");
+        product.setProvider("user1");
         product.setSalePrice(3);
         product.setState("stateTest");
 
-        Integer insertedId = productDao.insert(product);
+        Long insertedId = productRepository.save(product).getId();
         //딜리트 테스트가 통과하지 못한경우 직업 지워야할 id출력
         System.out.println(insertedId);
         product.setId(insertedId);
-        Product insertedProduct = productDao.get(insertedId);
+        Product insertedProduct = productRepository.findById(insertedId);
 
         assertThat(product, is(insertedProduct));
         //여기까지 삽입관련 테스트
@@ -81,16 +82,16 @@ public class ProductTest {
         product.setCostPerDay(5);
         product.setDeposit(6);
         product.setSalePrice(7);
-        productDao.update(product);
+        productRepository.save(product);
 
-        Product updatedProduct = productDao.get(insertedId);
+        Product updatedProduct = productRepository.findById(insertedId);
 
         assertThat(product, is(updatedProduct));
 
 //        여기까지 갱신관련 테스트
 
-        productDao.delete(insertedId);
-        Product deletedProduct = productDao.get(insertedId);
+        productRepository.delete(insertedProduct);
+        Product deletedProduct = productRepository.findById(insertedId);
 
         assertThat(deletedProduct, is(nullValue()));
 //        삭제 테스트
@@ -98,7 +99,7 @@ public class ProductTest {
 
     @Test
     public void productCount(){
-        int totalCount = productDao.getCount(null);
+        long totalCount = productRepository.count();
 
         assertThat(totalCount, is(61));
     }

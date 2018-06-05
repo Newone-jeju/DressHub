@@ -3,15 +3,14 @@ package com.newoneplus.dresshub.Model;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Data
 @Entity
-public class ThumbUp{
+public class ThumbUp implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
-    @OneToMany
     String user;
-    @OneToMany
-    int product;
+    Long product;
 }

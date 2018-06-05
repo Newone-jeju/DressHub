@@ -1,5 +1,6 @@
 package com.newoneplus.dresshub.Model;
 
+import com.newoneplus.dresshub.Repository.ProductRepository;
 import com.newoneplus.dresshub.Service.MainService;
 import com.newoneplus.dresshub.Service.ProductService;
 
@@ -80,6 +81,8 @@ public class DaoFactory {
 
     @Bean
     public ThumbupDao thumbupDao(){return new ThumbupDao(jdbcTemplate());}
+
+
 }
 
 
