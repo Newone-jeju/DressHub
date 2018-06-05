@@ -34,10 +34,11 @@ public class Product {
     String size;
     @Transient
     ArrayList<MultipartFile> image;
-//
-//    @OneToMany(cascade = CascadeType.ALL)
-//    @JoinColumn(name = "product", referencedColumnName = "id")
-//    List<ThumbUp> thumbUps=null;
+
+
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "product", referencedColumnName = "id")
+    List<ThumbUp> thumbUps=null;
 
     @Override
     public boolean equals(Object o){

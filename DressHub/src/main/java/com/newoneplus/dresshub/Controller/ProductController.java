@@ -1,9 +1,6 @@
 package com.newoneplus.dresshub.Controller;
 
-import com.newoneplus.dresshub.Model.Product;
-import com.newoneplus.dresshub.Model.ProductImage;
-import com.newoneplus.dresshub.Model.ThumbUp;
-import com.newoneplus.dresshub.Model.User;
+import com.newoneplus.dresshub.Model.*;
 import com.newoneplus.dresshub.Repository.ThumbUpRepository;
 import com.newoneplus.dresshub.Service.ProductService;
 import lombok.extern.slf4j.Slf4j;
@@ -57,7 +54,7 @@ public class ProductController {
 
     @RequestMapping(value = "/products/search", method = RequestMethod.GET)
     @ResponseBody
-    public HashMap<String, Object> getProductList(@RequestParam(value = "page", defaultValue = "1") int page, @RequestParam(value = "category", defaultValue = "null") String category, @RequestParam(value = "order" , defaultValue = "id desc") String order){
+    public Page getProductList(@RequestParam(value = "page", defaultValue = "1") int page, @RequestParam(value = "category", defaultValue = "null") String category, @RequestParam(value = "order" , defaultValue = "id desc") String order){
         return productService.getProductList(page-1, category, order);
     }
     //=============================================여기까지 product 검색
@@ -77,8 +74,9 @@ public class ProductController {
     //=============================================baskets 검색 관련
     @RequestMapping(value = "/baskets/search", method = RequestMethod.GET)
     @ResponseBody
-    public HashMap<String, Object> getBasketList(@RequestParam(value = "userId") String userId){
-        return productService.getBasketList(userId);
+    public Page<Basket> getBasketList(@RequestParam(value = "page", defaultValue="1") int page){
+
+        return productService.getBasketList(page-1);
     }
 
     //=============================================baskets 검색 여기까지

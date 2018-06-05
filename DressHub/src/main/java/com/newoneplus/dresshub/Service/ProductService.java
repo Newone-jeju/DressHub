@@ -108,28 +108,38 @@ public class ProductService {
     }
 
 //   카테고리와 페이징처리를 위한 상품 불러오기
-    public HashMap<String,Object > getProductList(int page, String category, String array) {
+    public Page<Product> getProductList(int page, String category, String array) {
         HashMap<String, Object> map = new HashMap<>();
-        map.put("list", productDao.getList(page,category,array));
-        map.put("count", productDao.getCount(category));
-        //Todo 현재 user1로 임시로 지정 나중에 보안정책 완료 후 User가져오는 것으로 수정
+        if(category.equals("null")) {
+            category = "";
+        }
         User user = new User();
         user.setId("user1");
-        try{
-//            user= AuthorizationService.getCurrentUser();
-            map.put("like", thumbUpRepository.findAllByUser(user.getId()));
-        }catch (NullPointerException e){
-            map.put("like", null);
-            e.printStackTrace();
-            return map;
-        }
-        return map;
+        PageRequest pageRequest = PageRequest.of(page, 25, Sort.Direction.ASC, "id");
+        //여기에 좋아요와 조인을 해야한다.
+            return productRepository.findAllByCatetoryJoinThumbUpByUser(category, user.getId(), pageRequest);
+
+        //Todo 현재 user1로 임시로 지정 나중에 보안정책 완료 후 User가져오는 것으로 수정
+//        User user = new User();
+//        user.setId("user1");
+//        try{
+////            user= AuthorizationService.getCurrentUser();
+//            map.put("like", thumbUpRepository.findAllByUser(user.getId()));
+//        }catch (NullPointerException e){
+//            map.put("like", null);
+//            e.printStackTrace();
+//            return map;
+//        }
+
     };
 
 
     //유저에 대한 장바구니 불러오기
-    public HashMap<String, Object> getBasketList(String userId){
-        return basketDao.getBasketList(userId);
+    public Page<Basket> getBasketList(int page){
+        User user = new User();
+        user.setId("user1");
+        PageRequest pageRequest = PageRequest.of(page, 25);
+        return basketRepository.findAllByUserJoinProduct(user.getId(), pageRequest);
     }
 
 
