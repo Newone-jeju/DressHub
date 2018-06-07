@@ -1,23 +1,23 @@
-package com.newoneplus.dresshub.Model;
-
-import com.newoneplus.dresshub.Model.ThumbUp;
-import lombok.Cleanup;
-import org.springframework.dao.EmptyResultDataAccessException;
-import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.RowMapper;
-import org.springframework.jdbc.support.GeneratedKeyHolder;
-import org.springframework.jdbc.support.KeyHolder;
-
-import java.sql.PreparedStatement;
-import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.List;
-
-public class ThumbupDao {
-    private JdbcTemplate jdbcTemplate;
-    public ThumbupDao(JdbcTemplate jdbcTemplate) {
-        this.jdbcTemplate = jdbcTemplate;
-    }
+//package com.newoneplus.dresshub.Model;
+//
+//import com.newoneplus.dresshub.Model.ThumbUp;
+//import lombok.Cleanup;
+//import org.springframework.dao.EmptyResultDataAccessException;
+//import org.springframework.jdbc.core.JdbcTemplate;
+//import org.springframework.jdbc.core.RowMapper;
+//import org.springframework.jdbc.support.GeneratedKeyHolder;
+//import org.springframework.jdbc.support.KeyHolder;
+//
+//import java.sql.PreparedStatement;
+//import java.sql.Statement;
+//import java.util.ArrayList;
+//import java.util.List;
+//
+//public class ThumbupDao {
+//    private JdbcTemplate jdbcTemplate;
+//    public ThumbupDao(JdbcTemplate jdbcTemplate) {
+//        this.jdbcTemplate = jdbcTemplate;
+//    }
 
 
 
@@ -94,33 +94,33 @@ public class ThumbupDao {
 //    }
 
     // user가 thumb_up한 product 가져오는 코드
-    public ArrayList<Product> getThumbUpProductList(int page, User user) {
-        ArrayList<Product> productList = null;
-        try {
-            productList = (ArrayList<Product>) jdbcTemplate.queryForObject
-                    ("SELECT PRODUCT, NAME, THUMBNAIL_IMAGE, DEPOSIT, COST_PER_DAY, CONTENTS, CATEGORY, STATE, SIZE " +
-                            "FROM THUMB_UP JOIN PRODUCT ON THUMB_UP.PRODUCT= PRODUCT.ID " +
-                            "WHERE (@ROWNUM :=" + (page * 25 - 25) + ") =" + (page * 25 - 25) +  " LIMIT " + (page * 25 - 25) + ", 25;", (RowMapper<Object>) (rs, rowNum) -> {
-                        List<Product> products = new ArrayList<>();
-                        do  {
-                            Product product = new Product();
-                            product.setId(rs.getLong("product"));
-                            product.setName(rs.getString("name"));
-                            product.setThumbnailImage(rs.getString("thumbnail_image"));
-                            product.setContents(rs.getString("contents"));
-                            product.setCategory(rs.getString("category"));
-                            product.setState(rs.getString("state"));
-                            product.setSize(rs.getString("size"));
-                            product.setDeposit(rs.getInt("deposit"));
-                            product.setCostPerDay(rs.getInt("cost_per_day"));
-                            products.add(product);
-                        }while((rs.next()));
-                        return products;
-                    });
-        }catch (EmptyResultDataAccessException e){
-            productList = null;
-        }
-        return productList;
-    }
-    //업데이트문은 필요 없을듯
-}
+//    public ArrayList<Product> getThumbUpProductList(int page, User user) {
+//        ArrayList<Product> productList = null;
+//        try {
+//            productList = (ArrayList<Product>) jdbcTemplate.queryForObject
+//                    ("SELECT PRODUCT, NAME, THUMBNAIL_IMAGE, DEPOSIT, COST_PER_DAY, CONTENTS, CATEGORY, STATE, SIZE " +
+//                            "FROM THUMB_UP JOIN PRODUCT ON THUMB_UP.PRODUCT= PRODUCT.ID " +
+//                            "WHERE (@ROWNUM :=" + (page * 25 - 25) + ") =" + (page * 25 - 25) +  " LIMIT " + (page * 25 - 25) + ", 25;", (RowMapper<Object>) (rs, rowNum) -> {
+//                        List<Product> products = new ArrayList<>();
+//                        do  {
+//                            Product product = new Product();
+//                            product.setId(rs.getLong("product"));
+//                            product.setName(rs.getString("name"));
+//                            product.setThumbnailImage(rs.getString("thumbnail_image"));
+//                            product.setContents(rs.getString("contents"));
+//                            product.setCategory(rs.getString("category"));
+//                            product.setState(rs.getString("state"));
+//                            product.setSize(rs.getString("size"));
+//                            product.setDeposit(rs.getInt("deposit"));
+//                            product.setCostPerDay(rs.getInt("cost_per_day"));
+//                            products.add(product);
+//                        }while((rs.next()));
+//                        return products;
+//                    });
+//        }catch (EmptyResultDataAccessException e){
+//            productList = null;
+//        }
+//        return productList;
+//    }
+//    //업데이트문은 필요 없을듯
+//}

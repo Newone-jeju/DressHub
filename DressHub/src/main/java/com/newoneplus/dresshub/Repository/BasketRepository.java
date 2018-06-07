@@ -10,6 +10,6 @@ import org.springframework.data.repository.query.Param;
 
 public interface BasketRepository extends JpaRepository<Basket, Integer> {
 
-    @Query(value="select b from Basket b left outer join Product p on (b.productId=p.id) where b.user=:user")
+    @Query(value="select b from Basket b left outer join Product p on (b.productId=p.id) where b.userId =:user")
     Page<Basket> findAllByUserJoinProduct(@Param("user")String user , Pageable pageable);
 }

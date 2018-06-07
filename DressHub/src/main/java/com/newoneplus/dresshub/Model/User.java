@@ -2,13 +2,19 @@ package com.newoneplus.dresshub.Model;
 
 import lombok.Data;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import java.util.Date;
 
 @Data
+@Entity
 public class User {
+    @Id
+    @GeneratedValue()
     @NotNull
     @Size(min=4, max=16, message="사용자 아이디는 4자리 이상 16자 이하만 가능 합니다.")
     private String id;

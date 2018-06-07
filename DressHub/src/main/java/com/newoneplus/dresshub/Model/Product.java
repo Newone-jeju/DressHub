@@ -8,6 +8,7 @@ import javax.persistence.*;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 @Data
@@ -37,8 +38,8 @@ public class Product {
 
 
     @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "product", referencedColumnName = "id")
-    List<ThumbUp> thumbUps=null;
+    @JoinColumn(name = "productId")
+    List<ThumbUp> thumbUps;
 
     @Override
     public boolean equals(Object o){

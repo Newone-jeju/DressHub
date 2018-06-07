@@ -7,10 +7,13 @@ import java.io.Serializable;
 
 @Data
 @Entity
-public class ThumbUp implements Serializable{
+public class ThumbUp{
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.TABLE)
     Long id;
-    String user;
-    Long product;
+    String userId;
+    Long productId;
+//    @ManyToOne
+//    @JoinColumn(name="product_id")
+//    Product product;
 }

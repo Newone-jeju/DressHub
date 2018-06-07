@@ -75,35 +75,29 @@ public class ProductController {
     @RequestMapping(value = "/baskets/search", method = RequestMethod.GET)
     @ResponseBody
     public Page<Basket> getBasketList(@RequestParam(value = "page", defaultValue="1") int page){
-
         return productService.getBasketList(page-1);
     }
-
     //=============================================baskets 검색 여기까지
 
     //TODO 나중에 보안정책 정해지면 POST로 바꿔야 한다.
-    @RequestMapping(value= "/thumbUp", method=RequestMethod.GET)
+    @RequestMapping(value= "/thumbUp", method=RequestMethod.POST)
     @ResponseBody
-    public Product likeCreate(@RequestParam(value="productId") long productId, @RequestParam(value="state") boolean state) throws ClassNotFoundException {
+    public Product likeCreate(@RequestBody Product product , @RequestParam(value="state") boolean state) throws ClassNotFoundException {
 
-        log.info("productId"+ productId);
         User user = new User();
         user.setId("user1");
         ThumbUp thumbUp = new ThumbUp();
-        thumbUp.setUser(user.getId());
-        thumbUp.setProduct(productId);
+        thumbUp.setUserId(user.getId());
+        thumbUp.setProductId(product.getId());
 
         //TODO 나중에 보안정책 끝나면 가져와서 넣을 것
 //        user= AuthorizationService.getCurrentUser();
-
-        if(state ){
+        if(state){
             productService.insertThumup(thumbUp);
-
         }else{
             productService.deleteThumup(thumbUp);
         }
-
-        return productService.getProduct(productId);
+        return productService.getProduct(product.getId());
     }
 
     //

@@ -3,8 +3,9 @@ package com.newoneplus.dresshub.Service;
 
 import com.newoneplus.dresshub.ImageProcesser;
 import com.newoneplus.dresshub.Model.*;
-import com.newoneplus.dresshub.Model.ThumbupDao;
+
 import com.newoneplus.dresshub.Repository.BasketRepository;
+import com.newoneplus.dresshub.Repository.ProductImageRepository;
 import com.newoneplus.dresshub.Repository.ProductRepository;
 import com.newoneplus.dresshub.Repository.ThumbUpRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,20 +25,17 @@ import java.util.List;
 
 @Service
 public class ProductService {
-    @Autowired
-    private ProductDao productDao;
+
     @Autowired
     private ProductImageDao productImageDao;
-    @Autowired
-    private BasketDao basketDao;
-    @Autowired
-    private ThumbupDao thumbupDao;
     @Autowired
     ThumbUpRepository thumbUpRepository;
     @Autowired
     ProductRepository productRepository;
     @Autowired
     BasketRepository basketRepository;
+    @Autowired
+    ProductImageRepository productImageRepository;
 
     //product 등록
     public void createProduct(Product product) throws IOException {
@@ -62,13 +60,13 @@ public class ProductService {
                         ImageIO.write(image, "jpg", new File(path + mediumpath));
                         productImage.setImage(mediumpath);
                         productImage.setImageSize("중간");
-                        productImageDao.insert(productImage);
+                        productImageRepository.save(productImage);
                         BufferedImage image2 = imageProcesser.getSmallImage(product.getImage().get(i).getInputStream());
                         String smallpath = "small" + filename;
                         ImageIO.write(image2, "jpg", new File(path + smallpath));
                         productImage.setImage(smallpath);
                         productImage.setImageSize("작은");
-                        productImageDao.insert(productImage);
+                        productImageRepository.save(productImage);
                     } catch (FileNotFoundException e) {
                         e.printStackTrace();
                     }
@@ -84,7 +82,7 @@ public class ProductService {
                 }
                 productImage.setImage("origin" + filename);
                 productImage.setImageSize("일반");
-                productImageDao.insert(productImage);
+                productImageRepository.save(productImage);
             }
             productRepository.save(product);
         }
@@ -100,11 +98,11 @@ public class ProductService {
 
 
     //product이미지리스트 프로덕트id에 맞게 불러오기
-    public ArrayList<ProductImage> getProductImageList(int id){ return productImageDao.getProductImageList(id, "ID DESC"); }
+    public List<ProductImage> getProductImageList(int id){ return productImageRepository.findAllByProductIdOrderByIdDesc(id); }
 
     //product이미지리스트 모두 정렬해서 불러오기
-    public ArrayList<ProductImage> getProductImageList(){
-        return productImageDao.getProductImageList("ID DESC" );
+    public List<ProductImage> getProductImageList(){
+        return productImageRepository.findAllByOrderByIdDesc();
     }
 
 //   카테고리와 페이징처리를 위한 상품 불러오기
@@ -118,19 +116,7 @@ public class ProductService {
         PageRequest pageRequest = PageRequest.of(page, 25, Sort.Direction.ASC, "id");
         //여기에 좋아요와 조인을 해야한다.
             return productRepository.findAllByCatetoryJoinThumbUpByUser(category, user.getId(), pageRequest);
-
         //Todo 현재 user1로 임시로 지정 나중에 보안정책 완료 후 User가져오는 것으로 수정
-//        User user = new User();
-//        user.setId("user1");
-//        try{
-////            user= AuthorizationService.getCurrentUser();
-//            map.put("like", thumbUpRepository.findAllByUser(user.getId()));
-//        }catch (NullPointerException e){
-//            map.put("like", null);
-//            e.printStackTrace();
-//            return map;
-//        }
-
     };
 
 
@@ -138,7 +124,7 @@ public class ProductService {
     public Page<Basket> getBasketList(int page){
         User user = new User();
         user.setId("user1");
-        PageRequest pageRequest = PageRequest.of(page, 25);
+        PageRequest pageRequest = PageRequest.of(page, 25, Sort.Direction.DESC, "id");
         return basketRepository.findAllByUserJoinProduct(user.getId(), pageRequest);
     }
 
@@ -146,24 +132,21 @@ public class ProductService {
     //좋아요 등록하기
     public void insertThumup(ThumbUp thumbUp){
         thumbUpRepository.save(thumbUp);
-        Product product = productRepository.findById(thumbUp.getProduct());
+        Product product = productRepository.findById(thumbUp.getProductId());
         product.setLikes(product.getLikes()+1);
         productRepository.save(product);
     }
 
     //좋아요 삭제하기
     public void deleteThumup( ThumbUp thumbUp) {
-        thumbUpRepository.deleteByUserAndProduct(thumbUp.getUser(), thumbUp.getProduct());
-        Product product = productRepository.findById(thumbUp.getProduct());
+        thumbUpRepository.deleteByUserAndProduct(thumbUp.getUserId(), thumbUp.getProductId());
+        Product product = productRepository.findById(thumbUp.getProductId());
         product.setLikes(product.getLikes()-1);
         productRepository.save(product);
     }
 
     public Page<Product> getThumbUpProductList(int page, User user) {
-//        HashMap<String, Object> map = new HashMap<>();
-//        map.put("count", thumbUpRepository.countByUser(user.getId()));
-//        map.put("list", thumbupDao.getThumbUpProductList(page, user));
-        PageRequest pageRequest = PageRequest.of(0, 25, Sort.Direction.ASC, "id");
+        PageRequest pageRequest = PageRequest.of(0, 25, Sort.Direction.DESC, "id");
         return productRepository.findAllByUser(user.getId(),pageRequest);
     }
 }

@@ -89,16 +89,16 @@ public class ProductDao {
 
 //page에 따라 데이터 가져오기 위한 코드
 //    @RowNUM은 없어도 되는데 나중에 어떻게 될 지몰라서 일단 들여놓음 가져오는 게시물에 순서대로 id 매기는 코드
-    public ArrayList<Product> getList(int page, String category, String arrangeQuery) {
-
-        if(!category.equals("null")){
-            category = " AND CATEGORY LIKE'" + category + "%'";
-        }else{
-            category="";
-        }
-        String sql = "SELECT * FROM PRODUCT WHERE (@ROWNUM :=" + (page * 25 - 25) + ") =" + (page * 25 - 25) + category +" ORDER BY " + arrangeQuery + " LIMIT " + (page * 25 - 25) + ", 25;";
-        return getProducts(sql);
-    }
+//    public ArrayList<Product> getList(int page, String category, String arrangeQuery) {
+//
+//        if(!category.equals("null")){
+//            category = " AND CATEGORY LIKE'" + category + "%'";
+//        }else{
+//            category="";
+//        }
+//        String sql = "SELECT * FROM PRODUCT WHERE (@ROWNUM :=" + (page * 25 - 25) + ") =" + (page * 25 - 25) + category +" ORDER BY " + arrangeQuery + " LIMIT " + (page * 25 - 25) + ", 25;";
+//        return getProducts(sql);
+//    }
 
 
 //    Product가져오는 부분이 중복되서 리팩토링 기존의 코드는 변경없음
