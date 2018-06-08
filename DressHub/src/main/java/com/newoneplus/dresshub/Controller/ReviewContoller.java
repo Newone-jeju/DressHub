@@ -37,7 +37,7 @@ public class ReviewContoller {
     }
 
 
-    @GetMapping("/list")
+    @GetMapping("/list/search")
     public List get(@RequestParam(defaultValue = "-1") Integer productId,
                     @RequestParam(defaultValue = "null") String userId) {
         List<Review> result = null;
@@ -48,7 +48,6 @@ public class ReviewContoller {
         }
         return result;
     }
-
 
     @PostMapping
     public ResultMessage insert(@RequestBody Review review) {
@@ -84,9 +83,9 @@ public class ReviewContoller {
         return resultMessage;
     }
 
-    private static final String IMAGE_PATH = System.getProperty("user.dir") + "/src/main/resources/static/review";
+    private static final String IMAGE_PATH = System.getProperty("user.dir") + "/out/production/main/resources/static/review/image";
 
-    @PostMapping("/{id}/image")
+    @PostMapping("/image")
     @ResponseBody
     public ResultMessage insertImage(@RequestParam MultipartFile Image, @PathVariable Integer id) {
         //TODO 권한 문제  + 수정관련 이슈 해결필요
@@ -116,7 +115,7 @@ public class ReviewContoller {
         return resultMessage;
     }
 
-    @PutMapping("/{id}/image")
+    @PutMapping("/image")
     @ResponseBody
     public ResultMessage updateImage(@RequestParam MultipartFile Image, @PathVariable Integer id) {
         ImageProcesser imageProcesser = new ImageProcesser();
@@ -136,6 +135,9 @@ public class ReviewContoller {
 
         return resultMessage;
     }
+
+
+
 
 
 }
