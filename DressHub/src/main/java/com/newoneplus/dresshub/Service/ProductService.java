@@ -26,8 +26,7 @@ import java.util.List;
 @Service
 public class ProductService {
 
-    @Autowired
-    private ProductImageDao productImageDao;
+ 
     @Autowired
     ThumbUpRepository thumbUpRepository;
     @Autowired
@@ -38,7 +37,7 @@ public class ProductService {
     ProductImageRepository productImageRepository;
 
     //product 등록
-    public void createProduct(Product product) throws IOException {
+    public void createProduct(Product product) {
         ImageProcesser imageProcesser = new ImageProcesser();
         long product_id = productRepository.save(product).getId();
         product.setId( product_id);
@@ -46,7 +45,6 @@ public class ProductService {
         // 첨부파일(상품사진)이 있으면
         if (!product.getImage().get(0).isEmpty()) {
             for (int i = 0; i < product.getImage().size(); i++) {
-
                 filename = product.getImage().get(i).getOriginalFilename();
                 String path = System.getProperty("user.dir") + "/out/main/resources/static/product_image/";
                 ProductImage productImage = new ProductImage();
@@ -69,6 +67,8 @@ public class ProductService {
                         productImageRepository.save(productImage);
                     } catch (FileNotFoundException e) {
                         e.printStackTrace();
+                    } catch (IOException e) {
+                        e.printStackTrace();
                     }
 
                     try {
@@ -88,17 +88,17 @@ public class ProductService {
         }
     }
 
-    public List<Product> getProductList() throws ClassNotFoundException {
+    public List<Product> getProductList(){
         return productRepository.findAllByOrderByIdDesc();
     }
     // productid에 맞는 프로덕트 불러오기
-    public Product getProduct(long id) throws ClassNotFoundException {
+    public Product getProduct(long id)  {
         return productRepository.findById(id);
     }
 
 
     //product이미지리스트 프로덕트id에 맞게 불러오기
-    public List<ProductImage> getProductImageList(int id){ return productImageRepository.findAllByProductIdOrderByIdDesc(id); }
+    public List<ProductImage> getProductImageList(long id){ return productImageRepository.findAllByProductIdOrderByIdDesc(id); }
 
     //product이미지리스트 모두 정렬해서 불러오기
     public List<ProductImage> getProductImageList(){
@@ -132,15 +132,15 @@ public class ProductService {
     //좋아요 등록하기
     public void insertThumup(ThumbUp thumbUp){
         thumbUpRepository.save(thumbUp);
-        Product product = productRepository.findById(thumbUp.getProductId());
+        Product product = productRepository.findById(thumbUp.getProduct().getId());
         product.setLikes(product.getLikes()+1);
         productRepository.save(product);
     }
 
     //좋아요 삭제하기
     public void deleteThumup( ThumbUp thumbUp) {
-        thumbUpRepository.deleteByUserAndProduct(thumbUp.getUserId(), thumbUp.getProductId());
-        Product product = productRepository.findById(thumbUp.getProductId());
+        thumbUpRepository.deleteByUserAndProduct(thumbUp.getUserId(), thumbUp.getProduct());
+        Product product = productRepository.findById(thumbUp.getProduct().getId());
         product.setLikes(product.getLikes()-1);
         productRepository.save(product);
     }

@@ -1,5 +1,7 @@
 package com.newoneplus.dresshub.Model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 import org.hibernate.annotations.GeneratorType;
 import org.springframework.web.multipart.MultipartFile;
@@ -37,8 +39,9 @@ public class Product {
     ArrayList<MultipartFile> image;
 
 
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "productId")
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "product")
+    @JsonIgnoreProperties(value = "product", allowSetters = true)
     List<ThumbUp> thumbUps;
 
     @Override
@@ -86,6 +89,5 @@ public class Product {
         }
         return isEqual;
     }
-
 }
 

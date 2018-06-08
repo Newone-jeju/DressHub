@@ -3,6 +3,7 @@ package com.newoneplus.dresshub.Controller;
 import com.newoneplus.dresshub.Model.*;
 import com.newoneplus.dresshub.Repository.ThumbUpRepository;
 import com.newoneplus.dresshub.Service.ProductService;
+import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -15,83 +16,59 @@ import java.text.ParseException;
 import java.util.*;
 
 @Slf4j
-@Controller
+@RestController
+@RequestMapping(value = "/products")
+@AllArgsConstructor
 public class ProductController {
 
     @Autowired
     ProductService  productService;
 
 
-    //=================================================prdouct CRUD
-
-    @RequestMapping(value = "/products/{id}", method = RequestMethod.GET)
-    @ResponseBody
-    public Product getProduct(@PathVariable(value="id") int id) throws ClassNotFoundException {
+    @GetMapping(value = "/{id}")
+    public Product getProduct(@PathVariable(value="id") int id)  {
         return productService.getProduct(id);
     }
 
-    @RequestMapping(value = "/products", method = RequestMethod.POST)
-    public String productCreate(@ModelAttribute Product product) throws IOException, ParseException {
+
+    @PostMapping
+    public String productCreate(@RequestBody Product product){
         productService.createProduct(product);
         return "productList";
     }
-    @RequestMapping(value = "/products/new", method = RequestMethod.GET)
-    public String productNew(){
-        return "productform";
-    }
 
-    @RequestMapping(value = "/products", method = RequestMethod.GET)
-    @ResponseBody
-    public List<Product> getProductList() throws ClassNotFoundException {
+
+    @GetMapping(value = "/list")
+    public List<Product> getProductList() {
         return productService.getProductList();
     }
 
-    //TODO 업데이트, delete 구현 예정
-
-    //============================================여기까지 CRUD
-
-    //=============================================product 검색관련
-
-    @RequestMapping(value = "/products/search", method = RequestMethod.GET)
-    @ResponseBody
+    @GetMapping(value="/search")
     public Page getProductList(@RequestParam(value = "page", defaultValue = "1") int page, @RequestParam(value = "category", defaultValue = "null") String category, @RequestParam(value = "order" , defaultValue = "id desc") String order){
         return productService.getProductList(page-1, category, order);
     }
-    //=============================================여기까지 product 검색
 
-    //==========================================productImage 검색관련
-    @RequestMapping(value = "/productImages/search", method = RequestMethod.GET)
-    @ResponseBody
-    public List<ProductImage> getProductImageList(@RequestParam(value = "productId",required = false) Integer paramId){
+
+    @GetMapping(value = "/image/list/search")
+    public List<ProductImage> getProductImageList(@RequestParam(value = "productId",required = false) Long paramId){
         if(paramId == null){
             return productService.getProductImageList();
         }else{
             return productService.getProductImageList(paramId);
         }
     }
-    //=============================================productImage 여기까지
 
-    //=============================================baskets 검색 관련
-    @RequestMapping(value = "/baskets/search", method = RequestMethod.GET)
-    @ResponseBody
-    public Page<Basket> getBasketList(@RequestParam(value = "page", defaultValue="1") int page){
-        return productService.getBasketList(page-1);
-    }
-    //=============================================baskets 검색 여기까지
 
-    //TODO 나중에 보안정책 정해지면 POST로 바꿔야 한다.
     @RequestMapping(value= "/thumbUp", method=RequestMethod.POST)
     @ResponseBody
     public Product likeCreate(@RequestBody Product product , @RequestParam(value="state") boolean state) throws ClassNotFoundException {
-
+        //TODO develop이랑 합치면 넣기 !
         User user = new User();
         user.setId("user1");
         ThumbUp thumbUp = new ThumbUp();
         thumbUp.setUserId(user.getId());
-        thumbUp.setProductId(product.getId());
+        thumbUp.setProduct(product);
 
-        //TODO 나중에 보안정책 끝나면 가져와서 넣을 것
-//        user= AuthorizationService.getCurrentUser();
         if(state){
             productService.insertThumup(thumbUp);
         }else{
@@ -100,23 +77,25 @@ public class ProductController {
         return productService.getProduct(product.getId());
     }
 
-    //
+
     @RequestMapping(value="/thumbUp/search", method=RequestMethod.GET)
     @ResponseBody
     public Page<Product> getThumbUpProductList(@RequestParam(value = "page", defaultValue = "1") int page){
          User user = new User();
          user.setId("user1");
-//        return productService.getProductList(page, category, order);
         return productService.getThumbUpProductList(page, user);
     }
 
-    //TODO restapi에 맞지않지만 현재 이것보다 좋은 방법x 나중에 생각해 보자.
+
+    //TODO 나중에 프론트 위임
     @RequestMapping(value = "/productList", method= RequestMethod.GET)
     public String productListView(@RequestParam(value = "category", defaultValue = "10") String category, Model model){
         model.addAttribute("category", category);
         return "productList";
     }
-    //TODO restapi에 맞지않지만 현재 이것보다 좋은 방법x 나중에 생각해 보자.
+
+
+    //TODO 나중에 프론트 위임
     @RequestMapping(value = "/productDetail", method = RequestMethod.GET)
     public String getProductDetail(@RequestParam(value="productId") int productId, Model model) throws ClassNotFoundException {
         model.addAttribute("productId", productId);
@@ -124,10 +103,5 @@ public class ProductController {
     }
 
 
-//TODO 나중에 user정보 NULL 나올 때 로그인창으로 이동
-    @ExceptionHandler(NullPointerException.class)
-    public String requestLogin(NullPointerException e){
-        return "login";
-    }
 
 }

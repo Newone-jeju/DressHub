@@ -1,5 +1,6 @@
 package com.newoneplus.dresshub.Model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -12,8 +13,9 @@ public class ThumbUp{
     @GeneratedValue(strategy = GenerationType.TABLE)
     Long id;
     String userId;
-    Long productId;
-//    @ManyToOne
-//    @JoinColumn(name="product_id")
-//    Product product;
+    @ManyToOne
+    @JsonIgnoreProperties(value = "thumbUp", allowSetters = true)
+    @JoinColumn(name="product_id")
+    Product product;
+
 }
