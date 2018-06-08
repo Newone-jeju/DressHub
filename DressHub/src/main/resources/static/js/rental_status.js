@@ -22,6 +22,7 @@ function getData(url, async){
 function setLogData(data_log){
 	var log_cards = [];
 	$.each(data_log, function(i,data){
+
 		log_cards.push(
 			'<tbody class="log-card">'+
               '<tr>'+
@@ -132,8 +133,8 @@ folding($(".card-header"));
 
 
 var target = "";
-var data = "";
-var ajaxData = "";
+var productData = "";
+var data = [];
 var ajaxCard = "";
 
 
@@ -153,7 +154,7 @@ function makeList(data, target, quantity){
 		            '<p class="text">'+data[i].orderStart+'</p>'+
 		          '</div>'+
 		          '<div class="recent-status flexcenter-align">'+
-		            '<p class="text">'+data[i].log[0].status+'</p>'+
+		            '<p class="text">'+data[i].status+'</p>'+
 		          '</div>'+
 		        '</div>'+
 		        '<div class="card-body hidd">'+
@@ -161,7 +162,9 @@ function makeList(data, target, quantity){
 		              '<input type="text" name="msg" value="" placeholder="수령한 대여의상에 특이사항이 발생하면 입력해 주세요.... " class="msg-box">'+
 		              '<button class="card-write-btn card-btn">메시지작성</button>'+
 		          '</div>'+
-		          '<table class="log-list">'
+		          '<table class="log-list">';
+		cardString += addLog();
+		cardString += 
 					'</table>'+
 		        '</div>'+
 		      '</div>'
@@ -172,30 +175,50 @@ function makeList(data, target, quantity){
 }
 
 function addLog(){
+	var status = [주문중, 배송중, 대여중, 반납중, 세탁중];
+	var cardString = "";
+	var index = 0;
+	for(var i=9; i<data[0].length; i=i+5){
+		if(i != null){
+			index += 1; 
+			cardString += 
+			'<tbody class="log-card">'+
+	          '<tr>'+
+	            '<td rowspan="3" class="log-no">'+index+'</td>'+
+	            '<td rowspan="3" class="status log-title">'+status[index]+'</td>'+
+	            '<td class="name-phonenum log-content">'+i[Object.keys[i-3]]+' : '+i[Object.keys[i-2]]+'</td>'+
+	          '</tr>'+
+	          '<tr>'+
+	            '<td class="how-long log-content">'+i[Object.keys[i]]+' ~ '+i[Object.keys[i+1]]+'</td>'+
+	          '</tr>'+
+	          '<tr>'+
+	            '<td class="msg log-content">'+i[Object.keys[i-1]]+'</td>'+
+	          '</tr>'+
+	        '</tbody>';
+		}
+	}
+	return cardString;
 
+}
+
+function getData(url){
+	var ajaxData = "";
+	ajaxData = new AjaxData(url, false);
+	return ajaxData.getData();
 }
 
 
 //빌린옷
-ajaxData = new AjaxData("js/rental_status_jeayoon.json", false);
-data = ajaxData.getData();
-ajaxData = undefined;
-ajaxCard = new AjaxCard(data);
+productData = getData("js/productData.json");
+data = getData("js/rental_status_jeayoon.json");
+ajaxCard = new AjaxCard();
 target = $(".rentaling-area .card-td");
 makeList(data, target, 3);
-addLog();
+sendMessage();
 
 //빌려준옷
 
 
+
 //공통
-
-
-
-
-
-
-
-
-
 

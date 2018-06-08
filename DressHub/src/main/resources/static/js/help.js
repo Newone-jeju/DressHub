@@ -48,7 +48,7 @@ function helpInit() {
 	helpData = new AjaxData("js/help.json", false);
 	data = helpData.getData();
 	helpData = undefined;
-	helpUi = new AjaxCard(data);
+	helpUi = new AjaxCard();
 	//map nav-tab
 	NavTabInit();
 	//map title, description, content

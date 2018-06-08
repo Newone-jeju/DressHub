@@ -51,8 +51,7 @@ AjaxUtil.prototype.crudData = function(crudData, type ,func){
 
 
 //class AjaxCard
-function AjaxCard(data){
-	this.data = data;
+function AjaxCard(){
 	this.cards = [];
 }
 
