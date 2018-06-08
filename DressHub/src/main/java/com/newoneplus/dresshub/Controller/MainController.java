@@ -37,7 +37,7 @@ public class MainController {
     // User 인증정보 test
     @RequestMapping(value = "/getuser" , method = RequestMethod.GET)
     public void getUser() {
-        log.info(AuthorizationService.getCurrentUser().getId());
+        log.info(AuthorizationService.getCurrentUser().getUid());
 
     }
 }

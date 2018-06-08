@@ -45,11 +45,6 @@ public class DaoFactory {
         return dataSource;
     }
 
-    @Bean
-    public UserDao userDao()
-    {
-        return new UserDao(jdbcTemplate());
-    }
 
     @Bean
     public ProductDao productDao() {return new ProductDao(jdbcTemplate());}
