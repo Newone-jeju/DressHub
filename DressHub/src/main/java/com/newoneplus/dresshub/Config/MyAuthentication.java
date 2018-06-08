@@ -12,7 +12,7 @@ public class MyAuthentication extends UsernamePasswordAuthenticationToken {
     private static final long serialVersionUID = 1L;
 
     User user;
-
+    // ...임시
     public MyAuthentication (String id, String password, List<GrantedAuthority> grantedAuthorityList, User user) {
         super(id, password, grantedAuthorityList);
         this.user = user;

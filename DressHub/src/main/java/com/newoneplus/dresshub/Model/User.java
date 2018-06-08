@@ -13,6 +13,7 @@ import java.util.Date;
 @Data
 @Entity(name = "user")
 public class User {
+    // User VO
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;

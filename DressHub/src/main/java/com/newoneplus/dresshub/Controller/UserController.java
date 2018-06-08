@@ -19,7 +19,7 @@ import java.text.ParseException;
 @Controller
 @RequestMapping("/join")
 public class UserController {
-
+    //User controller
     @Autowired
     UserRepository userRepository;
 
