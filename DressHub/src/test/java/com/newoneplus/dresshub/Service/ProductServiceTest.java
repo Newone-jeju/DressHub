@@ -1,6 +1,6 @@
 package com.newoneplus.dresshub.Service;
 
-import com.newoneplus.dresshub.Model.DaoFactory;
+//import com.newoneplus.dresshub.Model.DaoFactory;
 import com.newoneplus.dresshub.Model.Product;
 import org.junit.Before;
 import org.junit.Test;
@@ -16,8 +16,8 @@ public class ProductServiceTest {
 
     @Before
     public void setup() {
-        ApplicationContext applicationContext = new AnnotationConfigApplicationContext(DaoFactory.class);
-        productService = applicationContext.getBean("productService", ProductService.class);
+//        ApplicationContext applicationContext = new AnnotationConfigApplicationContext(DaoFactory.class);
+//        productService = applicationContext.getBean("productService", ProductService.class);
     }
 
     //

@@ -64,17 +64,17 @@ public class ProductController {
     public Product likeCreate(@RequestBody Product product , @RequestParam(value="state") boolean state) throws ClassNotFoundException {
         //TODO develop이랑 합치면 넣기 !
         User user = new User();
-        user.setId("user1");
+        user.setUid("user1");
         ThumbUp thumbUp = new ThumbUp();
-        thumbUp.setUserId(user.getId());
+        thumbUp.setUserId(user.getUid());
         thumbUp.setProduct(product);
-
         if(state){
             productService.insertThumup(thumbUp);
         }else{
             productService.deleteThumup(thumbUp);
         }
         return productService.getProduct(product.getId());
+
     }
 
 
@@ -82,7 +82,7 @@ public class ProductController {
     @ResponseBody
     public Page<Product> getThumbUpProductList(@RequestParam(value = "page", defaultValue = "1") int page){
          User user = new User();
-         user.setId("user1");
+         user.setUid("user1");
         return productService.getThumbUpProductList(page, user);
     }
 

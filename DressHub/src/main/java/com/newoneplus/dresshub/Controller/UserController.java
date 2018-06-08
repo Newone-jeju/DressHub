@@ -2,7 +2,7 @@ package com.newoneplus.dresshub.Controller;
 
 
 import com.newoneplus.dresshub.Model.User;
-import com.newoneplus.dresshub.Service.UserService;
+import com.newoneplus.dresshub.Repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -15,15 +15,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.validation.Valid;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 @Controller
 @RequestMapping("/join")
 public class UserController {
-
+    //User controller
     @Autowired
-    UserService userService;
+    UserRepository userRepository;
 
     @GetMapping
     public String showJoinForm(Model model, Authentication authentication) {
@@ -35,15 +33,10 @@ public class UserController {
 
     @PostMapping("")
     public String create(@ModelAttribute @Valid User user) throws ClassNotFoundException, ParseException {
-
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        Date date = null;
-        date = simpleDateFormat.parse(simpleDateFormat.format(new Date()));
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         user.setUserType(1);
-        user.setResisterDate(date);
-        userService.save(user);
+        userRepository.save(user);
         return "redirect:/";
     }
 }

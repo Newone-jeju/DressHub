@@ -24,7 +24,7 @@ public class BasketTest {
     public void get(){
        Basket basket =basketDao.get(1);
 
-//        assertThat(basket.getUserId(), is(""));
+//        assertThat(basket.getUser(), is(""));
     }
 
     @Test
@@ -36,7 +36,7 @@ public class BasketTest {
 //    @Test
 //    public void add(){
 //        Basket basket = new Basket();
-//        basket.setUserId("user1");
+//        basket.setUser("user1");
 //        basket.setProductId(60);
 ////        같은 데이터 x 유니크로 막아놈
 //        int id = basketDao.insert(basket);
@@ -44,14 +44,14 @@ public class BasketTest {
 //        Basket inserBasket = basketDao.get(id);
 //
 //        assertThat(inserBasket.getId(), is(3));
-//        assertThat(inserBasket.getUserId(), is("user1"));
+//        assertThat(inserBasket.getUser(), is("user1"));
 //        assertThat(inserBasket.getProductId(), is(60));
 //    }
 //
 //    @Test
 //    public void update(){
 //        Basket basket = new Basket();
-//        basket.setUserId("user1");
+//        basket.setUser("user1");
 //        basket.setProductId(60);
 //
 //        int id = basketDao.insert(basket);
@@ -72,7 +72,7 @@ public class BasketTest {
 //    @Test
 //    public void delete(){
 //        Basket basket = new Basket();
-//        basket.setUserId("user1");
+//        basket.setUser("user1");
 //        basket.setProductId(60);
 //
 //        int id = basketDao.insert(basket);
