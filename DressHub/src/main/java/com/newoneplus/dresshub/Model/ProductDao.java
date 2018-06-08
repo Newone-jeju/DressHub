@@ -32,73 +32,73 @@ public class ProductDao {
     public ProductDao(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }
-//    public Product get(long id) {
-//        Object[] params = {id};
-//        Product product = null;
-//
-//        try {
-//            product = (Product) jdbcTemplate.queryForObject(
-//                    "SELECT * FROM PRODUCT WHERE ID = ?", params, (RowMapper) (rs, rowNum) -> {
-//                Product selectesProduct = makeValidProduct(rs);
-//                return selectesProduct;
-//            });
-//        }catch (EmptyResultDataAccessException e){
-//            product = null;
-//        }
-//    return product;
-//    }
-//
+    public Product get(long id) {
+        Object[] params = {id};
+        Product product = null;
 
-//    public Integer insert(Product product) {
-//        KeyHolder keyHolder = new GeneratedKeyHolder();
-//
-//        Object[] params = getFullParams(product);
-//        jdbcTemplate.update(con -> {
-//            @Cleanup
-//            PreparedStatement preparedStatement = con.prepareStatement(
-//                  "INSERT INTO PRODUCT(NAME, THUMBNAIL_IMAGE, CONTENTS, COST_PER_DAY, DEPOSIT, SALE_PRICE," +
-//                          "CATEGORY, CONSIGMENT_START, CONSIGMENT_END, STATE, DELEVERY_TYPE, PROVIDER," +
-//                          "LIKES, REGISTRATION_DATE, LEAST_LEASE_DAY, SIZE)" +
-//                          "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? ,?)",
-//                  Statement.RETURN_GENERATED_KEYS);
-//          for(int i = 0 ; i < params.length ; i++){
-//              preparedStatement.setObject(i+1, params[i]);
-//          }
-//          return preparedStatement;
-//
-//        }, keyHolder);
-//        return keyHolder.getKey().intValue();
-//    }
+        try {
+            product = (Product) jdbcTemplate.queryForObject(
+                    "SELECT * FROM PRODUCT WHERE ID = ?", params, (RowMapper) (rs, rowNum) -> {
+                Product selectesProduct = makeValidProduct(rs);
+                return selectesProduct;
+            });
+        }catch (EmptyResultDataAccessException e){
+            product = null;
+        }
+    return product;
+    }
 
-//    public void update(Product product) {
-//        Object[] params = getFullParams(product);
-//        jdbcTemplate.update("UPDATE PRODUCT SET NAME = ?, THUMBNAIL_IMAGE = ?, CONTENTS = ?, COST_PER_DAY = ?, DEPOSIT = ?," +
-//                " SALE_PRICE = ?,CATEGORY = ?, CONSIGMENT_START = ?, CONSIGMENT_END = ?, STATE = ?, DELEVERY_TYPE = ?" +
-//                ", PROVIDER = ?, LIKES = ?, REGISTRATION_DATE = ?, LEAST_LEASE_DAY = ?, SIZE = ? WHERE id ="+ product.getId(), params);
-//
-//    }
 
-//    public void delete(int id) {
-//        Object[] params = {id};
-//        jdbcTemplate.update("DELETE FROM PRODUCT WHERE ID = ?", params);
-//    }
-//
-//    public ArrayList<Product> getList(String arrangeQuery) {
-//        return getProducts("SELECT * FROM PRODUCT ORDER BY " + arrangeQuery);
-//    }
+    public Integer insert(Product product) {
+        KeyHolder keyHolder = new GeneratedKeyHolder();
+
+        Object[] params = getFullParams(product);
+        jdbcTemplate.update(con -> {
+            @Cleanup
+            PreparedStatement preparedStatement = con.prepareStatement(
+                  "INSERT INTO PRODUCT(NAME, THUMBNAIL_IMAGE, CONTENTS, COST_PER_DAY, DEPOSIT, SALE_PRICE," +
+                          "CATEGORY, CONSIGMENT_START, CONSIGMENT_END, STATE, DELEVERY_TYPE, PROVIDER," +
+                          "LIKES, REGISTRATION_DATE, LEAST_LEASE_DAY, SIZE)" +
+                          "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? ,?)",
+                  Statement.RETURN_GENERATED_KEYS);
+          for(int i = 0 ; i < params.length ; i++){
+              preparedStatement.setObject(i+1, params[i]);
+          }
+          return preparedStatement;
+
+        }, keyHolder);
+        return keyHolder.getKey().intValue();
+    }
+
+    public void update(Product product) {
+        Object[] params = getFullParams(product);
+        jdbcTemplate.update("UPDATE PRODUCT SET NAME = ?, THUMBNAIL_IMAGE = ?, CONTENTS = ?, COST_PER_DAY = ?, DEPOSIT = ?," +
+                " SALE_PRICE = ?,CATEGORY = ?, CONSIGMENT_START = ?, CONSIGMENT_END = ?, STATE = ?, DELEVERY_TYPE = ?" +
+                ", PROVIDER = ?, LIKES = ?, REGISTRATION_DATE = ?, LEAST_LEASE_DAY = ?, SIZE = ? WHERE id ="+ product.getId(), params);
+
+    }
+
+    public void delete(int id) {
+        Object[] params = {id};
+        jdbcTemplate.update("DELETE FROM PRODUCT WHERE ID = ?", params);
+    }
+
+    public ArrayList<Product> getList(String arrangeQuery) {
+        return getProducts("SELECT * FROM PRODUCT ORDER BY " + arrangeQuery);
+    }
 
 //page에 따라 데이터 가져오기 위한 코드
 //    @RowNUM은 없어도 되는데 나중에 어떻게 될 지몰라서 일단 들여놓음 가져오는 게시물에 순서대로 id 매기는 코드
-//    public ArrayList<Product> getList(int page, String category, String arrangeQuery) {
-//
-//        if(!category.equals("null")){
-//            category = " AND CATEGORY LIKE'" + category + "%'";
-//        }else{
-//            category="";
-//        }
-//        String sql = "SELECT * FROM PRODUCT WHERE (@ROWNUM :=" + (page * 25 - 25) + ") =" + (page * 25 - 25) + category +" ORDER BY " + arrangeQuery + " LIMIT " + (page * 25 - 25) + ", 25;";
-//        return getProducts(sql);
-//    }
+    public ArrayList<Product> getList(int page, String category, String arrangeQuery) {
+
+        if(!category.equals("null")){
+            category = " AND CATEGORY LIKE'" + category + "%'";
+        }else{
+            category="";
+        }
+        String sql = "SELECT * FROM PRODUCT WHERE (@ROWNUM :=" + (page * 25 - 25) + ") =" + (page * 25 - 25) + category +" ORDER BY " + arrangeQuery + " LIMIT " + (page * 25 - 25) + ", 25;";
+        return getProducts(sql);
+    }
 
 
 //    Product가져오는 부분이 중복되서 리팩토링 기존의 코드는 변경없음
@@ -144,24 +144,24 @@ public class ProductDao {
     }
 
 
-//    private Object[] getFullParams(Product product)  {
-//        java.util.Date getConsigmentStart = null;
-//        java.util.Date getConsigmentEnd=null;
-//        if(!product.getConsigmentStart().equals("")&&!product.getConsigmentEnd().equals("")){
-//            try {
-//                getConsigmentStart  = format.parse(product.getConsigmentStart());
-//                getConsigmentEnd = format.parse(product.getConsigmentEnd());
-//            } catch (ParseException e) {
-//                e.printStackTrace();
-//            }
-//        }
-//
-//        return new Object[]{product.getName(), product.getThumbnailImage(), product.getContents(), product.getCostPerDay(),
-//                product.getDeposit(), product.getSalePrice(), product.getCategory(),getConsigmentStart,getConsigmentEnd, product.getState(),
-//                product.getDeleveryType(), product.getProvider(), product.getLikes(),
-//                product.getRegistrationDate(), product.getLeastLeaseDay(), product.getSize()};
-//
-//    }
+    private Object[] getFullParams(Product product)  {
+        java.util.Date getConsigmentStart = null;
+        java.util.Date getConsigmentEnd=null;
+        if(!product.getConsigmentStart().equals("")&&!product.getConsigmentEnd().equals("")){
+            try {
+                getConsigmentStart  = format.parse(product.getConsigmentStart());
+                getConsigmentEnd = format.parse(product.getConsigmentEnd());
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+        }
+
+        return new Object[]{product.getName(), product.getThumbnailImage(), product.getContents(), product.getCostPerDay(),
+                product.getDeposit(), product.getSalePrice(), product.getCategory(),getConsigmentStart,getConsigmentEnd, product.getState(),
+                product.getDeleveryType(), product.getProvider(), product.getLikes(),
+                product.getRegistrationDate(), product.getLeastLeaseDay(), product.getSize()};
+
+    }
 
 //   페이징 처리를 위해서 db count하는 코드
     public int getCount(String category) {
