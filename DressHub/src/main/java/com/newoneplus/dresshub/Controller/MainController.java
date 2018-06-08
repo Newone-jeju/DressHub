@@ -3,6 +3,7 @@ package com.newoneplus.dresshub.Controller;
 
 import com.newoneplus.dresshub.Model.Product;
 //import com.newoneplus.dresshub.Service.AuthorizationService;
+import com.newoneplus.dresshub.Service.AuthorizationService;
 import com.newoneplus.dresshub.Service.MainService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,7 @@ import java.util.List;
 @Controller
 @Slf4j
 public class MainController {
+    // main
     @Autowired
     private MainService mainService;
 //    @RequestMapping("/")
@@ -37,11 +39,11 @@ public class MainController {
         return "productform";
     }
 
-//    // User 인증정보 test
-//    @RequestMapping(value = "/getuser" , method = RequestMethod.GET)
-//    public void getUser() {
-//        log.info(AuthorizationService.getCurrentUser().getId());
-//
-//    }
 
+    // User 인증정보 test
+    @RequestMapping(value = "/getuser" , method = RequestMethod.GET)
+    public void getUser() {
+        log.info(AuthorizationService.getCurrentUser().getUid());
+
+    }
 }
