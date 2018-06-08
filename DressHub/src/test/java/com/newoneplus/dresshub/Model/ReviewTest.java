@@ -27,7 +27,7 @@ public class ReviewTest {
         review.setTitle("제목");
         review.setComment("내용");
         review.setRate(4.5f);
-        review.setUserId("testuser");
+        review.setUser("testuser");
         review.setProductId(0);
         review.setDate("2000-11-22 00:00:00.0"); //미리초까지 적어줘야함
         review.setLeaseStart("2000-11-22");
@@ -49,7 +49,7 @@ public class ReviewTest {
         review.setTitle("제목");
         review.setComment("내용");
         review.setRate(4.5f);
-        review.setUserId("testuser");
+        review.setUser("testuser");
         review.setProductId(0);
         review.setDate("2000-11-22 00:00:00.0"); //미리초까지 적어줘야함
         review.setLeaseStart("2000-11-22");
@@ -69,7 +69,7 @@ public class ReviewTest {
         review.setTitle("제목");
         review.setComment("내용");
         review.setRate(4.5f);
-        review.setUserId("testuser");
+        review.setUser("testuser");
         review.setProductId(0);
         review.setDate("2000-11-22 00:00:00.0"); //미리초까지 적어줘야함
         review.setLeaseStart("2000-11-22");
@@ -85,7 +85,7 @@ public class ReviewTest {
         review.setTitle("제목");
         review.setComment("내용");
         review.setRate(4.5f);
-        review.setUserId("testuser");
+        review.setUser("testuser");
         review.setProductId(0);
         review.setDate("2000-11-22 00:00:00.0"); //미리초까지 적어줘야함
         review.setLeaseStart("2000-11-22");
@@ -102,7 +102,7 @@ public class ReviewTest {
         reviewForUpdate.setTitle("수정된 제목");
         reviewForUpdate.setComment("수정된 내용");
         reviewForUpdate.setRate(4.3f);
-        reviewForUpdate.setUserId("testuser");
+        reviewForUpdate.setUser("testuser");
         reviewForUpdate.setProductId(0);
         reviewForUpdate.setDate("2001-12-23 12:12:12.0"); //미리초까지 적어줘야함
         reviewForUpdate.setLeaseStart("2001-12-23");

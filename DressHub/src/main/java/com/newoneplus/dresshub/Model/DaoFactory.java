@@ -26,6 +26,7 @@ public class DaoFactory {
     private String password;
 
 
+
     @Bean
     public JdbcTemplate jdbcTemplate() {
         return new JdbcTemplate(datasource());
@@ -44,7 +45,6 @@ public class DaoFactory {
         dataSource.setPassword(password);
         return dataSource;
     }
-
 
     @Bean
     public ProductDao productDao() {return new ProductDao(jdbcTemplate());}
