@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:sec="http://www.springframework.org/security/tags"
+      xmlns:th="http://www.thymeleaf.org">
 
 <head>
   <meta charset="utf-8">
@@ -10,12 +12,16 @@
 
 <body>
   <div id="top">
+
     <h1 id="logo">DRESS HUB</h1>
-      <ul class="topul">
-      <li><a href="../login">LOGIN</a></li>
+
+      <ul class="topul" >
+
+
+        <li><a href="../login">LOGIN</a></li>
         <li><a href="../join">회원가입</a></li>
-      <li><a href="cart.html">장바구니</a></li>
-      <li><a href="mypage.html">MYPAGE</a></li>
+        <li><a href="cart.html">장바구니</a></li>
+        <li><a href="mypage.html">MYPAGE</a></li>
       </ul>
   </div>
   <nav id="nav">
@@ -202,6 +208,7 @@
   <script type="text/javascript" src="../js/jquery-3.3.1.min.js" charset="utf-8"></script>
   <script type="text/javascript" src="../js/carousel.js" charset="utf-8"></script>
   <script src="../js/menu.js">
+
   </script>
 </body>
 
