@@ -17,7 +17,5 @@ public class MyAuthentication extends UsernamePasswordAuthenticationToken {
         super(id, password, grantedAuthorityList);
         this.user = user;
     }
-
-
 }
 

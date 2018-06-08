@@ -4,9 +4,14 @@
 <head>
   <meta charset="utf-8">
   <link rel="stylesheet" type="text/css" href="css/menu.css" />
-  <!-- pagination plugin -->
-  <link rel="stylesheet" href="css/pagination.css">
-  <link rel="stylesheet" type="text/css" href="css/rental_status.css" />
+  <!-- 페이지 상단 카테고리 ex) 마이페이지 > 도움말  -->
+  <link rel="stylesheet" type="text/css" href="css/page_category.css" />
+  <link rel="stylesheet" type="text/css" href="css/mypage-style.css" />
+  <link rel="stylesheet" type="text/css" href="css/help.css" />
+
+
+
+
   <title></title>
 </head>
 
@@ -62,63 +67,33 @@
   
   
 
-<main id="rental-status">
+<main id="my-main">
   <div class="header">
     <nav class="page-head-category">
       <a href=""><span class="text">마이페이지</span></a>
       <span class="text"> > </span>
-      <a href=""><span class="text">내 상품</span></a>
+      <a href=""><span class="text">도움말</span></a>
     </nav>
   </div>
-
-  <article class="rentaling-area">
+  <article class="help-content">
     <header>
-      <h1>빌린 옷</h1>
-      <a class="rentaling-more" href=""><span>더보기</span></a>
     </header>
-    <main class="retaling-list">
-      <div class="card-th">
-        <div class="thumnail">
-          <p class="text flexcenter-align">이미지</p>
-        </div>
-        <div class="title flexcenter-align">
-          <p class="text">상품명</p>
-        </div>
-        <div class="order-day flexcenter-align">
-          <p class="text">주문날짜</p>
-        </div>
-        <div class="recent-status flexcenter-align">
-          <p class="text">최근상태</p>
-        </div>
-      </div>
-      <div class="card-td"></div>
-    </main>
-  </article>
+    <nav id="nav-tab">
+      <div class="head-space"></div>
+      <ul></ul>
+      <div class="tail-space"></div>
+    </nav>
+    
+    <main id="content"></main>
 
-  <article class="rented-area">
-    <header>
-      <h1>빌린 옷</h1>
-      <a class="rented-more" href=""><span>더보기</span></a>
-    </header>
-    <main class="reted-list">
-      <div class="card-th">
-        <div class="thumnail">
-          <p class="text flexcenter-align">이미지</p>
-        </div>
-        <div class="title flexcenter-align">
-          <p class="text">상품명</p>
-        </div>
-        <div class="order-day flexcenter-align">
-          <p class="text">주문날짜</p>
-        </div>
-        <div class="recent-status flexcenter-align">
-          <p class="text">최근상태</p>
-        </div>
-      </div>
-      <div class="card-td"></div>
-    </main>
+    
+    
   </article>
+  <button class="go-top"></button>
 </main>
+
+
+
 
 
   <!-- footer -->
@@ -162,9 +137,10 @@
   </footer>
 
   <script type="text/javascript" src="js/jquery-3.3.1.min.js" charset="utf-8"></script>
-  <!-- 페이지네이션 플러그인 -->
-  <script type="text/javascript" src="js/pagination.min.js" charset="utf-8"></script>
-  <script type="text/javascript" src="js/rental_status.js"></script>
+  <script type="text/javascript" src="js/axaxData.js" charset="utf-8"></script>
+  <script type="text/javascript" src="js/help.js" charset="utf-8"></script>
 </body>
 
 </html>
+
+

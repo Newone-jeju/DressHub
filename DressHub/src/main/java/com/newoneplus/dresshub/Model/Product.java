@@ -1,18 +1,26 @@
 package com.newoneplus.dresshub.Model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
+import org.hibernate.annotations.GeneratorType;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.persistence.*;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
 
 @Data
+@Entity
 public class Product {
-    Integer id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    Long id;
     String name;
     String thumbnailImage;
-    ArrayList<MultipartFile> image;
     String contents;
     Integer costPerDay;
     Integer deposit;
@@ -22,13 +30,19 @@ public class Product {
     String consigmentEnd;
     String state;
     String deleveryType;
-    String providerId;
+    String provider;
     Integer likes;
-    Date regDate;
+    Date registrationDate;
     Integer leastLeaseDay;
     String size;
+    @Transient
+    ArrayList<MultipartFile> image;
 
 
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "product")
+    @JsonIgnoreProperties(value = "product", allowSetters = true)
+    List<ThumbUp> thumbUps;
 
     @Override
     public boolean equals(Object o){
@@ -58,11 +72,11 @@ public class Product {
                 isEqual = false;
             }else if(!deleveryType.equals(((Product) o).getDeleveryType())){
                 isEqual = false;
-            }else if(!providerId.equals(((Product) o).getProviderId())){
+            }else if(!provider.equals(((Product) o).getProvider())){
                 isEqual = false;
             }else if(!likes.equals(((Product) o).getLikes())){
                 isEqual = false;
-            }else if(!regDate.equals(((Product) o).getRegDate())){
+            }else if(!registrationDate.equals(((Product) o).getRegistrationDate())){
                 isEqual = false;
             }else if(!leastLeaseDay.equals(((Product) o).getLeastLeaseDay())){
                 isEqual = false;
@@ -75,6 +89,5 @@ public class Product {
         }
         return isEqual;
     }
-
 }
 

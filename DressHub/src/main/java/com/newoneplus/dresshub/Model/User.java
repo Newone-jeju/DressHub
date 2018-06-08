@@ -4,6 +4,7 @@ import lombok.Data;
 import lombok.ToString;
 import org.hibernate.annotations.CreationTimestamp;
 
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
@@ -22,6 +23,7 @@ public class User {
     private String uid;
     @Column
 //    @Pattern(regexp="([a-zA-Z0-9].*[!,@,#,$,%,^,&,*,?,_,~])|([!,@,#,$,%,^,&,*,?,_,~].*[a-zA-Z0-9]){10,16}" ,message="숫자 영문자 특수 문자를 포함한 10 ~ 16 자를 입력하세요. ")
+
     private String password;
     @Column
     private String name;
