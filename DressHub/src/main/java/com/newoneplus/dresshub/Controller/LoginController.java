@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 @Slf4j
 public class LoginController {
-
+    // login
     @RequestMapping(value = "/login" ,method = RequestMethod.GET)
     public String login(Authentication authentication){
         if (authentication != null) {

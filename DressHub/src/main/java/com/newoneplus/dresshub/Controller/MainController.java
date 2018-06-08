@@ -16,6 +16,7 @@ import java.util.List;
 @Controller
 @Slf4j
 public class MainController {
+    // main
     @Autowired
     private MainService mainService;
 //    @RequestMapping("/")
