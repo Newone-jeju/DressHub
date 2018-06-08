@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.imageio.ImageIO;
+import javax.servlet.http.HttpServletResponse;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileInputStream;
@@ -50,94 +51,63 @@ public class ReviewContoller {
     }
 
     @PostMapping
-    public ResultMessage insert(@RequestBody Review review) {
+    public ResultMessage insert(@RequestBody Review review, HttpServletResponse res) {
         //TODO 테스트코드, 개발완료시 newReview사용할것
         reviewRepository.save(review);
-        ResultMessage resultMessage = new ResultMessage();
-        resultMessage.setCode(200);
-        resultMessage.setMessage("accepted");
-        return resultMessage;
+        res.setStatus(200);
+        return null;
     }
 
 
     @DeleteMapping(value = "/{id}")
-    public ResultMessage delete(@RequestParam Integer id) {
+    public ResultMessage delete(@RequestParam Integer id, HttpServletResponse res) {
+
         reviewRepository.deleteById(id);
-        ResultMessage resultMessage = new ResultMessage();
-        resultMessage.setCode(200);
-        resultMessage.setMessage("accepted");
-
-
-        return resultMessage;
+        res.setStatus(200);
+        return null;
 
     }
 
 
     @PutMapping
-    public ResultMessage update(@RequestBody Review review) {
+    public ResultMessage update(@RequestBody Review review, HttpServletResponse res) {
         reviewRepository.save(review);
-        ResultMessage resultMessage = new ResultMessage();
-        resultMessage.setCode(200);
-        resultMessage.setMessage("accepted");
-
-        return resultMessage;
+        res.setStatus(200);
+        return null;
     }
 
-    private static final String IMAGE_PATH = System.getProperty("user.dir") + "/out/production/main/resources/static/review/image";
+    private static final String IMAGE_PATH = System.getProperty("user.dir") + "/out/production/main/resources/static/review/image.";
 
     @PostMapping("/image")
     @ResponseBody
-    public ResultMessage insertImage(@RequestParam MultipartFile Image, @PathVariable Integer id) {
+    public ResultMessage insertImage(@RequestParam MultipartFile image, HttpServletResponse res) {
         //TODO 권한 문제  + 수정관련 이슈 해결필요
-        ImageProcesser imageProcesser = new ImageProcesser();
-
-        try {
-            BufferedImage image = imageProcesser.getOriginImage(Image.getInputStream());
-            ImageIO.write(image, "jpg", new File(IMAGE_PATH + "/" + id + "/image"));
-        } catch (InvalidPathException e) {
-            try {
-                File reviewIdFolder = new File(IMAGE_PATH + "/" + id);
-                reviewIdFolder.mkdir();
-                BufferedImage image = imageProcesser.getOriginImage(Image.getInputStream());
-                ImageIO.write(image, "jpg", new File(IMAGE_PATH + "/" + id + "/image"));
-            } catch (IOException e1) {
-                e1.printStackTrace();
-            }
-            e.printStackTrace();
-        } catch (IOException e1) {
-            e1.printStackTrace();
-        }
-
-        ResultMessage resultMessage = new ResultMessage();
-        resultMessage.setCode(200);
-        resultMessage.setMessage("accepted");
-
-        return resultMessage;
+        saveImage(image);
+        res.setStatus(200);
+        return null;
     }
 
     @PutMapping("/image")
     @ResponseBody
-    public ResultMessage updateImage(@RequestParam MultipartFile Image, @PathVariable Integer id) {
+    //TODO 권한 점검 필요
+    public ResultMessage updateImage(@RequestParam MultipartFile image, HttpServletResponse res) {
+        saveImage(image);
+        res.setStatus(200);
+
+        return null;
+    }
+
+    private void saveImage(@RequestParam MultipartFile image) {
         ImageProcesser imageProcesser = new ImageProcesser();
-
-
         //TODO 권한 문제 해결 필요
+        BufferedImage bufferedImage = null;
         try {
-            BufferedImage image = imageProcesser.getOriginImage(Image.getInputStream());
-            ImageIO.write(image, "jpg", new File(IMAGE_PATH + "/" + id + "/image"));
+            bufferedImage = imageProcesser.getOriginImage(image.getInputStream());
+            ImageIO.write(bufferedImage, "jpg", new File(IMAGE_PATH + "/" + image.getOriginalFilename()));
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-        ResultMessage resultMessage = new ResultMessage();
-        resultMessage.setCode(200);
-        resultMessage.setMessage("accepted");
-
-        return resultMessage;
     }
-
-
-
 
 
 }
