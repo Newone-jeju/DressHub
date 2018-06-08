@@ -4,28 +4,30 @@ import com.newoneplus.dresshub.Model.LeaseInfo;
 import com.newoneplus.dresshub.Model.ResultMessage;
 import com.newoneplus.dresshub.Repository.LeaseInfoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
-@Controller
+@RestController
+@RequestMapping(value = "leaseInfo")
+@ResponseBody
 public class LeaseInfoController {
     @Autowired
     LeaseInfoRepository leaseInfoRepository;
 
+    @GetMapping("/{id}")
+    public LeaseInfo get(@PathVariable Integer id){
+        return leaseInfoRepository.findById(id);
+    }
 
-    @RequestMapping(value = "/leaseInfo", method = RequestMethod.GET)
-    @ResponseBody
-    public List<LeaseInfo> getLeaseInfo(@RequestParam (defaultValue = "-1") Integer id,
-                               @RequestParam (defaultValue = "-1") Integer product,
+    @GetMapping("/list/search")
+    public List<LeaseInfo> getList(@RequestParam (defaultValue = "-1") Integer product,
                                @RequestParam (defaultValue = "null")String user){
 
         List<LeaseInfo> leaseInfos = null;
 
-        if(!id.equals(-1)) {
-            leaseInfos = leaseInfoRepository.findById(id);
-        }else if(!product.equals(-1) && !user.equals("null")){
+        if(!product.equals(-1) && !user.equals("null")){
             leaseInfos = leaseInfoRepository.findAllByLeaserAndProduct(user , product);
         }else if(!product.equals(-1)){
             leaseInfos = leaseInfoRepository.findAllByProduct(product);
@@ -36,23 +38,28 @@ public class LeaseInfoController {
         return leaseInfos;
     }
 
-    @RequestMapping(value = "/leaseInfo/update/", method = RequestMethod.POST)
-    public ResultMessage update(@ModelAttribute LeaseInfo leaseInfo){
-        ResultMessage resultMessage = new ResultMessage();
-        leaseInfoRepository.save(leaseInfo);
-        resultMessage.setCode(200);
-        resultMessage.setMessage("승인");
 
-        return resultMessage;
+    @PostMapping
+    public ResultMessage create(@ModelAttribute LeaseInfo leaseInfo, HttpServletResponse res){
+        leaseInfoRepository.save(leaseInfo);
+        res.setStatus(200);
+        return null;
     }
 
-    @RequestMapping(value = "/leaseInfo/delete/", method = RequestMethod.POST)
-    public ResultMessage delete(@RequestParam Integer leaseInfoId){
-        ResultMessage resultMessage = new ResultMessage();
-        leaseInfoRepository.deleteById(leaseInfoId);
-        resultMessage.setCode(200);
-        resultMessage.setMessage("승인");
 
-        return resultMessage;
+    @PutMapping
+    //TODO 권한검사
+    public ResultMessage update(@ModelAttribute LeaseInfo leaseInfo, HttpServletResponse res){
+        leaseInfoRepository.save(leaseInfo);
+        res.setStatus(200);
+        return null;
+    }
+
+    @DeleteMapping("/{id}")
+    //TODO 권한검사
+    public ResultMessage delete(@RequestParam Integer id, HttpServletResponse res){
+        res.setStatus(200);
+        leaseInfoRepository.deleteById(id);
+        return null;
     }
 }
