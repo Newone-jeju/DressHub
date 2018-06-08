@@ -41,7 +41,7 @@ public class AuthProvider implements AuthenticationProvider {
         String role = "";
         /**
          * 0 : 일반 사용자
-         * 1 : 정회원
+         * 1 : 정회원(default)
          * 2 : 관리자
          * */
         switch (user.getUserType()) {
