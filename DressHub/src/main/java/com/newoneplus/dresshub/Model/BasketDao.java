@@ -29,7 +29,7 @@
 //                    "SELECT * FROM BASKET WHERE ID = ?", params, (RowMapper) (rs, rowNum) -> {
 //                        Basket basket1 = new Basket();
 //                        basket1.setId(rs.getInt("id"));
-//                        basket1.setUserId(rs.getString("user_id"));
+//                        basket1.setUid(rs.getString("user_id"));
 //                        basket1.setProductId(rs.getInt("product_id"));
 //                        return basket1;
 //                    });
@@ -40,8 +40,8 @@
 //    }
 //
 ////    user에 따른 장바구니 리스트 가져오기
-//    public HashMap<String, Object> getBasketList(String userId) {
-//        Object[] params = {userId};
+//    public HashMap<String, Object> getBasketList(String uid) {
+//        Object[] params = {uid};
 //        HashMap<String, Object> hashMap = null;
 //
 //        try {
@@ -53,7 +53,7 @@
 //                        do{
 //                            Basket basket = new Basket();
 //                            basket.setId(rs.getInt("id"));
-//                            basket.setUserId(rs.getString("user_id"));
+//                            basket.setUid(rs.getString("user_id"));
 //                            basket.setProductId(rs.getInt("product_id"));
 //                            basketArrayList.add(basket);
 //                            Product product = new Product();
@@ -88,7 +88,7 @@
 //    }
 //    public int insert(Basket basket) {
 //        KeyHolder keyHolder = new GeneratedKeyHolder();
-//        Object[] params = {basket.getUserId(),basket.getProductId() };
+//        Object[] params = {basket.getUid(),basket.getProductId() };
 //        jdbcTemplate.update(con -> {
 //            PreparedStatement preparedStatement = con.prepareStatement("insert into basket(user_id, product_id) VALUES (?, ?)", Statement.RETURN_GENERATED_KEYS);
 //            for (int i = 0; i < params.length; i++) {
@@ -100,7 +100,7 @@
 //    }
 //
 //    public void update(Basket basket) {
-//        Object[] params = {basket.getUserId(), basket.getProductId(), basket.getId()};
+//        Object[] params = {basket.getUid(), basket.getProductId(), basket.getId()};
 //        jdbcTemplate.update("update basket set user_id = ?, product_id = ? where id = ?", params);
 //    }
 //

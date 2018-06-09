@@ -14,7 +14,7 @@ public class Basket {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    private String userId;
+    private String uid;
     private Integer productId;
 
 
