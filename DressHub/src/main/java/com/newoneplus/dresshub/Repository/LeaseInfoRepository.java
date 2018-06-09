@@ -8,7 +8,7 @@ import java.util.List;
 
 @Repository
 public interface LeaseInfoRepository extends JpaRepository<LeaseInfo, Long> {
-    List<LeaseInfo> findById(int id);
+    LeaseInfo findById(int id);
     List<LeaseInfo> findAllByLeaser(String leaser);
     List<LeaseInfo> findAllByProduct(int product);
     List<LeaseInfo> findAllByLeaserAndProduct(String leaser, int product);
