@@ -6,6 +6,7 @@ import com.newoneplus.dresshub.Model.Review;
 //import com.newoneplus.dresshub.Model.User;
 //import com.newoneplus.dresshub.Service.AuthorizationService;
 import com.newoneplus.dresshub.Repository.ReviewRepository;
+import com.newoneplus.dresshub.Service.AuthorizationService;
 import com.newoneplus.dresshub.Service.ReviewService;
 
 import lombok.AllArgsConstructor;
@@ -53,6 +54,8 @@ public class ReviewContoller {
     @PostMapping
     public ResultMessage insert(@RequestBody Review review, HttpServletResponse res) {
         //TODO 테스트코드, 개발완료시 newReview사용할것
+        //TODO 시연용 유저 정보 가져오는 코드 반드시 지울것
+        review.setUser(AuthorizationService.getCurrentUser().getUid());
         reviewRepository.save(review);
         res.setStatus(200);
         return null;
@@ -71,6 +74,8 @@ public class ReviewContoller {
 
     @PutMapping
     public ResultMessage update(@RequestBody Review review, HttpServletResponse res) {
+        //TODO 시연용 유저 정보 가져오는 코드 반드시 지울것
+        review.setUser(AuthorizationService.getCurrentUser().getUid());
         reviewRepository.save(review);
         res.setStatus(200);
         return null;
@@ -81,6 +86,7 @@ public class ReviewContoller {
     @PostMapping("/image")
     @ResponseBody
     public ResultMessage insertImage(@RequestParam MultipartFile image, HttpServletResponse res) {
+
         //TODO 권한 문제  + 수정관련 이슈 해결필요
         saveImage(image);
         res.setStatus(200);
@@ -91,6 +97,7 @@ public class ReviewContoller {
     @ResponseBody
     //TODO 권한 점검 필요
     public ResultMessage updateImage(@RequestParam MultipartFile image, HttpServletResponse res) {
+
         saveImage(image);
         res.setStatus(200);
 
