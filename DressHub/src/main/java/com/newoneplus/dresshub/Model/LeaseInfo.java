@@ -18,6 +18,8 @@ public class LeaseInfo {
     @JoinColumn(name="product")
     private Product product;
     private String leaser;
+    private String leaseStart;
+    private String leaseEnd;
     @OneToMany(fetch=FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "leaseInfo")
     private Collection<LeaseInfoLog> log;
