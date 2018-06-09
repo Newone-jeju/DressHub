@@ -25,7 +25,5 @@ public class MyAuthentication extends UsernamePasswordAuthenticationToken {
         this.user = user;
     }
 
-
-
 }
 

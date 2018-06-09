@@ -1,0 +1,17 @@
+#column_menu{
+  display: block;
+  background-color: #eee;
+  text-decoration:none;
+  width: 10%;
+  margin: 3%;
+  padding: 1%;
+  padding-left: 2%;
+  float: left;
+
+}
+
+#article{
+float: left;
+width: 75%;
+margin:3% 0%;
+}
