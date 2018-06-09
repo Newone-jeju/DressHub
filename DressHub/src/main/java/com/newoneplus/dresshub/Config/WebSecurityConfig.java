@@ -1,20 +1,29 @@
 
 package com.newoneplus.dresshub.Config;
 
+import com.newoneplus.dresshub.Service.AuthorizationService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletResponse;
 
 //import java.security.AuthProvider;
 
 
-
 @Configuration
 @EnableWebSecurity
+@EnableGlobalMethodSecurity(securedEnabled = true)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     // 보안
 
@@ -60,22 +69,22 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.formLogin()
                 .loginPage("/login")
                 .failureUrl("/login?error")
-                .defaultSuccessUrl("/afterLogin.html")
-                .usernameParameter("id")
+                .defaultSuccessUrl("/loginSuccess")
+                .usernameParameter("uid")
                 .passwordParameter("password");
 
         http.logout()
                 .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
                 .logoutSuccessUrl("/login?logout")
-                .deleteCookies("JSESSIONID")
+                .deleteCookies("JSESSIONID", "uid")
                 .invalidateHttpSession(true);
 
         http.authenticationProvider(authProvider);
 
 
 
-
     }
+
 
 
 
