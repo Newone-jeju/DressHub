@@ -23,7 +23,7 @@ import javax.servlet.http.HttpServletResponse;
 
 @Configuration
 @EnableWebSecurity
-@EnableGlobalMethodSecurity(securedEnabled = true)
+
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     // 보안
 
@@ -53,8 +53,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 //        csrf config
         http.csrf()
                 .ignoringAntMatchers("/products/*")
+                .ignoringAntMatchers("/products")
                 .ignoringAntMatchers("/review/*")
-                .ignoringAntMatchers("/leaseInfo/*");
+                .ignoringAntMatchers("/review")
+                .ignoringAntMatchers("/leaseInfo/*")
+                .ignoringAntMatchers("/leaseInfo");
+
 
         http.sessionManagement().
                 sessionFixation().
