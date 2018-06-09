@@ -23,7 +23,7 @@ function setLogData(data_log){
 	var log_cards = [];
 	$.each(data_log, function(i,data){
 
-		log_cards.push(
+		log_cards.unshift(
 			'<tbody class="log-card">'+
               '<tr>'+
                 '<td rowspan="3" class="log-no">'+i+'</td>'+
@@ -55,10 +55,10 @@ function setCard(data, quantity){
 		            '<p class="text">'+data[i].name+'</p>'+
 		          '</div>'+
 		          '<div class="order-day flexcenter-align">'+
-		            '<p class="text">'+data[i].log[data[i].log.length-1].startDay+'</p>'+
+		            '<p class="text">'+data[i].log[0].startDay+'</p>'+
 		          '</div>'+
 		          '<div class="recent-status flexcenter-align">'+
-		            '<p class="text">'+data[i].log[0].status+'</p>'+
+		            '<p class="text">'+data[i].log[data[i].log.length-1].status+'</p>'+
 		          '</div>'+
 		        '</div>'+
 		        '<div class="card-body hidd">'+
@@ -102,13 +102,44 @@ function folding(target){// 다음 body요소(.hidd 가 붙은)에 folding 부�
 
 function msg_send(data){
 	$(".card-write-btn").click(function(){
-		var comment = $(this).prev()
+		var comment = $(this).prev().val();
+		var logList = $(this).parent().next();
+		var date = new Date()
+
 		$.ajax({
             type: "post",
-            url: "", //좋아요 눌렀을 때 상태정보 전달할 url
-            data: {'comment': comment }, // 서버로 보낼 데이터
+            async: true,
+            url: "", 
+            data: {
+           	'startDay': date,
+            'comment': comment
+            }, 
+            // 서버로 보낼 데이터
             dataType: "json",
-            success: function(response){     
+            error: function(jqXHR, textStatus, errorThrown) {
+		        alert('로그인 상태를 확인해 주세요');
+		    },
+            success: function(response){
+				var log = []; 
+				log.push(logList.html());
+				log.unshift( 
+		    		'<tbody class="log-card">'+
+		              '<tr>'+
+		                '<td rowspan="3" class="log-no"></td>'+
+		                '<td rowspan="3" class="status log-title">고객</td>'+
+		                '<td class="name-phonenum log-content"></td>'+
+		              '</tr>'+
+		              '<tr>'+
+		                '<td class="how-long log-content">'+date.getFullYear()+'-'+date.getMonth()+'-'+date.getDate()+'</td>'+
+		              '</tr>'+
+		              '<tr>'+
+		                '<td class="msg log-content">'+comment+'</td>'+
+		              '</tr>'+
+		            '</tbody>'
+		    	 )
+		    	map_card(log, logList);
+		    	comment = $(this).prev().val('');
+
             }
         });		
 	})
@@ -127,98 +158,4 @@ card = setCard(getData("js/rental_status.json", false),3);
 map_card(card, target);
 
 folding($(".card-header"));
-
-/////////////////// 수정 후 ///////////////////////////
-
-
-
-var target = "";
-var productData = "";
-var data = [];
-var ajaxCard = "";
-
-
-function makeList(data, target, quantity){
-	var cardString = "";
-	for(var i=0; i<quantity; i++){
-		cardString = 			
-			'<div class="product-card" data-id="'+data[i].id+'">'+
-		        '<div class="card-header">'+
-		          '<div class="thumnail">'+
-		            '<img src="'+data[i].thumnailUrl+'" alt="thumnail_img">'+
-		          '</div>'+
-		          '<div class="title flexcenter-align">'+
-		            '<p class="text">'+data[i].name+'</p>'+
-		          '</div>'+
-		          '<div class="order-day flexcenter-align">'+
-		            '<p class="text">'+data[i].orderStart+'</p>'+
-		          '</div>'+
-		          '<div class="recent-status flexcenter-align">'+
-		            '<p class="text">'+data[i].status+'</p>'+
-		          '</div>'+
-		        '</div>'+
-		        '<div class="card-body hidd">'+
-		          '<div class="card-btn-wrap">'+
-		              '<input type="text" name="msg" value="" placeholder="수령한 대여의상에 특이사항이 발생하면 입력해 주세요.... " class="msg-box">'+
-		              '<button class="card-write-btn card-btn">메시지작성</button>'+
-		          '</div>'+
-		          '<table class="log-list">';
-		cardString += addLog();
-		cardString += 
-					'</table>'+
-		        '</div>'+
-		      '</div>'
-
-		ajaxCard.setCard(cardString);
-		ajaxCard.mapCard(target);
-	}
-}
-
-function addLog(){
-	var status = [주문중, 배송중, 대여중, 반납중, 세탁중];
-	var cardString = "";
-	var index = 0;
-	for(var i=9; i<data[0].length; i=i+5){
-		if(i != null){
-			index += 1; 
-			cardString += 
-			'<tbody class="log-card">'+
-	          '<tr>'+
-	            '<td rowspan="3" class="log-no">'+index+'</td>'+
-	            '<td rowspan="3" class="status log-title">'+status[index]+'</td>'+
-	            '<td class="name-phonenum log-content">'+i[Object.keys[i-3]]+' : '+i[Object.keys[i-2]]+'</td>'+
-	          '</tr>'+
-	          '<tr>'+
-	            '<td class="how-long log-content">'+i[Object.keys[i]]+' ~ '+i[Object.keys[i+1]]+'</td>'+
-	          '</tr>'+
-	          '<tr>'+
-	            '<td class="msg log-content">'+i[Object.keys[i-1]]+'</td>'+
-	          '</tr>'+
-	        '</tbody>';
-		}
-	}
-	return cardString;
-
-}
-
-function getData(url){
-	var ajaxData = "";
-	ajaxData = new AjaxData(url, false);
-	return ajaxData.getData();
-}
-
-
-//빌린옷
-productData = getData("js/productData.json");
-data = getData("js/rental_status_jeayoon.json");
-ajaxCard = new AjaxCard();
-target = $(".rentaling-area .card-td");
-makeList(data, target, 3);
-sendMessage();
-
-//빌려준옷
-
-
-
-//공통
-
+msg_send();
