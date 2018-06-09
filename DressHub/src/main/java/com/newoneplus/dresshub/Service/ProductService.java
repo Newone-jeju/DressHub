@@ -87,7 +87,7 @@ public class ProductService {
 
     //좋아요 삭제하기
     public void deleteThumup( ThumbUp thumbUp) {
-        thumbUpRepository.deleteByUidAndProduct(thumbUp.getUid(), thum bUp.getProduct());
+        thumbUpRepository.deleteByUidAndProduct(thumbUp.getUid(), thumbUp.getProduct());
         Product product = productRepository.findById(thumbUp.getProduct().getId());
         product.setLikes(product.getLikes()-1);
         productRepository.save(product);
