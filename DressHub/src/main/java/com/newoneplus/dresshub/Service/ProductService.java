@@ -14,12 +14,6 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
-import javax.imageio.ImageIO;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -69,7 +63,7 @@ public class ProductService {
         user.setUid("user1");
         PageRequest pageRequest = PageRequest.of(page, 25, Sort.Direction.ASC, "id");
         //여기에 좋아요와 조인을 해야한다.
-            return productRepository.findAllByCatetoryJoinThumbUpByUser(category, user.getUid(), pageRequest);
+            return productRepository.findAllByCatetoryJoinThumbUpByUid(category, user.getUid(), pageRequest);
         //Todo 현재 user1로 임시로 지정 나중에 보안정책 완료 후 User가져오는 것으로 수정
     };
 
@@ -93,7 +87,7 @@ public class ProductService {
 
     //좋아요 삭제하기
     public void deleteThumup( ThumbUp thumbUp) {
-        thumbUpRepository.deleteByUserAndProduct(thumbUp.getUserId(), thumbUp.getProduct());
+        thumbUpRepository.deleteByUidAndProduct(thumbUp.getUid(), thum bUp.getProduct());
         Product product = productRepository.findById(thumbUp.getProduct().getId());
         product.setLikes(product.getLikes()-1);
         productRepository.save(product);
@@ -101,6 +95,6 @@ public class ProductService {
 
     public Page<Product> getThumbUpProductList(int page, User user) {
         PageRequest pageRequest = PageRequest.of(0, 25, Sort.Direction.DESC, "id");
-        return productRepository.findAllByUser(user.getUid(),pageRequest);
+        return productRepository.findAllByUid(user.getUid(),pageRequest);
     }
 }

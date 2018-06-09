@@ -93,7 +93,7 @@ public class ProductController {
         User user = new User();
         user.setUid("user1");
         ThumbUp thumbUp = new ThumbUp();
-        thumbUp.setUserId(user.getUid());
+        thumbUp.setUid(user.getUid());
         thumbUp.setProduct(product);
         if (state) {
             productService.insertThumup(thumbUp);
