@@ -165,12 +165,12 @@ userData = new ajaxData('/api/user/'+userId ,false);
 
 //빌린웃
 target = $(".rentaling-area .card-td");
-data = getData("js/rental_status.json", false);
+data = getData('/leaseInfo/list/search?userId='+userId, false);
 card = setCard(data,3);
 map_card(card, target);
 //빌려 준 옷
 target = $(".rented-area .card-td");
-data = getData("js/rental_status.json", false);
+data = getData('/leaseInfo/list/search?userId='+userId, false);
 card = setCard(data,3);
 map_card(card, target);
 
