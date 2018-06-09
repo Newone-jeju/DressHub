@@ -1,7 +1,7 @@
 package com.newoneplus.dresshub.Model;
 
 import com.newoneplus.dresshub.Repository.ProductRepository;
-import com.newoneplus.dresshub.Service.MainService;
+
 import com.newoneplus.dresshub.Service.ProductService;
 
 import org.springframework.beans.factory.annotation.Value;
@@ -49,8 +49,6 @@ public class DaoFactory {
     public ProductDao productDao() {return new ProductDao(jdbcTemplate());}
 
 
-    @Bean
-    public MainService mainService(){return new MainService();}
 
     @Bean
 
