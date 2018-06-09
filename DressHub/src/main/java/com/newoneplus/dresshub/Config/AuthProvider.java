@@ -2,6 +2,7 @@ package com.newoneplus.dresshub.Config;
 
 import com.newoneplus.dresshub.Model.User;
 import com.newoneplus.dresshub.Service.AuthorizationService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -11,11 +12,14 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Component;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletResponse;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
 @Component
+@Slf4j
 public class AuthProvider implements AuthenticationProvider {
 
     @Autowired

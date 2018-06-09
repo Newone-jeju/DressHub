@@ -1,9 +1,8 @@
 package com.newoneplus.dresshub.Model;
 
-import com.newoneplus.dresshub.Service.MainService;
-import com.newoneplus.dresshub.Service.ProductService;
+import com.newoneplus.dresshub.Repository.ProductRepository;
 
-import com.newoneplus.dresshub.ThumbupDao;
+import com.newoneplus.dresshub.Service.ProductService;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -50,8 +49,6 @@ public class DaoFactory {
     public ProductDao productDao() {return new ProductDao(jdbcTemplate());}
 
 
-    @Bean
-    public MainService mainService(){return new MainService();}
 
     @Bean
 
@@ -71,12 +68,14 @@ public class DaoFactory {
     @Bean
     public LeaseInfoDao leaseInfoDao(){return new LeaseInfoDao(jdbcTemplate());}
 
-    @Bean
+//    @Bean
+//
+//    public BasketDao basketDao(){return new BasketDao(jdbcTemplate());}
+//
+//    @Bean
+//    public ThumbupDao thumbupDao(){return new ThumbupDao(jdbcTemplate());}
 
-    public BasketDao basketDao(){return new BasketDao(jdbcTemplate());}
 
-    @Bean
-    public ThumbupDao thumbupDao(){return new ThumbupDao(jdbcTemplate());}
 }
 
 
