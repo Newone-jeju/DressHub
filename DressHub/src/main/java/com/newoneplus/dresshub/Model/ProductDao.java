@@ -32,7 +32,7 @@ public class ProductDao {
     public ProductDao(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }
-    public Product get(int id) {
+    public Product get(long id) {
         Object[] params = {id};
         Product product = null;
 
@@ -130,18 +130,19 @@ public class ProductDao {
         product.setCostPerDay(rs.getInt("COST_PER_DAY"));
         product.setDeleveryType(rs.getString("DELEVERY_TYPE"));
         product.setDeposit(rs.getInt("DEPOSIT"));
-        product.setId(rs.getInt("ID"));
+        product.setId(rs.getLong("ID"));
         product.setThumbnailImage(rs.getString("THUMBNAIL_IMAGE"));
         product.setName(rs.getString("NAME"));
-        product.setProviderId(rs.getString("PROVIDER"));
+        product.setProvider(rs.getString("PROVIDER"));
         product.setSalePrice(rs.getInt("SALE_PRICE"));
         product.setState(rs.getString("STATE"));
         product.setLikes(rs.getInt("LIKES"));
-        product.setRegDate(rs.getDate("REGISTRATION_DATE"));
+        product.setRegistrationDate(rs.getDate("REGISTRATION_DATE"));
         product.setLeastLeaseDay(rs.getInt("LEAST_LEASE_DAY"));
         product.setSize(rs.getString("SIZE"));
         return product;
     }
+
 
     private Object[] getFullParams(Product product)  {
         java.util.Date getConsigmentStart = null;
@@ -155,14 +156,12 @@ public class ProductDao {
             }
         }
 
-
         return new Object[]{product.getName(), product.getThumbnailImage(), product.getContents(), product.getCostPerDay(),
                 product.getDeposit(), product.getSalePrice(), product.getCategory(),getConsigmentStart,getConsigmentEnd, product.getState(),
-                product.getDeleveryType(), product.getProviderId(), product.getLikes(),
-                product.getRegDate(), product.getLeastLeaseDay(), product.getSize()};
+                product.getDeleveryType(), product.getProvider(), product.getLikes(),
+                product.getRegistrationDate(), product.getLeastLeaseDay(), product.getSize()};
 
     }
-
 
 //   페이징 처리를 위해서 db count하는 코드
     public int getCount(String category) {

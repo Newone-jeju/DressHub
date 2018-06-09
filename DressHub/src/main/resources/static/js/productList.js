@@ -66,6 +66,7 @@ $(document).ready(function () {
                 type: 'get',
                 success: function (data) {
                     var like = data.like;
+                    console.log("like" + like);
                     totalCount = data.count;
                     var product = {};
                     console.log("$item=" + $item);
@@ -79,16 +80,34 @@ $(document).ready(function () {
                         if (data == null) {
                             alert("아직 등록된 상품이 없습니다.");
                         } else {
+                            var likeBtn ="";
                             for (var i = 0; i < data.length; i++) {
                                 cards +=
                                     '<span class="product_container_content_card" data-href="/productDetail?productId=' + data[i].id + '">' +
                                     '<div class="card_img_wrap">' +
-                                    '<img src="../product_image/' + data[i].thumbnailImage + '" alt="blank" class="card_img">' +
+                                    '<img src="./product_image/' + data[i].thumbnailImage + '" alt="blank" class="card_img">' +
                                     '<div class="hover-content">' +
                                     '<img src="../image/' + data[i].state + '_icon.png}" alt="" class="hover-size">' +
                                     '<div class="hover-btn-wrap">' +
-                                    '<img src="../image/cart_btn_0.png" alt="" class="cart_btn" name="' + data[i].id + '">'+
-                                    '<img src="../image/like_btn_'+like[data[i].id]+'.png" alt="" class="like_btn '+like[data[i].id]+'" name="' + data[i].id + '">'
+                                    '<img src="../image/cart_btn_0.png" alt="" class="cart_btn" name="' + data[i].id + '">'
+                                    console.log("like"+ like);
+                                    if(like!=null){
+
+                                        for(var j= 0; j < like.length; j++){
+
+                                            if(data[i].id == like[j].product){
+                                                console.log("data.id: " + data[i].id+ "like.product", + like[j].product);
+                                                likeBtn = '<img src="../image/like_btn_1.png" alt="" class="like_btn 1" name="' + data[i].id + '">';
+                                                break;
+                                            }else{
+
+                                                likeBtn= '<img src="../image/like_btn_0.png" alt="" class="like_btn 0 " name="'+data[i].id+ '">';
+                                            }
+                                        }
+                                    }else{
+                                        likeBtn= '<img src="../image/like_btn_0.png" alt="" class="like_btn 0 " name="'+data[i].id+ '">';
+                                    }
+                                cards += likeBtn;
                                 cards +=
                                     '<span class="like-num">'+data[i].likes+'</span>'+
                                     // json 추가 필요
@@ -102,6 +121,7 @@ $(document).ready(function () {
                                     '</div>' +
                                     '</span>';
                             }
+
                             $('.product_container_content').html(cards);
                         }
 
@@ -117,25 +137,34 @@ $(document).ready(function () {
                         window.location.href=$(this).attr("data-href");
                     })
 
-                    $(".like_btn").click(function(){
+                    $(".like_btn").click(function(e){
                         console.log("likebtntest");
                         e.stopPropagation();
                         var productId = $(this).attr('name');
-                        var state = $(".like_btn").hasClass("0");
+                        var state = $(this).hasClass("0");
+
+                        console.log(state);
                         var likeNum = $(this).next();
+                        var target = $(this);
                         $.ajax({
                             type: "GET",
-                            url: "./productAddLike?productId="+productId+"&state="+state, //좋아요 눌렀을 때 상태정보 전달할 url
+                            url: "./thumbUp?productId="+productId+"&state="+state, //좋아요 눌렀을 때 상태정보 전달할 url
                             dataType: "json",
                             success: function(response){
-                                conosole.log("like누름 ajax실행됨");
-                                if(state){
-                                    $(this).attr("src", "../image/like_btn_0.png");
-                                    likeNum.text(Number( likeNum.text() )+1);
+                                console.log("like누름 ajax실행됨");
+                                if(!state){
+                                    console.log(target);
+                                    target.attr("src", "../image/like_btn_0.png");
+                                    likeNum.text(Number( likeNum.text() )-1);
+                                    target.removeClass("1");
+                                    target.addClass("0");
                                 }
                                 else{
-                                    $(this).attr("src", "../image/like_btn_1.png");
-                                    likeNum.text(Number( likeNum.text() )-1);
+                                    console.log(target);
+                                    target.attr("src", "../image/like_btn_1.png");
+                                    likeNum.text(Number( likeNum.text() )+1);
+                                    target.removeClass("0");
+                                    target.addClass("1");
                                 }
                             }
                         });
@@ -156,11 +185,13 @@ $(document).ready(function () {
                                     $(this).attr('src', 'img/cart_btn_1');
                                     $(this).removeClass("0");
                                     $(this).addClass("1");
+
                                 }
                                 else{
                                     $(this).attr('src', 'img/cart_btn_0');
                                     $(this).removeClass("1");
                                     $(this).addClass("0");
+                                    state = $(".like_btn").hasClass("0");
                                 }
                             }
                         });
