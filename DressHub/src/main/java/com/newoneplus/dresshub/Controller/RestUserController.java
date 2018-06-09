@@ -25,7 +25,7 @@ import javax.servlet.http.HttpSession;
 public class RestUserController {
     private final UserRepository userRepository;
     @GetMapping("/{id}")
-    @Secured("ROLE_USER")
+//    @Secured("ROLE_USER")
     public User get(@PathVariable Integer id) {
         return userRepository.findById(id).get();
     }
