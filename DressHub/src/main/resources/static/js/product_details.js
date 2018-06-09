@@ -5,6 +5,15 @@
 
     var data =[];
 
+    function getURLParameter(name) {
+        return decodeURI(
+         (RegExp(name + '=' + '(.+?)(&|$)').exec(location.search)||[,null])[1]
+        );
+    }
+
+
+
+
     function initMap(url){
 
         //데이터 가져오고
@@ -108,7 +117,7 @@
     }
 
     //초기 매핑
-    initMap("/product", false); // init mapping url 필요
+    initMap("js/productData.json", false); // init mapping url 필요
 
     //주문 장바구니 버튼
     $(".submit-btn > button.request").click(function(){
@@ -119,7 +128,7 @@
             return_day: $("#e-date").attr("value")
         };
         AjaxUtil.crudData(postData, "POST", function(){
-            window.location.href = '';//결제페이지
+            window.location.href = '/order.html';//결제페이지
         })
     })
 
@@ -129,7 +138,7 @@
             id: data.id
         };
         AjaxUtil.crudData(postData, "POST", function(){
-            window.location.href = '';//장바구니 페이지
+            window.location.href = '/cart.html';//장바구니 페이지
         })
     })
 
