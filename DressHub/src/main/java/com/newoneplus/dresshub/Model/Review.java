@@ -3,6 +3,7 @@ package com.newoneplus.dresshub.Model;
 import lombok.Data;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import java.util.ArrayList;
@@ -17,6 +18,7 @@ public class Review {
     Float rate;
     String date;  //0000-00-00 hh:mm:ss
     String user;
+    @Column(name = "product")
     Integer productId;
     String leaseStart; //0000-00-00
     String leaseEnd; //0000-00-00

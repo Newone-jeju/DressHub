@@ -24,10 +24,11 @@ import javax.servlet.http.HttpSession;
 @Slf4j
 public class RestUserController {
     private final UserRepository userRepository;
-    @GetMapping("/{id}")
+    @GetMapping("/{uid}")
 //    @Secured("ROLE_USER")
-    public User get(@PathVariable Integer id) {
-        return userRepository.findById(id).get();
+    public User get(@PathVariable String uid) {
+        return userRepository.findByUid(uid);
+//        return userRepository.findById(id).get();
     }
 
 

@@ -54,6 +54,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.csrf()
                 .ignoringAntMatchers("/products/*")
                 .ignoringAntMatchers("/products")
+
                 .ignoringAntMatchers("/review/*")
                 .ignoringAntMatchers("/review")
                 .ignoringAntMatchers("/leaseInfo/*")

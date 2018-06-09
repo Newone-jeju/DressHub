@@ -1,3 +1,4 @@
+
 //package com.newoneplus.dresshub.Model;
 //
 //import com.newoneplus.dresshub.Repository.ProductRepository;
@@ -31,6 +32,7 @@
 //        return new JdbcTemplate(datasource());
 //    }
 //
+
 //    @Bean
 //    public DataSource datasource(){
 //        SimpleDriverDataSource dataSource = new SimpleDriverDataSource();
@@ -50,6 +52,7 @@
 //
 //
 //
+
 //    @Bean
 //
 //    public ProductService productService(){return new ProductService();}
