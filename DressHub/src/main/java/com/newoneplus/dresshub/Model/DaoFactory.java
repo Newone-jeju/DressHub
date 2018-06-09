@@ -49,7 +49,6 @@ public class DaoFactory {
     public ProductDao productDao() {return new ProductDao(jdbcTemplate());}
 
 
-
     @Bean
 
     public ProductService productService(){return new ProductService();}
@@ -65,8 +64,6 @@ public class DaoFactory {
     @Bean
     public ReviewDao reviewDao(){return  new ReviewDao(jdbcTemplate());}
 
-    @Bean
-    public LeaseInfoDao leaseInfoDao(){return new LeaseInfoDao(jdbcTemplate());}
 
 //    @Bean
 //

@@ -1,6 +1,6 @@
 $(document).ready(function () {
 					  $.ajax({
-                url: '/baskets/search?userId=user1',
+                url: '/baskets/search?uid=user1',
                 dataType: 'json',
                 type: 'get',
                 success: function (data) {
