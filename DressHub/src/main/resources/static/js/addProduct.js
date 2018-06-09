@@ -1,6 +1,6 @@
 var filesUpload = document.getElementById("files-upload"),
     fileList = document.getElementById("file-list");
-
+var fileName;
 function traverseFiles (files) {
     var li,
         file,
@@ -12,7 +12,7 @@ function traverseFiles (files) {
         file = files[i];
         fileInfo = "<div><strong>FileName:</strong> "
             + file.name + "</div>";
-
+        fileName=file.name;
         li.innerHTML = fileInfo;
         fileList.appendChild(li);
     };
@@ -34,8 +34,8 @@ function getUrlParams() {
 }
 
 function save() {
-    var user = {
-        id: $('#id').val(),
+    var product = {
+        name:$('#name').val(),
         costPerDay: $('#costPerDay').val(),
         deposit: $('#deposit').val(),
         salePrice: $('#salePrice').val(),
@@ -46,14 +46,14 @@ function save() {
         state: $('#state').val(),
         size: $('#size').val(),
         contents: $('#contents').val(),
-        image: $('#image').val()
+        thumbnailImage:fileName
     };
 
     var method = 'POST';
 
-    if(user.id!='')
+    if(product.id)
         method = 'PUT';
-    requestData(method, user);
+    requestData(method, product);
     return false;
 }
 
@@ -61,7 +61,7 @@ function requestData(method, data) {
     $.ajax({
         url: host,
         method: method,
-        contentType: "application/json",
+        contentType: "application/json;charset=UTF-8",
         data: JSON.stringify(data)
     }).done(function () {
         window.location.href = 'list';
@@ -71,19 +71,19 @@ function requestData(method, data) {
 $(document).ready(function () {
     var params = getUrlParams();
     if (params.id) {
-        $.get(host + "/" + params.id, function (user) {
-            $('#id').val(user.id);
-            $('#costPerDay').val(user.costPerDay),
-                $('#deposit').val(user.deposit),
-                $('#salePrice').val(user.salePrice),
-                $('#category').val(user.category),
-                $('#consigmentEnd').val(user.consigmentEnd),
-                $('#leastLeaseDay').val(user.leastLeaseDay),
-                $('#location').val(user.location),
-                $('#state').val(user.state),
-                $('#size').val(user.size),
-                $('#contents').val(user.contents),
-                $('#image').val(user.image)
+        $.get(host + "/" + params.id, function (product) {
+            $('#id').val(product.id);
+            $('#costPerDay').val(product.costPerDay),
+                $('#deposit').val(product.deposit),
+                $('#salePrice').val(product.salePrice),
+                $('#category').val(product.category),
+                $('#consigmentEnd').val(product.consigmentEnd),
+                $('#leastLeaseDay').val(product.leastLeaseDay),
+                $('#location').val(product.location),
+                $('#state').val(product.state),
+                $('#size').val(product.size),
+                $('#contents').val(product.contents),
+                $('#image').val(product.image)
         });
     }
 
