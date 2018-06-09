@@ -31,9 +31,17 @@ public class ProductService {
     ProductImageRepository productImageRepository;
 
     //product 등록
-    public void createProduct(Product product) {
-        ImageProcesser imageProcesser = new ImageProcesser();
-        long product_id = productRepository.save(product).getId();
+    public Product createProduct(Product product) {
+        return  productRepository.save(product);
+    }
+
+    //product수정
+    public void updateProduct(Product product){
+        productRepository.save(product);
+    }
+    //product삭제
+    public void deleteProduct(Product product) {
+        productRepository.delete(product);
     }
 
     public List<Product> getProductList(){
@@ -97,4 +105,6 @@ public class ProductService {
         PageRequest pageRequest = PageRequest.of(0, 25, Sort.Direction.DESC, "id");
         return productRepository.findAllByUid(user.getUid(),pageRequest);
     }
+
+
 }
