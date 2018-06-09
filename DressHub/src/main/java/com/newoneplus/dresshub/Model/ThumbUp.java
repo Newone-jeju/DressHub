@@ -12,7 +12,7 @@ public class ThumbUp{
     @Id
     @GeneratedValue(strategy = GenerationType.TABLE)
     Long id;
-    String userId;
+    String uid;
     @ManyToOne
     @JsonIgnoreProperties(value = "thumbUp", allowSetters = true)
     @JoinColumn(name="product_id")
