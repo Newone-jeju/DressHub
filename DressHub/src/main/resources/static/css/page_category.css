@@ -1,0 +1,16 @@
+.page-head-category > a{
+	text-decoration: none;
+}
+
+.page-head-category .text {
+	color : black;	
+	font-size: 1.3em;
+	padding : 0 0.4em;
+	font-weight: 550;
+}
+
+.page-head-category .text:hover {
+	color: gray;
+	transition: all 0.5s;
+	text-decoration: underline;
+}
