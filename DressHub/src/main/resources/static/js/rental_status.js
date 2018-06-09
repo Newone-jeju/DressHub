@@ -66,7 +66,7 @@ function setCard(data, quantity){
 		              '<input type="text" name="msg" value="" placeholder="수령한 대여의상에 특이사항이 발생하면 입력해 주세요.... " class="msg-box">'+
 		              '<button class="card-write-btn card-btn">메시지작성</button>'+
 		          '</div>'+
-		          '<table class="log-list">'
+		          '<table class="log-list" data-leaseInfo='+data[i].log[0].leaseInfo+'>'
 		          )
 		var log_data = setLogData(data[i].log);
 		cards = cards.concat(log_data);
@@ -104,13 +104,15 @@ function msg_send(data){
 	$(".card-write-btn").click(function(){
 		var comment = $(this).prev().val();
 		var logList = $(this).parent().next();
-		var date = new Date()
+		var date = new Date();
+		var leaseInfo = logList.attr('data-leaseInfo');
 
 		$.ajax({
             type: "post",
             async: true,
-            url: "", 
+            url: "/leaseInfoLog", 
             data: {
+            'leaseInfo': leaseInfo,
            	'startDay': date,
             'comment': comment
             }, 
@@ -127,10 +129,10 @@ function msg_send(data){
 		              '<tr>'+
 		                '<td rowspan="3" class="log-no"></td>'+
 		                '<td rowspan="3" class="status log-title">고객</td>'+
-		                '<td class="name-phonenum log-content"></td>'+
+		                '<td class="name-phonenum log-content">'+userId+' : '+userData.phoneNumber+'+</td>'+
 		              '</tr>'+
 		              '<tr>'+
-		                '<td class="how-long log-content">'+date.getFullYear()+'-'+date.getMonth()+'-'+date.getDate()+'</td>'+
+		                '<td class="how-long log-content">'+date.getFullYear()+'-'+date.getMonth()+'-'+date.getDate()+' ~ </td>'+
 		              '</tr>'+
 		              '<tr>'+
 		                '<td class="msg log-content">'+comment+'</td>'+
@@ -148,13 +150,28 @@ function msg_send(data){
 
 var target = "";
 var card = [];
+var data = "";
+var userId = "";
+var userData = "";
+
+userId = getUserId();
+if(userId == ''){
+	alert('로그인이 필요합니다');
+	window.location.href='/';
+}
+
+userData = new ajaxData('/api/user/'+userId ,false);
+
+
 //빌린웃
 target = $(".rentaling-area .card-td");
-card = setCard(getData("js/rental_status.json", false),3);
+data = getData("js/rental_status.json", false);
+card = setCard(data,3);
 map_card(card, target);
 //빌려 준 옷
 target = $(".rented-area .card-td");
-card = setCard(getData("js/rental_status.json", false),3);
+data = getData("js/rental_status.json", false);
+card = setCard(data,3);
 map_card(card, target);
 
 folding($(".card-header"));
