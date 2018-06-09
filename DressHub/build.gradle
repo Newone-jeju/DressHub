@@ -44,6 +44,7 @@ dependencies {
     compile group: 'org.bgee.log4jdbc-log4j2', name: 'log4jdbc-log4j2-jdbc4.1', version: '1.16'
     compile 'org.json:json:20171018'
     compile 'org.springframework.session:spring-session-core:2.0.4.BUILD-SNAPSHOT'
+    compile 'org.springframework.security:spring-security-taglibs:4.0.4.RELEASE'
 //    compile group: 'commons-io', name: 'commons-io', version: '2.5'
 //    compile group: 'servlets.com', name: 'cos', version: '05Nov2002'
 
