@@ -39,7 +39,7 @@ public class ProductController {
     }
 
 
-    @PostMapping(produces = "application/json; charset=UTF-8")
+    @PostMapping
     public Product productCreate(@RequestBody Product product) {
         log.info(product.getCategory());
         return productService.createProduct(product);
@@ -47,7 +47,7 @@ public class ProductController {
 
     }
 
-    @PutMapping(produces = "application/json; charset=UTF-8")
+    @PutMapping
     public void productUpdate(@RequestBody Product product){
         productService.updateProduct(product);
     }

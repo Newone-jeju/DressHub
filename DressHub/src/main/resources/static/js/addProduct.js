@@ -40,6 +40,7 @@ function save() {
         deposit: $('#deposit').val(),
         salePrice: $('#salePrice').val(),
         category: $('#category').val(),
+        consigmentStart: $('#consigmentStrat').val(),
         consigmentEnd: $('#consigmentEnd').val(),
         leastLeaseDay: $('#leastLeaseDay').val(),
         location: $('#location').val(),
