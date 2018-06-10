@@ -65,7 +65,7 @@ function requestData(method, data) {
         contentType: "application/json;charset=UTF-8",
         data: JSON.stringify(data)
     }).done(function () {
-        window.location.href = 'list';
+        window.location.href = 'productList';
     });
 }
 
@@ -87,6 +87,11 @@ $(document).ready(function () {
                 $('#image').val(product.image)
         });
     }
+    $('#imageForm').submit(function(){
+        save();
+        return true;
+    } ) ;
 
-    $('#addBtn').on("click", save);
+
+    // $('#addBtn').on("click", save);
 });

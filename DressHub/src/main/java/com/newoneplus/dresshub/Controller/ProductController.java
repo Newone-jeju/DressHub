@@ -42,7 +42,7 @@ public class ProductController {
 
     @PostMapping
     public Product productCreate(@RequestBody Product product) {
-        log.info(product.getCategory());
+        log.info("***********************요청이가 오고 있습니다. **********************************8");
         return productService.createProduct(product);
 
 
@@ -79,8 +79,8 @@ public class ProductController {
     }
 
     @PostMapping(value = "/image")
-    public void createProductImage(@RequestParam MultipartFile productImage) throws IOException {
-
+    public void createProductImage(@RequestParam("file") MultipartFile productImage) throws IOException {
+        log.info("***********************이미지가 오고 있습니다. **********************************8");
         ImageProcesser imageProcesser = new ImageProcesser();
         String filename = productImage.getOriginalFilename();
         String path = System.getProperty("user.dir") + "/out/main/resources/static/product_image/";
