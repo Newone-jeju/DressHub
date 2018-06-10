@@ -145,6 +145,7 @@
 
         sessionStorage.setItem("productId", data.id);
         sessionStorage.setItem("productName", data.name);
+        sessionStorage.setItem("deposit", data.deposit);
         sessionStorage.setItem("totalPrice", totalPrice);
         sessionStorage.setItem("totalShipment", 3000);
         sessionStorage.setItem("totalPayment", totalPayment);
