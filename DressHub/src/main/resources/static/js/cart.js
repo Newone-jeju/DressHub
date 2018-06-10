@@ -1,12 +1,12 @@
 $(document).ready(function () {
 					  $.ajax({
-                url: '/baskets/search?uid=user1',
+                url: '/baskets/search?uid=aaaa',
                 dataType: 'json',
                 type: 'get',
                 success: function (data) {
                     var product = {};
 
-                    data = data.product;
+                    data = data.content;
                     product.mapcard = function () {
                         var cards = ' <tr>\n' +
                             '      <th style="width: 10%;">이미지</th>\n' +

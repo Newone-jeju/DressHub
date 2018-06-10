@@ -56,6 +56,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .ignoringAntMatchers("/products")
                 .ignoringAntMatchers("/review/*")
                 .ignoringAntMatchers("/review")
+                .ignoringAntMatchers("/thumbUp")
+                .ignoringAntMatchers("/thumbUP/*")
                 .ignoringAntMatchers("/leaseInfo/*")
                 .ignoringAntMatchers("/leaseInfo");
 

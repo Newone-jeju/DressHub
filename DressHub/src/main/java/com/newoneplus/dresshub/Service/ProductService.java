@@ -79,9 +79,13 @@ public class ProductService {
     //유저에 대한 장바구니 불러오기
     public Page<Basket> getBasketList(int page){
         User user = new User();
-        user.setUid("user1");
+        user.setUid("aaaa");
         PageRequest pageRequest = PageRequest.of(page, 25, Sort.Direction.DESC, "id");
         return basketRepository.findAllByUserJoinProduct(user.getUid(), pageRequest);
+    }
+
+    public Basket createBasket(Basket basket){
+        return  basketRepository.save(basket);
     }
 
 

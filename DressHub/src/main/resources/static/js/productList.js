@@ -6,14 +6,9 @@ $(document).ready(function () {
     paging(1, 25, 10, 1);
 
     function paging(totalData, dataPerPage, pageCount, currentPage) {
-        console.log("abc");
-        console.log("currentPage : " + currentPage);
-        console.log("totalData :" + totalData);
+
         var totalPage = Math.ceil(totalData / dataPerPage);    // 총 페이지 수
         var pageGroup = Math.ceil(currentPage / pageCount);    // 페이지 그룹
-        console.log("totalPage : " + totalPage);
-        console.log("pageGroup : " + pageGroup);
-
         var last = pageGroup * pageCount;    // 화면에 보여질 마지막 페이지 번호
         if (last > totalPage)
             last = totalPage;
@@ -22,15 +17,9 @@ $(document).ready(function () {
         if (first <= 0) {
             first = 1;
         }
-
         var next = last + 1;
         var prev = first - 1;
 
-        console.log("last : " + last);
-        console.log("first : " + first);
-        console.log("next : " + next);
-        console.log("prev : " + prev);
-        console.log("total:" + totalPage);
 
         var $pingingView = $("#paging");
 
@@ -67,10 +56,10 @@ $(document).ready(function () {
                 success: function (data) {
                     var like = data.like;
                     console.log("like" + like);
-                    totalCount = data.count;
+                    totalCount = data.totalElements;
                     var product = {};
                     console.log("$item=" + $item);
-                    data = data.list;
+                    data = data.content;
                     console.log(data);
                     product.max_cardnum = 11;
 
@@ -83,7 +72,7 @@ $(document).ready(function () {
                             var likeBtn ="";
                             for (var i = 0; i < data.length; i++) {
                                 cards +=
-                                    '<span class="product_container_content_card" data-href="/productDetail?productId=' + data[i].id + '">' +
+                                    '<span class="product_container_content_card" data-href="/productDetail.html?productId=' + data[i].id + '">' +
                                     '<div class="card_img_wrap">' +
                                     '<img src="./product_image/' + data[i].thumbnailImage + '" alt="blank" class="card_img">' +
                                     '<div class="hover-content">' +
