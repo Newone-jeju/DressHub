@@ -20,6 +20,20 @@ public class BasketController {
         return productService.getBasketList(page-1);
     }
 
+    @PostMapping
+    public Basket create(@RequestBody Basket basket){
+        return productService.createBasket(basket);
+    }
 
+    @PutMapping
+    public void update(@RequestBody Basket basket){
+        productService.createBasket(basket);
+    }
+
+    @ExceptionHandler(NullPointerException.class)
+    @ResponseBody
+    public String checkUser(NullPointerException e){
+        return "403";
+    }
 
 }
