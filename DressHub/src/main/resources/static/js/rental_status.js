@@ -44,7 +44,7 @@
 
 	function setCard(data, quantity){
 		var cards =[];
-		for(var i=0; i<quantity; i++){
+		for(var i=0; i<quantity; i++){// thumnailUrl 이대로 괜춘???
 			cards.push(
 				'<div class="product-card" data-id="'+data[i].id+'">'+
 			        '<div class="card-header">'+

@@ -14,7 +14,7 @@
         var productId = getURLId(document.location.href);
         var ajaxData = '';
         //상품 데이터
-        ajaxData = new AjaxData('products/'+productId+, false);
+        ajaxData = new AjaxData('/products/'+productId+, false);
         data = ajaxData.getData()[0];
         ajaxData = undefined;
         //이미지 데이터
@@ -92,9 +92,9 @@
         //사이즈 아이콘 처리
         var sizeTxt = $(".product > .size > .info");
         var sizeIcon = "";
-        var getSizeIcon = new AjaxData('products/image/'+sizeTxt.text()+'_icon.png', false);
+        var getSizeIcon = new AjaxData('/products/image/'+sizeTxt.text()+'_icon.png', false);
         sizeIcon = getSizeIcon.getData();
-        sizeTxt.html('<img src="image/'+sizeIcon+'" alt="'+sizeIcon+'">');
+        sizeTxt.html('<img src="/image/'+sizeIcon+'" alt="'+sizeIcon+'">');
         getSizeIcon = undefined;
         
         
@@ -114,7 +114,7 @@
         ajaxCard = new AjaxCard();
         var cardString;
         cardString = 
-                '<a href="products/image/'+ajaxImg.origin+'" class="cloud-zoom" id="zoom1" rel="adjustX: 10, adjustY:-4">'+
+                '<a href="/image/'+ajaxImg.origin+'" class="cloud-zoom" id="zoom1" rel="adjustX: 10, adjustY:-4">'+
                   '<img class="big-img" src="'+ajaxImg.medium+'" alt="'+ajaxImg.medium+'" title="크게 보기" />'+
                 '</a>'
 
