@@ -1,4 +1,15 @@
 (function(){
+    
+    //class ReviewCard extends ajaxCard
+    function ReviewCard(){
+        AjaxCard.apply(this, arguments)
+    }
+    ReviewCard.prototype = Object.create(AjaxCard.prototype);
+    ReviewCard.prototype.constructor = ReviewCard;
+
+    ReviewCard.prototype.
+
+
     function no_review(){
         $(".td-group").html(
             '<div class="no-review flexcenter">' +
@@ -23,7 +34,7 @@
     function folding(){
         $(".review-head").click(function() {
             var index = ($(this).index()+1 - Math.floor($(this).index() / 2) - 1);
-            var $review_body = $("div.review-body:eq(" + index + ")");
+            var $review_body = $(this).next();
             if ($review_body.css('display') == "none") {
                 $($review_body).removeClass('hidd');
             } else {
@@ -35,7 +46,7 @@
     //페이지네이션 포함 리뷰 매핑 addhook 없으면 안됨
     function map_review(review_data) {
         var $review_pagination = $(".review-pagination");
-        $review_pagination.addHook('beforeInit', function () {});
+        $review_pagination.addHook('beforeInit', function (){});
         $review_pagination.pagination({
             dataSource: review_data,
             pageSize: 5,
@@ -59,7 +70,7 @@
         })
     }
 
-    function init() {
+    function reviewInit() {
         $.ajax({
             url: 'review?productId=0', //TODO 나중에 변수로 받아올것!
             dataType: 'json',
@@ -67,7 +78,7 @@
             success: function(data){
                 var review_cards = [];
             $.each(data, function(i, review_data)
-            {  
+            {   
                 i = i+1;
                 review_cards.push(
                 //리뷰 카드
@@ -157,6 +168,12 @@
     }
 
 
-    review.init();
+    var data = '';
+    get 
+    var reviewCard = new ReviewCard();
+    reviewCard.setCard();
+    reviewCard.mapCard();
+    setCard()
+    reviewInit();
 
 })();

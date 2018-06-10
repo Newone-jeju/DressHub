@@ -35,15 +35,12 @@
         ajaxCard = new AjaxCard();
         //이미지매핑
         //큰 이미지 매핑
-        bigMap(1);
+        bigMap();
 
-        //썸네일바 이미지 매핑 (눌러서 전환 되는) quantity는 이미지 갯수 이미지는 따로 필요
-        var quantity = 2;
-        for(var i=1; i<=quantity; i++){
-            cardString = 
-                '<img class="thumnail-img" src="image/tiny_jean'+i+'.jpg" alt = "Thumbnail '+i+'"/>'
-            ajaxCard.setCard(cardString);
-        }
+        //썸네일바 이미지 매핑
+        cardString = 
+            '<img class="thumnail-img" src="image/'+ajaxImg.small+'" alt = "'+ajaxImg.small+'"/>'
+        ajaxCard.setCard(cardString);
         ajaxCard.mapCard($(".thumnamil-bar"));
 
         $(".thumnamil-bar > .thumnail-img").click(function(){
@@ -93,8 +90,13 @@
         });
 
         //사이즈 아이콘 처리
-        var sizeIcon = $(".product > .size > .info");
-        sizeIcon.html('<img src="image/'+sizeIcon.text()+'_icon.png" alt="'+sizeIcon.text()+'">');
+        var sizeTxt = $(".product > .size > .info");
+        var sizeIcon = "";
+        var getSizeIcon = new AjaxData('products/image/'+sizeTxt.text()+'_icon.png', false);
+        sizeIcon = getSizeIcon.getData();
+        sizeTxt.html('<img src="image/'+sizeIcon+'" alt="'+sizeIcon+'">');
+        getSizeIcon = undefined;
+        
         
         //페이지 컨텐츠 상세
         cardString = 
@@ -108,12 +110,12 @@
     }    
 
     // 대형 이미지 매핑
-    function bigMap(i){
+    function bigMap(){
         ajaxCard = new AjaxCard();
         var cardString;
         cardString = 
-                '<a href="image/big_jean'+i+'.jpg" class="cloud-zoom" id="zoom1" rel="adjustX: 10, adjustY:-4">'+
-                  '<img class="big-img" src="image/small_jean'+i+'.jpg" alt="small_jean'+i+'" title="크게 보기" />'+
+                '<a href="products/image/'+ajaxImg.origin+'" class="cloud-zoom" id="zoom1" rel="adjustX: 10, adjustY:-4">'+
+                  '<img class="big-img" src="'+ajaxImg.medium+'" alt="'+ajaxImg.medium+'" title="크게 보기" />'+
                 '</a>'
 
         ajaxCard.setCard(cardString);
