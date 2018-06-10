@@ -17,6 +17,7 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.awt.image.ImageProducer;
+import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -39,15 +40,15 @@ public class ProductController {
     }
 
 
-    @PostMapping(produces = "application/json; charset=UTF-8")
+    @PostMapping
     public Product productCreate(@RequestBody Product product) {
-        log.info(product.getCategory());
+        log.info("***********************요청이가 오고 있습니다. **********************************8");
         return productService.createProduct(product);
 
 
     }
 
-    @PutMapping(produces = "application/json; charset=UTF-8")
+    @PutMapping
     public void productUpdate(@RequestBody Product product){
         productService.updateProduct(product);
     }
@@ -63,7 +64,7 @@ public class ProductController {
     }
 
     @GetMapping(value = "/search")
-    public Page getProductList(@RequestParam(value = "page", defaultValue = "1") int page, @RequestParam(value = "category", defaultValue = "null") String category, @RequestParam(value = "order", defaultValue = "id desc") String order) {
+    public Page getProductList(@RequestParam(value = "page", defaultValue = "1") int page, @RequestParam(value = "category", defaultValue = "캐쥬얼") String category, @RequestParam(value = "order", defaultValue = "id desc") String order) {
         return productService.getProductList(page - 1, category, order);
     }
 
@@ -78,18 +79,18 @@ public class ProductController {
     }
 
     @PostMapping(value = "/image")
-    public void createProductImage(@RequestParam MultipartFile productImage) throws IOException {
-
+    public void createProductImage(@RequestParam("file") MultipartFile productImage) throws IOException {
+        log.info("***********************이미지가 오고 있습니다. **********************************8");
         ImageProcesser imageProcesser = new ImageProcesser();
         String filename = productImage.getOriginalFilename();
-        String path = System.getProperty("user.dir") + "/out/main/resources/static/product_image/";
+        String path = System.getProperty("user.dir") + "/out/production/resources/static/product_image/";
         new File(path).mkdirs(); // 디렉토리 생성
 
-        BufferedImage image = imageProcesser.getMediumImage(productImage.getInputStream());
-        writeImage(filename, path, image, "medium");
+        BufferedImage image2 = imageProcesser.getMediumImage(productImage.getInputStream());
+        writeImage(filename, path, image2, "medium");
 
-        BufferedImage image2 = imageProcesser.getSmallImage(productImage.getInputStream());
-        writeImage(filename, path, image2, "small");
+        BufferedImage image3 = imageProcesser.getSmallImage(productImage.getInputStream());
+        writeImage(filename, path, image3, "small");
 
         productImage.transferTo(new File(path + "origin" + filename));
     }
@@ -99,46 +100,7 @@ public class ProductController {
         ImageIO.write(image2, "jpg", new File(path + sizeFileName));
     }
 
-    @RequestMapping(value = "/thumbUp", method = RequestMethod.POST)
-    public Product likeCreate(@RequestBody Product product, @RequestParam(value = "state") boolean state) throws ClassNotFoundException {
-        //TODO develop이랑 합치면 넣기 !
-        User user = new User();
-        user.setUid("user1");
-        ThumbUp thumbUp = new ThumbUp();
-        thumbUp.setUid(user.getUid());
-        thumbUp.setProduct(product);
-        if (state) {
-            productService.insertThumup(thumbUp);
-        } else {
-            productService.deleteThumup(thumbUp);
-        }
-        return productService.getProduct(product.getId());
 
-    }
-
-
-    @RequestMapping(value = "/thumbUp/search", method = RequestMethod.GET)
-    public Page<Product> getThumbUpProductList(@RequestParam(value = "page", defaultValue = "1") int page) {
-        User user = new User();
-        user.setUid("user1");
-        return productService.getThumbUpProductList(page, user);
-    }
-
-
-    //TODO 나중에 프론트 위임
-    @RequestMapping(value = "/productList", method = RequestMethod.GET)
-    public String productListView(@RequestParam(value = "category", defaultValue = "10") String category, Model model) {
-        model.addAttribute("category", category);
-        return "productList";
-    }
-
-
-    //TODO 나중에 프론트 위임
-    @RequestMapping(value = "/productDetail", method = RequestMethod.GET)
-    public String getProductDetail(@RequestParam(value = "productId") int productId, Model model) throws ClassNotFoundException {
-        model.addAttribute("productId", productId);
-        return "product_details";
-    }
 
 
 }

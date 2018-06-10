@@ -51,11 +51,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 //        .antMatchers("/**").requiresSecure();
 //        csrf config
         http.csrf()
+
                 .ignoringAntMatchers("/products/*")
                 .ignoringAntMatchers("/products")
 
                 .ignoringAntMatchers("/review/*")
                 .ignoringAntMatchers("/review")
+                .ignoringAntMatchers("/thumbUp")
+                .ignoringAntMatchers("/thumbUP/*")
                 .ignoringAntMatchers("/leaseInfo/*")
                 .ignoringAntMatchers("/leaseInfo");
 

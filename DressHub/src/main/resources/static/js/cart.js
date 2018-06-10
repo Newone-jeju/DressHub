@@ -1,12 +1,17 @@
 $(document).ready(function () {
-                 $.ajax({
-                url: '/basketList?userId=user1',
+
+					  $.ajax({
+                url: '/baskets/search?',
+
                 dataType: 'json',
                 type: 'get',
                 success: function (data) {
+                    if(data=="403"){
+                        window.location.href = 'login';
+                    }
                     var product = {};
 
-                    data = data.product;
+                    data = data.content;
                     product.mapcard = function () {
                         var cards = ' <tr>\n' +
                             '      <th style="width: 10%;">이미지</th>\n' +
@@ -16,12 +21,14 @@ $(document).ready(function () {
                             '    </tr>';
                         for (var i = 0; i < data.length; i++) {
                             cards +=
-                                                '<tr>'+
-                                                   '<td><img style="width:100%"src="./product_image/'+data[i].thumbnailImage+'"/></td>'+
-                                                   '<td>'+data[i].name+'</td>'+
-                                                   '<td>'+data[i].costPerDay+'</td>'+
-                                                   '<td>'+data[i].salePrice+'</td>'+
-                                                '</tr>'
+
+																'<tr>'+
+																	'<td><img style="width:100%"src="./product_image/origin'+data[i].product.thumbnailImage+'"/></td>'+
+																	'<td>'+data[i].product.name+'</td>'+
+																	'<td>'+data[i].product.costPerDay+'</td>'+
+																	'<td>'+data[i].product.salePrice+'</td>'+
+																'</tr>'
+
                         }
                         var totalPrice=0;
                         for(var i=0; i<data.length; i++){

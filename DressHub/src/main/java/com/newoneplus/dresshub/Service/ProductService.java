@@ -8,12 +8,16 @@ import com.newoneplus.dresshub.Repository.BasketRepository;
 import com.newoneplus.dresshub.Repository.ProductImageRepository;
 import com.newoneplus.dresshub.Repository.ProductRepository;
 import com.newoneplus.dresshub.Repository.ThumbUpRepository;
+import com.sun.corba.se.impl.protocol.giopmsgheaders.RequestMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.validation.constraints.Null;
 import java.util.HashMap;
 import java.util.List;
 
@@ -67,28 +71,45 @@ public class ProductService {
         if(category.equals("null")) {
             category = "";
         }
-        User user = new User();
-        user.setUid("user1");
-        PageRequest pageRequest = PageRequest.of(page, 25, Sort.Direction.ASC, "id");
+
+        PageRequest pageRequest = PageRequest.of(page, 25, Sort.Direction.DESC, "id");
+        if(AuthorizationService.getCurrentUser() ==null){
+            return productRepository.findAllByCatetoryJoinThumbUpByUid(category, "null", pageRequest);
+        }else {
+            return productRepository.findAllByCatetoryJoinThumbUpByUid(category, AuthorizationService.getCurrentUser().getUid(), pageRequest);
+        }
+
+
         //여기에 좋아요와 조인을 해야한다.
-            return productRepository.findAllByCatetoryJoinThumbUpByUid(category, user.getUid(), pageRequest);
+
         //Todo 현재 user1로 임시로 지정 나중에 보안정책 완료 후 User가져오는 것으로 수정
     };
 
 
     //유저에 대한 장바구니 불러오기
-    public Page<Basket> getBasketList(int page){
-        User user = new User();
-        user.setUid("user1");
+    public Page<Basket> getBasketList(int page) throws NullPointerException{
+        if(AuthorizationService.getCurrentUser()==null){
+            new NullPointerException();
+        }
         PageRequest pageRequest = PageRequest.of(page, 25, Sort.Direction.DESC, "id");
-        return basketRepository.findAllByUserJoinProduct(user.getUid(), pageRequest);
+        return basketRepository.findAllByUserJoinProduct(AuthorizationService.getCurrentUser().getUid(), pageRequest);
+    }
+
+    public Basket createBasket(Basket basket){
+        return  basketRepository.save(basket);
     }
 
 
+    //TODO 나중에 post로 바꿀 시 바꿔야함
     //좋아요 등록하기
     public void insertThumup(ThumbUp thumbUp){
         thumbUpRepository.save(thumbUp);
-        Product product = productRepository.findById(thumbUp.getProduct().getId());
+//        Product product = productRepository.findById(thumbUp.getProduct().getId());
+//        product.setLikes(thumbUp.getProduct().getLikes()+1);
+        Product product = thumbUp.getProduct();
+        if(product.getLikes()==null){
+            product.setLikes(0);
+        }
         product.setLikes(product.getLikes()+1);
         productRepository.save(product);
     }
@@ -102,9 +123,13 @@ public class ProductService {
     }
 
     public Page<Product> getThumbUpProductList(int page, User user) {
-        PageRequest pageRequest = PageRequest.of(0, 25, Sort.Direction.DESC, "id");
+        PageRequest pageRequest = PageRequest.of(page, 25, Sort.Direction.DESC, "id");
         return productRepository.findAllByUid(user.getUid(),pageRequest);
     }
-
+    @ExceptionHandler(NullPointerException.class)
+    @ResponseBody
+    public String checkUser(NullPointerException e){
+        return "403";
+    }
 
 }
