@@ -89,10 +89,16 @@ public class ProductService {
     }
 
 
+    //TODO 나중에 post로 바꿀 시 바꿔야함
     //좋아요 등록하기
     public void insertThumup(ThumbUp thumbUp){
         thumbUpRepository.save(thumbUp);
-        Product product = productRepository.findById(thumbUp.getProduct().getId());
+//        Product product = productRepository.findById(thumbUp.getProduct().getId());
+//        product.setLikes(thumbUp.getProduct().getLikes()+1);
+        Product product = thumbUp.getProduct();
+        if(product.getLikes()==null){
+            product.setLikes(0);
+        }
         product.setLikes(product.getLikes()+1);
         productRepository.save(product);
     }

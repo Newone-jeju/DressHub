@@ -79,26 +79,18 @@ $(document).ready(function () {
                                     '<img src="../image/' + data[i].state + '_icon.png}" alt="" class="hover-size">' +
                                     '<div class="hover-btn-wrap">' +
                                     '<img src="../image/cart_btn_0.png" alt="" class="cart_btn" name="' + data[i].id + '">'
-                                    console.log("like"+ like);
-                                    if(like!=null){
 
-                                        for(var j= 0; j < like.length; j++){
-
-                                            if(data[i].id == like[j].product){
-                                                console.log("data.id: " + data[i].id+ "like.product", + like[j].product);
-                                                likeBtn = '<img src="../image/like_btn_1.png" alt="" class="like_btn 1" name="' + data[i].id + '">';
-                                                break;
-                                            }else{
-
-                                                likeBtn= '<img src="../image/like_btn_0.png" alt="" class="like_btn 0 " name="'+data[i].id+ '">';
-                                            }
-                                        }
+                                    if(data[i].thumbUps.length != 0){
+                                     likeBtn = '<img src="../image/like_btn_1.png" alt="" class="like_btn 1" name="' + data[i].id + '">';
                                     }else{
-                                        likeBtn= '<img src="../image/like_btn_0.png" alt="" class="like_btn 0 " name="'+data[i].id+ '">';
+                                     likeBtn= '<img src="../image/like_btn_0.png" alt="" class="like_btn 0 " name="'+data[i].id+ '">';
                                     }
+
                                 cards += likeBtn;
-                                cards +=
-                                    '<span class="like-num">'+data[i].likes+'</span>'+
+                                    if(data[i].likes == null){
+                                        data[i].likes=0;
+                                    }
+                                cards += '<span class="like-num">'+data[i].likes+'</span>'+
                                     // json 추가 필요
                                     '</div>' +
                                     '</div>' +

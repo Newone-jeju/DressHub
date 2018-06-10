@@ -40,13 +40,17 @@ public class MainController {
 //        model.addAttribute("productId", productId);
 //        return "product_details";
 //    }
-    @RequestMapping(value = "/thumbUp", method = RequestMethod.POST)
-    public Product likeCreate(@RequestBody Product product, @RequestParam(value = "state") boolean state) throws ClassNotFoundException {
+
+    //TODO 나중에 Post로 바꿀것
+    @RequestMapping(value = "/thumbUp", method = RequestMethod.GET)
+    @ResponseBody
+    public Product likeCreate(@RequestParam(value = "productId") Integer productId , @RequestParam(value = "state") boolean state) throws ClassNotFoundException {
         //TODO develop이랑 합치면 넣기 !
         User user = new User();
-        user.setUid("user1");
+        user.setUid("aaaa");
         ThumbUp thumbUp = new ThumbUp();
         thumbUp.setUid(user.getUid());
+        Product product =productService.getProduct(productId);
         thumbUp.setProduct(product);
         if (state) {
             productService.insertThumup(thumbUp);
@@ -59,6 +63,7 @@ public class MainController {
 
 
     @RequestMapping(value = "/thumbUp/search", method = RequestMethod.GET)
+    @ResponseBody
     public Page<Product> getThumbUpProductList(@RequestParam(value = "page", defaultValue = "1") int page) {
         User user = new User();
         user.setUid("user1");
