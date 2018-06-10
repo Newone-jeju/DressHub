@@ -1,6 +1,8 @@
 $(document).ready(function () {
+
 					  $.ajax({
                 url: '/baskets/search?',
+
                 dataType: 'json',
                 type: 'get',
                 success: function (data) {
@@ -19,12 +21,14 @@ $(document).ready(function () {
                             '    </tr>';
                         for (var i = 0; i < data.length; i++) {
                             cards +=
+
 																'<tr>'+
 																	'<td><img style="width:100%"src="./product_image/origin'+data[i].product.thumbnailImage+'"/></td>'+
 																	'<td>'+data[i].product.name+'</td>'+
 																	'<td>'+data[i].product.costPerDay+'</td>'+
 																	'<td>'+data[i].product.salePrice+'</td>'+
 																'</tr>'
+
                         }
                         var totalPrice=0;
                         for(var i=0; i<data.length; i++){

@@ -28,7 +28,7 @@ table input{
 #Btn{
   text-align: center;
 }
-.addBtn{
+#addBtn{
   background-color: #363636;
    border: none;
    color: white;
@@ -38,7 +38,7 @@ table input{
    text-decoration: none;
    font-size: 10px;
 }
-.cancle{
+#cancle{
   background-color: #9B9B9B;
    border: none;
    color: white;
