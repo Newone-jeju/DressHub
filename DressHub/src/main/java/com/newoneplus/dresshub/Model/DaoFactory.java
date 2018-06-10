@@ -1,3 +1,4 @@
+
 //package com.newoneplus.dresshub.Model;
 //
 //import com.newoneplus.dresshub.Repository.ProductRepository;
@@ -31,6 +32,7 @@
 //        return new JdbcTemplate(datasource());
 //    }
 //
+
 //    @Bean
 //    public DataSource datasource(){
 //        SimpleDriverDataSource dataSource = new SimpleDriverDataSource();
@@ -44,12 +46,13 @@
 //        dataSource.setPassword(password);
 //        return dataSource;
 //    }
-//
+
 //    @Bean
 //    public ProductDao productDao() {return new ProductDao(jdbcTemplate());}
 //
 //
 //
+
 //    @Bean
 //
 //    public ProductService productService(){return new ProductService();}
