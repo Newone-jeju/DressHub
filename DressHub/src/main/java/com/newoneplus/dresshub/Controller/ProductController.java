@@ -64,7 +64,7 @@ public class ProductController {
     }
 
     @GetMapping(value = "/search")
-    public Page getProductList(@RequestParam(value = "page", defaultValue = "1") int page, @RequestParam(value = "category", defaultValue = "null") String category, @RequestParam(value = "order", defaultValue = "id desc") String order) {
+    public Page getProductList(@RequestParam(value = "page", defaultValue = "1") int page, @RequestParam(value = "category", defaultValue = "캐쥬얼") String category, @RequestParam(value = "order", defaultValue = "id desc") String order) {
         return productService.getProductList(page - 1, category, order);
     }
 
@@ -83,7 +83,7 @@ public class ProductController {
         log.info("***********************이미지가 오고 있습니다. **********************************8");
         ImageProcesser imageProcesser = new ImageProcesser();
         String filename = productImage.getOriginalFilename();
-        String path = System.getProperty("user.dir") + "/out/main/resources/static/product_image/";
+        String path = System.getProperty("user.dir") + "/out/production/resources/static/product_image/";
         new File(path).mkdirs(); // 디렉토리 생성
 
         BufferedImage image2 = imageProcesser.getMediumImage(productImage.getInputStream());

@@ -30,5 +30,10 @@ public class BasketController {
         productService.createBasket(basket);
     }
 
+    @ExceptionHandler(NullPointerException.class)
+    @ResponseBody
+    public String checkUser(NullPointerException e){
+        return "403";
+    }
 
 }

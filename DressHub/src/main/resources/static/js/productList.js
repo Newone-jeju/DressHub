@@ -74,7 +74,7 @@ $(document).ready(function () {
                                 cards +=
                                     '<span class="product_container_content_card" data-href="/productDetail.html?productId=' + data[i].id + '">' +
                                     '<div class="card_img_wrap">' +
-                                    '<img src="./product_image/' + data[i].thumbnailImage + '" alt="blank" class="card_img">' +
+                                    '<img src="/product_image/origin' + data[i].thumbnailImage + '" alt="blank" class="card_img">' +
                                     '<div class="hover-content">' +
                                     '<img src="../image/' + data[i].state + '_icon.png}" alt="" class="hover-size">' +
                                     '<div class="hover-btn-wrap">' +
@@ -133,6 +133,10 @@ $(document).ready(function () {
                             dataType: "json",
                             success: function(response){
                                 console.log("like누름 ajax실행됨");
+                                console.log(response);
+                                if(response=='403'){
+                                    window.location.href = 'login';
+                                }
                                 if(!state){
                                     console.log(target);
                                     target.attr("src", "../image/like_btn_0.png");
