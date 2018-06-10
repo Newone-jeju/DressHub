@@ -67,7 +67,7 @@
       <th>상품금액</th>
       <th>배송비</th>
     </tr>
-    <tr class="cartAdd_container"></tr>
+    <div class="cartAdd_container"></div>
     <!-- <tr>
       <td class="image"></td>
       <td class="information"></td>
@@ -98,12 +98,14 @@
 
   <!-- 버튼 -->
   <div id="btn">
-    <button class="cancle">취소하기</button>
-    <input type="button" class="order" value="주문하기"></input>
+    <button class="cancle" onClick="location.href='index.html'">취소하기</button>
+    <input type="submit" class="order" value="주문하기" onClick="location.href='order.html'"></input>
   </div>
 
 </div>
-    <script type="text/javascript" src="js/jquery-3.3.1.min.js" charset="utf-8"></script>
+<script type="text/javascript" src="js/jquery-3.3.1.min.js" charset="utf-8"></script>
+<script src="js/ajaxData.js"></script>
+<script src="js/getCookie.js"></script>
   <script src="js/menu.js"></script>
   <script src="js/cart.js"></script>
 

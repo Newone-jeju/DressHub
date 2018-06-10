@@ -8,6 +8,7 @@ import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -33,17 +34,28 @@ public class ProductController {
 
 
     @GetMapping(value = "/{id}")
-    public Product getProduct(@PathVariable(value = "id") int id) {
+    public Product getProduct(@PathVariable Integer id) {
         return productService.getProduct(id);
     }
 
 
-    @PostMapping
-    public String productCreate(@RequestBody Product product) {
-        productService.createProduct(product);
-        return "productList";
+    @PostMapping(produces = "application/json; charset=UTF-8")
+    public Product productCreate(@RequestBody Product product) {
+        log.info(product.getCategory());
+        return productService.createProduct(product);
+
+
     }
 
+    @PutMapping(produces = "application/json; charset=UTF-8")
+    public void productUpdate(@RequestBody Product product){
+        productService.updateProduct(product);
+    }
+
+    @DeleteMapping(value = "/{id}")
+    public void productDelete(@PathVariable Integer id){
+        productService.deleteProduct(productService.getProduct(id));
+    }
 
     @GetMapping(value = "/list")
     public List<Product> getProductList() {
