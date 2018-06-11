@@ -6,7 +6,7 @@
 		"log": [
 			{
 				"log_id": 4,
-				"status": "입고",
+				"status": "세탁중",
 				"name": "dresshub",
 				"phoneNum": "01000000000",
 				"startDay": "2013-12-14",
@@ -15,7 +15,7 @@
 			},
 			{
 				"log_id": 3,
-				"status": "입고",
+				"status": "반납중",
 				"name": "dresshub",
 				"phoneNum": "01000000000",
 				"startDay": "2013-12-14",
@@ -24,7 +24,7 @@
 			},
 			{
 				"log_id": 2,
-				"status": "입고",
+				"status": "대여중",
 				"name": "dresshub",
 				"phoneNum": "01000000000",
 				"startDay": "2013-12-14",
@@ -33,7 +33,7 @@
 			},
 			{
 				"log_id": 1,
-				"status": "입고",
+				"status": "배송중",
 				"name": "dresshub",
 				"phoneNum": "01000000000",
 				"startDay": "2013-12-14",
@@ -42,7 +42,7 @@
 			},
 			{
 				"log_id": 0,
-				"status": "입고",
+				"status": "주문",
 				"name": "dresshub",
 				"phoneNum": "01000000000",
 				"startDay": "2013-12-14",

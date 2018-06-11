@@ -59,6 +59,13 @@
 	text-decoration: underline;
 }
 
+@media screen and (max-width: 800px) {
+    #rental-status {
+    width:95%;
+    min-width: 520px;  
+	}
+}
+
 
 .page-head-category > a{
 	text-decoration: none;

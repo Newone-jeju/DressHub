@@ -3,7 +3,7 @@ function getName(){
 	$rental_product_content.text(window.opener.$("#product-details h1.title:eq(0)").text());
 	console.log($rental_product_content.text());
 	//부모창인 상품상세정보페이지로 부터 접근하지 않은 경우
-	if($rental_product_content.text() ==''){
+	if($rental_product_content.text() ==""){
 		alert('잘못된 경로로 접근');
 		window.open('about:blank', '_self').close();
 	}
@@ -11,6 +11,9 @@ function getName(){
 
 function getauthor(){
 	//작성자 이름 가져오기
+    var user = new CookieUser();
+    var userId = user.getUserId();
+
 }
 
 function setHiddenName(){
@@ -35,6 +38,7 @@ function setHiddenRating(){
 
 function getEditInfo(review_id) {
     if ( review_id == "null"){
+        method = "POST";
         $("#rating").text(0);
         $("#rating").attr("value", 0);
         setHiddenRating();
@@ -42,13 +46,14 @@ function getEditInfo(review_id) {
         var id = review_id;
         console.log(id)
         $.ajax({
-            type: "get",
-            url: "review",// id로 받아올 리뷰 url
+            type: "GET",
+            url: "/review/"+id,// id로 받아올 리뷰 url
+            async: false,
             data: {'id': id},
             dataType: "json", // 서버에서 받을 데이터 형식
             success: function (response) {
                 console.log(response);
-                $(".form-url").attr("action", "review/update");
+                method = "PUT";
                 $(".author-content").val(response[0].userId);
                 $("#rating").text(response[0].rate);
                 setHiddenRating();
@@ -57,6 +62,24 @@ function getEditInfo(review_id) {
                 $(".hid-id").val(response[0].id);
             }
         });
+        //부모창 리뷰아이디 초기화
+        opener.parent.getReviewId(false);
+    }
+}
+
+function gatherForm(){
+    return {
+        id: $(".hid-id").val(),
+        userId: $(".author-content").text(),
+        rate: $(".hid-rank").val(),
+        title: $(".title-content").val(),
+        comment: $(".text-content").val()
+    }
+}
+
+function gatherImage() {
+    return{
+        imageUrl: $(".img-content")[0].files[0].name;
     }
 }
 
@@ -65,21 +88,31 @@ function reviewFormInit() {
 	getName();
 	getauthor();
 	setHiddenName();
-	var edit_id = opener.parent.getEditNum(); 
-	console.log(edit_id);
-	getEditInfo(edit_id);
+	review_id = opener.parent.getReviewId(true); 
+	console.log(review_id);
+	getEditInfo(review_id);
 }
 
+var review_id = "";
+var method = "POST";
 reviewFormInit();
+var formData = {}
 
 
 $(".send-btn").click(function(){
-	opener.parent.location.reload();
-	// window.open('about:blank', '_self').close();
+    var ajaxUtil = new AjaxUtil('/review/'+review_id);
+    ajaxUtil.crudData(gatherForm(), method, function(){
+        //이미지 전송
+        var ajaxUtil = new AjaxUtil('/review/image');
+        ajaxUtil.crudData(gatherImage(), method, function(){
+                opener.parent.location.reload();
+                window.open('about:blank', '_self').close();
+        })
+    })
 });
 
 $(".cancel-btn").click(function(){
-	// window.open('about:blank', '_self').close();
+	window.open('about:blank', '_self').close();
 });
 
 
