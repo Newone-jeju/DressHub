@@ -45,4 +45,4 @@ CookieUser.prototype.inspectIdDiff = function(uid){
 
 (function(){
 	userNavEdit();
-})();
+}());

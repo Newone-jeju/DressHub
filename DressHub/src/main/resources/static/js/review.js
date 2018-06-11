@@ -1,4 +1,4 @@
-(function(){
+(function() {
     
 
     //class ReviewCard extends ajaxCard
@@ -105,7 +105,6 @@
           '</div>'
           )
         });
-
         var review_cards = reviewCard.getCard();
         // 리뷰없음 검사
         if (review_cards == []) {
@@ -123,6 +122,7 @@
         write_btn();
         delete_btn();
     }
+
 
 
     //review write review
@@ -202,4 +202,4 @@
     reviewInit();
 
 
-})();
+}())

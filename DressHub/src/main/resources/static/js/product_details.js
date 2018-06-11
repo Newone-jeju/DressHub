@@ -14,7 +14,7 @@
         var productId = getURLId(document.location.href);
         var ajaxData = '';
         //상품 데이터
-        ajaxData = new AjaxData('/products/'+productId+, false);
+        ajaxData = new AjaxData('/products/'+productId, false);
         data = ajaxData.getData()[0];
         ajaxData = undefined;
         //이미지 데이터
@@ -193,8 +193,7 @@
         })
     })
 
-
-})();
+}());
 
 
 

@@ -58,5 +58,5 @@ var host = './join';
            });
        }
 
-       $('#addBtn').on("click", save);
+       $('#addBtn').on("click", save());
    });
