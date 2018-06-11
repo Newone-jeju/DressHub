@@ -1,0 +1,45 @@
+[
+	{
+	    "id": 0,
+	    "leaseDay": "2001-01-01",
+	    "returnDay": "2001-01-01",
+	    "totalPrice": 15000,
+	    "leaseSite": "제주시",
+	    "returnSite": "제주시",
+	    "leaser": "testuser2",
+	    "product": 0,
+	    "status": "준비중",
+
+	    "orderManager": null,
+	    "orderManagerCall": null,
+	    "orderManagerMassage": null,
+	    "orderStart": null,
+	    "orderEnd": null,
+
+	    "leaseDeliverManager": null,
+	    "leaseDeliverManagerCall": null,
+	    "leaseDeliverManagerMassage": null,
+	    "leaseDeliverStart": null,
+	    "leaseDeliverEnd": null,
+	    
+	    "leaseManager": null,
+	    "leaseManagerCall": null,
+	    "leaseManagerMassage": null,
+	    "leaseStart": null,
+	    "leaseEnd": null,
+	    
+	    "returnManager": null,
+	    "returnManagerCall": null,
+	    "returnManagerMassage": null,
+	    "returnStart": null,
+	    "returnEnd": null,
+	    
+	    "laundryManager": null,
+	    "laundryManagerCall": null,
+	    "laundryManagerMassage": null,
+	    "laundryStart": null,
+	    "laundryEnd": null,
+
+	    "ready": null
+	}
+]
