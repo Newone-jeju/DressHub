@@ -16,7 +16,8 @@ $('.totalPrice').html(totalPrice);
 $('.totalShipment').html(totalShipment);
 $('.totalPayment').html(totalPayment);
 
-// ******
+// *******************************************
+
 var host = './order';
 
 function getUrlParams() {
@@ -29,10 +30,10 @@ function getUrlParams() {
 
 function save() {
     var user = {
-        name: $('#name').val(),
         id: $('#id').val(),
-        password: $('#password').val(),
-        passwordCheck: $('#passwordCheck').val()
+        productId: $('#productId').val(),
+        startDay: $('#startDay').val(),
+        endDay: $('#endDay').val()
     };
 
     var method = 'POST';
@@ -58,10 +59,10 @@ $(document).ready(function () {
     var params = getUrlParams();
     if (params.id) {
         $.get(host + "/" + params.id, function (user) {
-            $('#name').val(),
-                $('#id').val(),
-                $('#password').val(),
-                $('#passwordCheck').val()
+            $('#id').val(),
+                $('#productId').val(),
+                $('#startDay').val(),
+                $('#endDay').val()
         });
     }
 
