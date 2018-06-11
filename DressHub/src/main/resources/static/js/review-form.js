@@ -79,7 +79,7 @@ function gatherForm(){
 
 function gatherImage() {
     return{
-        imageUrl: $(".img-content")[0].files[0].name;
+        imageUrl: $(".img-content")[0].files[0].name
     }
 }
 

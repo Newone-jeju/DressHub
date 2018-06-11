@@ -61,6 +61,7 @@ public class LeaseInfoController {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd");
         log.setStartDay(dateFormat.format(new Date()));
         log.setMessage("");
+        leaseInfoLogRepository.save(log);
 
         res.setStatus(200);
         return null;

@@ -35,7 +35,7 @@
 
         //썸네일바 이미지 매핑
         cardString = 
-            '<img class="thumnail-img" src="products/image/'+ajaxImg.small+'" alt = "'+ajaxImg.small+'"/>'
+            '<img class="thumnail-img" src="/product_image/small'+data.thumbnailImage+'" alt = "small'+data.thumbnailImage+'"/>'
         ajaxCard.setCard(cardString);
         ajaxCard.mapCard($(".thumnamil-bar"));
 
@@ -88,7 +88,7 @@
         //사이즈 아이콘 처리
         var sizeTxt = $(".product > .size > .info");
         var sizeIcon = "";
-        sizeTxt.html('<img src="/products/image/'+data.size+'.png" alt="'+sizeIcon+'">');
+        sizeTxt.html('<img src="products/image/'+data.size+'.png" alt="'+sizeIcon+'">');
         
         
         //페이지 컨텐츠 상세
@@ -107,8 +107,8 @@
         ajaxCard = new AjaxCard();
         var cardString;
         cardString = 
-                '<a href="/products/image/'+ajaxImg.origin+'" class="cloud-zoom" id="zoom1" rel="adjustX: 10, adjustY:-4">'+
-                  '<img class="big-img" src="/products/image/'+ajaxImg.medium+'" alt="'+ajaxImg.medium+'" title="크게 보기" />'+
+                '<a href="/product_image/origin'+data.thumbnailImage+'" class="cloud-zoom" id="zoom1" rel="adjustX: 10, adjustY:-4">'+
+                  '<img class="big-img" src="/product_image/medium'+data.thumbnailImage+'" alt="medium'+data.thumbnailImage+'" title="크게 보기" />'+
                 '</a>'
 
         ajaxCard.setCard(cardString);
@@ -149,11 +149,6 @@
     }
 
     var ajaxCard ="";
-    var ajaxImg = {
-        origin: "",
-        medium: "",
-        small: ""
-    };
     var data =[];
     
     //데이터 가져오기

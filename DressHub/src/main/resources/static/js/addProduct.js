@@ -40,12 +40,13 @@ function save() {
         deposit: $('#deposit').val(),
         salePrice: $('#salePrice').val(),
         category: $('#category').val(),
-        consigmentStart: $('#consigmentStrat').val(),
+        consigmentStart: $('#consigmentStart').val(),
         consigmentEnd: $('#consigmentEnd').val(),
         leastLeaseDay: $('#leastLeaseDay').val(),
         location: $('#location').val(),
         state: $('#state').val(),
         size: $('#size').val(),
+        provider: getUserId(),
         contents: $('#contents').val(),
         thumbnailImage:fileName
     };
