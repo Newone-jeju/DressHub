@@ -16,6 +16,57 @@ $('.totalPrice').html(totalPrice);
 $('.totalShipment').html(totalShipment);
 $('.totalPayment').html(totalPayment);
 
+// ******
+var host = './order';
+
+function getUrlParams() {
+    var params = {};
+    window.location.search.replace(/[?&]+([^=&]+)=([^&]*)/gi, function (str, key, value) {
+        params[key] = value;
+    });
+    return params;
+}
+
+function save() {
+    var user = {
+        name: $('#name').val(),
+        id: $('#id').val(),
+        password: $('#password').val(),
+        passwordCheck: $('#passwordCheck').val()
+    };
+
+    var method = 'POST';
+
+    if(user.id!='')
+        method = 'PUT';
+    requestData(method, user);
+    return false;
+}
+
+function requestData(method, data) {
+    $.ajax({
+        url: host,
+        method: method,
+        contentType: "application/json",
+        data: JSON.stringify(data)
+    }).done(function () {
+        window.location.href = 'list';
+    });
+}
+
+$(document).ready(function () {
+    var params = getUrlParams();
+    if (params.id) {
+        $.get(host + "/" + params.id, function (user) {
+            $('#name').val(),
+                $('#id').val(),
+                $('#password').val(),
+                $('#passwordCheck').val()
+        });
+    }
+
+    $('#payment').on("click", save());
+});
 
 
 
