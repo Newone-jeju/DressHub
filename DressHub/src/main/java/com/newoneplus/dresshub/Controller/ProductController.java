@@ -2,6 +2,7 @@ package com.newoneplus.dresshub.Controller;
 
 import com.newoneplus.dresshub.ImageProcesser;
 import com.newoneplus.dresshub.Model.*;
+import com.newoneplus.dresshub.Repository.ProductRepository;
 import com.newoneplus.dresshub.Repository.ThumbUpRepository;
 import com.newoneplus.dresshub.Service.ProductService;
 import lombok.AllArgsConstructor;
@@ -33,6 +34,8 @@ public class ProductController {
     @Autowired
     ProductService productService;
 
+    @Autowired
+    ProductRepository productRepository;
 
     @GetMapping(value = "/{id}")
     public Product getProduct(@PathVariable Integer id) {
