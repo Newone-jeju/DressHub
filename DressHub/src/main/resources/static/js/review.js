@@ -1,75 +1,76 @@
-var review = new Object();
-review.no_review = function() {
-    $(".td-group").html(
-        '<div class="no-review flexcenter">' +
-        '<image src="image/no-review.png" alt="no-review">' +
-        '</div>'
-    );
-}
+(function() {
+    
 
-//숫자로 된 점수를 별점화
-review.getStar = function(i) {
-    var $td_rank = $("div.td-rank:eq("+i+")");
-    var rank = $td_rank.text();
-    $td_rank.rateYo({
-        starWidth: "20px",
-        rating: rank,
-        readOnly: true,
-        halfStar: true
-    });
-}
+    //class ReviewCard extends ajaxCard
+    function ReviewCard(){
+        AjaxCard.apply(this, arguments)
+    }
+    ReviewCard.prototype = Object.create(AjaxCard.prototype);
+    ReviewCard.prototype.constructor = ReviewCard;
 
-//fold review
-review.folding = function(){
-    $(".review-head").click(function() {
-        var index = ($(this).index()+1 - Math.floor($(this).index() / 2) - 1);
-        var $review_body = $("div.review-body:eq(" + index + ")");
-        if ($review_body.css('display') == "none") {
-            $($review_body).removeClass('hidd');
-        } else {
-            $($review_body).addClass('hidd');
-        }
-    });
-}
+    ReviewCard.prototype.getCard = function(){
+        return this.cards;
+    }
 
-//페이지네이션 포함 리뷰 매핑 addhook 없으면 안됨
-review.map_review = function(review_data) {
-    var $review_pagination = $(".review-pagination");
-    $review_pagination.addHook('beforeInit', function () {});
-    $review_pagination.pagination({
-        dataSource: review_data,
-        pageSize: 5,
-        showPrevious: true,
-        showNext: true,
-        callback: function(data, pagination) {
-            var i;
-            var html = '';
-            $.each(data, function (index, item) {
-              html += item;
-            });
-            $review_pagination.prev().html(html);
-            //별점
-             for(i=0; i<5; i++){
-                review.getStar(i);
+
+    function no_review(){
+        var noReviewImg = new AjaxData("/review/image/no-review.png");
+        $(".td-group").html(
+            '<div class="no-review flexcenter">' +
+            '<image src="/image/'+noReviewImg.getData()+'" alt="no-review">' +
+            '</div>'
+        );
+    }
+
+    //숫자로 된 점수를 별점화
+    function getStar(i) {
+        var $td_rank = $("div.td-rank:eq("+i+")");
+        var rank = $td_rank.text();
+        $td_rank.rateYo({
+            starWidth: "20px",
+            rating: rank,
+            readOnly: true,
+            halfStar: true
+        });
+    }
+
+    //리뷰 내용 접기
+    function folding(){
+        $(".review-head").click(function() {
+            var $review_body = $(this).next();
+            if ($review_body.css('display') == "none") {
+                $($review_body).removeClass('hidd');
+            } else {
+                $($review_body).addClass('hidd');
             }
-            //내용접기
-            review.folding();
-            review.edit_btn();
-        }
-    })
-}
+        });
+    }
 
-review.init = function() {
-    $.ajax({
-        url: 'review?productId=0', //TODO 나중에 변수로 받아올것!
-        dataType: 'json',
-        type:'get',
-        success: function(data){
-            var review_cards = [];
+    //페이지네이션 포함 리뷰 매핑 addhook 없으면 안됨
+    function map_review(review_data) {
+        var $review_pagination = $(".review-pagination");
+        $review_pagination.addHook('beforeInit', function (){});
+        $review_pagination.pagination({
+            dataSource: review_data,
+            pageSize: 5,
+            showPrevious: true,
+            showNext: true,
+            callback: function(data, pagination) {
+                var i;
+                ReviewCard.mapCard($review_pagination.prev());
+                //별점
+                 for(i=0; i<5; i++){
+                    getStar(i);
+                }
+            }
+        })
+    }
+
+    function reviewInit() {
         $.each(data, function(i, review_data)
-        {  
+        {   
             i = i+1;
-            review_cards.push(
+            reviewCard.setCard(
             //리뷰 카드
             '<div class="review-head review'+i+'">'+
                 '<div class="td-no">'+i+'</div>'+
@@ -81,12 +82,9 @@ review.init = function() {
           '<div class="review-body hidd">'+
             '<div class="review-btn-wrap">'+
                 //리뷰 수정 버튼
-                    '<button class="review-btn review-body-btn review-edit-btn" data-editId="'+review_data.id+'">수정</button>'+
+                '<button class="review-btn review-body-btn review-edit-btn" data-reviewId="'+review_data.id+'">수정</button>'+
                 //리뷰 삭제버튼
-                '<form action="/review/delete" method="post">'+
-                    '<input type="hidden" name="id" value="'+review_data.id+'">'+
-                    '<button type="submit" class="review-btn review-body-btn review-delete-btn">삭제</button>'+
-                '</form>'+
+                '<button type="submit" class="review-btn review-body-btn review-delete-btn" data-reviewId="'+review_data.id+'">삭제</button>'+                
             '</div>'+
             //리뷰 날짜정보
             '<div class="review-date-info">'+
@@ -101,64 +99,116 @@ review.init = function() {
             '</div>'+
 
             //리뷰내용
-            '<image src="'+review_data.imageUrl+'" alt="review_img">'+
+            '<image src="/image/'+review_data.imageUrl+'" alt="review_img">'+
 
             '<p>'+review_data.comment+'</p>'+
           '</div>'
           )
         });
+        var review_cards = reviewCard.getCard();
+        // 리뷰없음 검사
         if (review_cards == []) {
-        review.no_review();
+            no_review();
         } else {
             window.setTimeout(function(){
-                review.map_review(review_cards,1);
+                map_review(review_cards);
             },500);               
         }
-        review.write_btn();
+
+        //내용접기
+        folding();
+        //버튼처리
+        edit_btn();
+        write_btn();
+        delete_btn();
     }
-    }); 
-}
 
-//review write review
-review.write_review = function(url, w, h, name, option) {
-    var pozX, pozY = 0;
-    var sw = screen.availWidth;
-    var sh = screen.availHeight;
-    var scroll = 0;
-    if (option == 'scroll') {
-        scroll = 1;
+
+
+    //review write review
+    function write_review(url, w, h, name, option) {
+        var pozX, pozY = 0;
+        var sw = screen.availWidth;
+        var sh = screen.availHeight;
+        var scroll = 0;
+        if (option == 'scroll') {
+            scroll = 1;
+        }
+        pozX = (sw - w) / 2;
+        pozY = (sh - h) / 2;
+        return window.open(url, name, "location=no,status=0,scrollbars=" + scroll + ",resizable=1,width=" + w + ",height=" + h + 
+        ",left=" + pozX + ",top=" + pozY +"resizable=no");
     }
-    pozX = (sw - w) / 2;
-    pozY = (sh - h) / 2;
-    return window.open(url, name, "location=no,status=0,scrollbars=" + scroll + ",resizable=1,width=" + w + ",height=" + h + 
-    ",left=" + pozX + ",top=" + pozY +"resizable=no");
-}
 
-//리뷰쓰기 버튼
-review.write_btn = function(){
-    $(".review-write-btn").click(function(){
-        review.write_review("review-form.html", 660, 600, "review_form","none");
-    })
-}
+    //리뷰쓰기 버튼
+    function write_btn(){
+        $(".review-write-btn").click(function(){
+            //권한검사
+            var user = new CookieUser();
+            user.inspectId(); //로그인 안되있으면 로그인 페이지로 리다이렉션
+            write_review("review-form.html", 660, 600, "review_form","none");
+        })
+    }
 
-var edit_id = "null";
-//review body 내 수정버튼
-review.edit_btn = function(){
-    $(".review-edit-btn").click(function(){
-        var review_form = review.write_review("review-form.html", 660, 600, "review_form");
-        edit_id = $(this).attr("data-editId");
-        
-    })
-}
+    var reviewId = "null";
+    //자식창에서도 쓰일 리뷰아이디 핸들러 함수
+    function getReviewId(toNull){
+        if(toNull == true){
+            return reviewId;
+        }else{
+            reviewId = "null";
+        }
 
-function getEditNum() {
-    return edit_id;
-}
+    }
 
-//review body 내 삭제버튼
-review.delete_btn = function(){
-    $(".review-delete-btn").click(function(){})
-}
+    //review body 내 수정버튼
+    function edit_btn(){
+        $(".review-edit-btn").click(function(){
+            //권한검사
+            var user = new CookieUser();
+            var reviewUser = $(this).parent().parent().prev().children(".td-author").text();
+            if(user.inspectIdDiff(reviewUser) == false){
+                return false
+            }
+            review_id = $(this).attr("data-reviewId");
+            //새창 띄우기
+            var review_form = write_review("review-form.html", 660, 600, "review_form");
+            
+        })
+    }
+
+    //review body 내 삭제버튼
+    function delete_btn(){
+        $(".review-delete-btn").click(function(){
+            //권한검사
+            var user = new CookieUser();
+            var reviewUser = $(this).parent().parent().prev().children(".td-author").text();
+            if(user.inspectIdDiff(reviewUser) == false){
+                return false
+            }
+            var reviewId = $(this).attr("data-reviewId");
+            //삭제되면 새로고침
+            var ajaxDelete = new AjaxUtil('/review/'+reviewId);
+            ajaxDelete.crudData("", 'DELETE', function(){
+                window.location.reload();
+            })
+        })
+    }
+    function getURLParameter(name) {
+        return decodeURI(
+         (RegExp(name + '=' + '(.+?)(&|$)').exec(location.search)||[,null])[1]
+        );
+    }
+
+    var data = '';
+    var productId = getURLParameter("productId");
+    var ajaxData = new AjaxData('/review/'+productId, false);
+    data = ajaxData.getData();
+    console.log(data)
+    ajaxData = undefined;
+    var reviewCard = new ReviewCard();
+
+    reviewInit();
 
 
-review.init();
+}());

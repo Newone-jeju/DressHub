@@ -10,7 +10,7 @@ import java.io.Serializable;
 @Entity
 public class ThumbUp{
     @Id
-    @GeneratedValue(strategy = GenerationType.TABLE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
     String uid;
     @ManyToOne

@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 @RestController
-@RequestMapping(value = "leaseInfo")
+@RequestMapping(value = "/leaseInfo")
 @ResponseBody
 @AllArgsConstructor
 public class LeaseInfoController {

@@ -1,4 +1,3 @@
-
 package com.newoneplus.dresshub.Config;
 
 import com.newoneplus.dresshub.Service.AuthorizationService;
@@ -23,7 +22,7 @@ import javax.servlet.http.HttpServletResponse;
 
 @Configuration
 @EnableWebSecurity
-@EnableGlobalMethodSecurity(securedEnabled = true)
+
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     // 보안
 
@@ -52,9 +51,16 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 //        .antMatchers("/**").requiresSecure();
 //        csrf config
         http.csrf()
-                .ignoringAntMatchers("/product")
+
+                .ignoringAntMatchers("/products/*")
+                .ignoringAntMatchers("/products")
                 .ignoringAntMatchers("/review/*")
-                .ignoringAntMatchers("/leaseInfo/*");
+                .ignoringAntMatchers("/review")
+                .ignoringAntMatchers("/thumbUp")
+                .ignoringAntMatchers("/thumbUP/*")
+                .ignoringAntMatchers("/leaseInfo/*")
+                .ignoringAntMatchers("/leaseInfo");
+
 
         http.sessionManagement().
                 sessionFixation().

@@ -25,6 +25,7 @@ public class Product {
     Integer costPerDay;
     Integer deposit;
     Integer salePrice;
+    String location;
     String category;
     String consigmentStart;
     String consigmentEnd;

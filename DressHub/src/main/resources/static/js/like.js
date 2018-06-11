@@ -1,6 +1,5 @@
 $(document).ready(function () {
     paging(1, 25, 10, 1);
-
     function paging(totalData, dataPerPage, pageCount, currentPage) {
         var totalPage = Math.ceil(totalData / dataPerPage);    // 총 페이지 수
         var pageGroup = Math.ceil(currentPage / pageCount);    // 페이지 그룹
@@ -9,22 +8,22 @@ $(document).ready(function () {
         if (last > totalPage)
             last = totalPage;
         var first = last - (pageCount - 1);    // 화면에 보여질 첫번째 페이지 번호
-        if (first <= 0) {
-            first = 1;
+        if(first<=0){
+            first=1;
         }
         var next = last + 1;
         var prev = first - 1;
         var $pingingView = $("#paging");
         var html = "";
 
-        if (prev > 0)
+				if (prev > 0)
             html += "<a href=# id='prev'><</a> ";
 
-        for (var i = first; i <= last; i++) {
+				for (var i = first; i <= last; i++) {
             html += "<a href='#' id=" + i + ">" + i + "</a> ";
         }
 
-        if (last < totalPage)
+				if (last < totalPage)
             html += "<a href=# id='next'>></a>";
         $("#paging").html(html);    // 페이지 목록 생성
         $("#paging a").css("color", "black");
@@ -40,51 +39,38 @@ $(document).ready(function () {
             if ($id == "next") selectedPage = next;
             if ($id == "prev") selectedPage = prev;
 
-            $.ajax({
-                url: './thumbUp/search?page=' + selectedPage,
+					  $.ajax({
+                url: './products/search?page='+selectedPage,
                 dataType: 'json',
                 type: 'get',
                 success: function (data) {
-
                     totalCount = data.count;
                     var product = {};
                     data = data.list;
                     product.max_cardnum = 11;
+
                     product.mapcard = function () {
-                        console.log("여기에 들어오나?");
                         var cards = '';
-                        if (data == null) {
-                            alert("아직 좋아요한 상품이 없습니다.");
-                        } else {
-                            console.log("여기에 들어오나?");
-                            for (var i = 0; i < data.length; i++) {
-                                cards += '<span class="product_container_content_card" data-href="/productDetail?productId=' + data[i].id + '">' +
-                                    '<div class="card_img_wrap">' +
-                                    '<img src="../product_image/' + data[i].thumbnailImage + '" alt="blank" class="card_img">' +
-                                    '<div class="hover-content">' +
-                                    '<img src="../image/' + data[i].state + '_icon.png}" alt="" class="hover-size">' +
-                                    '<span class="like-num">' + data[i].likes + '</span>' +
-                                    // json 추가 필요
-                                    '</div>' +
-                                    '</div>' +
-                                    '</div>' +
-                                    '<div class="card_text_wrap">' +
-                                    '<h3 class="text_name">' + data[i].name + '</h3>' +
-                                    '<p class="text_deposit">보증금 : ' + data[i].deposit + '</p>' +
-                                    '<p class="text_costPerDay">1일 렌탈료 : ' + data[i].costPerDay + '</p>' +
-                                    '</div>' +
-                                    '</span>';
-                            }
-                            $('.product_container_content').html(cards);
+                        for (var i = 0; i < data.length; i++) {
+                            cards +=
+                                '<a href="' + data[i].url + '" class="product_container_content_card">' +
+                                '<div class="card_img_wrap">' +
+                                '<img src="../product_image/' + data[i].thumbnailImage + '" alt="blank" class="card_img">' +
+                                '</div>' +
+                                '<div class="card_text_wrap">' +
+                                '<h3 class="text_name">' + data[i].name + '</h3>' +
+                                '<p class="text_deposit">보증금 : ' + data[i].deposit + '</p>' +
+                                '<p class="text_costPerDay">1일 렌탈료 : ' + data[i].costPerDay + '</p>' +
+                                '</div>' +
+                                '</a>';
                         }
+                        $('.product_container_content').html(cards);
                     }
                     product.mapcard();
 
                     paging(totalCount, 25, 10, selectedPage);
                 }
-
-            });
-        })
+            })
+        });
     }
     $("#paging a").trigger("click");
-})
