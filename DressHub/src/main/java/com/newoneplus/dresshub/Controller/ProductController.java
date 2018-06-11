@@ -41,7 +41,10 @@ public class ProductController {
     public Product getProduct(@PathVariable Integer id) {
         return productService.getProduct(id);
     }
-
+    @GetMapping(value = "/list/search")
+    public List<Product> getProductProvider(@RequestParam String provider){
+        return productService.getProductListByProvider(provider);
+    }
 
     @PostMapping
     public Product productCreate(@RequestBody Product product) {

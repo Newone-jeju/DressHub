@@ -31,7 +31,7 @@
 	                '<td class="name-phonenum log-content">dresshub : '+data.phoneNum+'</td>'+
 	              '</tr>'+
 	              '<tr>'+
-	                '<td class="how-long log-content">'+data.startDay+' ~ '+data.endDay+'</td>'+
+	                '<td class="how-long log-content">'+data.leaseStart+' ~ '+data.leaseEnd+'</td>'+
 	              '</tr>'+
 	              '<tr>'+
 	                '<td class="msg log-content">'+data.message+'</td>'+
@@ -44,9 +44,9 @@
 
 	function setCard(data, quantity){
 		var cards =[];
-		for(var i=0; i<quantity; i++){// thumnailUrl 이대로 괜춘???
+		for(var i=0; i<data.length; i++){// thumnailUrl 이대로 괜춘???
 			cards.push(
-				'<div class="product-card" data-id="'+data[i].id+'">'+
+				'<div class="product-card">'+
 			        '<div class="card-header">'+
 			          '<div class="thumnail">'+
 			            '<img src="leaseInfo/image/'+data[i].thumnailUrl+'" alt="thumnail_img">'+
@@ -55,7 +55,7 @@
 			            '<p class="text">'+data[i].name+'</p>'+
 			          '</div>'+
 			          '<div class="order-day flexcenter-align">'+
-			            '<p class="text">'+data[i].log[0].startDay+'</p>'+
+			            '<p class="text">'+data[i].log[0].leaseStart+'</p>'+
 			          '</div>'+
 			          '<div class="recent-status flexcenter-align">'+
 			            '<p class="text">'+data[i].log[data[i].log.length-1].status+'</p>'+
@@ -109,10 +109,10 @@
 
 			$.ajax({
 	            type: "post",
-	            async: true,
+	            async: false,
 	            url: "/leaseInfoLog", 
 	            data: {
-	            'status': "고객"
+	            'status': "고객",
 	            'leaseInfo': leaseInfo,
 	           	'startDay': date,
 	            'comment': comment
@@ -161,19 +161,19 @@
 		window.location.href='/';
 	}
 
-	userData = new ajaxData('/api/user/'+userId ,false);
+	userData = new AjaxData('/api/user/'+userId ,false);
 
 
 	//빌린웃
 	target = $(".rentaling-area .card-td");
-	data = getData('/leaseInfo/list/search?userId='+userId, false);
+	data = getData('/leaseInfo/list/search?user='+userId, false);
 	card = setCard(data,3);
 	map_card(card, target);
-	//빌려 준 옷
-	target = $(".rented-area .card-td");
-	data = getData('/leaseInfo/list/search?userId='+userId, false);
-	card = setCard(data,3);
-	map_card(card, target);
+	// //빌려 준 옷
+	// target = $(".rented-area .card-td");
+	// data = getData('/leaseInfo/list/search?user='+userId, false);
+	// card = setCard(data,3);
+	// map_card(card, target);
 
 	folding($(".card-header"));
 	msg_send();
