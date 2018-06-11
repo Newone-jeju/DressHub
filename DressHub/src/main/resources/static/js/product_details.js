@@ -1,27 +1,29 @@
 (function(){
 
-    // function getURLParameter(name) {
-    //     return decodeURI(
-    //      (RegExp(name + '=' + '(.+?)(&|$)').exec(location.search)||[,null])[1]
-    //     );
-    // }
-    function getURLId(url){
-        return url.match(/\/([^\/]+)\/?$/)[1];
+    function getURLParameter(name) {
+        return decodeURI(
+         (RegExp(name + '=' + '(.+?)(&|$)').exec(location.search)||[,null])[1]
+        );
     }
+    // function getURLId(url){
+    //     return url.match(/\/([^\/]+)\/?$/)[1];
+    // }
 
     //데이터 가져오기
     function dataInit(){
-        var productId = getURLId(document.location.href);
+        var productId = getURLParameter("productId");
         var ajaxData = '';
         //상품 데이터
+        console.log(productId)
         ajaxData = new AjaxData('/products/'+productId, false);
-        data = ajaxData.getData()[0];
+        data = ajaxData.getData();
+        console.log(data);
         ajaxData = undefined;
         //이미지 데이터
         var size = ['origin', 'medium', 'small'];
         for(var i = 0; i<size.length; i++){
             ajaxData = new AjaxData('/products/'+size[i]+data.name+'.jpg', false);
-            Object.keys(ajaxImg)[i] = ajaxData.getDate();
+            Object.keys(ajaxImg)[i] = ajaxData.getData();
         }
     }
 
@@ -130,11 +132,11 @@
         var diffDay = "";
         sDay = new Date(sDay);
         eDay = new Date(eDay);
-        if(diffDay>=0){
+        diffDay = (eDay.getTime() - sDay.getTime())/1000/60/60/24;
+        if(diffDay<=0){
             alert("날짜입력오류: 시작일보다 종료일이 늦습니다");
             return false;
         }
-        diffDay = (eDay.getTime() - sDay.getTime())/1000/60/60/24;
         return diffDay;
     }
 
@@ -151,6 +153,8 @@
         sessionStorage.setItem("totalPrice", totalPrice);
         sessionStorage.setItem("totalShipment", 3000);
         sessionStorage.setItem("totalPayment", totalPayment);
+        sessionStorage.setItem("startDay", $("#s-date").val())
+        sessionStorage.setItem("endDay", $("#e-date").val())
     }
 
     var ajaxCard ="";
@@ -169,12 +173,14 @@
     //주문 버튼
     $(".submit-btn > button.request").click(function(){
         var user = new CookieUser();
-        user.inspectId();
+        if(user.inspectId()){
+            console.log("주문취소됨")
+            return false;
+        }
+
         sessionPrice();
-        AjaxUtil.crudData(postData, "POST", function(){
-            window.location.href = '/order.html';//결제페이지
-        })
-        
+
+        window.location.href='/order.html';//결제페이지     
     })
 
     //장바구니 버튼

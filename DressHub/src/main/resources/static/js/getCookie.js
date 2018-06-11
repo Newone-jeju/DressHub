@@ -32,6 +32,7 @@ CookieUser.prototype.inspectId = function(){
 	if(this.userId == ''){
             alert("로그인 해주세요");
             window.location.href = '/login';
+            return false;
     }
 }
 
