@@ -13,6 +13,7 @@ function getauthor(){
 	//작성자 이름 가져오기
     var user = new CookieUser();
     var userId = user.getUserId();
+    $(".author-content").text(userId);
 
 }
 
@@ -37,7 +38,7 @@ function setHiddenRating(){
 
 
 function getEditInfo(review_id) {
-    if ( review_id == "null"){
+    if ( review_id == ""){
         method = "POST";
         $("#rating").text(0);
         $("#rating").attr("value", 0);
@@ -100,10 +101,11 @@ var formData = {}
 
 
 $(".send-btn").click(function(){
-    var ajaxUtil = new AjaxUtil('/review/'+review_id);
+    var ajaxUtil = new AjaxUtil('review/'+review_id);
     ajaxUtil.crudData(gatherForm(), method, function(){
+        console.log("send form!")
         //이미지 전송
-        var ajaxUtil = new AjaxUtil('/review/image');
+        var ajaxUtil = new AjaxUtil('review/image');
         ajaxUtil.crudData(gatherImage(), method, function(){
                 opener.parent.location.reload();
                 window.open('about:blank', '_self').close();

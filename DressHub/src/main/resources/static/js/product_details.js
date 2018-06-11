@@ -56,7 +56,7 @@
             },
             {
                 target: ".provider-id",
-                value: data.providerId
+                value: data.provider
             },
             {
                 target: ".product > .size",
@@ -87,8 +87,8 @@
 
         //사이즈 아이콘 처리
         var sizeTxt = $(".product > .size > .info");
-        var sizeIcon = "";
-        sizeTxt.html('<img src="products/image/'+data.size+'.png" alt="'+sizeIcon+'">');
+        var sizeIcon = data.size.toLowerCase() +"_icon.png";
+        sizeTxt.html('<img src="image/'+sizeIcon+'" alt="'+data.size+'">');
         
         
         //페이지 컨텐츠 상세

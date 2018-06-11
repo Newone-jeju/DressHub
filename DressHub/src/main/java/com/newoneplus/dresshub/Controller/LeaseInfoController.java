@@ -58,7 +58,7 @@ public class LeaseInfoController {
         log.setName("dresshub");
         log.setPhoneNum("010-1111-1111");
 
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         log.setStartDay(dateFormat.format(new Date()));
         log.setMessage("");
         leaseInfoLogRepository.save(log);

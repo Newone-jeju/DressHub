@@ -143,13 +143,13 @@ function write_btn(){
     })
 }
 
-var reviewId = "null";
+var reviewId = "";
 //자식창에서도 쓰일 리뷰아이디 핸들러 함수
 function getReviewId(toNull){
     if(toNull == true){
         return reviewId;
     }else{
-        reviewId = "null";
+        reviewId = "";
     }
 
 }
