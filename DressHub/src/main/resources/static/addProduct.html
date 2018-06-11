@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <script src="js/menu.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/menu.css"  />
+<link rel="stylesheet" href="css/addProduct.css">
+    <title></title>
+  </head>
+  <body>
+    <div id="top">
+        <h1 id="logo"><a href="/index.html">DRESS HUB</a></h1>
+        <ul class="topul">
+          <li><a href="login.html">LOGIN</a></li>
+          <li><a href="join.html">회원가입</a></li>
+          <li><a href="cart.html">장바구니</a></li>
+          <li><a href="mypage.html">MYPAGE</a></li>
+        </ul>
+  </div>
+    <nav id="nav">
+    <ul class="menu">
+      <li><a class="category">전체카테고리</a> </li>
+        <li><a id="clothes" class="name" href="productList?category=10">캐쥬얼</a>
+        <ul class="allcategory">
+           <li><a href="productList?category=11">남성</a></li>
+           <li><a href="productList?category=12">여성</a></li>
+           <li><a href="productList?category=13">신발</a></li>
+           <li><a href="productList?category=14">기타</a></li>
+          </ul>
+        </li>
+        <li><a id="suit"  class="name" href="productList?category=20">예복</a>
+        <ul class="allcategory">
+           <li><a href="productList?category=21">경조사</a></li>
+           <li><a href="productList?category=22">면접</a></li>
+           <li><a href="productList?category=23">실생활</a></li>
+           <li><a href="productList?category=24">기타</a></li>
+          </ul>
+          </li>
+        <li><a id="accessory"  class="name" href="productList?category=30">악세사리</a>
+        <ul class="allcategory">
+           <li><a href="productList?category=31">남성</a></li>
+           <li><a href="productList?category=32">여성</a></li>
+           <li><a href="productList?category=33">고가</a></li>
+           <li><a href="productList?category=34">특수한 경우</a></li>
+          </ul>
+          </li>
+        <li><a href="productList?category=40">할인/기획</a>
+          <ul class="allcategory">
+             <li><a href="productList?category=41">의류</a></li>
+             <li><a href="productList?category=42">악세사리</a></li>
+             <li><a href="productList?category=43">신발</a></li>
+             <li><a href="productList?category=44">기타</a></li>
+            </ul>
+        </li>
+        <li><a href=#>MYPAGE</a></li>
+    </ul>
+  </nav>
+
+
+<!-- 상품등록 -->
+<div id="addProduct">
+    <h2>상품등록</h2><hr width="90%"/>
+
+
+        <table id="addTable">
+        <tr>
+            <th><label for="name">상품이름</label>></th>
+            <td><input type="text" name="name" id="name" size="40%"></td>
+        </tr>
+        <tr>
+            <th><label for="costPerDay">1일 렌탈료</label>></th>
+            <td><input type="text" name="costPerDay" id="costPerDay" size="20%"> 원</td>
+        </tr>
+        <tr>
+            <th><label for="deposit">보증금</label>></th>
+            <td><input type="text" name="deposit" id="deposit" size="20%"> 원</td>
+        </tr>
+        <tr>
+            <th><label for="salePrice">판매가격  </label>></th>
+            <td>  <input type="text" name="salePrice" id="salePrice" size="20%"> 원</td>
+        </tr>
+        <tr>
+            <th><label for="category">카테고리  </label>></th>
+            <td>
+                <select name="category" id="category">
+                    <option > 캐쥬얼>남성 </option>
+                    <option > 캐쥬얼>여성 </option>
+                    <option > 캐쥬얼>신발 </option>
+                    <option > 캐쥬얼>기타 </option>
+                    <option > 예복>경조사 </option>
+                    <option > 예복>면접 </option>
+                    <option > 예복>실생활 </option>
+                    <option > 예복>기타 </option>
+                    <option > 악세사리>남성 </option>
+                    <option > 악세사리>여성 </option>
+                    <option > 악세사리>고가 </option>
+                    <option > 악세사리>특수한 경우</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <th><label for="consigmentStart">시작 대여일</label>></th>
+            <td><input type="date" name="consigmentStart" id="consigmentStart" ></td>
+        </tr>
+        <tr>
+            <th><label for="consigmentEnd">종료 대여일</label>></th>
+            <td><input type="date" name="consigmentEnd" id="consigmentEnd" size="20px"></td>
+        </tr>
+        <tr>
+            <th><label for="leastLeaseDay">최소 대여일</label>></th>
+            <td><input type="text" name="leastLeaseDay" id="leastLeaseDay" size="20px"> 일</td>
+        </tr>
+        <tr>
+            <th>  <label for="location">지역</label>></th>
+            <td><input type="text" name="location" id="location" size="100%"></td>
+        </tr>
+        <tr>
+            <th><label for="state">상태</label>></th>
+            <td><input type="text" name="state" id="state" size="100%"></td>
+        </tr>
+        <tr>
+            <th><label for="size">사이즈  </label></th>
+            <td >
+                <select name="category" id="size">
+                     <option >S</option>
+                     <option >M</option>
+                     <option >L</option>
+                     <option >XL</option>
+                     <option >XXL</option>
+                </select>
+            <td>
+        </tr>
+        <tr>
+            <th><label for="contents">설명 </label></th>
+            <td><textarea name="contents" id="contents"></textarea></td>
+        </tr>
+    </table>
+        <form action="/products/image" method="POST" id="imageForm" name="imageData" enctype="multipart/form-data">
+        <table>
+
+        <tr>
+            <th><label for="image">이미지</label>></th>
+            <td>
+                <!-- <input type="file" value="" name="upload[]" multiple> -->
+                <h3>파일(들)을 선택하세요.</h3>
+                <input id="files-upload" type="file" name = "file" multiple accept="image/*" id="image">
+
+                <h3>Uploaded files</h3>
+                <ul id="file-list">
+                    <li class="no-items">(파일이 선택되지 않음)</li>
+                </ul>
+            </td>
+        </tr>
+        </table>>
+        <div id="Btn">
+            <input type="submit" class="addBtn" value="상품등록"   >
+            <input type="button" id="cancle" value="취소하기" onClick="location.href='index.html'">
+        </div>
+    </form>
+
+
+</div>
+      </div>
+      <script type="text/javascript" src="js/jquery-3.3.1.min.js" charset="utf-8"></script>
+      <script src="js/ajaxData.js"></script>
+      <script src="js/getCookie.js"></script>
+      <script src="js/addProduct.js"></script>
+      </body>
+    </html>
