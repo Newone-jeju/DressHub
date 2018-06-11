@@ -49,7 +49,7 @@
 				'<div class="product-card" data-id="'+data[i].id+'">'+
 			        '<div class="card-header">'+
 			          '<div class="thumnail">'+
-			            '<img src="'+data[i].thumnailUrl+'" alt="thumnail_img">'+
+			            '<img src="/image/'+data[i].thumnailUrl+'" alt="thumnail_img">'+
 			          '</div>'+
 			          '<div class="title flexcenter-align">'+
 			            '<p class="text">'+data[i].name+'</p>'+

@@ -20,7 +20,7 @@
         //이미지 데이터
         var size = ['origin', 'medium', 'small'];
         for(var i = 0; i<size.length; i++){
-            ajaxData = new AjaxData('/products/image/image/'+size[i]+data.name+'.jpg', false);
+            ajaxData = new AjaxData('/products/'+size[i]+data.name+'.jpg', false);
             Object.keys(ajaxImg)[i] = ajaxData.getDate();
         }
     }
@@ -39,7 +39,7 @@
 
         //썸네일바 이미지 매핑
         cardString = 
-            '<img class="thumnail-img" src="image/'+ajaxImg.small+'" alt = "'+ajaxImg.small+'"/>'
+            '<img class="thumnail-img" src="/image/'+ajaxImg.small+'" alt = "'+ajaxImg.small+'"/>'
         ajaxCard.setCard(cardString);
         ajaxCard.mapCard($(".thumnamil-bar"));
 
@@ -164,7 +164,7 @@
     //데이터 가져오기
     dataInit();
     //초기 매핑
-    initMap(); // init mapping url 필요
+    initMap(); 
 
     //주문 버튼
     $(".submit-btn > button.request").click(function(){
@@ -183,13 +183,13 @@
         var userId = user.getUserId();
         user.inspectId();
 
-        var ajaxUtil = new AjaxUtil('/baskets'); // 장바구니URL 필요
+        var ajaxUtil = new AjaxUtil('/baskets'); // 장바구니URL
         var postData = {
             id: data.id,
             userId: userId
         };
         AjaxUtil.crudData(postData, "POST", function(){
-            window.location.href = '/cart.html';//장바구니 페이지
+            window.location.href = '/cart.html';
         })
     })
 

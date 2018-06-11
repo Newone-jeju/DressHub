@@ -17,7 +17,7 @@
         var noReviewImg = new AjaxData("/review/image/no-review.png");
         $(".td-group").html(
             '<div class="no-review flexcenter">' +
-            '<image src="image/'+noReviewImg.getData()+'" alt="no-review">' +
+            '<image src="/image/'+noReviewImg.getData()+'" alt="no-review">' +
             '</div>'
         );
     }
@@ -99,7 +99,7 @@
             '</div>'+
 
             //리뷰내용
-            '<image src="'+review_data.imageUrl+'" alt="review_img">'+
+            '<image src="/image/'+review_data.imageUrl+'" alt="review_img">'+
 
             '<p>'+review_data.comment+'</p>'+
           '</div>'
