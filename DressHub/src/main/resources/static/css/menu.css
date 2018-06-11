@@ -6,6 +6,8 @@ body{
  }
  #logo{
    flex:1;
+	 text-decoration:none;
+	 color: #000;
  }
  #top{
   display:flex;
