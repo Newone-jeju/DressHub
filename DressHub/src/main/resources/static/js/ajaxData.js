@@ -36,10 +36,10 @@ AjaxUtil.prototype.crudData = function(crudData, type ,func){
 	$.ajax(
 		{
 			url: this.url,
-		    dataType: 'json',
+		    contentType : "application/json; charset=UTF-8",
 		    async: true,
 		    type: type,
-		    data: JSON.stringfy(crudData),
+		    data: JSON.stringify(crudData),
 		    error: function(jqXHR, textStatus, errorThrown) {
 		        alert("failed crud");
 		    },

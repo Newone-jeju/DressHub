@@ -19,12 +19,6 @@
         data = ajaxData.getData();
         console.log(data);
         ajaxData = undefined;
-        //이미지 데이터
-        var size = ['origin', 'medium', 'small'];
-        for(var i = 0; i<size.length; i++){
-            ajaxData = new AjaxData('/products/'+size[i]+data.name+'.jpg', false);
-            Object.keys(ajaxImg)[i] = ajaxData.getData();
-        }
     }
 
     function initMap(){
@@ -41,7 +35,7 @@
 
         //썸네일바 이미지 매핑
         cardString = 
-            '<img class="thumnail-img" src="/image/'+ajaxImg.small+'" alt = "'+ajaxImg.small+'"/>'
+            '<img class="thumnail-img" src="/product_image/small'+data.thumbnailImage+'" alt = "small'+data.thumbnailImage+'"/>'
         ajaxCard.setCard(cardString);
         ajaxCard.mapCard($(".thumnamil-bar"));
 
@@ -62,7 +56,7 @@
             },
             {
                 target: ".provider-id",
-                value: data.providerId
+                value: data.provider
             },
             {
                 target: ".product > .size",
@@ -93,11 +87,8 @@
 
         //사이즈 아이콘 처리
         var sizeTxt = $(".product > .size > .info");
-        var sizeIcon = "";
-        var getSizeIcon = new AjaxData('/products/image/'+sizeTxt.text()+'_icon.png', false);
-        sizeIcon = getSizeIcon.getData();
-        sizeTxt.html('<img src="/image/'+sizeIcon+'" alt="'+sizeIcon+'">');
-        getSizeIcon = undefined;
+        var sizeIcon = data.size.toLowerCase() +"_icon.png";
+        sizeTxt.html('<img src="image/'+sizeIcon+'" alt="'+data.size+'">');
         
         
         //페이지 컨텐츠 상세
@@ -116,8 +107,8 @@
         ajaxCard = new AjaxCard();
         var cardString;
         cardString = 
-                '<a href="/image/'+ajaxImg.origin+'" class="cloud-zoom" id="zoom1" rel="adjustX: 10, adjustY:-4">'+
-                  '<img class="big-img" src="'+ajaxImg.medium+'" alt="'+ajaxImg.medium+'" title="크게 보기" />'+
+                '<a href="/product_image/origin'+data.thumbnailImage+'" class="cloud-zoom" id="zoom1" rel="adjustX: 10, adjustY:-4">'+
+                  '<img class="big-img" src="/product_image/medium'+data.thumbnailImage+'" alt="medium'+data.thumbnailImage+'" title="크게 보기" />'+
                 '</a>'
 
         ajaxCard.setCard(cardString);
@@ -158,11 +149,6 @@
     }
 
     var ajaxCard ="";
-    var ajaxImg = {
-        origin: "",
-        medium: "",
-        small: ""
-    };
     var data =[];
     
     //데이터 가져오기
