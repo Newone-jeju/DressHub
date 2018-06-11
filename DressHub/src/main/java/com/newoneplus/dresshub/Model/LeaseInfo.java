@@ -13,6 +13,7 @@ import java.util.List;
 @Entity
 public class LeaseInfo {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private Integer product;
     private String leaser;
