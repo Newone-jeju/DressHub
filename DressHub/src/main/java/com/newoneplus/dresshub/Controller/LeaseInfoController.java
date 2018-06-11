@@ -7,10 +7,14 @@ import com.newoneplus.dresshub.Repository.LeaseInfoLogRepository;
 import com.newoneplus.dresshub.Repository.LeaseInfoRepository;
 import com.newoneplus.dresshub.Service.AuthorizationService;
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
+import java.text.SimpleDateFormat;
+//import java.util.Date;
+import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -48,7 +52,19 @@ public class LeaseInfoController {
     public ResultMessage create(@RequestBody LeaseInfo leaseInfo, HttpServletResponse res){
         //TODO tempcode must be deleted
         leaseInfo.setLeaser(AuthorizationService.getCurrentUser().getUid());
-        leaseInfoRepository.save(leaseInfo);
+        LeaseInfo savedLeaseInfo = leaseInfoRepository.save(leaseInfo);
+        int leaseInfoId = savedLeaseInfo.getId();
+        LeaseInfoLog log = new LeaseInfoLog();
+        log.setLeaseInfo(leaseInfoId);
+        log.setStatus("주문중");
+        log.setName("dresshub");
+        log.setPhoneNum("010-1111-1111");
+
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        log.setStartDay(dateFormat.format(new Date()));
+        log.setMessage("");
+        leaseInfoLogRepository.save(log);
+
         res.setStatus(200);
         return null;
     }
