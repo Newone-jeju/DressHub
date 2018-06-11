@@ -153,6 +153,8 @@
         sessionStorage.setItem("totalPrice", totalPrice);
         sessionStorage.setItem("totalShipment", 3000);
         sessionStorage.setItem("totalPayment", totalPayment);
+        sessionStorage.setItem("startDay", $("#s-date").val())
+        sessionStorage.setItem("endDay", $("#e-date").val())
     }
 
     var ajaxCard ="";

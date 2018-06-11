@@ -1,70 +1,69 @@
-(function(){
-	//class AjaxData
-	function AjaxData(url, async) {
-		this.url = url;
-		this.data = (function(){
-		var ajaxData = ""
-		$.ajax(
-			{
-				url: url,
-			    dataType: 'json',
-			    async: async,
-			    type:'GET',
-			    error: function(jqXHR, textStatus, errorThrown) {
-			        alert(textStatus);
-			        alert(errorThrown);
-			    },
-			    success: function(json_data){
-			    	ajaxData = json_data;
-			    }
-			})
-		return ajaxData;
-		})();
-	}
 
-	AjaxData.prototype.getData = function(){
-		return this.data;
-	}
+//class AjaxData
+function AjaxData(url, async) {
+	this.url = url;
+	this.data = (function(){
+	var ajaxData = ""
+	$.ajax(
+		{
+			url: url,
+		    dataType: 'json',
+		    async: async,
+		    type:'GET',
+		    error: function(jqXHR, textStatus, errorThrown) {
+		        alert(textStatus);
+		        alert(errorThrown);
+		    },
+		    success: function(json_data){
+		    	ajaxData = json_data;
+		    }
+		})
+	return ajaxData;
+	})();
+}
 
-
-	//class AjaxUtil
-	function AjaxUtil(url){
-		this.url = url;
-	}
-
-	AjaxUtil.prototype.crudData = function(crudData, type ,func){
-		$.ajax(
-			{
-				url: this.url,
-			    dataType: 'json',
-			    async: true,
-			    type: type,
-			    data: JSON.stringfy(crudData),
-			    error: function(jqXHR, textStatus, errorThrown) {
-			        alert("failed crud");
-			    },
-			    success: function(json_data){
-			    	func();
-			    }
-			})
-	}
+AjaxData.prototype.getData = function(){
+	return this.data;
+}
 
 
-	//class AjaxCard
-	function AjaxCard(){
-		this.cards = [];
-	}
+//class AjaxUtil
+function AjaxUtil(url){
+	this.url = url;
+}
 
-	AjaxCard.prototype.setCard = function(string){
-		this.cards.push(string); 
-	}
+AjaxUtil.prototype.crudData = function(crudData, type ,func){
+	$.ajax(
+		{
+			url: this.url,
+		    dataType: 'json',
+		    async: true,
+		    type: type,
+		    data: JSON.stringfy(crudData),
+		    error: function(jqXHR, textStatus, errorThrown) {
+		        alert("failed crud");
+		    },
+		    success: function(json_data){
+		    	func();
+		    }
+		})
+}
 
-	AjaxCard.prototype.mapCard = function(target){
-		var html = "";
-		$.each(this.cards, function(i, card) {
-	      html += card;
-	    });
-	    target.html(html);
-	    this.cards = [];
-	}
-}());
+
+//class AjaxCard
+function AjaxCard(){
+	this.cards = [];
+}
+
+AjaxCard.prototype.setCard = function(string){
+	this.cards.push(string); 
+}
+
+AjaxCard.prototype.mapCard = function(target){
+	var html = "";
+	$.each(this.cards, function(i, card) {
+      html += card;
+    });
+    target.html(html);
+    this.cards = [];
+}
