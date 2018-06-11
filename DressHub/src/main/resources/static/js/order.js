@@ -16,6 +16,58 @@ $('.totalPrice').html(totalPrice);
 $('.totalShipment').html(totalShipment);
 $('.totalPayment').html(totalPayment);
 
+// *******************************************
+
+var host = './order';
+
+function getUrlParams() {
+    var params = {};
+    window.location.search.replace(/[?&]+([^=&]+)=([^&]*)/gi, function (str, key, value) {
+        params[key] = value;
+    });
+    return params;
+}
+
+function save() {
+    var user = {
+        leaser: $('#leaser').val(),
+        product: $('#product').val(),
+        leaseStart: $('#leaseStart').val(),
+        leaseEnd: $('#leaseEnd').val()
+    };
+
+    var method = 'POST';
+
+    if(user.leaser!='')
+        method = 'PUT';
+    requestData(method, user);
+    return false;
+}
+
+function requestData(method, data) {
+    $.ajax({
+        url: host,
+        method: method,
+        contentType: "application/json",
+        data: JSON.stringify(data)
+    }).done(function () {
+        window.location.href = 'list';
+    });
+}
+
+$(document).ready(function () {
+    var params = getUrlParams();
+    if (params.id) {
+        $.get(host + "/" + params.id, function (user) {
+            $('#leaser').val(),
+                $('#product').val(),
+                $('#leaseStart').val(),
+                $('#leaseEnd').val()
+        });
+    }
+
+    $('#payment').on("click", save());
+});
 
 
 

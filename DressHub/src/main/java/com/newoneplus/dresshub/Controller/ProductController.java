@@ -88,7 +88,9 @@ public class ProductController {
         String filename = productImage.getOriginalFilename();
         String path = System.getProperty("user.dir") + "/out/production/resources/static/product_image/";
         new File(path).mkdirs(); // 디렉토리 생성
-
+        if(productImage ==null){
+            return;
+        }
         BufferedImage image2 = imageProcesser.getMediumImage(productImage.getInputStream());
         writeImage(filename, path, image2, "medium");
 

@@ -194,12 +194,21 @@
             })
         })
     }
-
+    function getURLParameter(name) {
+        return decodeURI(
+         (RegExp(name + '=' + '(.+?)(&|$)').exec(location.search)||[,null])[1]
+        );
+    }
 
     var data = '';
+    var productId = getURLParameter("productId");
+    var ajaxData = new AjaxData('/review/'+productId, false);
+    data = ajaxData.getData();
+    console.log(data)
+    ajaxData = undefined;
     var reviewCard = new ReviewCard();
 
     reviewInit();
 
 
-}())
+}());

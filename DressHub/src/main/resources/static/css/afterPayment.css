@@ -1,0 +1,14 @@
+.content{
+background-color: #F7F9FF;
+display: flex;
+justify-content:center;
+}
+
+.home{
+  color: #fff;
+  background-color: #000;
+  border: solid 0;
+  width: 5rem;
+  height: 2rem;
+
+}

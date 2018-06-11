@@ -72,7 +72,7 @@ $(document).ready(function () {
                             var likeBtn ="";
                             for (var i = 0; i < data.length; i++) {
                                 cards +=
-                                    '<span class="product_container_content_card" data-href="/productDetail.html?productId=' + data[i].id + '">' +
+                                    '<span class="product_container_content_card" data-href="/product_details.html?productId=' + data[i].id + '">' +
                                     '<div class="card_img_wrap">' +
                                     '<img src="/product_image/origin' + data[i].thumbnailImage + '" alt="blank" class="card_img">' +
                                     '<div class="hover-content">' +
