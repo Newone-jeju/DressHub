@@ -15,7 +15,6 @@
 	        	data = json_data;
 	        } 
 		})
-		console.log(data);
 		return data;
 	}
 
@@ -31,7 +30,7 @@
 	                '<td class="name-phonenum log-content">dresshub : '+data.phoneNum+'</td>'+
 	              '</tr>'+
 	              '<tr>'+
-	                '<td class="how-long log-content">'+data.leaseStart+' ~ '+data.leaseEnd+'</td>'+
+	                '<td class="how-long log-content">'+data.startDay+' ~ '+data.endDay+'</td>'+
 	              '</tr>'+
 	              '<tr>'+
 	                '<td class="msg log-content">'+data.message+'</td>'+
@@ -45,17 +44,20 @@
 	function setCard(data, quantity){
 		var cards =[];
 		for(var i=0; i<data.length; i++){// thumnailUrl 이대로 괜춘???
+				var product = new AjaxData('products/'+data[i].product, false);
+				var productData = product.getData();
+
 			cards.push(
 				'<div class="product-card">'+
 			        '<div class="card-header">'+
 			          '<div class="thumnail">'+
-			            '<img src="leaseInfo/image/'+data[i].thumnailUrl+'" alt="thumnail_img">'+
+			            '<img src="product_image/small'+productData.thumbnailImage+'" alt="thumnail_img">'+
 			          '</div>'+
 			          '<div class="title flexcenter-align">'+
-			            '<p class="text">'+data[i].name+'</p>'+
+			            '<p class="text">'+productData.name+'</p>'+
 			          '</div>'+
 			          '<div class="order-day flexcenter-align">'+
-			            '<p class="text">'+data[i].log[0].leaseStart+'</p>'+
+			            '<p class="text">'+data[i].log[0].startDay+'</p>'+
 			          '</div>'+
 			          '<div class="recent-status flexcenter-align">'+
 			            '<p class="text">'+data[i].log[data[i].log.length-1].status+'</p>'+
@@ -106,45 +108,64 @@
 			var logList = $(this).parent().next();
 			var date = new Date();
 			var leaseInfo = logList.attr('data-leaseInfo');
+			
+			var log = []; 
+			log.push(logList.html());
+			log.unshift( 
+	    		'<tbody class="log-card">'+
+	              '<tr>'+
+	                '<td rowspan="3" class="log-no"></td>'+
+	                '<td rowspan="3" class="status log-title">고객</td>'+
+	                '<td class="name-phonenum log-content">'+userId+' : 01010000000</td>'+
+	              '</tr>'+
+	              '<tr>'+
+	                '<td class="how-long log-content">'+date.getFullYear()+'-'+date.getMonth()+'-'+date.getDate()+' ~ </td>'+
+	              '</tr>'+
+	              '<tr>'+
+	                '<td class="msg log-content">'+comment+'</td>'+
+	              '</tr>'+
+	            '</tbody>'
+	    	 )
+	    	map_card(log, logList);
+	    	comment = $(this).prev().val('');
+			// $.ajax({
+	  //           type: "post",
+	  //           async: false,
+	  //           url: "/leaseInfoLog", 
+	  //           data: {
+	  //           'status': "고객",
+	  //           'leaseInfo': leaseInfo,
+	  //          	'startDay': date,
+	  //           'comment': comment
+	  //           }, 
+	  //           // 서버로 보낼 데이터
+	  //           dataType: "json",
+	  //           error: function(jqXHR, textStatus, errorThrown) {
+			//         alert('로그인 상태를 확인해 주세요');
+			//     },
+	  //           success: function(response){
+			// 		var log = []; 
+			// 		log.push(logList.html());
+			// 		log.unshift( 
+			//     		'<tbody class="log-card">'+
+			//               '<tr>'+
+			//                 '<td rowspan="3" class="log-no"></td>'+
+			//                 '<td rowspan="3" class="status log-title">고객</td>'+
+			//                 '<td class="name-phonenum log-content">'+userId+' : '+userData.phoneNumber+'+</td>'+
+			//               '</tr>'+
+			//               '<tr>'+
+			//                 '<td class="how-long log-content">'+date.getFullYear()+'-'+date.getMonth()+'-'+date.getDate()+' ~ </td>'+
+			//               '</tr>'+
+			//               '<tr>'+
+			//                 '<td class="msg log-content">'+comment+'</td>'+
+			//               '</tr>'+
+			//             '</tbody>'
+			//     	 )
+			//     	map_card(log, logList);
+			//     	comment = $(this).prev().val('');
 
-			$.ajax({
-	            type: "post",
-	            async: false,
-	            url: "/leaseInfoLog", 
-	            data: {
-	            'status': "고객",
-	            'leaseInfo': leaseInfo,
-	           	'startDay': date,
-	            'comment': comment
-	            }, 
-	            // 서버로 보낼 데이터
-	            dataType: "json",
-	            error: function(jqXHR, textStatus, errorThrown) {
-			        alert('로그인 상태를 확인해 주세요');
-			    },
-	            success: function(response){
-					var log = []; 
-					log.push(logList.html());
-					log.unshift( 
-			    		'<tbody class="log-card">'+
-			              '<tr>'+
-			                '<td rowspan="3" class="log-no"></td>'+
-			                '<td rowspan="3" class="status log-title">고객</td>'+
-			                '<td class="name-phonenum log-content">'+userId+' : '+userData.phoneNumber+'+</td>'+
-			              '</tr>'+
-			              '<tr>'+
-			                '<td class="how-long log-content">'+date.getFullYear()+'-'+date.getMonth()+'-'+date.getDate()+' ~ </td>'+
-			              '</tr>'+
-			              '<tr>'+
-			                '<td class="msg log-content">'+comment+'</td>'+
-			              '</tr>'+
-			            '</tbody>'
-			    	 )
-			    	map_card(log, logList);
-			    	comment = $(this).prev().val('');
-
-	            }
-	        });		
+	  //           }
+	  //       });		
 		})
 	}	
 
@@ -163,14 +184,47 @@
 
 	userData = new AjaxData('/api/user/'+userId ,false);
 
-
 	//빌린웃
 	target = $(".rentaling-area .card-td");
 	data = getData('/leaseInfo/list/search?user='+userId, false);
+
 	card = setCard(data,3);
 	map_card(card, target);
-	// //빌려 준 옷
-	// target = $(".rented-area .card-td");
+	//빌려 준 옷
+	target = $(".rented-area .card-td");
+	data = getData('/products/list/search?provider='+userId, false);
+	console.log(data);
+	var ajaxCard = new AjaxCard();
+	var cardData = ""
+	for(var i=0; i<3; i++){
+		var ajaxData = new AjaxData('/leaseInfo/list/search?product='+data[i].id, false);
+		cardData = ajaxData.getData();
+		console.log("url = /leaseInfo/list/search?product="+data[i].id)
+		console.log(cardData);
+		ajaxCard.setCard(
+			'<div class="product-card">'+
+			        '<div class="card-header">'+
+			          '<div class="thumnail">'+
+			            '<img src="product_image/small'+cardData.thumbnailImage+'" alt="thumnail_img">'+
+			          '</div>'+
+			          '<div class="title flexcenter-align">'+
+			            '<p class="text">'+cardData.name+'</p>'+
+			          '</div>'+
+			          '<div class="order-day flexcenter-align">'+
+			            '<p class="text">'+data[i].leaseStart+'</p>'+
+			          '</div>'+
+			          '<div class="recent-status flexcenter-align">'+
+			            '<p class="text">대여중</p>'+
+			          '</div>'+
+			        '</div>'+
+			        '<div class="card-body hidd">'+
+			          '<table class="log-list" data-leaseInfo=>'+
+			          '</table>'+
+			        '</div>'+
+			      '</div>'
+			)
+	}
+	ajaxCard.mapCard(target);
 	// data = getData('/leaseInfo/list/search?user='+userId, false);
 	// card = setCard(data,3);
 	// map_card(card, target);
