@@ -112,6 +112,7 @@
 	            async: true,
 	            url: "/leaseInfoLog", 
 	            data: {
+	            'status': "고객"
 	            'leaseInfo': leaseInfo,
 	           	'startDay': date,
 	            'comment': comment
