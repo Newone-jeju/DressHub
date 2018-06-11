@@ -13,12 +13,15 @@ $(document).ready(function () {
 
                     data = data.content;
                     product.mapcard = function () {
-                        var cards = ' <tr>\n' +
-                            '      <th style="width: 10%;">이미지</th>\n' +
-                            '      <th>상품정보</th>\n' +
-                            '      <th>상품금액</th>\n' +
-                            '      <th>배송비</th>\n' +
-                            '    </tr>';
+                        // var cards = ' <tr>\n' +
+                        //     '      <th style="width: 10%;">이미지</th>\n' +
+                        //     '      <th>상품정보</th>\n' +
+                        //     '      <th>상품금액</th>\n' +
+                        //     '      <th>배송비</th>\n' +
+                        //     '    </tr>';
+
+                        var cards='';
+
                         for (var i = 0; i < data.length; i++) {
                             cards +=
 
@@ -43,7 +46,7 @@ $(document).ready(function () {
                         $('.payment_amount').html(totalPrice+totalShipping);
 
                         $('.cartAdd_container').html(cards);
-                        $('#cart_table').html(cards);
+                        // $('#cart_table').html(cards);
 
                     }
                     product.mapcard();

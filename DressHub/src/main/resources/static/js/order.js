@@ -30,15 +30,15 @@ function getUrlParams() {
 
 function save() {
     var user = {
-        id: $('#id').val(),
-        productId: $('#productId').val(),
-        startDay: $('#startDay').val(),
-        endDay: $('#endDay').val()
+        leaser: $('#leaser').val(),
+        product: $('#product').val(),
+        leaseStart: $('#leaseStart').val(),
+        leaseEnd: $('#leaseEnd').val()
     };
 
     var method = 'POST';
 
-    if(user.id!='')
+    if(user.leaser!='')
         method = 'PUT';
     requestData(method, user);
     return false;
@@ -59,10 +59,10 @@ $(document).ready(function () {
     var params = getUrlParams();
     if (params.id) {
         $.get(host + "/" + params.id, function (user) {
-            $('#id').val(),
-                $('#productId').val(),
-                $('#startDay').val(),
-                $('#endDay').val()
+            $('#leaser').val(),
+                $('#product').val(),
+                $('#leaseStart').val(),
+                $('#leaseEnd').val()
         });
     }
 
