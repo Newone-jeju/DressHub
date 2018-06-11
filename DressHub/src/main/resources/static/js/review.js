@@ -14,10 +14,10 @@
 
 
     function no_review(){
-        var noReviewImg = new AjaxData("/review/image/no-review.png");
+        var noReviewImg = "no-review.png"
         $(".td-group").html(
             '<div class="no-review flexcenter">' +
-            '<image src="/image/'+noReviewImg.getData()+'" alt="no-review">' +
+            '<image src="/review/image/'+noReviewImg+'" alt="no-review">' +
             '</div>'
         );
     }
@@ -36,9 +36,9 @@
 
     //리뷰 내용 접기
     function folding(){
-        $(".review-head").click(function() {
+        $(".review-head").click(function(){
             var $review_body = $(this).next();
-            if ($review_body.css('display') == "none") {
+            if ($review_body.hasClass('hidd')) {
                 $($review_body).removeClass('hidd');
             } else {
                 $($review_body).addClass('hidd');
@@ -48,22 +48,18 @@
 
     //페이지네이션 포함 리뷰 매핑 addhook 없으면 안됨
     function map_review(review_data) {
-        var $review_pagination = $(".review-pagination");
-        $review_pagination.addHook('beforeInit', function (){});
-        $review_pagination.pagination({
-            dataSource: review_data,
-            pageSize: 5,
-            showPrevious: true,
-            showNext: true,
-            callback: function(data, pagination) {
-                var i;
-                ReviewCard.mapCard($review_pagination.prev());
-                //별점
-                 for(i=0; i<5; i++){
-                    getStar(i);
-                }
-            }
-        })
+        reviewCard.mapCard($(".review-table > .td-group"));
+        console.log(review_data.length);
+        for(var i=0; i<review_data.length; i++){
+            getStar(i);
+        }
+        //내용접기
+        folding();
+        //버튼처리
+        edit_btn();
+        write_btn();
+        delete_btn();
+
     }
 
     function reviewInit() {
@@ -76,7 +72,7 @@
                 '<div class="td-no">'+i+'</div>'+
                 '<div class="td-rank">'+review_data.rate+'</div>'+
                 '<div class="td-title">'+review_data.title+'</div>'+
-                '<div class="td-author">'+review_data.userId+'</div>'+
+                '<div class="td-author">'+review_data.user+'</div>'+
             '</div>'+
             //리뷰 접혀진 부분
           '<div class="review-body hidd">'+
@@ -99,13 +95,14 @@
             '</div>'+
 
             //리뷰내용
-            '<image src="/image/'+review_data.imageUrl+'" alt="review_img">'+
+            '<image src="/review/image/'+review_data.imageUrl+'" alt="review_img">'+
 
             '<p>'+review_data.comment+'</p>'+
           '</div>'
           )
         });
         var review_cards = reviewCard.getCard();
+        console.log(review_cards)
         // 리뷰없음 검사
         if (review_cards == []) {
             no_review();
@@ -114,13 +111,6 @@
                 map_review(review_cards);
             },500);               
         }
-
-        //내용접기
-        folding();
-        //버튼처리
-        edit_btn();
-        write_btn();
-        delete_btn();
     }
 
 
@@ -144,8 +134,11 @@
     function write_btn(){
         $(".review-write-btn").click(function(){
             //권한검사
+            //로그인 안되있으면 로그인 페이지로 리다이렉션
             var user = new CookieUser();
-            user.inspectId(); //로그인 안되있으면 로그인 페이지로 리다이렉션
+            if(user.inspectId() == false){
+                return false;
+            } 
             write_review("review-form.html", 660, 600, "review_form","none");
         })
     }
@@ -166,7 +159,12 @@
         $(".review-edit-btn").click(function(){
             //권한검사
             var user = new CookieUser();
+            //로그인 안되있으면 로그인 페이지로 리다이렉션
+            if(user.inspectId() == false){
+                return false;
+            } 
             var reviewUser = $(this).parent().parent().prev().children(".td-author").text();
+            console.log(reviewUser);
             if(user.inspectIdDiff(reviewUser) == false){
                 return false
             }
@@ -182,7 +180,13 @@
         $(".review-delete-btn").click(function(){
             //권한검사
             var user = new CookieUser();
+            //로그인 안되있으면 로그인 페이지로 리다이렉션
+            if(user.inspectId() == false){
+                return false;
+            } 
+            //아이디 불일치시
             var reviewUser = $(this).parent().parent().prev().children(".td-author").text();
+            console.log(reviewUser);
             if(user.inspectIdDiff(reviewUser) == false){
                 return false
             }
@@ -202,13 +206,14 @@
 
     var data = '';
     var productId = getURLParameter("productId");
-    var ajaxData = new AjaxData('/review/'+productId, false);
+    var ajaxData = new AjaxData('/review/list/search?productId='+productId, false);
     data = ajaxData.getData();
-    console.log(data)
     ajaxData = undefined;
     var reviewCard = new ReviewCard();
 
     reviewInit();
+    
+    
 
 
 }());
