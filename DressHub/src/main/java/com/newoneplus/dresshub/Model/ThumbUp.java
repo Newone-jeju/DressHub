@@ -18,4 +18,5 @@ public class ThumbUp{
     @JoinColumn(name="product_id")
     Product product;
 
+
 }
