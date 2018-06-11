@@ -13,6 +13,7 @@ import java.util.List;
 @Entity
 public class LeaseInfo {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     @OneToOne(fetch=FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name="product")

@@ -8,8 +8,8 @@
 
 
 
-
-var product=sessionStorage.getItem('productId');
+var product;
+var productId=sessionStorage.getItem('productId');
 var leaseStart=sessionStorage.getItem('startDay');
 console.log(product);
 var leaseEnd=sessionStorage.getItem('endDay');
@@ -64,8 +64,33 @@ function requestData(method, data) {
 
 
 
+$(document).ready(function () {
+
+    $.get("products/" + productId, function (productinfo) {
+         product = {
+            name:productinfo.name,
+            costPerDay:productinfo.costPerDay,
+            deposit: productinfo.deposit,
+            salePrice: productinfo.salePrice,
+            category: productinfo.category,
+            consigmentStart: productinfo.consigmentStart,
+            consigmentEnd: productinfo.consigmentEnd,
+            leastLeaseDay: productinfo.leastLeaseDay,
+            location: productinfo.location,
+            state: productinfo.state,
+            size: productinfo.size,
+            contents: productinfo.contents,
+            thumbnailImage:productinfo.thumbnailImage
+        }
+    });
+
+
+
+    document.getElementById("payment").addEventListener("click", save);
+
+});
     // $('#payment').on('click', save());
-document.getElementById("payment").addEventListener("click", save);
+
 
 
 
