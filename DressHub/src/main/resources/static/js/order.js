@@ -4,6 +4,16 @@
 // sessionStorage.setItem("deposit", 7000);
 
 
+
+
+
+
+var product;
+var productId=sessionStorage.getItem('productId');
+var leaseStart=sessionStorage.getItem('startDay');
+console.log(product);
+var leaseEnd=sessionStorage.getItem('endDay');
+console.log(leaseEnd);
 var productName  = sessionStorage.getItem('productName');
 var totalPrice   = sessionStorage.getItem('totalPrice');
 var totalShipment   = sessionStorage.getItem('totalShipment');
@@ -18,7 +28,7 @@ $('.totalPayment').html(totalPayment);
 
 // *******************************************
 
-var host = './order';
+var host = './leaseInfo';
 
 function getUrlParams() {
     var params = {};
@@ -29,18 +39,14 @@ function getUrlParams() {
 }
 
 function save() {
-    var user = {
-        leaser: $('#leaser').val(),
-        product: $('#product').val(),
-        leaseStart: $('#leaseStart').val(),
-        leaseEnd: $('#leaseEnd').val()
+    console.log("눌렀니");
+    var leaseInfo = {
+        product: product,
+        leaseStart: leaseStart,
+        leaseEnd: leaseEnd
     };
-
     var method = 'POST';
-
-    if(user.leaser!='')
-        method = 'PUT';
-    requestData(method, user);
+    requestData(method, leaseInfo);
     return false;
 }
 
@@ -48,26 +54,43 @@ function requestData(method, data) {
     $.ajax({
         url: host,
         method: method,
-        contentType: "application/json",
+        contentType: "application/json;charset=UTF-8",
         data: JSON.stringify(data)
     }).done(function () {
-        window.location.href = 'list';
+        window.location.href = '/rental_status.html';
     });
 }
 
-$(document).ready(function () {
-    var params = getUrlParams();
-    if (params.id) {
-        $.get(host + "/" + params.id, function (user) {
-            $('#leaser').val(),
-                $('#product').val(),
-                $('#leaseStart').val(),
-                $('#leaseEnd').val()
-        });
-    }
 
-    $('#payment').on("click", save());
+
+
+$(document).ready(function () {
+
+    $.get("products/" + productId, function (productinfo) {
+         product = {
+            name:productinfo.name,
+            costPerDay:productinfo.costPerDay,
+            deposit: productinfo.deposit,
+            salePrice: productinfo.salePrice,
+            category: productinfo.category,
+            consigmentStart: productinfo.consigmentStart,
+            consigmentEnd: productinfo.consigmentEnd,
+            leastLeaseDay: productinfo.leastLeaseDay,
+            location: productinfo.location,
+            state: productinfo.state,
+            size: productinfo.size,
+            contents: productinfo.contents,
+            thumbnailImage:productinfo.thumbnailImage
+        }
+    });
+
+
+
+    document.getElementById("payment").addEventListener("click", save);
+
 });
+    // $('#payment').on('click', save());
+
 
 
 
