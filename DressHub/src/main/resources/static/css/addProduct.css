@@ -28,7 +28,7 @@ table input{
 #Btn{
   text-align: center;
 }
-#addBtn{
+.addBtn{
   background-color: #363636;
    border: none;
    color: white;

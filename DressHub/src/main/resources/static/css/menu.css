@@ -7,6 +7,10 @@ body{
  #logo{
    flex:1;
  }
+ #logo a{
+	 text-decoration:none;
+	color: #000;
+ }
  #top{
   display:flex;
   flex:1;

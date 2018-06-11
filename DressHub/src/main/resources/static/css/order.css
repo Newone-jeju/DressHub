@@ -79,7 +79,7 @@ input{
   border: solid 1px #ddd;
   border-radius:0.5rem;
 }
-.payment{
+#payment{
   background-color: #363636;
    border: none;
    color: white;

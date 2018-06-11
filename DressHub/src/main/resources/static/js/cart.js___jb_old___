@@ -13,13 +13,12 @@ $(document).ready(function () {
 
                     data = data.content;
                     product.mapcard = function () {
-											var cards = ' <tr>\n' +
-													'      <th style="width: 10%;">이미지</th>\n' +
-													'      <th>상품정보</th>\n' +
-													'      <th>상품금액</th>\n' +
-													'      <th>배송비</th>\n' +
-													'    </tr>';
-
+                        var cards = ' <tr>\n' +
+                            '      <th style="width: 10%;">이미지</th>\n' +
+                            '      <th>상품정보</th>\n' +
+                            '      <th>상품금액</th>\n' +
+                            '      <th>배송비</th>\n' +
+                            '    </tr>';
                         for (var i = 0; i < data.length; i++) {
                             cards +=
 
