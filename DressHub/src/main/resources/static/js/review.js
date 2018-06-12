@@ -1,6 +1,3 @@
-
-
-
 //class ReviewCard extends ajaxCard
 function ReviewCard(){
     AjaxCard.apply(this, arguments)
@@ -64,42 +61,42 @@ function map_review(review_data) {
 
 function reviewInit() {
     $.each(data, function(i, review_data)
-    {   
+    {
         i = i+1;
         reviewCard.setCard(
-        //리뷰 카드
-        '<div class="review-head review'+i+'">'+
+            //리뷰 카드
+            '<div class="review-head review'+i+'">'+
             '<div class="td-no">'+i+'</div>'+
             '<div class="td-rank">'+review_data.rate+'</div>'+
             '<div class="td-title">'+review_data.title+'</div>'+
             '<div class="td-author">'+review_data.user+'</div>'+
-        '</div>'+
-        //리뷰 접혀진 부분
-      '<div class="review-body hidd">'+
-        '<div class="review-btn-wrap">'+
+            '</div>'+
+            //리뷰 접혀진 부분
+            '<div class="review-body hidd">'+
+            '<div class="review-btn-wrap">'+
             //리뷰 수정 버튼
             '<button class="review-btn review-body-btn review-edit-btn" data-reviewId="'+review_data.id+'">수정</button>'+
             //리뷰 삭제버튼
-            '<button type="submit" class="review-btn review-body-btn review-delete-btn" data-reviewId="'+review_data.id+'">삭제</button>'+                
-        '</div>'+
-        //리뷰 날짜정보
-        '<div class="review-date-info">'+
+            '<button type="submit" class="review-btn review-body-btn review-delete-btn" data-reviewId="'+review_data.id+'">삭제</button>'+
+            '</div>'+
+            //리뷰 날짜정보
+            '<div class="review-date-info">'+
             '<div class="lease-duration-wrap">'+
-                '<div class="title">대여기간</div>'+
-                '<div class="content">'+review_data.leaseStart+'  ~  '+review_data.leaseEnd+'</div>'+
+            '<div class="title">대여기간</div>'+
+            '<div class="content">'+review_data.leaseStart+'  ~  '+review_data.leaseEnd+'</div>'+
             '</div>'+
             '<div class="write-date-wrap">'+
-                '<div class="title">작성날짜</div>'+
-                '<div class="content">'+review_data.date+'</div>'+
+            '<div class="title">작성날짜</div>'+
+            '<div class="content">'+review_data.date+'</div>'+
             '</div>'+
-        '</div>'+
+            '</div>'+
 
-        //리뷰내용
-        '<image src="/review/image/'+review_data.imageUrl+'" alt="review_img">'+
+            //리뷰내용
+            '<image src="/review/image/'+review_data.imageUrl+'" alt="review_img">'+
 
-        '<p>'+review_data.comment+'</p>'+
-      '</div>'
-      )
+            '<p>'+review_data.comment+'</p>'+
+            '</div>'
+        )
     });
     var review_cards = reviewCard.getCard();
     console.log(review_cards)
@@ -109,7 +106,7 @@ function reviewInit() {
     } else {
         window.setTimeout(function(){
             map_review(review_cards);
-        },500);               
+        },500);
     }
 }
 
@@ -126,8 +123,8 @@ function write_review(url, w, h, name, option) {
     }
     pozX = (sw - w) / 2;
     pozY = (sh - h) / 2;
-    return window.open(url, name, "location=no,status=0,scrollbars=" + scroll + ",resizable=1,width=" + w + ",height=" + h + 
-    ",left=" + pozX + ",top=" + pozY +"resizable=no");
+    return window.open(url, name, "location=no,status=0,scrollbars=" + scroll + ",resizable=1,width=" + w + ",height=" + h +
+        ",left=" + pozX + ",top=" + pozY +"resizable=no");
 }
 
 //리뷰쓰기 버튼
@@ -138,7 +135,7 @@ function write_btn(){
         var user = new CookieUser();
         if(user.inspectId() == false){
             return false;
-        } 
+        }
         write_review("review-form.html", 660, 600, "review_form","none");
     })
 }
@@ -165,7 +162,7 @@ function edit_btn(){
         //로그인 안되있으면 로그인 페이지로 리다이렉션
         if(user.inspectId() == false){
             return false;
-        } 
+        }
         var reviewUser = $(this).parent().parent().prev().children(".td-author").text();
         console.log(reviewUser);
         if(user.inspectIdDiff(reviewUser) == false){
@@ -174,7 +171,7 @@ function edit_btn(){
         review_id = $(this).attr("data-reviewId");
         //새창 띄우기
         var review_form = write_review("review-form.html", 660, 600, "review_form");
-        
+
     })
 }
 
@@ -186,7 +183,7 @@ function delete_btn(){
         //로그인 안되있으면 로그인 페이지로 리다이렉션
         if(user.inspectId() == false){
             return false;
-        } 
+        }
         //아이디 불일치시
         var reviewUser = $(this).parent().parent().prev().children(".td-author").text();
         console.log(reviewUser);
@@ -203,7 +200,7 @@ function delete_btn(){
 }
 function getURLParameter(name) {
     return decodeURI(
-     (RegExp(name + '=' + '(.+?)(&|$)').exec(location.search)||[,null])[1]
+        (RegExp(name + '=' + '(.+?)(&|$)').exec(location.search)||[,null])[1]
     );
 }
 
@@ -215,7 +212,3 @@ ajaxData = undefined;
 var reviewCard = new ReviewCard();
 
 reviewInit();
-
-
-
-

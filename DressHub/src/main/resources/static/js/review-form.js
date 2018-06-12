@@ -1,41 +1,41 @@
 function getName(){
-	var $rental_product_content = $('.rental-product-content');
-	$rental_product_content.text(window.opener.$("#product-details h1.title:eq(0)").text());
-	console.log($rental_product_content.text());
-	//부모창인 상품상세정보페이지로 부터 접근하지 않은 경우
-	if($rental_product_content.text() ==""){
-		alert('잘못된 경로로 접근');
-		window.open('about:blank', '_self').close();
-	}
+    var $rental_product_content = $('.rental-product-content');
+    $rental_product_content.text(window.opener.$("#product-details h1.title:eq(0)").text());
+    console.log($rental_product_content.text());
+    //부모창인 상품상세정보페이지로 부터 접근하지 않은 경우
+    if($rental_product_content.text() ==""){
+        alert('잘못된 경로로 접근');
+        window.open('about:blank', '_self').close();
+    }
 }
 
 function getauthor(){
-	//작성자 이름 가져오기
+    //작성자 이름 가져오기
     var user = new CookieUser();
     var userId = user.getUserId();
     $(".author-content").text(userId);
-    
+
     $('.hid-id').val(productId);
 
 }
 
 function setHiddenName(){
-	$('.rental-product-content').after('<input type="hidden" name="rental-product" value="'+$('.rental-product-content').text()+'">')
-    
+    $('.rental-product-content').after('<input type="hidden" name="rental-product" value="'+$('.rental-product-content').text()+'">')
+
 }
 
 function setHiddenRating(){
-	var $rating = $("#rating"); 
-	console.log($rating.text());
+    var $rating = $("#rating");
+    console.log($rating.text());
     $(".hid-rank").attr("value", $rating.text());
-	$rating.rateYo({
-		starWidth: "30px",
-		halfStar: true,
-		rating: $rating.text(),
-  	onSet: function (rating, rateYoInstance) {
-    $(".hid-rank").attr("value", rating);
-  }
-});
+    $rating.rateYo({
+        starWidth: "30px",
+        halfStar: true,
+        rating: $rating.text(),
+        onSet: function (rating, rateYoInstance) {
+            $(".hid-rank").attr("value", rating);
+        }
+    });
 }
 
 
@@ -90,13 +90,13 @@ function gatherImage() {
 
 
 function reviewFormInit() {
-	getName();
+    getName();
     productId = opener.parent.getProductId();
-	getauthor();
-	setHiddenName();
-	review_id = opener.parent.getReviewId(true); 
-	console.log(review_id);
-	getEditInfo(review_id);
+    getauthor();
+    setHiddenName();
+    review_id = opener.parent.getReviewId(true);
+    console.log(review_id);
+    getEditInfo(review_id);
 }
 
 var review_id = "";
@@ -112,18 +112,15 @@ $(".send-btn").click(function(){
         console.log("send form!")
         //이미지 전송
         $("#imageForm").on("submit", function() {
-            
+
         });
         opener.parent.location.reload();
         window.open('about:blank', '_self').close();
-        
+
     })
     return true;
 });
 
 $(".cancel-btn").click(function(){
-	window.open('about:blank', '_self').close();
+    window.open('about:blank', '_self').close();
 });
-
-
-
