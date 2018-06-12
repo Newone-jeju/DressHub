@@ -190,28 +190,30 @@
 
 	card = setCard(data,3);
 	map_card(card, target);
-	//빌려 준 옷
+	// 빌려 준 옷
 	target = $(".rented-area .card-td");
-	data = getData('/products/list/search?provider='+userId, false);
-	console.log(data);
+	var pdata ="";
+	pdata = getData('/products/list/search?provider='+userId, false);
+	console.log(pdata[0].id);
 	var ajaxCard = new AjaxCard();
 	var cardData = ""
-	for(var i=0; i<3; i++){
-		var ajaxData = new AjaxData('/leaseInfo/list/search?product='+data[i].id, false);
-		cardData = ajaxData.getData();
-		console.log("url = /leaseInfo/list/search?product="+data[i].id)
+	for(var i=0; i<pdata.length; i++){
+		console.log(i);
+		var idid = pdata[i].id;
+		var ajaxData2 = new AjaxData('/leaseInfo/list/search?product='+idid, false);
+		cardData = ajaxData2.getData();
 		console.log(cardData);
 		ajaxCard.setCard(
 			'<div class="product-card">'+
 			        '<div class="card-header">'+
 			          '<div class="thumnail">'+
-			            '<img src="product_image/small'+cardData.thumbnailImage+'" alt="thumnail_img">'+
+			            '<img src="product_image/small'+pdata[i].thumbnailImage+'" alt="thumnail_img">'+
 			          '</div>'+
 			          '<div class="title flexcenter-align">'+
-			            '<p class="text">'+cardData.name+'</p>'+
+			            '<p class="text">'+pdata[i].name+'</p>'+
 			          '</div>'+
 			          '<div class="order-day flexcenter-align">'+
-			            '<p class="text">'+data[i].leaseStart+'</p>'+
+			            '<p class="text">'+cardData[0].leaseStart+'</p>'+
 			          '</div>'+
 			          '<div class="recent-status flexcenter-align">'+
 			            '<p class="text">대여중</p>'+
@@ -225,10 +227,7 @@
 			)
 	}
 	ajaxCard.mapCard(target);
-	// data = getData('/leaseInfo/list/search?user='+userId, false);
-	// card = setCard(data,3);
-	// map_card(card, target);
-
+	
 	folding($(".card-header"));
 	msg_send();
 })();

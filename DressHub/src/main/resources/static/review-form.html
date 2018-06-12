@@ -9,7 +9,7 @@
 </head>
 <body>
 <section class="reviewform-wrap">
-
+<form action="/review/image" method="POST" id="imageForm" name="imageData" enctype="multipart/form-data">
 	<div class="head flex border-bot">
 		<div class="rental-product-area flexcenter-align">
 			<div class="rental-product form-name">상품명</div>
@@ -37,6 +37,7 @@
 			<div class="text form-name">내용</div>
 			<textarea name="comment" class="text text-content left-space"></textarea>
 		</div>
+		
 		<div class="img-area flexcenter-align">
 			<div class="img form-name">첨부 이미지</div>
 			<input type="file" name="image" class="img img-content left-space"></input>
@@ -48,7 +49,9 @@
 			<button class="cancel-btn form-btn-style">취소</button>
 		</div>
 	</div>
+	
 	<input type="hidden" class="hid-id" name="id" value="">
+	</form>
 </section>
 
 

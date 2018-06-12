@@ -151,7 +151,10 @@ function getReviewId(toNull){
     }else{
         reviewId = "";
     }
+}
 
+function getProductId(){
+    return productId;
 }
 
 //review body 내 수정버튼

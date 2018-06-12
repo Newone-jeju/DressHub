@@ -1,18 +1,14 @@
 //function card_carousel(carouselId,jsonFile){}
 $(document).ready(function() {
-	var carousel ={};
+		var carousel ={};
 	carousel.max_cardnum = 11;
 	carousel.cardnum = [0,1,2,3];
-	// $.getJSON(jsonFile, function(info){
-	// 	console.log("getJSON");
-	// });
-		// ㅠㅠ
 		carousel.data = [
 			{
 				"id" : 1,
 				"category" : "캐주얼 > 상의",
 				"title" : "상품이름이름이름",
-				"img_src" : "img/1.jpg",
+				"img_src" : "image/1.jpg",
 				"price" : "30/300/3000",
 				"location" : "제주시 아라동",
 			},
@@ -20,7 +16,7 @@ $(document).ready(function() {
 				"id" : 2,
 				"category" : "캐주얼 > 하의",
 				"title" : "상품이름이름이름",
-				"img_src" : "img/2.jpg",
+				"img_src" : "image/2.jpg",
 				"price" : "30/300/3000",
 				"location" : "서울시 아라동",
 			},
@@ -28,7 +24,7 @@ $(document).ready(function() {
 				"id" : 3,
 				"category" : "캐주얼 > 신발",
 				"title" : "상품이름이름이름",
-				"img_src" : "img/3.jpg",
+				"img_src" : "image/3.jpg",
 				"price" : "30/300/3000",
 				"location" : "대전시 아라동",
 			},
@@ -36,7 +32,7 @@ $(document).ready(function() {
 				"id" : 4,
 				"category" : "캐주얼 > 웃옷",
 				"title" : "상품이름이름이름",
-				"img_src" : "img/4.jpg",
+				"img_src" : "image/4.jpg",
 				"price" : "30/300/3000",
 				"location" : "부산시 아라동",
 			},
@@ -44,7 +40,7 @@ $(document).ready(function() {
 				"id" : 5,
 				"category" : "캐주얼 > 상의",
 				"title" : "상품이름이름이름",
-				"img_src" : "img/5.jpg",
+				"img_src" : "image/5.jpg",
 				"price" : "30/300/3000",
 				"location" : "전주시 아라동",
 			},
@@ -52,7 +48,7 @@ $(document).ready(function() {
 				"id" : 6,
 				"category" : "캐주얼 > 상의",
 				"title" : "상품이름이름이름",
-				"img_src" : "img/1.jpg",
+				"img_src" : "image/1.jpg",
 				"price" : "30/300/3000",
 				"location" : "강릉시 아라동",
 			},
@@ -60,7 +56,7 @@ $(document).ready(function() {
 				"id" : 7,
 				"category" : "캐주얼 > 상의",
 				"title" : "상품이름이름이름",
-				"img_src" : "img/2.jpg",
+				"img_src" : "image/2.jpg",
 				"price" : "30/300/3000",
 				"location" : "제주시 아라동",
 			},
@@ -68,7 +64,7 @@ $(document).ready(function() {
 				"id" : 8,
 				"category" : "캐주얼 > 하의",
 				"title" : "상품이름이름이름",
-				"img_src" : "img/3.jpg",
+				"img_src" : "image/3.jpg",
 				"price" : "30/300/3000",
 				"location" : "서울시 아라동",
 			},
@@ -76,7 +72,7 @@ $(document).ready(function() {
 				"id" : 9,
 				"category" : "캐주얼 > 신발",
 				"title" : "상품이름이름이름",
-				"img_src" : "img/4.jpg",
+				"img_src" : "image/4.jpg",
 				"price" : "30/300/3000",
 				"location" : "대전시 아라동",
 			},
@@ -84,7 +80,7 @@ $(document).ready(function() {
 				"id" : 10,
 				"category" : "캐주얼 > 웃옷",
 				"title" : "상품이름이름이름",
-				"img_src" : "img/5.jpg",
+				"img_src" : "image/5.jpg",
 				"price" : "30/300/3000",
 				"location" : "부산시 아라동",
 			},
@@ -92,7 +88,7 @@ $(document).ready(function() {
 				"id" : 11,
 				"category" : "캐주얼 > 상의",
 				"title" : "상품이름이름이름",
-				"img_src" : "img/1.jpg",
+				"img_src" : "image/1.jpg",
 				"price" : "30/300/3000",
 				"location" : "전주시 아라동",
 			},
@@ -100,7 +96,7 @@ $(document).ready(function() {
 				"id" : 12,
 				"category" : "캐주얼 > 상의",
 				"title" : "상품이름이름이름",
-				"img_src" : "img/2.jpg",
+				"img_src" : "image/2.jpg",
 				"price" : "30/300/3000",
 				"location" : "강릉시 아라동",
 			},
@@ -109,8 +105,8 @@ $(document).ready(function() {
 
 
 	carousel.mapcard = function(){
-		console.log('mapcard');
-		console.log(carousel.cardnum);
+		// console.log('mapcard');
+		// console.log(carousel.cardnum);
 			var cards = '';
 			for(var i= 0; i <carousel.cardnum.length; i++){
 				cards +=
@@ -123,12 +119,12 @@ $(document).ready(function() {
 						'<p class="text_title">'+carousel.data[carousel.cardnum[i]].title+'</p>'+
 						'<p class="text_price">'+carousel.data[carousel.cardnum[i]].price+'</p>'+
 						'<div class="location_wrap">'+
-							'<img src="img/location_pin.png" alt="L" class="icon_location">'+
+							'<img src="image/location_pin.png" alt="L" class="icon_location">'+
 							'<span class="text_location">'+carousel.data[carousel.cardnum[i]].location+'</span>'+
 						'</div>'+
 					'</div>'+
 				'</a>';
-				console.log(carousel.cardnum[i]);
+				// console.log(carousel.cardnum[i]);
 			}
 			$('.card_carousel_container_content').html(cards);//+id
 	}
