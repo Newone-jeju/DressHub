@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <script src="js/menu.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/menu.css"  />
+<link rel="stylesheet" href="css/join.css">
+    <title></title>
+  </head>
+  <body>
+    <div id="top">
+      <h1 id="logo"><a href="/index.html">DRESS HUB</a></h1>
+        <ul class="topul">
+          <li><a href="login.html">LOGIN</a></li>
+          <li><a href="join.html">회원가입</a></li>
+        </ul>
+  </div>
+    <nav id="nav">
+    <ul class="menu">
+      <li><a class="category">전체카테고리</a> </li>
+        <li><a id="clothes" class="name" href="productList?category=10">캐쥬얼</a>
+        <ul class="allcategory">
+           <li><a href="productList?category=11">남성</a></li>
+           <li><a href="productList?category=12">여성</a></li>
+           <li><a href="productList?category=13">신발</a></li>
+           <li><a href="productList?category=14">기타</a></li>
+          </ul>
+        </li>
+        <li><a id="suit"  class="name" href="productList?category=20">예복</a>
+        <ul class="allcategory">
+           <li><a href="productList?category=21">경조사</a></li>
+           <li><a href="productList?category=22">면접</a></li>
+           <li><a href="productList?category=23">실생활</a></li>
+           <li><a href="productList?category=24">기타</a></li>
+          </ul>
+          </li>
+        <li><a id="accessory"  class="name" href="productList?category=30">악세사리</a>
+        <ul class="allcategory">
+           <li><a href="productList?category=31">남성</a></li>
+           <li><a href="productList?category=32">여성</a></li>
+           <li><a href="productList?category=33">고가</a></li>
+           <li><a href="productList?category=34">특수한 경우</a></li>
+          </ul>
+          </li>
+        <li><a href="productList?category=40">할인/기획</a>
+          <ul class="allcategory">
+             <li><a href="productList?category=41">의류</a></li>
+             <li><a href="productList?category=42">악세사리</a></li>
+             <li><a href="productList?category=43">신발</a></li>
+             <li><a href="productList?category=44">기타</a></li>
+            </ul>
+        </li>
+        <li><a href=#>MYPAGE</a></li>
+    </ul>
+  </nav>
+
+
+  <!-- 회원가입 -->
+  <div id="join">
+    <h2>회원가입</h2><hr width="90%"/>
+      <form method="GET" name="inputForm" id="inputForm">
+            <table id="joinTable">
+                <tr>
+                    <th><label for="name">이름</th>
+                    <td><input type="text" name="name" id="name" size="20%"></td>
+                </tr>
+                <tr>
+                    <th>  <label for="id">아이디</th>
+                    <td><input type="text" name="id" id="id" size="20%">
+                           *영문소문자/숫자, 4~16자
+                    </th>
+                </tr>
+                <tr>
+                    <th><label for="password">비밀번호</th>
+                    <td>
+                        <input type="password" name="password" id="password" size="20%">
+                        *영문 대소문자/숫자/특수문자 중 2가지 이상 조합, 10자~16자
+                    </td>
+                </tr>
+                <tr>
+                    <th><label for="passwordCheck">비밀번호확인</th>
+                    <td><input type="password" name="passwordCheck" id="passwordCheck" size="20%"></td>
+                </tr>
+                <tr>
+                    <th>  <label for="email">이메일</th>
+                    <td>
+                        <input type="text" name="email" id="email" size="30%"> @
+                        <input type="text" name="email" id="email" size="30%">
+                    </td>
+                </tr>
+                <tr>
+                    <th>  <label for="address">주소</th>
+                    <td><input type="text" name="address" id="address" size="100%"></td>
+                </tr>
+                <tr>
+                    <th><label for="phone_number">연락처</th>
+                    <td>
+                        <input type="text" name="phone_number" id="phone_number" size="30%">
+                    </td>
+                </tr>
+                <tr>
+                    <th><label for="nickname">닉네임</th>
+                    <td><input type="text" name="nickname" id="nickname" size="30%"></td>
+                </tr>
+                <tr>
+                    <th><label for="introduce">자기소개</th>
+                    <td><textarea name="introduce" id="introduce"></textarea></td>
+                </tr>
+                <tr>
+                    <th><label for="open_private_info">정보공개여부</th>
+                    <td>
+                        <input type="radio" name="open_private_info" id="agree">동의함
+                        <input type="radio"  name="open_private_info"id="disagree" >동의하지 않음
+                    </td>
+                </tr>
+                <tr>
+                    <th><label for="certification">본인인증</th>
+                    <td>
+                        처리해야함
+                    </td>
+                </tr>
+            </table>
+        </form>
+        <div id="Btn">
+          <input type="submit" class="joinBtn" value="회원가입" onClick="location.href='index.html'">
+            <input type="button" class="cancle" value="취소하기" onclick="../login">
+        </div>
+              </div>
+              <script type="text/javascript" src="js/jquery-3.3.1.min.js" charset="utf-8"></script>
+              <script src="js/ajaxData.js"></script>
+              <script src="js/getCookie.js"></script>
+              <script src="js/menu.js"></script>
+              <script src="js/join.js"></script>
+              </body>
+            </html>
