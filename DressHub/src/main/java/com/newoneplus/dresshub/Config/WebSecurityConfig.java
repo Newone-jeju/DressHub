@@ -29,8 +29,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     AuthProvider authProvider;
 
-
-
     @Override
     public void configure(WebSecurity web) throws Exception {
         web.ignoring().antMatchers("/resources/**", "/css/**", "/js/**","/image/**", "/static/**");
@@ -89,10 +87,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 
 
+
     }
-
-
-
 
 
 }
