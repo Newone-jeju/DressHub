@@ -2,6 +2,7 @@ package com.newoneplus.dresshub.Controller;
 
 import com.newoneplus.dresshub.ImageProcesser;
 import com.newoneplus.dresshub.Model.*;
+import com.newoneplus.dresshub.Repository.ProductRepository;
 import com.newoneplus.dresshub.Repository.ThumbUpRepository;
 import com.newoneplus.dresshub.Service.ProductService;
 import lombok.AllArgsConstructor;
@@ -33,12 +34,17 @@ public class ProductController {
     @Autowired
     ProductService productService;
 
+    @Autowired
+    ProductRepository productRepository;
 
     @GetMapping(value = "/{id}")
     public Product getProduct(@PathVariable Integer id) {
         return productService.getProduct(id);
     }
-
+    @GetMapping(value = "/list/search")
+    public List<Product> getProductProvider(@RequestParam String provider){
+        return productService.getProductListByProvider(provider);
+    }
 
     @PostMapping
     public Product productCreate(@RequestBody Product product) {
@@ -85,7 +91,9 @@ public class ProductController {
         String filename = productImage.getOriginalFilename();
         String path = System.getProperty("user.dir") + "/out/production/resources/static/product_image/";
         new File(path).mkdirs(); // 디렉토리 생성
-
+        if(productImage ==null){
+            return;
+        }
         BufferedImage image2 = imageProcesser.getMediumImage(productImage.getInputStream());
         writeImage(filename, path, image2, "medium");
 

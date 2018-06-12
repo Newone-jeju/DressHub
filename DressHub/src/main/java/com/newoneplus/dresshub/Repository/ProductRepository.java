@@ -20,4 +20,5 @@ public interface ProductRepository extends JpaRepository<Product, Integer> {
     Product findById(long id);
     List<Product> findAllByOrderByIdDesc();
 
+    List<Product> findAllByProvider(String provider);
 }

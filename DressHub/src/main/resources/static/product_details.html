@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -23,47 +23,45 @@
 
 <body>
     <div id="top">
-        <h1 id="logo">DRESS HUB</h1>
+        <h1 id="logo"><a href="/index.html">DRESS HUB</a></h1>
         <ul class="topul">
             <li><a href="login.html">LOGIN</a></li>
             <li><a href="login.html">회원가입</a></li>
-            <li><a href="cart.html">장바구니</a></li>
-            <li><a href="mypage.html">MYPAGE</a></li>
         </ul>
     </div>
     <nav id="nav">
         <ul class="menu">
             <li><a class="category">전체카테고리</a> </li>
-            <li><a id="clothes">캐쥬얼</a>
+            <li><a id="clothes" class="name" href="productList?category=10">캐쥬얼</a>
                 <ul class="allcategory">
-                    <li><a href="#">남성</a></li>
-                    <li><a href="#">여성</a></li>
-                    <li><a href="#">신발</a></li>
-                    <li><a href="#">기타</a></li>
+                    <li><a href="productList?category=11">남성</a></li>
+                    <li><a href="productList?category=12">여성</a></li>
+                    <li><a href="productList?category=13">신발</a></li>
+                    <li><a href="productList?category=14">기타</a></li>
                 </ul>
             </li>
-            <li><a id="suit">예복</a>
+            <li><a id="suit"  class="name" href="productList?category=20">예복</a>
                 <ul class="allcategory">
-                    <li><a href="#">경조사</a></li>
-                    <li><a href="#">면접</a></li>
-                    <li><a href="#">another</a></li>
-                    <li><a href="#">another</a></li>
+                    <li><a href="productList?category=21">경조사</a></li>
+                    <li><a href="productList?category=22">면접</a></li>
+                    <li><a href="productList?category=23">실생활</a></li>
+                    <li><a href="productList?category=24">기타</a></li>
                 </ul>
             </li>
-            <li><a id="accessory">악세사리</a>
+            <li><a id="accessory"  class="name" href="productList?category=30">악세사리</a>
                 <ul class="allcategory">
-                    <li><a href="#">경조사</a></li>
-                    <li><a href="#">면접</a></li>
-                    <li><a href="#">another</a></li>
-                    <li><a href="#">another</a></li>
+                    <li><a href="productList?category=31">남성</a></li>
+                    <li><a href="productList?category=32">여성</a></li>
+                    <li><a href="productList?category=33">고가</a></li>
+                    <li><a href="productList?category=34">특수한 경우</a></li>
                 </ul>
             </li>
-            <li><a>할인/기획</a>
+            <li><a href="productList?category=40">할인/기획</a>
                 <ul class="allcategory">
-                    <li><a href="#">의류</a></li>
-                    <li><a href="#">악세사리</a></li>
-                    <li><a href="#">another</a></li>
-                    <li><a href="#">another</a></li>
+                    <li><a href="productList?category=41">의류</a></li>
+                    <li><a href="productList?category=42">악세사리</a></li>
+                    <li><a href="productList?category=43">신발</a></li>
+                    <li><a href="productList?category=44">기타</a></li>
                 </ul>
             </li>
             <li><a href=#>MYPAGE</a></li>
@@ -74,94 +72,78 @@
     <main id="product-details">
         <div class="header">
             <nav class="page-head-category">
-                <a href="index.html"><span class="text">HOME</span></a>
+                <a href="index.html"><span class="text category1">HOME</span></a>
                 <span class="text">></span>
-                <a href=""><span class="text">하의</span></a>
+                <a href=""><span class="text category2"></span></a>
             </nav>
-            <h1 class="title">멋진 청바지</h1>
+            <h1 class="title productName"></h1>
         </div>
         <section class="order-area">
             <div class="image-area">
-                <div class="main-image">
-                    <a href='image/big_jean.jpg' class='cloud-zoom' id='zoom1' rel="adjustX: 10, adjustY:-4">
-              <img class="big-img" src="image/small_jean.jpg" alt='' title="크게 보기" />
-          </a>
-                </div>
-                <!-- 썸네일 바에서 이미지 치환 -->
-                <div class="thumnamil-bar">
-                    <a href='image/big_jean.jpg' class='cloud-zoom-gallery' title='Thumbnail 1' rel="useZoom: 'zoom1', smallImage: 'image/small_jean.jpg' ">
-          <img class="thumnail-img" src="image/tiny_jean.jpg" alt = "Thumbnail 1"/></a>
-
-                    <a href='image/big_jean2.jpg' class='cloud-zoom-gallery' title='Thumbnail 2' rel="useZoom: 'zoom1', smallImage: 'image/small_jean2.jpg' ">
-          <img class="thumnail-img" src="image/tiny_jean2.jpg" alt = "Thumbnail 2"/></a>
-                </div>
+                <div class="main-image"></div>
+                <div class="thumnamil-bar"></div>
             </div>
             <div class="info-area">
                 <div class="user group">
-                    <div>
+                    <div class="regi-day">
                         <span class="title">상품 등록일</span>
-                        <span class="info">2013-12-14</span>
+                        <span class="info"></span>
                     </div>
-                    <div>
+                    <div class="least-rental">
                         <span class="title">최소 대여일</span>
-                        <span class="info">3일</span>
+                        <span class="info"></span>
                     </div>
-                    <div>
+                    <div class="provider-id">
                         <span class="title">등록자 아이디</span>
-                        <span class="info">ojlee93</span>
+                        <span class="info"></span>
                     </div>
                 </div>
                 <div class="product group">
-                    <div>
+                    <div class="size">
                         <span class="title">사이즈</span>
-                        <span class="info"><img src="image/xl_icon.jpg" alt=""></span>
+                        <span class="info"></span>
                     </div>
-                    <div>
+                    <div class="location">
                         <span class="title">지역</span>
-                        <span class="info">제주시 아라동</span>
+                        <span class="info"></span>
                     </div>
                 </div>
                 <div class="price group">
-                    <div>
+                    <div class="deposit">
                         <span class="title">보증금</span>
-                        <span class="info lime-txt">50,000 원</span>
+                        <span class="info lime-txt"></span>
                     </div>
-                    <div>
+                    <div class="day">
                         <span class="title">렌탈료</span>
-                        <span class="info orange-txt">일 2,0000 원</span>
+                        <span class="info orange-txt"></span>
                     </div>
-                    <div>
+                    <div class="deliver">
                         <span class="title">배송비</span>
-                        <span class="info">3,000 원</span>
+                        <span class="info"></span>
                     </div>
                 </div>
                 <div class="order group">
-                    <form action="" method="post">
-                        <div>
+                        <div class="">
                             <span class="title">대여시작일</span>
                             <input type="date" name='s_date' id="s-date">
                         </div>
-                        <div>
+                        <div class="">
                             <span class="title">대여종료일</span>
-                            <input type="date" name='e_date' id="edate">
+                            <input type="date" name='e_date' id="e-date">
                         </div>
                 </div>
                 <div class="submit-btn">
-                    <button class="request" type="submit">대여신청</button>
+                    <button class="request">대여신청</button>
                     <button class="add-cart">장바구니</button>
                 </div>
-                </form>
             </div>
         </section>
         <article class="article-area">
             <div class="header">
                 <h1 class="title">상품 상세정보</h1>
-                <div class="body">
-                    <img src="image/small_jean.jpg" alt="sjean">
-                    <p>
-                        되는 것이다 그들은 앞이 긴지라 착목한는 곳이 원대하고 그들은 피가 더운지라 실현에 대한 자신과 용기가 있다 그러므로 그들은 이상의 보배를 능히 품으며 그들의 이상은 아름답고 소담스러운 열매를 맺어 우리 인생을 풍부하게 하는 것이다 보라 청춘을 ! 그들의 몸이 얼마나 튼튼하며 그들의 피부가 얼마나 생생하며 그들의 눈에 무엇이 타오르고 있는가? 우리 눈이 그것을 보는 때에 우리의 귀는 생의 찬미를 듣는다 그것은 웅대한 관현악이며 미묘한 교향악이다 뼈 끝에 스며들어 가는 열락의 소리다이것은 피어나기 전인 유소년에게서 구하지 못할 바이며 시들어 가는 노년에게서 구하지 못할 바이며 오직 우리 청춘에서만 구할 수 있는 그들의 그림자는 천고에 사라지지 않는 것이다 이것은 현저하게 일월과 같은 예가 되려니와 그와 같지 못하다 할지라도 창공에 반짝이는 뭇 별과 같이 산야에 피어나는 군영과 같이 이상은 실로 인간의 부패를 방지하는 소금이라 할지니 인생에 가치를 주는 원질이 되는 것이다 그들은 앞이 긴지라 착목한는 곳이 원대하고 그들은 피가 더운지라 실현에 대한 자신과 용기가 있다 그러므로 그들은 이상의 보배를 능히 품으며 그들의 이상은 아름답고 소담스러운 열매를 맺어 우리 인생을 풍부하게 하는 것이다 보라 청춘을 ! 그들의 몸이 얼마나 튼튼하며 그들의 피부가 얼마나 생생하며 그들의 눈에 무엇이 타오르고 있는가? 설레는 말이다 청춘! 너의 두손을 가슴에 대고 물방아 같은 심장의 고동을 들어 보라 청춘의 피는 끓는다 끓는 피에 뛰노는 심장은 거선의 기관과 같이 힘있다 이것이다 인류의 역사를 꾸며 내려온 동력은 바로 이것이다 이성은 투명하되 얼음과 같으며 지혜는 날카로우나 갑 속에 든 칼이다 청춘의 끓는 피가 아니더면 인간이 얼마나 쓸쓸하랴? 얼음에 싸인 만물은 얼음이 있을 뿐이다 그들에게 생명을 불어 넣는 것은 따뜻한 봄바람이다 풀밭에 속잎나고 가지에 싹이 트고 꽃 피고 새 우는 봄날의 천지는 얼마나 기쁘며 얼마나 아름다우냐? 이것을 얼음 속에서 불러 내는 것이 따뜻한 봄바람이다 인생에 따뜻한 봄바람을 불어 보내는 것은 청춘의 끓는 피다 청춘의 피가 뜨거운지라 인간의 동산에는 사랑의 풀이 돋고 이상의 꽃이 피고 희망의 놀이 뜨고 열락의 새가 운다사랑의 풀이 없으면 인간은 사막이다 오아이스도 없는 사막이다 보이는 끝까지 찾아다녀도 목숨이 있는 때까지 방황하여도
-                    </p>
-                </div>
+            </div>
+            <div class="body">
+                    <!-- 상품소개내용 -->
             </div>
         </article>
         <!-- 리뷰 -->
@@ -251,6 +233,7 @@
     <script type="text/javascript" src="js/jquery-3.3.1.min.js" charset="utf-8"></script>
     <!-- ajax 데이터 받아오기 -->
     <script type="text/javascript" src="js/ajaxData.js" charset="utf-8"></script>
+    <script type="text/javascript" src="js/getCookie.js" charset="utf-8"></script>
     <!-- 상품 상세정보 -->
     <script type="text/javascript" src="js/product_details.js" charset="utf-8"></script>
     <!-- 그래픽형태 별점매기기 플러그인 -->

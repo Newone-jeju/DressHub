@@ -132,4 +132,7 @@ public class ProductService {
         return "403";
     }
 
+    public List<Product> getProductListByProvider(String provider) {
+        return productRepository.findAllByProvider(provider);
+    }
 }

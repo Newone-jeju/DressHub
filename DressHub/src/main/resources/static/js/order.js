@@ -4,6 +4,16 @@
 // sessionStorage.setItem("deposit", 7000);
 
 
+
+
+
+
+var product;
+var productId=sessionStorage.getItem('productId');
+var leaseStart=sessionStorage.getItem('startDay');
+console.log(product);
+var leaseEnd=sessionStorage.getItem('endDay');
+console.log(leaseEnd);
 var productName  = sessionStorage.getItem('productName');
 var totalPrice   = sessionStorage.getItem('totalPrice');
 var totalShipment   = sessionStorage.getItem('totalShipment');
@@ -15,6 +25,60 @@ $('.deposit').html(deposit);
 $('.totalPrice').html(totalPrice);
 $('.totalShipment').html(totalShipment);
 $('.totalPayment').html(totalPayment);
+
+// *******************************************
+
+var host = './leaseInfo';
+
+function getUrlParams() {
+    var params = {};
+    window.location.search.replace(/[?&]+([^=&]+)=([^&]*)/gi, function (str, key, value) {
+        params[key] = value;
+    });
+    return params;
+}
+
+function save() {
+    console.log("눌렀니");
+    var leaseInfo = {
+        product: product,
+        leaseStart: leaseStart,
+        leaseEnd: leaseEnd
+    };
+    console.log(leaseInfo);
+    var method = 'POST';
+    requestData(method, leaseInfo);
+    return false;
+}
+
+function requestData(method, data) {
+    $.ajax({
+        url: host,
+        method: method,
+        contentType: "application/json;charset=UTF-8",
+        data: JSON.stringify(data)
+    }).done(function () {
+        window.location.href = '/rental_status.html';
+    });
+    console.log(product);
+    
+}
+
+
+
+
+$(document).ready(function () {
+
+    $.get("products/" + productId, function (productinfo) {
+         product =  productinfo.id;
+    });
+
+
+
+    document.getElementById("payment").addEventListener("click", save);
+
+});
+    // $('#payment').on('click', save());
 
 
 

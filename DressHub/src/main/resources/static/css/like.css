@@ -15,3 +15,173 @@ float: left;
 width: 75%;
 margin:3% 0%;
 }
+
+* {
+	margin: 0;
+}
+
+.product_container_content{
+	display: flex;
+	width:90%;
+	flex-direction: row;
+	flex-wrap: wrap;
+	margin: 1%;
+	justify-content: center;
+}
+
+.product_container_content_card{
+	border:2px solid #e1e1e1;
+	margin: 1%;
+	text-decoration: none;
+	color:black;
+	flex-basis:15%;
+	/*added*/
+	transition-property: border;
+	transition-duration: 0.5s;
+	/*/added*/
+
+}
+
+/*added*/
+.product_container_content_card:hover{
+	border:2px solid #b5e51d;
+
+}
+/*added*/
+
+.card_img_wrap{
+	height: auto;
+	position: relative;
+}
+
+.card_img{
+	display: block;
+	width:100%;
+	height:10rem;
+}
+
+.card_text_wrap{
+	padding:0.9rem;
+}
+
+.hover-content{
+	display:flex;
+	position:absolute;
+	left: 5%;
+	bottom: 0;
+	z-index: 9;
+	width:90%;
+	visibility: hidden;
+	transition-property: visibility;
+	transition-duration: 0.1s;
+}
+
+.product_container_content_card:hover .hover-content{
+	visibility: visible;
+}
+
+.hover-content img {
+	border: none;
+	border-radius: 11px;
+}
+
+
+
+.hover-content{
+	display:flex;
+	position:absolute;
+	left: 5%;
+	bottom: 0;
+	z-index: 9;
+	width:90%;
+	visibility: hidden;
+	transition-property: visibility;
+	transition-duration: 0.1s;
+}
+
+.card_carousel_container_content_card:hover .hover-content{
+	visibility: visible;
+}
+
+.hover-content img {
+	border: none;
+	border-radius: 11px; 
+}
+
+
+.hover-content .hover-size {
+	width:25%;
+	height:10%;
+}
+.hover-btn-wrap {
+	flex-grow: 1;
+	display:flex;
+	justify-content: flex-end;
+	position: relative;
+}
+
+.hover-btn-wrap ~ img {
+    cursor: pointer;
+}
+
+.hover-btn-wrap > .cart_btn {
+	width:25%;
+	height:90%;
+	padding-right:4%;
+	z-index: 1000;
+	cursor: pointer;
+}
+
+.hover-btn-wrap > .like_btn {
+	width:25%;
+	height:90%;
+	padding-right:8%;
+	cursor: pointer;
+}
+
+.hover-btn-wrap > .like-num {
+	font-size:12px;
+	font-weight: 600;
+	color: #c03a2b;
+	position: absolute;
+	right: 0;
+	bottom: 0;
+    text-shadow: 0px 0 #fff, 0 2px #fff, 2px 0 #fff, 0 0px #fff;
+    -moz-text-shadow: 0px 0 #fff, 0 2px #fff, 2px 0 #fff, 0 0px #fff;
+    -webkit-text-shadow: 0px 0 #fff, 0 2px #fff, 2px 0 #fff, 0 0px #fff;
+}
+
+.card_text_wrap .text_name{
+text-align: center;
+margin-bottom: 0.5rem;
+}
+
+.card_text_wrap .text_deposit {
+	text-align: right;
+}
+
+.card_text_wrap .text_costPerDay{
+		text-align: right;
+}
+
+/* 페이징 */
+#paging{
+	text-align: center;
+	font-size:1rem;
+	margin: 1rem;
+}
+
+/* 퀵메뉴 */
+.quick-menu-area{
+  position:fixed;
+  left:90%;
+	top:50%;
+  z-index: 99;
+}
+.quick-menu-area a{
+  display: block;
+}
+.quick-menu-area img{
+  max-width: 60%;
+  width: 60%;
+}

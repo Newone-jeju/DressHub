@@ -9,52 +9,56 @@
 </head>
 <body>
 <section class="reviewform-wrap">
+<form action="/review/image" method="POST" id="imageForm" name="imageData" enctype="multipart/form-data">
+	<div class="head flex border-bot">
+		<div class="rental-product-area flexcenter-align">
+			<div class="rental-product form-name">상품명</div>
+			<div class="rental-product rental-product-content left-space-w"></div>
+		</div>
+		<div class="author-area flex">
+			<div class="author form-name">작성자</div>
+			<div class="author author-content flexcenter-align left-space"></div>
+		</div>
+	</div>
 
-	<form class="form-url" action="review/new" method="POST" enctype="multipart/form-data">
-		<div class="head flex border-bot">
-			<div class="rental-product-area flexcenter-align">
-				<div class="rental-product form-name">상품명</div>
-				<div class="rental-product rental-product-content left-space-w"></div>
+	<div class="body">
+		<div class="rating-area flexcenter-align">
+			<div class="rating form-name">
+				별점
 			</div>
-			<div class="author-area flex">
-				<div class="author form-name">작성자</div>
-				<div class="author flexcenter-align left-space">ojlee</div>
-			</div>
+			<div class="rating left-space" id="rating"></div>
+			<input type="hidden" class="hid-rank" name="rate" value="">
 		</div>
-
-		<div class="body">
-			<div class="rating-area flexcenter-align">
-				<div class="rating form-name">
-					별점
-				</div>
-				<div class="rating left-space" id="rating"></div>
-				<input type="hidden" class="hid-rank" name="rate" value="">
-			</div>
-			<div class="title-area flexcenter-align">
-				<div class="title form-name">제목</div>
-				<input type="text" name="title" class="title title-content left-space"></input>
-			</div>
-			<div class="text-area flex">
-				<div class="text form-name">내용</div>
-				<textarea name="comment" class="text text-content left-space"></textarea>
-			</div>
-			<div class="img-area flexcenter-align">
-				<div class="img form-name">첨부 이미지</div>
-				<input type="file" name="image" class="img left-space"></input>
-			</div>
+		<div class="title-area flexcenter-align">
+			<div class="title form-name">제목</div>
+			<input type="text" name="title" class="title title-content left-space"></input>
 		</div>
-		<div class="footer">
-			<div class="btn-area flexcenter">
-				<button type="submit" class="send-btn form-btn-style">작성완료</button>
-				<button class="cancel-btn form-btn-style">취소</button>
-			</div>
+		<div class="text-area flex">
+			<div class="text form-name">내용</div>
+			<textarea name="comment" class="text text-content left-space"></textarea>
 		</div>
-		<input type="hidden" class="hid-id" name="id" value="">
+		
+		<div class="img-area flexcenter-align">
+			<div class="img form-name">첨부 이미지</div>
+			<input type="file" name="image" class="img img-content left-space"></input>
+		</div>
+	</div>
+	<div class="footer">
+		<div class="btn-area flexcenter">
+			<button class="send-btn form-btn-style">작성완료</button>
+			<button class="cancel-btn form-btn-style">취소</button>
+		</div>
+	</div>
+	
+	<input type="hidden" class="hid-id" name="id" value="">
 	</form>
 </section>
 
 
 <script type="text/javascript" src="js/jquery-3.3.1.min.js" charset="utf-8"></script>
+<!-- ajax 데이터 받아오기 -->
+<script type="text/javascript" src="js/ajaxData.js" charset="utf-8"></script>
+<script type="text/javascript" src="js/getCookie.js" charset="utf-8"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.3.2/jquery.rateyo.min.js"></script>
 <script type="text/javascript" src="js/review-form.js" charset="utf-8"></script>
 </body>

@@ -1,4 +1,3 @@
-
 package com.newoneplus.dresshub.Config;
 
 import com.newoneplus.dresshub.Service.AuthorizationService;
@@ -53,7 +52,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
                 .ignoringAntMatchers("/products/*")
                 .ignoringAntMatchers("/products")
-
                 .ignoringAntMatchers("/review/*")
                 .ignoringAntMatchers("/review")
                 .ignoringAntMatchers("/thumbUp")
