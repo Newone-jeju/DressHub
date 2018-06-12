@@ -20,6 +20,7 @@ import java.util.List;
 
 @Component
 @Slf4j
+
 public class AuthProvider implements AuthenticationProvider {
 
     @Autowired
