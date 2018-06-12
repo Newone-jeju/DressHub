@@ -92,12 +92,13 @@
         
         
         //페이지 컨텐츠 상세
+        ajaxCard = new AjaxCard();
         cardString = 
-            '<img src="'+data.contentsImage+'" alt="'+data.name+'">'+
+            '<img src="/product_image/medium'+data.thumbnailImage+'" alt="'+data.name+'">'+
             '<p>'+data.contents+'</p>'
 
         ajaxCard.setCard(cardString);
-        ajaxCard.mapCard($("article-area .body"));
+        ajaxCard.mapCard($(".article-area > .body"));
         
         ajaxCard = undefined;
     }    
@@ -159,14 +160,14 @@
     //주문 버튼
     $(".submit-btn > button.request").click(function(){
         var user = new CookieUser();
-        if(user.inspectId()){
-            console.log("주문취소됨")
+        if(user.inspectId() == false){
             return false;
         }
-
-        sessionPrice();
-
-        window.location.href='/order.html';//결제페이지     
+        else{
+            sessionPrice();
+        window.location.href='/order.html';//결제페이지    
+        }
+     
     })
 
     //장바구니 버튼

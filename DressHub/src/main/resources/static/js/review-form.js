@@ -14,11 +14,14 @@ function getauthor(){
     var user = new CookieUser();
     var userId = user.getUserId();
     $(".author-content").text(userId);
+    
+    $('.hid-id').val(productId);
 
 }
 
 function setHiddenName(){
 	$('.rental-product-content').after('<input type="hidden" name="rental-product" value="'+$('.rental-product-content').text()+'">')
+    
 }
 
 function setHiddenRating(){
@@ -70,11 +73,12 @@ function getEditInfo(review_id) {
 
 function gatherForm(){
     return {
-        id: $(".hid-id").val(),
+        productId: $(".hid-id").val(),
         userId: $(".author-content").text(),
         rate: $(".hid-rank").val(),
         title: $(".title-content").val(),
-        comment: $(".text-content").val()
+        comment: $(".text-content").val(),
+        imageUrl: $(".img-content").val().split("\\").slice(-1)[0]
     }
 }
 
@@ -87,6 +91,7 @@ function gatherImage() {
 
 function reviewFormInit() {
 	getName();
+    productId = opener.parent.getProductId();
 	getauthor();
 	setHiddenName();
 	review_id = opener.parent.getReviewId(true); 
@@ -95,6 +100,7 @@ function reviewFormInit() {
 }
 
 var review_id = "";
+var productId = ""
 var method = "POST";
 reviewFormInit();
 var formData = {}
@@ -105,12 +111,14 @@ $(".send-btn").click(function(){
     ajaxUtil.crudData(gatherForm(), method, function(){
         console.log("send form!")
         //이미지 전송
-        var ajaxUtil = new AjaxUtil('review/image');
-        ajaxUtil.crudData(gatherImage(), method, function(){
-                opener.parent.location.reload();
-                window.open('about:blank', '_self').close();
-        })
+        $("#imageForm").on("submit", function() {
+            
+        });
+        opener.parent.location.reload();
+        window.open('about:blank', '_self').close();
+        
     })
+    return true;
 });
 
 $(".cancel-btn").click(function(){
