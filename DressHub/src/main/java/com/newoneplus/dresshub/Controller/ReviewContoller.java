@@ -16,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import sun.misc.BASE64Decoder;
 
 import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletResponse;
@@ -26,6 +27,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.nio.file.InvalidPathException;
 import java.text.SimpleDateFormat;
+import java.util.Base64;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -73,6 +75,10 @@ public class ReviewContoller {
         review.setDate(dateFormat.format(new Date()));
         reviewRepository.save(review);
         res.setStatus(200);
+
+        byte[] xxx = Base64.getDecoder().decode(review.getImage());
+
+
         return null;
     }
 

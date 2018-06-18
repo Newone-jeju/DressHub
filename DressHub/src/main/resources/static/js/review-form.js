@@ -49,11 +49,14 @@ function getEditInfo(review_id) {
     }else {
         var id = review_id;
         console.log(id)
+
+
         $.ajax({
             type: "GET",
             url: "/review/"+id,// id로 받아올 리뷰 url
             async: false,
             data: {'id': id},
+            contentType : "application/json;charset=UTF-8",
             dataType: "json", // 서버에서 받을 데이터 형식
             success: function (response) {
                 console.log(response);
@@ -78,7 +81,8 @@ function gatherForm(){
         rate: $(".hid-rank").val(),
         title: $(".title-content").val(),
         comment: $(".text-content").val(),
-        imageUrl: $(".img-content").val().split("\\").slice(-1)[0]
+        imageUrl: $(".img-content").val().split("\\").slice(-1)[0],
+        image : getBase64($(".img-content")[0].files[0])
     }
 }
 
@@ -127,3 +131,13 @@ $(".cancel-btn").click(function(){
 
 
 
+function getBase64(file) {
+    var reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = function () {
+        console.log(reader.result);
+    };
+    reader.onerror = function (error) {
+        console.log('Error: ', error);
+    };
+}
