@@ -82,7 +82,7 @@ function gatherForm(){
         title: $(".title-content").val(),
         comment: $(".text-content").val(),
         imageUrl: $(".img-content").val().split("\\").slice(-1)[0],
-        image : getBase64($(".img-content")[0].files[0])
+        image : $(".preview-img").attr("src")
     }
 }
 
@@ -109,18 +109,27 @@ var method = "POST";
 reviewFormInit();
 var formData = {}
 
+$(".img-content").on("change", function () {
+    getBase64($(".img-content")[0].files[0])
+    $(".preview-img").css("display", "block")
+})
+
 
 $(".send-btn").click(function(){
     var ajaxUtil = new AjaxUtil('review/'+review_id);
+
+    console.log($(".preview-img").attr("src"));
+
     ajaxUtil.crudData(gatherForm(), method, function(){
         console.log("send form!")
         //이미지 전송
-        $("#imageForm").on("submit", function() {
-            
-        });
-        opener.parent.location.reload();
-        window.open('about:blank', '_self').close();
-        
+        console.log(gatherForm().image)
+        // $("#imageForm").on("submit", function() {
+        //
+        // });
+        // opener.parent.location.reload();
+        // window.open('about:blank', '_self').close();
+
     })
     return true;
 });
@@ -135,7 +144,7 @@ function getBase64(file) {
     var reader = new FileReader();
     reader.readAsDataURL(file);
     reader.onload = function () {
-        console.log(reader.result);
+        $(".preview-img").attr("src",reader.result)
     };
     reader.onerror = function (error) {
         console.log('Error: ', error);
