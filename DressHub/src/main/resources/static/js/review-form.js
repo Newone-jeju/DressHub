@@ -124,11 +124,11 @@ $(".send-btn").click(function(){
         console.log("send form!")
         //이미지 전송
         console.log(gatherForm().image)
-        // $("#imageForm").on("submit", function() {
-        //
-        // });
-        // opener.parent.location.reload();
-        // window.open('about:blank', '_self').close();
+        $("#imageForm").on("submit", function() {
+
+        });
+        opener.parent.location.reload();
+        window.open('about:blank', '_self').close();
 
     })
     return true;
