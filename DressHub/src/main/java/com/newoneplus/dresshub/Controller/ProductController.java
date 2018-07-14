@@ -50,8 +50,6 @@ public class ProductController {
     public Product productCreate(@RequestBody Product product) {
         log.info("***********************요청이가 오고 있습니다. **********************************8");
         return productService.createProduct(product);
-
-
     }
 
     @PutMapping
@@ -74,6 +72,10 @@ public class ProductController {
         return productService.getProductList(page - 1, category, order);
     }
 
+   @GetMapping(value = "/list/thumbUp")
+    public List<Product> getProductListByThumbUp(List<Integer> productIdList){
+       return productService.getProductListByThumbUp(productIdList);
+   }
 
     @GetMapping(value = "/image/list/search")
     public List<ProductImage> getProductImageList(@RequestParam(value = "productId", required = false) Long paramId) {

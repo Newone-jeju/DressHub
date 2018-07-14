@@ -13,14 +13,11 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public interface ThumbUpRepository extends JpaRepository<ThumbUp, Integer>{
-
-    @Query("delete from ThumbUp t where t.liker = :user and t.product= :product")
-    @Modifying
-    @Transactional
-    void deleteByUidAndProduct(@Param("user") String user, @Param("product") Product product);
-    List<ThumbUp> findAllByLiker(String user);
+    Page<ThumbUp> findAllByLiker(String liker, Pageable pageable);
+    Optional<ThumbUp> findByLikerAndProduct(String liker, Integer product);
 
 //    long countByUser(String user);
 //    @Query(value = "select u from ThumbUp u join u.comment c where u.name = :name and u.password = :password")
