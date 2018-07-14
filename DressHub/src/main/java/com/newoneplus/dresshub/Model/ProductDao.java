@@ -130,7 +130,7 @@ public class ProductDao {
         product.setCostPerDay(rs.getInt("COST_PER_DAY"));
         product.setDeleveryType(rs.getString("DELEVERY_TYPE"));
         product.setDeposit(rs.getInt("DEPOSIT"));
-        product.setId(rs.getLong("ID"));
+        product.setId(rs.getInt("ID"));
         product.setThumbnailImage(rs.getString("THUMBNAIL_IMAGE"));
         product.setName(rs.getString("NAME"));
         product.setProvider(rs.getString("PROVIDER"));

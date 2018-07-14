@@ -11,11 +11,8 @@ import java.io.Serializable;
 public class ThumbUp{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long id;
-    String uid;
-    @ManyToOne
-    @JsonIgnoreProperties(value = "thumbUp", allowSetters = true)
-    @JoinColumn(name="product_id")
-    Product product;
+    Integer id;
+    String liker;
+    Integer product;
 
 }
