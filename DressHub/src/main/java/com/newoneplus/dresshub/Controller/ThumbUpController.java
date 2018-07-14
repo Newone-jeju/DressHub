@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping(value = "/thumbUp")
+@RequestMapping(value = "/thumbup")
 @Slf4j
 @AllArgsConstructor
 public class ThumbUpController {
@@ -37,7 +37,7 @@ public class ThumbUpController {
         return productService.clickThumup(thumbUp);
     }
     //TODO 나중에 user에 대해서도 rest로 바뀌면 이렇게 넣을필요없다.front에서 넘겨줄거다 Path로 가져오든지 하자
-    @GetMapping(value = "/search")
+    @GetMapping(value = "/list/search")
     public Page<ThumbUp> getThumbUpProductList(@RequestParam(value = "page", defaultValue = "1") int page) {
         PageRequest pageRequest = PageRequest.of(page, 25, Sort.Direction.DESC, "id");
         return thumbUpRepository.findAllByLiker(AuthorizationService.getCurrentUser().getUid(), pageRequest);

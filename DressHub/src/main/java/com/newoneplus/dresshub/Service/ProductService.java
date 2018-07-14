@@ -34,12 +34,13 @@ public class ProductService {
 
 
     //   카테고리와 페이징처리를 위한 상품 불러오기
-    public Page<Product> getProductList(int page, String category, String array) {
-        if (category.equals("null")) {
-            category = "";
-        }
+    public Page<Product> getProductList(int page, String category, String provider) {
         PageRequest pageRequest = PageRequest.of(page, 25, Sort.Direction.DESC, "id");
-        return productRepository.findAllByCategoryContaining(category, pageRequest);
+        if(provider.equals("")){
+            return productRepository.findAllByCategoryContaining(category, pageRequest);
+        }else{
+            return productRepository.findAllByProvider(provider, pageRequest);
+        }
     }
 
 

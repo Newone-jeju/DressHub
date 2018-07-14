@@ -43,14 +43,18 @@ public class ProductController {
     public Product getProduct(@PathVariable Integer id) {
         return productRepository.findById(id).get();
     }
-    @GetMapping(value = "/list/search")
-    public List<Product> getProductProvider(@RequestParam String provider){
-        return productRepository.findAllByProvider(provider);
+
+    @GetMapping(value = "/list")
+    public List<Product> getProductList() {
+        return productRepository.findAllByOrderByIdDesc();
     }
 
+    @GetMapping(value = "/list/search")
+    public Page getProductList(@RequestParam(defaultValue = "1") int page, @RequestParam(defaultValue = "") String category,@RequestParam(defaultValue = "")String provider) {
+        return productService.getProductList(page - 1, category, provider);
+    }
     @PostMapping
     public Product productCreate(@RequestBody Product product) {
-        log.info("***********************요청이가 오고 있습니다. **********************************8");
         return productRepository.save(product);
     }
 
@@ -64,22 +68,12 @@ public class ProductController {
         productRepository.delete(productRepository.findById(id).get());
     }
 
-    @GetMapping(value = "/list")
-    public List<Product> getProductList() {
-        return productRepository.findAllByOrderByIdDesc();
-    }
-
-    @GetMapping(value = "/search")
-    public Page getProductList(@RequestParam(value = "page", defaultValue = "1") int page, @RequestParam(value = "category", defaultValue = "null") String category, @RequestParam(value = "order", defaultValue = "id desc") String order) {
-        return productService.getProductList(page - 1, category, order);
-    }
-
-   @GetMapping(value = "/list/thumbUp")
+   @GetMapping(value = "/list/thumbup")
     public List<Product> getProductListByThumbUp(List<Integer> productIdList){
        return productRepository.findAllByThumbUpList(productIdList);
    }
 
-    @GetMapping(value = "/image/list/search")
+    @GetMapping(value = "/image/search")
     public List<ProductImage> getProductImageList(@RequestParam(value = "productId", required = false) Long paramId) {
         if (paramId == null) {
             return productImageRepository.findAllByOrderByIdDesc();
