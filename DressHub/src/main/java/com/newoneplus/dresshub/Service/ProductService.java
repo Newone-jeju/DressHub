@@ -89,7 +89,7 @@ public class ProductService {
             new NullPointerException();
         }
         PageRequest pageRequest = PageRequest.of(page, 25, Sort.Direction.DESC, "id");
-        return basketRepository.findAllByUserJoinProduct(AuthorizationService.getCurrentUser().getUid(), pageRequest);
+        return basketRepository.findAllByHolder(AuthorizationService.getCurrentUser().getUid(),  pageRequest);
     }
 
     public Basket createBasket(Basket basket){

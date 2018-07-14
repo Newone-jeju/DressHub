@@ -13,7 +13,6 @@ public class ThumbUp{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
     String liker;
-
     @ManyToOne
     @JsonIgnoreProperties(value = "thumbUp", allowSetters = true)
     @JoinColumn(name="product")

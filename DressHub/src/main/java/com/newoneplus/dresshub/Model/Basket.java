@@ -15,8 +15,5 @@ public class Basket {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String holder;
-
-    @ManyToOne
-    @JoinColumn(name="product")
-    private Product product;
+    private Integer product;
 }
