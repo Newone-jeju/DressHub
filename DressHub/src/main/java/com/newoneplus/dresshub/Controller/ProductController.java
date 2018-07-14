@@ -70,8 +70,13 @@ public class ProductController {
 
    @GetMapping(value = "/list/thumbup")
     public List<Product> getProductListByThumbUp(List<Integer> productIdList){
-       return productRepository.findAllByThumbUpList(productIdList);
+       return productRepository.findAllByProductList(productIdList);
    }
+
+    @GetMapping(value = "/list/basket")
+    public List<Product> getProductListByBasket(List<Integer> productIdList){
+        return productRepository.findAllByProductList(productIdList);
+    }
 
     @GetMapping(value = "/image/search")
     public List<ProductImage> getProductImageList(@RequestParam(value = "productId", required = false) Long paramId) {
@@ -105,7 +110,11 @@ public class ProductController {
         ImageIO.write(image2, "jpg", new File(path + sizeFileName));
     }
 
-
+    @ExceptionHandler(NullPointerException.class)
+    @ResponseBody
+    public String checkUser(NullPointerException e){
+        return "403";
+    }
 
 
 }

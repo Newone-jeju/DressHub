@@ -56,7 +56,7 @@ public class ProductService {
 
 
     //좋아요 누르기
-    public Product clickThumup(ThumbUp thumbUp) {
+    public ThumbUp clickThumup(ThumbUp thumbUp) {
         Optional<ThumbUp> opthionalThumbUp = thumbUpRepository.findByLikerAndProduct(thumbUp.getLiker(), thumbUp.getProduct());
         Product product = productRepository.findById(thumbUp.getProduct()).get();
         if (!opthionalThumbUp.isPresent()) {
@@ -68,10 +68,10 @@ public class ProductService {
             thumbUpRepository.delete(opthionalThumbUp.get());
             productUpdate(product, product.getLikes() - 1);
         }
-        return product;
+        return opthionalThumbUp.get();
     }
     //장바구니 누르기
-    public Product clickBasket(Basket basket) {
+    public Basket clickBasket(Basket basket) {
         Optional<Basket> opthionalBasket = basketRepository.findByHolderAndProduct(basket.getHolder(), basket.getProduct());
         Product product = productRepository.findById(basket.getProduct()).get();
         if (!opthionalBasket.isPresent()) {
@@ -81,7 +81,7 @@ public class ProductService {
             //존재한다면
             basketRepository.delete(opthionalBasket.get());
         }
-        return product;
+        return opthionalBasket.get();
     }
 
 

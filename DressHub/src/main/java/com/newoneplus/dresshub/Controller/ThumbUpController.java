@@ -28,7 +28,7 @@ public class ThumbUpController {
     ThumbUpRepository thumbUpRepository;
 
     @PostMapping
-    public Product thumbUpProcess(@RequestBody ThumbUp thumbUp)  {
+    public ThumbUp thumbUpProcess(@RequestBody ThumbUp thumbUp)  {
         if(AuthorizationService.getCurrentUser()==null){
             new NullPointerException();
         }
@@ -45,6 +45,11 @@ public class ThumbUpController {
     @GetMapping(value = "/list/product")
     public List<ThumbUp> getThumbUpListbyProduct(@RequestBody List<Integer> productIdList) {
         return thumbUpRepository.findAllByLikerAndProductList(AuthorizationService.getCurrentUser().getUid(), productIdList);
+    }
+    @ExceptionHandler(NullPointerException.class)
+    @ResponseBody
+    public String checkUser(NullPointerException e){
+        return "403";
     }
 
 }

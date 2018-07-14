@@ -14,7 +14,7 @@ public interface ProductRepository extends JpaRepository<Product, Integer> {
 
     //좋아요한 product list 가져오기
     @Query(value = "select p from Product p where id in(:productlist)")
-    List<Product> findAllByThumbUpList(@Param("productlist") List<Integer> productlist);
+    List<Product> findAllByProductList(@Param("productlist") List<Integer> productlist);
     //Category에 따른 product list 가져오기
     Page<Product> findAllByCategoryContaining(String category, Pageable pageable);
     //그냥 리스트 가져오기

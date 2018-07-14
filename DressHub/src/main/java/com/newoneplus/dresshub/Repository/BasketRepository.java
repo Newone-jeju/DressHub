@@ -14,7 +14,7 @@ import java.util.Optional;
 
 public interface BasketRepository extends JpaRepository<Basket, Integer> {
         Page<Basket> findAllByHolder(String user, Pageable pageable);
-        @Query(value = "select b from basket b where b.holder like :holder and b.product in(:productList)  ")
+        @Query(value = "select b from Basket b where b.holder like :holder and b.product in(:productList)  ")
         List<Basket> findAllByHolderAndProductList(String holder, List<Integer> productList);
         Optional<Basket> findByHolderAndProduct(String holder, Integer product);
 }

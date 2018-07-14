@@ -12,6 +12,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
+import sun.swing.BakedArrayList;
 
 import java.util.List;
 
@@ -28,7 +29,7 @@ public class BasketController {
 
 
     @PostMapping
-    public Product basketProcess(@RequestBody Basket basket)  {
+    public Basket basketProcess(@RequestBody Basket basket)  {
         if(AuthorizationService.getCurrentUser()==null){
             new NullPointerException();
         }
@@ -44,7 +45,7 @@ public class BasketController {
         return basketRepository.findAllByHolderAndProductList(AuthorizationService.getCurrentUser().getUid(), productIdList);
     }
 
-    @GetMapping(value = "list/search")
+    @GetMapping(value = "/list/search")
     public Page<Basket> getBasketList(@RequestParam(value = "page", defaultValue="1") int page){
         return productService.getBasketList(page-1);
     }
