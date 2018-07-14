@@ -84,7 +84,6 @@ public class ProductController {
 
     @PostMapping(value = "/image")
     public void createProductImage(@RequestParam("file") MultipartFile productImage) throws IOException {
-        log.info("***********************이미지가 오고 있습니다. **********************************8");
         ImageProcesser imageProcesser = new ImageProcesser();
         String filename = productImage.getOriginalFilename();
         String path = System.getProperty("user.dir") + "/out/production/resources/static/product_image/";

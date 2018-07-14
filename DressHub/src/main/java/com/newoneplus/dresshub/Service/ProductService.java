@@ -33,7 +33,7 @@ public class ProductService {
 
 
 
-    //   카테고리와 페이징처리를 위한 상품 불러오기
+
     public Page<Product> getProductList(int page, String category, String provider) {
         PageRequest pageRequest = PageRequest.of(page, 25, Sort.Direction.DESC, "id");
         if(provider.equals("")){
@@ -44,7 +44,7 @@ public class ProductService {
     }
 
 
-    //유저에 대한 장바구니 불러오기
+
     public Page<Basket> getBasketList(int page) throws NullPointerException {
         if (AuthorizationService.getCurrentUser() == null) {
             new NullPointerException();
@@ -53,12 +53,8 @@ public class ProductService {
         return basketRepository.findAllByHolder(AuthorizationService.getCurrentUser().getUid(), pageRequest);
     }
 
-    public Basket createBasket(Basket basket) {
-        return basketRepository.save(basket);
-    }
 
 
-    //TODO 나중에 post로 바꿀 시 바꿔야함
     //좋아요 등록하기
     public Product clickThumup(ThumbUp thumbUp) {
         Optional<ThumbUp> opthionalThumbUp = thumbUpRepository.findByLikerAndProduct(thumbUp.getLiker(), thumbUp.getProduct());

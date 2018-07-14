@@ -2,6 +2,7 @@ package com.newoneplus.dresshub.Controller;
 
 
 import com.newoneplus.dresshub.Model.Basket;
+import com.newoneplus.dresshub.Repository.BasketRepository;
 import com.newoneplus.dresshub.Service.ProductService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,8 @@ import org.springframework.web.bind.annotation.*;
 public class BasketController {
     @Autowired
     ProductService productService;
+    @Autowired
+    BasketRepository basketRepository;
 
     @GetMapping(value = "/search")
     public Page<Basket> getBasketList(@RequestParam(value = "page", defaultValue="1") int page){
@@ -22,12 +25,12 @@ public class BasketController {
 
     @PostMapping
     public Basket create(@RequestBody Basket basket){
-        return productService.createBasket(basket);
+        return basketRepository.save(basket);
     }
 
     @PutMapping
     public void update(@RequestBody Basket basket){
-        productService.createBasket(basket);
+        basketRepository.save(basket);
     }
 
     @ExceptionHandler(NullPointerException.class)

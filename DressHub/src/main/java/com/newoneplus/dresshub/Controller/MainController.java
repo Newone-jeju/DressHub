@@ -29,8 +29,6 @@ public class MainController {
     }
 
 
-
-    
     @ExceptionHandler(NullPointerException.class)
     @ResponseBody
     public String checkUser(NullPointerException e){
