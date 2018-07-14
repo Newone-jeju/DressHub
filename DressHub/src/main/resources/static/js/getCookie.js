@@ -21,7 +21,7 @@ function userNavEdit(){
 
 //class CookieUser
 function CookieUser(){
-	this.userId = document.cookie.replace('uid=','');			
+	this.userId = document.cookie.replace('uid=','');
 }
 
 CookieUser.prototype.getUserId = function(){

@@ -12,10 +12,11 @@ public class ThumbUp{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
-    String uid;
+    String liker;
+
     @ManyToOne
     @JsonIgnoreProperties(value = "thumbUp", allowSetters = true)
-    @JoinColumn(name="product_id")
+    @JoinColumn(name="product")
     Product product;
 
 }

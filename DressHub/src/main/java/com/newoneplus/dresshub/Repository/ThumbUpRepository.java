@@ -16,11 +16,11 @@ import java.util.List;
 
 public interface ThumbUpRepository extends JpaRepository<ThumbUp, Integer>{
 
-    @Query("delete from ThumbUp t where t.uid = :user and t.product= :product")
+    @Query("delete from ThumbUp t where t.liker = :user and t.product= :product")
     @Modifying
     @Transactional
     void deleteByUidAndProduct(@Param("user") String user, @Param("product") Product product);
-    List<ThumbUp> findAllByUid(String user);
+    List<ThumbUp> findAllByLiker(String user);
 
 //    long countByUser(String user);
 //    @Query(value = "select u from ThumbUp u join u.comment c where u.name = :name and u.password = :password")

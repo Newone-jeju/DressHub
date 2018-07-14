@@ -4,7 +4,6 @@ package com.newoneplus.dresshub.Controller;
 import com.newoneplus.dresshub.Model.Product;
 //import com.newoneplus.dresshub.Service.AuthorizationService;
 import com.newoneplus.dresshub.Model.ThumbUp;
-import com.newoneplus.dresshub.Model.User;
 import com.newoneplus.dresshub.Service.AuthorizationService;
 
 import com.newoneplus.dresshub.Service.ProductService;
@@ -12,15 +11,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletResponse;
-import java.util.List;
 
 @Controller
 @Slf4j
@@ -55,7 +48,7 @@ public class MainController {
             new NullPointerException();
         }
             ThumbUp thumbUp = new ThumbUp();
-            thumbUp.setUid(AuthorizationService.getCurrentUser().getUid());
+            thumbUp.setLiker(AuthorizationService.getCurrentUser().getUid());
             Product product =productService.getProduct(productId);
             thumbUp.setProduct(product);
             if (state) {
