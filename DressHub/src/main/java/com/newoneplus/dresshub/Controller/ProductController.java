@@ -2,6 +2,7 @@ package com.newoneplus.dresshub.Controller;
 
 import com.newoneplus.dresshub.ImageProcesser;
 import com.newoneplus.dresshub.Model.*;
+import com.newoneplus.dresshub.Repository.ProductImageRepository;
 import com.newoneplus.dresshub.Repository.ProductRepository;
 import com.newoneplus.dresshub.Repository.ThumbUpRepository;
 import com.newoneplus.dresshub.Service.ProductService;
@@ -33,56 +34,57 @@ public class ProductController {
 
     @Autowired
     ProductService productService;
-
     @Autowired
     ProductRepository productRepository;
+    @Autowired
+    ProductImageRepository productImageRepository;
 
     @GetMapping(value = "/{id}")
     public Product getProduct(@PathVariable Integer id) {
-        return productService.getProduct(id);
+        return productRepository.findById(id).get();
     }
     @GetMapping(value = "/list/search")
     public List<Product> getProductProvider(@RequestParam String provider){
-        return productService.getProductListByProvider(provider);
+        return productRepository.findAllByProvider(provider);
     }
 
     @PostMapping
     public Product productCreate(@RequestBody Product product) {
         log.info("***********************요청이가 오고 있습니다. **********************************8");
-        return productService.createProduct(product);
+        return productRepository.save(product);
     }
 
     @PutMapping
     public void productUpdate(@RequestBody Product product){
-        productService.updateProduct(product);
+        productRepository.save(product);
     }
 
     @DeleteMapping(value = "/{id}")
     public void productDelete(@PathVariable Integer id){
-        productService.deleteProduct(productService.getProduct(id));
+        productRepository.delete(productRepository.findById(id).get());
     }
 
     @GetMapping(value = "/list")
     public List<Product> getProductList() {
-        return productService.getProductList();
+        return productRepository.findAllByOrderByIdDesc();
     }
 
     @GetMapping(value = "/search")
-    public Page getProductList(@RequestParam(value = "page", defaultValue = "1") int page, @RequestParam(value = "category", defaultValue = "캐쥬얼") String category, @RequestParam(value = "order", defaultValue = "id desc") String order) {
+    public Page getProductList(@RequestParam(value = "page", defaultValue = "1") int page, @RequestParam(value = "category", defaultValue = "null") String category, @RequestParam(value = "order", defaultValue = "id desc") String order) {
         return productService.getProductList(page - 1, category, order);
     }
 
    @GetMapping(value = "/list/thumbUp")
     public List<Product> getProductListByThumbUp(List<Integer> productIdList){
-       return productService.getProductListByThumbUp(productIdList);
+       return productRepository.findAllByThumbUpList(productIdList);
    }
 
     @GetMapping(value = "/image/list/search")
     public List<ProductImage> getProductImageList(@RequestParam(value = "productId", required = false) Long paramId) {
         if (paramId == null) {
-            return productService.getProductImageList();
+            return productImageRepository.findAllByOrderByIdDesc();
         } else {
-            return productService.getProductImageList(paramId);
+            return productImageRepository.findAllByProductIdOrderByIdDesc(paramId);
         }
     }
 
