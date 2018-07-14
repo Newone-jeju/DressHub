@@ -27,7 +27,7 @@ import java.util.*;
 
 @Slf4j
 @RestController
-@RequestMapping(value = "/products")
+@RequestMapping(value = "/product")
 @AllArgsConstructor
 public class ProductController {
 

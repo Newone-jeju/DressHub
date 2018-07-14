@@ -2,6 +2,7 @@ package com.newoneplus.dresshub.Controller;
 
 import com.newoneplus.dresshub.Model.Product;
 import com.newoneplus.dresshub.Model.ThumbUp;
+import com.newoneplus.dresshub.Model.User;
 import com.newoneplus.dresshub.Service.AuthorizationService;
 import com.newoneplus.dresshub.Service.ProductService;
 import lombok.AllArgsConstructor;
@@ -9,6 +10,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping(value = "/thumbUp")
@@ -32,4 +35,10 @@ public class ThumbUpController {
     public Page<ThumbUp> getThumbUpProductList(@RequestParam(value = "page", defaultValue = "1") int page) {
         return productService.getThumbUpProductList(page-1, AuthorizationService.getCurrentUser());
     }
+    @GetMapping(value = "/list/product")
+    public List<ThumbUp> getThumbUpListbyProduct(@RequestBody List<Integer> productIdList) {
+        User user =AuthorizationService.getCurrentUser();
+        return productService.getThumbUpListbyProduct(productIdList, user.getUid());
+    }
+
 }

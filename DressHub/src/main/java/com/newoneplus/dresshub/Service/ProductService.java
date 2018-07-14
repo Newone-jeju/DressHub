@@ -75,18 +75,8 @@ public class ProductService {
         if (category.equals("null")) {
             category = "";
         }
-
         PageRequest pageRequest = PageRequest.of(page, 25, Sort.Direction.DESC, "id");
-        if (AuthorizationService.getCurrentUser() == null) {
-            return productRepository.findAllByCatetoryJoinThumbUpByUid(category, "null", pageRequest);
-        } else {
-            return productRepository.findAllByCatetoryJoinThumbUpByUid(category, AuthorizationService.getCurrentUser().getUid(), pageRequest);
-        }
-
-
-        //여기에 좋아요와 조인을 해야한다.
-
-        //Todo 현재 user1로 임시로 지정 나중에 보안정책 완료 후 User가져오는 것으로 수정
+        return productRepository.findAllByCategoryLike(category, pageRequest);
     }
 
     ;
@@ -109,14 +99,14 @@ public class ProductService {
     //TODO 나중에 post로 바꿀 시 바꿔야함
     //좋아요 등록하기
     public Product clickThumup(ThumbUp thumbUp) {
-        Optional<ThumbUp> opthionalThumbUp=thumbUpRepository.findByLikerAndProduct(thumbUp.getLiker(), thumbUp.getProduct());
+        Optional<ThumbUp> opthionalThumbUp = thumbUpRepository.findByLikerAndProduct(thumbUp.getLiker(), thumbUp.getProduct());
         Product product = productRepository.findById(thumbUp.getProduct()).get();
         if (!opthionalThumbUp.isPresent()) {
             //존재하지않는다면
             thumbUpRepository.save(thumbUp);
             product.setLikes(product.getLikes() + 1);
             productRepository.save(product);
-        }else{
+        } else {
             //존재한다면
             thumbUpRepository.delete(opthionalThumbUp.get());
             product.setLikes(product.getLikes() - 1);
@@ -142,5 +132,9 @@ public class ProductService {
 
     public List<Product> getProductListByThumbUp(List<Integer> productIdList) {
         return productRepository.findAllByThumbUpList(productIdList);
+    }
+
+    public List<ThumbUp> getThumbUpListbyProduct(List<Integer> productIdList, String liker) {
+        return thumbUpRepository.findAllByLikerAndProductList(liker, productIdList);
     }
 }

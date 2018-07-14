@@ -16,10 +16,9 @@ public interface ProductRepository extends JpaRepository<Product, Integer> {
     @Query(value = "select p from Product p where id in(:productlist)")
     List<Product> findAllByThumbUpList(@Param("productlist") List<Integer> productlist);
 
-    @Query(value="select p from Product p left outer join ThumbUp t on (p.id=t.product) and t.liker =:user where category like :category%")
-    Page<Product> findAllByCatetoryJoinThumbUpByUid(@Param("category")String category, @Param("user")String user ,Pageable pageable);
-
-
+//    @Query(value="select p from Product p left outer join ThumbUp t on (p.id=t.product) and t.liker =:user where category like :category%")
+//    Page<Product> findAllByCatetoryJoinThumbUpByUid(@Param("category")String category, @Param("user")String user ,Pageable pageable);
+    Page<Product> findAllByCategoryLike(String category, Pageable pageable);
 
     Product findById(long id);
     List<Product> findAllByOrderByIdDesc();

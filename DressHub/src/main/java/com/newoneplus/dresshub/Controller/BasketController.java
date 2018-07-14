@@ -9,7 +9,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping(value = "/baskets")
+@RequestMapping(value = "/basket")
 @AllArgsConstructor
 public class BasketController {
     @Autowired

@@ -40,11 +40,6 @@ public class Product {
     ArrayList<MultipartFile> image;
 
 
-
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "product")
-    @JsonIgnoreProperties(value = "product", allowSetters = true)
-    List<ThumbUp> thumbUps;
-
     @Override
     public boolean equals(Object o){
         boolean isEqual = true;
