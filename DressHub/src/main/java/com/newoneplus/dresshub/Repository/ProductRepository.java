@@ -12,13 +12,13 @@ import java.util.List;
 
 public interface ProductRepository extends JpaRepository<Product, Integer> {
 
-    //    이렇게 하면 안된다!!
-    @Query(value = "select p from Product p inner join ThumbUp t on (p.id = t.product)and (t.uid = :user) ")
-    Page<Product> findAllByUid(@Param("user")String user, Pageable pageable);
-    @Query(value="select p from Product p left outer join ThumbUp t on (p.id=t.product) and t.uid =:user where category like :category%")
-    Page<Product> findAllByCatetoryJoinThumbUpByUid(@Param("category")String category, @Param("user")String user ,Pageable pageable);
-    Product findById(long id);
+    //좋아요한 product list 가져오기
+    @Query(value = "select p from Product p where id in(:productlist)")
+    List<Product> findAllByProductList(@Param("productlist") List<Integer> productlist);
+    //Category에 따른 product list 가져오기
+    Page<Product> findAllByCategoryContaining(String category, Pageable pageable);
+    //그냥 리스트 가져오기
     List<Product> findAllByOrderByIdDesc();
-
-    List<Product> findAllByProvider(String provider);
+    //제공자의 product list 가져오기
+    Page<Product> findAllByProvider(String provider, Pageable pageable);
 }

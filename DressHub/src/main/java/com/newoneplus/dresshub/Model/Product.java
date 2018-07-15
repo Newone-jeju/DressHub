@@ -18,7 +18,7 @@ import java.util.List;
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long id;
+    Integer id;
     String name;
     String thumbnailImage;
     String contents;
@@ -39,11 +39,6 @@ public class Product {
     @Transient
     ArrayList<MultipartFile> image;
 
-
-
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "product")
-    @JsonIgnoreProperties(value = "product", allowSetters = true)
-    List<ThumbUp> thumbUps;
 
     @Override
     public boolean equals(Object o){
