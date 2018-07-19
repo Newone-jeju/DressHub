@@ -20,8 +20,7 @@ import java.util.List;
 
 @Component
 @Slf4j
-public class AuthProvider implements AuthenticationProvider {
-
+public class AuthProvider implements AuthenticationProvider{
     @Autowired
     AuthorizationService authorizationService;
     @Override
@@ -61,14 +60,9 @@ public class AuthProvider implements AuthenticationProvider {
         }
         grantedAuthorityList.add(new SimpleGrantedAuthority(role));
         return new MyAuthentication(id, password, grantedAuthorityList, user);
-
-
     }
-
     @Override
     public boolean supports(Class<?> authentication) {
-        return authentication.equals(UsernamePasswordAuthenticationToken.class);
-
-
+        return (UsernamePasswordAuthenticationToken.class.isAssignableFrom(authentication));
     }
 }

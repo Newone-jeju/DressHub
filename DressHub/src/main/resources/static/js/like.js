@@ -41,7 +41,7 @@ $(document).ready(function () {
             if ($id == "prev") selectedPage = prev;
 
             $.ajax({
-                url: './products/search?page=' + selectedPage,
+                url: './thumbUp/search?page=' + selectedPage,
                 dataType: 'json',
                 type: 'get',
                 success: function (data) {

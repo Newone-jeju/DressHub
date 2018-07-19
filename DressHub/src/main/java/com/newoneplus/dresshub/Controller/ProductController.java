@@ -2,6 +2,7 @@ package com.newoneplus.dresshub.Controller;
 
 import com.newoneplus.dresshub.ImageProcesser;
 import com.newoneplus.dresshub.Model.*;
+import com.newoneplus.dresshub.Repository.ProductImageRepository;
 import com.newoneplus.dresshub.Repository.ProductRepository;
 import com.newoneplus.dresshub.Repository.ThumbUpRepository;
 import com.newoneplus.dresshub.Service.ProductService;
@@ -27,66 +28,67 @@ import java.util.*;
 
 @Slf4j
 @RestController
-@RequestMapping(value = "/products")
+@RequestMapping(value = "/product")
 @AllArgsConstructor
 public class ProductController {
 
     @Autowired
     ProductService productService;
-
     @Autowired
     ProductRepository productRepository;
+    @Autowired
+    ProductImageRepository productImageRepository;
 
     @GetMapping(value = "/{id}")
     public Product getProduct(@PathVariable Integer id) {
-        return productService.getProduct(id);
-    }
-    @GetMapping(value = "/list/search")
-    public List<Product> getProductProvider(@RequestParam String provider){
-        return productService.getProductListByProvider(provider);
-    }
-
-    @PostMapping
-    public Product productCreate(@RequestBody Product product) {
-        log.info("***********************요청이가 오고 있습니다. **********************************8");
-        return productService.createProduct(product);
-
-
-    }
-
-    @PutMapping
-    public void productUpdate(@RequestBody Product product){
-        productService.updateProduct(product);
-    }
-
-    @DeleteMapping(value = "/{id}")
-    public void productDelete(@PathVariable Integer id){
-        productService.deleteProduct(productService.getProduct(id));
+        return productRepository.findById(id).get();
     }
 
     @GetMapping(value = "/list")
     public List<Product> getProductList() {
-        return productService.getProductList();
+        return productRepository.findAllByOrderByIdDesc();
     }
 
-    @GetMapping(value = "/search")
-    public Page getProductList(@RequestParam(value = "page", defaultValue = "1") int page, @RequestParam(value = "category", defaultValue = "캐쥬얼") String category, @RequestParam(value = "order", defaultValue = "id desc") String order) {
-        return productService.getProductList(page - 1, category, order);
+    @GetMapping(value = "/list/search")
+    public Page getProductList(@RequestParam(defaultValue = "1") int page, @RequestParam(defaultValue = "") String category,@RequestParam(defaultValue = "")String provider) {
+        return productService.getProductList(page - 1, category, provider);
+    }
+    @PostMapping
+    public Product productCreate(@RequestBody Product product) {
+        return productRepository.save(product);
     }
 
+    @PutMapping
+    public void productUpdate(@RequestBody Product product){
+        productRepository.save(product);
+    }
 
-    @GetMapping(value = "/image/list/search")
+    @DeleteMapping(value = "/{id}")
+    public void productDelete(@PathVariable Integer id){
+        productRepository.delete(productRepository.findById(id).get());
+    }
+
+   @GetMapping(value = "/list/thumbup")
+    public List<Product> getProductListByThumbUp(List<Integer> productIdList){
+       return productRepository.findAllByProductList(productIdList);
+   }
+
+    @GetMapping(value = "/list/basket")
+    public List<Product> getProductListByBasket(List<Integer> productIdList){
+        return productRepository.findAllByProductList(productIdList);
+    }
+
+    @GetMapping(value = "/image/search")
     public List<ProductImage> getProductImageList(@RequestParam(value = "productId", required = false) Long paramId) {
         if (paramId == null) {
-            return productService.getProductImageList();
+            return productImageRepository.findAllByOrderByIdDesc();
         } else {
-            return productService.getProductImageList(paramId);
+            return productImageRepository.findAllByProductIdOrderByIdDesc(paramId);
         }
     }
 
     @PostMapping(value = "/image")
     public void createProductImage(@RequestParam("file") MultipartFile productImage) throws IOException {
-        log.info("***********************이미지가 오고 있습니다. **********************************8");
         ImageProcesser imageProcesser = new ImageProcesser();
         String filename = productImage.getOriginalFilename();
         String path = System.getProperty("user.dir") + "/out/production/resources/static/product_image/";
@@ -108,7 +110,11 @@ public class ProductController {
         ImageIO.write(image2, "jpg", new File(path + sizeFileName));
     }
 
-
+    @ExceptionHandler(NullPointerException.class)
+    @ResponseBody
+    public String checkUser(NullPointerException e){
+        return "403";
+    }
 
 
 }
