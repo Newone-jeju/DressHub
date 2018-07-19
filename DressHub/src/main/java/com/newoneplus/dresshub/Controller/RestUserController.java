@@ -1,11 +1,8 @@
 package com.newoneplus.dresshub.Controller;
 
 
-import com.newoneplus.dresshub.Config.AuthProvider;
-import com.newoneplus.dresshub.Config.MyAuthentication;
 import com.newoneplus.dresshub.Model.User;
 import com.newoneplus.dresshub.Repository.UserRepository;
-import com.newoneplus.dresshub.Service.AuthorizationService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.access.annotation.Secured;
