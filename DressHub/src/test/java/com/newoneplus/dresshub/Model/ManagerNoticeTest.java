@@ -55,4 +55,44 @@ public class ManagerNoticeTest {
        mnNoticeForCreate.setId(mnNotice.getId());
        assertThat(mnNotice, is(mnNoticeForCreate));
     }
+
+    @Test
+    public void update() {
+        ManagerNotice mnNoticeForUpdate = new ManagerNotice();
+        mnNoticeForUpdate.setTitle("공지사항");
+        mnNoticeForUpdate.setContent("공지사항");
+        mnNoticeForUpdate.setWriter("운영자");
+
+        ManagerNotice mnNotice = restTemplate.postForObject(PATH, mnNoticeForUpdate, ManagerNotice.class);
+        mnNoticeForUpdate.setId(mnNotice.getId());
+
+        mnNoticeForUpdate.setTitle("수정");
+        mnNoticeForUpdate.setContent("수정");
+        mnNoticeForUpdate.setWriter("운영");
+
+        ManagerNotice updateNotice = restTemplate.postForObject(PATH, mnNoticeForUpdate, ManagerNotice.class);
+
+        assertThat(mnNotice, not(updateNotice));
+    }
+
+    @Test
+    public void delete() {
+        ManagerNotice mnNoticeForDelete = new ManagerNotice();
+        Integer id = mnNoticeForDelete.getId();
+
+        ManagerNotice mnNotice = restTemplate.getForObject(PATH + "/" + id, ManagerNotice.class);
+        restTemplate.delete(PATH + "/" + id);
+
+        ManagerNotice deleteNotice = restTemplate.getForObject(PATH + "/" + id, ManagerNotice.class);
+
+        String dTitle = deleteNotice.getTitle();
+        String dContent = deleteNotice.getContent();
+        String dWriter = deleteNotice.getWriter();
+        String dDate = deleteNotice.getDate();
+
+        assertThat(dTitle, is(nullValue()));
+        assertThat(dContent, is(nullValue()));
+        assertThat(dWriter, is(nullValue()));
+        assertThat(dDate, is(nullValue()));
+    }
 }
