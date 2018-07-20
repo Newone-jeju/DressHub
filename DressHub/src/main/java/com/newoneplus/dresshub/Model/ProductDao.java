@@ -137,7 +137,7 @@ public class ProductDao {
         product.setSalePrice(rs.getInt("SALE_PRICE"));
         product.setState(rs.getString("STATE"));
         product.setLikes(rs.getInt("LIKES"));
-        product.setRegistrationDate(rs.getDate("REGISTRATION_DATE"));
+//        product.setRegistrationDate(rs.getDate("REGISTRATION_DATE"));
         product.setLeastLeaseDay(rs.getInt("LEAST_LEASE_DAY"));
         product.setSize(rs.getString("SIZE"));
         return product;

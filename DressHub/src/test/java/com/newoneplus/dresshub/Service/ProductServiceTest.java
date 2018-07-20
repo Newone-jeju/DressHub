@@ -39,10 +39,10 @@ public class ProductServiceTest {
 //
 //        Integer insertedId = productService.insertProduct(product);
 //    }
-    @Test
-    public void getProduct() throws ClassNotFoundException {
-        Product product = new Product();
-        product = productService.getProduct(1);
-        assertThat(product.getName(), is("changedName"));
-    }
+//    @Test
+//    public void getProduct() throws ClassNotFoundException {
+//        Product product = new Product();
+//        product = productService.getProduct(1);
+//        assertThat(product.getName(), is("changedName"));
+//    }
 }
