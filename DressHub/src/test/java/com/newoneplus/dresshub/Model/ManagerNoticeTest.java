@@ -2,6 +2,7 @@ package com.newoneplus.dresshub.Model;
 
 import org.apache.catalina.Manager;
 import org.hamcrest.collection.IsEmptyCollection;
+import org.hibernate.collection.internal.PersistentArrayHolder;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -12,9 +13,11 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.List;
 
+// is(T value)
 import static org.hamcrest.CoreMatchers.*;
+// assertThat(String reason, boolean assertion);
 import static org.hamcrest.MatcherAssert.*;
-import static org.mockito.internal.configuration.GlobalConfiguration.validate;
+//import static org.mockito.internal.configuration.GlobalConfiguration.validate;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
@@ -66,13 +69,19 @@ public class ManagerNoticeTest {
         ManagerNotice mnNotice = restTemplate.postForObject(PATH, mnNoticeForUpdate, ManagerNotice.class);
         mnNoticeForUpdate.setId(mnNotice.getId());
 
-        mnNoticeForUpdate.setTitle("수정");
-        mnNoticeForUpdate.setContent("수정");
-        mnNoticeForUpdate.setWriter("운영");
+        String rewrite = "수정";
 
-        ManagerNotice updateNotice = restTemplate.postForObject(PATH, mnNoticeForUpdate, ManagerNotice.class);
+        mnNoticeForUpdate.setTitle(rewrite);
+        mnNoticeForUpdate.setContent(rewrite);
+        mnNoticeForUpdate.setWriter(rewrite);
 
-        assertThat(mnNotice, not(updateNotice));
+        Integer id = mnNoticeForUpdate.getId();
+
+        restTemplate.put(PATH + "/" + id, mnNoticeForUpdate);
+
+        assertThat(mnNoticeForUpdate.getTitle(), is(rewrite));
+        assertThat(mnNoticeForUpdate.getContent(), is(rewrite));
+        assertThat(mnNoticeForUpdate.getWriter(), is(rewrite));
     }
 
     @Test
