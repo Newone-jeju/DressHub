@@ -28,4 +28,19 @@ public class ManagerNoticeController {
         return managerNoticeRepository.save(managerNotice);
     }
 
+    @PutMapping
+    private void update(@RequestBody ManagerNotice managerNotice){
+        if (managerNoticeRepository.existsById(managerNotice.getId())) {
+            managerNoticeRepository.save(managerNotice);
+        }
+        else {
+            System.out.println("잘못된 요청입니다");
+        }
+    }
+
+    @DeleteMapping("/{id}")
+    private void delete(@PathVariable Integer id) {
+        managerNoticeRepository.delete(managerNoticeRepository.findById(id).get());
+    }
+
 }

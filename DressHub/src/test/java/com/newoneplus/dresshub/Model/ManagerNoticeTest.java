@@ -1,14 +1,17 @@
 package com.newoneplus.dresshub.Model;
 
+import com.newoneplus.dresshub.Repository.ManagerNoticeRepository;
 import org.apache.catalina.Manager;
 import org.hamcrest.collection.IsEmptyCollection;
 import org.hibernate.collection.internal.PersistentArrayHolder;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
+import org.springframework.data.repository.CrudRepository;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.List;
@@ -25,6 +28,8 @@ public class ManagerNoticeTest {
     private static final String PATH = "/notice";
     @Autowired
     private TestRestTemplate restTemplate;
+    @Autowired
+    private ManagerNoticeRepository mnRepository;
     @Before
     public void setup() {
     }
@@ -67,21 +72,20 @@ public class ManagerNoticeTest {
         mnNoticeForUpdate.setWriter("운영자");
 
         ManagerNotice mnNotice = restTemplate.postForObject(PATH, mnNoticeForUpdate, ManagerNotice.class);
-        mnNoticeForUpdate.setId(mnNotice.getId());
+        Integer id = mnNotice.getId();
+        if (mnRepository.existsById(id)) {
+            String rewrite = "수정";
 
-        String rewrite = "수정";
+            mnNotice.setTitle(rewrite);
+            mnNotice.setContent(rewrite);
+            mnNotice.setWriter(rewrite);
 
-        mnNoticeForUpdate.setTitle(rewrite);
-        mnNoticeForUpdate.setContent(rewrite);
-        mnNoticeForUpdate.setWriter(rewrite);
+            restTemplate.put(PATH, mnNotice);
 
-        Integer id = mnNoticeForUpdate.getId();
-
-        restTemplate.put(PATH + "/" + id, mnNoticeForUpdate);
-
-        assertThat(mnNoticeForUpdate.getTitle(), is(rewrite));
-        assertThat(mnNoticeForUpdate.getContent(), is(rewrite));
-        assertThat(mnNoticeForUpdate.getWriter(), is(rewrite));
+            assertThat(mnNotice.getTitle(), is(rewrite));
+            assertThat(mnNotice.getContent(), is(rewrite));
+            assertThat(mnNotice.getWriter(), is(rewrite));
+        }
     }
 
     @Test
