@@ -35,7 +35,7 @@ public class UserController {
     public String create(@ModelAttribute @Valid User user) throws ClassNotFoundException, ParseException {
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         user.setPassword(passwordEncoder.encode(user.getPassword()));
-        user.setUserType(1);
+//        user.setUserType(1);
         userRepository.save(user);
         return "redirect:/";
     }

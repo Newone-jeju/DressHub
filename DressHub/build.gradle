@@ -43,6 +43,7 @@ dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.12'
     compile group: 'org.bgee.log4jdbc-log4j2', name: 'log4jdbc-log4j2-jdbc4.1', version: '1.16'
     compile 'org.json:json:20171018'
+    compile 'io.jsonwebtoken:jjwt:0.9.1'
     compile 'org.springframework.session:spring-session-core:2.0.4.BUILD-SNAPSHOT'
     compile 'org.springframework.security:spring-security-taglibs:4.0.4.RELEASE'
 //    compile group: 'commons-io', name: 'commons-io', version: '2.5'
