@@ -69,7 +69,7 @@ public class ManagerNoticeTest {
     @Test
     public void update() {
         List<ManagerNotice> mnNoticeForUpdate = mnRepository.findAll();
-        int id = 40;
+        int id = mnNoticeForUpdate.toArray().length;
 
 //        System.out.println(id);
 //        mnNoticeForUpdate.setTitle("공지사항");
