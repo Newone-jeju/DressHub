@@ -34,4 +34,9 @@ public class MainController {
     public String checkUser(NullPointerException e){
         return "403";
     }
+
+    @GetMapping(value ="/login")
+    public String loginVC() {
+        return "/login";
+    }
 }

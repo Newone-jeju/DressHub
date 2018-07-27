@@ -3,7 +3,8 @@ package com.newoneplus.dresshub.Controller;
 
 import com.newoneplus.dresshub.Model.ApiResponseMessage;
 import com.newoneplus.dresshub.Model.User;
-import com.newoneplus.dresshub.Model.UserRole;
+//import com.newoneplus.dresshub.Model.UserRole;
+//import com.newoneplus.dresshub.Model.UserRole;
 import com.newoneplus.dresshub.Repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -35,11 +36,11 @@ public class RestUserController {
             return new ApiResponseMessage(HttpStatus.BAD_REQUEST, 400);
         }
         try {
-            UserRole role = new UserRole();
+//            UserRole role = new UserRole();
             BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
             user.setPassword(passwordEncoder.encode(user.getPassword()));
-            role.setRoleName("ROLE_USER");
-            user.setRoles(Arrays.asList(role));
+//            role.setRoleName("USER");
+//            user.setRoles(Arrays.asList(role));
             userRepository.save(user);
             return new ApiResponseMessage(HttpStatus.OK, 200);
         } catch (Exception ex){

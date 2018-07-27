@@ -47,8 +47,8 @@ public class User {
     @CreationTimestamp
     private Date resisterDate;
 
-    @OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
-    @JoinColumn(name="uid")
-    private List<UserRole> roles;
+//    @OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+//    @JoinColumn(name="uid")
+//    private List<UserRole> roles;
 
 }
