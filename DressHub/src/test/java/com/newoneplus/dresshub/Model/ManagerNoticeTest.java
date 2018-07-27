@@ -11,10 +11,12 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.List;
+import java.util.Random;
 
 // is(T value)
 import static org.hamcrest.CoreMatchers.*;
@@ -35,7 +37,7 @@ public class ManagerNoticeTest {
     }
 
     @Test
-    public void get(){
+    public void get() {
         String title = "f";
         String content = "f";
         String writer = "f";
@@ -45,7 +47,6 @@ public class ManagerNoticeTest {
         assertThat(mnNotice.getContent(), is(content));
         assertThat(mnNotice.getWriter(), is(writer));
     }
-
     @Test
     public void getList(){
         List<ManagerNotice> managerNotices = restTemplate.getForObject(PATH + "/list", List.class);
@@ -62,38 +63,49 @@ public class ManagerNoticeTest {
        ManagerNotice mnNotice = restTemplate.postForObject(PATH, mnNoticeForCreate, ManagerNotice.class);
        mnNoticeForCreate.setId(mnNotice.getId());
        assertThat(mnNotice, is(mnNoticeForCreate));
+
     }
 
     @Test
     public void update() {
-        ManagerNotice mnNoticeForUpdate = new ManagerNotice();
-        mnNoticeForUpdate.setTitle("공지사항");
-        mnNoticeForUpdate.setContent("공지사항");
-        mnNoticeForUpdate.setWriter("운영자");
+        List<ManagerNotice> mnNoticeForUpdate = mnRepository.findAll();
+        int id = 40;
 
-        ManagerNotice mnNotice = restTemplate.postForObject(PATH, mnNoticeForUpdate, ManagerNotice.class);
-        Integer id = mnNotice.getId();
-        if (mnRepository.existsById(id)) {
-            String rewrite = "수정";
+//        System.out.println(id);
+//        mnNoticeForUpdate.setTitle("공지사항");
+//        mnNoticeForUpdate.setContent("공지사항");
+//        mnNoticeForUpdate.setWriter("운영자");
+//        ManagerNotice mnNotice = restTemplate.postForObject(PATH, mnNoticeForUpdate, ManagerNotice.class);
 
-            mnNotice.setTitle(rewrite);
-            mnNotice.setContent(rewrite);
-            mnNotice.setWriter(rewrite);
+        ManagerNotice mnNotice = restTemplate.getForObject(PATH + "/" + id, ManagerNotice.class);
 
-            restTemplate.put(PATH, mnNotice);
+//        Integer id = mnNotice.getId();
+//        if (mnRepository.existsById(id)) {
+        String rewrite = "바꾸기";
 
-            assertThat(mnNotice.getTitle(), is(rewrite));
-            assertThat(mnNotice.getContent(), is(rewrite));
-            assertThat(mnNotice.getWriter(), is(rewrite));
-        }
+        mnNotice.setTitle(rewrite);
+        mnNotice.setContent(rewrite);
+        mnNotice.setWriter(rewrite);
+
+        restTemplate.put(PATH, mnNotice);
+
+        assertThat(mnNotice.getTitle(), is(rewrite));
+        assertThat(mnNotice.getContent(), is(rewrite));
+        assertThat(mnNotice.getWriter(), is(rewrite));
+//        }
     }
 
     @Test
     public void delete() {
         ManagerNotice mnNoticeForDelete = new ManagerNotice();
-        Integer id = mnNoticeForDelete.getId();
 
-        ManagerNotice mnNotice = restTemplate.getForObject(PATH + "/" + id, ManagerNotice.class);
+        mnNoticeForDelete.setTitle("공지사항");
+        mnNoticeForDelete.setContent("공지사항");
+        mnNoticeForDelete.setWriter("운영자");
+        ManagerNotice mnNotice = restTemplate.postForObject(PATH, mnNoticeForDelete, ManagerNotice.class);
+
+        Integer id = mnNotice.getId();
+//        Integer id = 31;
         restTemplate.delete(PATH + "/" + id);
 
         ManagerNotice deleteNotice = restTemplate.getForObject(PATH + "/" + id, ManagerNotice.class);

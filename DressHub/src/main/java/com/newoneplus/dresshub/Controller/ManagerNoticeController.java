@@ -5,6 +5,8 @@ import com.newoneplus.dresshub.Repository.ManagerNoticeRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.util.List;
 
 @RestController
@@ -29,12 +31,12 @@ public class ManagerNoticeController {
     }
 
     @PutMapping
-    private void update(@RequestBody ManagerNotice managerNotice){
+    private void update(@RequestBody ManagerNotice managerNotice, HttpServletResponse res) throws IOException {
         if (managerNoticeRepository.existsById(managerNotice.getId())) {
             managerNoticeRepository.save(managerNotice);
         }
         else {
-            System.out.println("잘못된 요청입니다");
+            res.sendError(404, "잘못된 접근입니다");
         }
     }
 
