@@ -44,7 +44,7 @@
 	function setCard(data, quantity){
 		var cards =[];
 		for(var i=0; i<data.length; i++){// thumnailUrl 이대로 괜춘???
-				var product = new AjaxData('products/'+data[i].product, false);
+				var product = new AjaxData('product/'+data[i].product, false);
 				var productData = product.getData();
 
 			cards.push(
@@ -193,7 +193,7 @@
 	// 빌려 준 옷
 	target = $(".rented-area .card-td");
 	var pdata ="";
-	pdata = getData('/products/list/search?provider='+userId, false);
+	pdata = getData('/product/list/search?provider='+userId, false);
 	console.log(pdata[0].id);
 	var ajaxCard = new AjaxCard();
 	var cardData = ""

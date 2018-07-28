@@ -50,7 +50,7 @@ $(document).ready(function () {
             if ($id == "next") selectedPage = next;
             if ($id == "prev") selectedPage = prev;
             $.ajax({
-                url: './products/search?page=' + selectedPage + "&category=" + categoryString,
+                url: './product/list/search?page=' + selectedPage + "&category=" + categoryString,
                 dataType: 'json',
                 type: 'get',
                 success: function (data) {
