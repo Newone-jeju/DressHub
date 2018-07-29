@@ -69,7 +69,7 @@ function requestData(method, data) {
 
 $(document).ready(function () {
 
-    $.get("products/" + productId, function (productinfo) {
+    $.get("product/" + productId, function (productinfo) {
          product =  productinfo.id;
     });
 
