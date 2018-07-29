@@ -80,7 +80,7 @@ $(document).ready(function () {
                                     '<div class="hover-btn-wrap">' +
                                     '<img src="../image/cart_btn_0.png" alt="" class="cart_btn" name="' + data[i].id + '">'
 
-                                    if(data[i].thumbUps.length != 0){
+                                    if(data[i].likes != null){
                                      likeBtn = '<img src="../image/like_btn_1.png" alt="" class="like_btn 1" name="' + data[i].id + '">';
                                     }else{
                                      likeBtn= '<img src="../image/like_btn_0.png" alt="" class="like_btn 0 " name="'+data[i].id+ '">';
@@ -117,7 +117,7 @@ $(document).ready(function () {
                         console.log($(this).attr("data-href"));
                         window.location.href=$(this).attr("data-href");
                     })
-
+                    // 좋아요 버튼
                     $(".like_btn").click(function(e){
                         console.log("likebtntest");
                         e.stopPropagation();
@@ -128,7 +128,7 @@ $(document).ready(function () {
                         var likeNum = $(this).next();
                         var target = $(this);
                         $.ajax({
-                            type: "GET",
+                            type: "POST",
                             url: "./thumbUp?productId="+productId+"&state="+state, //좋아요 눌렀을 때 상태정보 전달할 url
                             dataType: "json",
                             success: function(response){
@@ -151,7 +151,10 @@ $(document).ready(function () {
                                     target.removeClass("0");
                                     target.addClass("1");
                                 }
-                            }
+                            },
+                            error: function(jqXHR, textStatus, errorThrown) {
+                                console.log("좋아요 에러");
+                            },
                         });
 
                     });
