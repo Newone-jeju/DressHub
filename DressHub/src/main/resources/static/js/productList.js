@@ -78,7 +78,7 @@ $(document).ready(function () {
                                     '   <div class="card_img_wrap">' +
                                     '       <img src="/product_image/origin' + data[i].thumbnailImage + '" alt="blank" class="card_img">' +
                                     '       <div class="hover-content">' +
-                                    '           <img src="../image/' + data[i].size + '_icon.png}" alt="" class="hover-size">' +
+                                    '           <img src="../image/' + data[i].size + '_icon.png" alt="" class="hover-size">' +
                                     '           <div class="hover-btn-wrap">' +
                                     '               <img src="../image/cart_btn_0.png" alt="" class="cart_btn" name="' + data[i].id + '">' +
                                     '               <img src="../image/like_btn_0.png" alt="" class="like_btn 0 " name="'+data[i].id+ '">'
@@ -103,10 +103,11 @@ $(document).ready(function () {
                     product.mapcard();
                     console.log('question')
                     console.log(productIdArr)
+                    console.log(JSON.stringify(productIdArr))
                     $.ajax({
                         type: "GET",
                         url: "./thumbUp/list/product",
-                        data: productIdArr,
+                        data: JSON.stringify(productIdArr),
                         async: false,
                         success: function(res){
                             console.log('answer')
