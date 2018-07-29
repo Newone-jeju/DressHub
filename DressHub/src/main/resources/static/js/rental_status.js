@@ -194,7 +194,7 @@
 	target = $(".rented-area .card-td");
 	var pdata ="";
 	pdata = getData('/product/list/search?provider='+userId, false);
-	console.log(pdata[0].id);
+	console.log(pdata[0]);
 	var ajaxCard = new AjaxCard();
 	var cardData = ""
 	for(var i=0; i<pdata.length; i++){
