@@ -16,21 +16,22 @@ import java.util.Arrays;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/user")
+@RequestMapping("/user")
 @RequiredArgsConstructor
 @Slf4j
 public class RestUserController {
     private final UserRepository userRepository;
-    @GetMapping("/{uid}")
-    public User get(@PathVariable String uid) {
-        return userRepository.findByUid(uid);
+    @GetMapping("/{id}")
+    public User get(@PathVariable Integer id) {
+        return userRepository.findById(id).get();
     }
-    @GetMapping("/list")
+
+    @GetMapping("/search/list")
     public List<User> list() {
         return userRepository.findAll();
     }
 
-    @PostMapping
+    @PostMapping("/signup")
     public ApiResponseMessage create(@RequestBody User user) {
         if (user.getUid() == "" || user.getName() == "") {
             return new ApiResponseMessage(HttpStatus.BAD_REQUEST, 400);
@@ -48,15 +49,17 @@ public class RestUserController {
         }
     }
 
-    @PutMapping("/{uid}")
-    public void modify(@RequestBody User user, @PathVariable String uid) {
-        userRepository.save(user);
-    }
+//    @PutMapping("/{uid}")
+//    public void modify(@RequestBody User user, @PathVariable String uid) {
+//        userRepository.save(user);
+//    }
 
-    @DeleteMapping("/{id}")
-    public void delete(@PathVariable Integer id) {
-        userRepository.delete(userRepository.findById(id).get());
-    }
+
+
+//    @DeleteMapping("/{id}")
+//    public void delete(@PathVariable Integer id) {
+//        userRepository.delete(userRepository.findById(id).get());
+//    }
 
 
 }
