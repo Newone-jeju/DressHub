@@ -1,8 +1,37 @@
 var newItemData = new AjaxData('/product/list', false)
 
-issueCaro(newItemData, )
+issueCaroCard(newItemData, )
 
-function issueCaro(data, target, sindex, eindex){
+issuCaroBtn()
+
+function issuCaroFrame(target, name) {
+    var frame= new AjaxCard()
+    frame.setCard(
+    '<div class="card_carousel_container">'+
+        '<div class="card_carousel_slide_btn">'+
+          '<form>'+
+            '<input class="btn_left" type="button">'+
+          '</form>'+
+        '</div>'+
+  
+        //card_carousel cardset
+        '<div class="card_carousel_container_content">'+
+          //js card gen
+        '</div>'+
+        '<div class="card_carousel_slide_btn">'+
+          '<form>'+
+            '<input class="btn_right" type="button">'+
+          '</form>'+
+        '</div>'+
+      '</div>'
+    )
+    frame.mapCard(target)
+    
+    
+
+}
+
+function issueCaroCard(data, target, sindex, eindex){
     var card = new AjaxCard()
     for(var i= sindex; i <eindex; i++){
         card.setCard(
