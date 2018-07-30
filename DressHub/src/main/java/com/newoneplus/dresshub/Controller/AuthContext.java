@@ -10,7 +10,7 @@ import io.jsonwebtoken.MalformedJwtException;
 
 import javax.servlet.http.HttpServletResponse;
 
-public class AutnContext {
+public class AuthContext {
     public static ApiResponseMessage askAuthorityAndAct(String userFromEntityModel, String token,
                                                         HttpServletResponse res, ActAfterAuthStrategy actAfterAuthStrategy) {
         ApiResponseMessage apiResponseMessage = null;
