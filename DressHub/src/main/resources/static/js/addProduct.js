@@ -23,7 +23,7 @@ filesUpload.onchange = function () {
 };
 
 //ajax
-var host = './products';
+var host = './product';
 
 function getUrlParams() {
     var params = {};

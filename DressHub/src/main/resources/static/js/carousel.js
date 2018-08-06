@@ -3,121 +3,23 @@ $(document).ready(function() {
 		var carousel ={};
 	carousel.max_cardnum = 11;
 	carousel.cardnum = [0,1,2,3];
-		carousel.data = [
-			{
-				"id" : 1,
-				"category" : "캐주얼 > 상의",
-				"title" : "상품이름이름이름",
-				"img_src" : "image/1.jpg",
-				"price" : "30/300/3000",
-				"location" : "제주시 아라동",
-			},
-			{
-				"id" : 2,
-				"category" : "캐주얼 > 하의",
-				"title" : "상품이름이름이름",
-				"img_src" : "image/2.jpg",
-				"price" : "30/300/3000",
-				"location" : "서울시 아라동",
-			},
-			{
-				"id" : 3,
-				"category" : "캐주얼 > 신발",
-				"title" : "상품이름이름이름",
-				"img_src" : "image/3.jpg",
-				"price" : "30/300/3000",
-				"location" : "대전시 아라동",
-			},
-			{
-				"id" : 4,
-				"category" : "캐주얼 > 웃옷",
-				"title" : "상품이름이름이름",
-				"img_src" : "image/4.jpg",
-				"price" : "30/300/3000",
-				"location" : "부산시 아라동",
-			},
-			{
-				"id" : 5,
-				"category" : "캐주얼 > 상의",
-				"title" : "상품이름이름이름",
-				"img_src" : "image/5.jpg",
-				"price" : "30/300/3000",
-				"location" : "전주시 아라동",
-			},
-			{
-				"id" : 6,
-				"category" : "캐주얼 > 상의",
-				"title" : "상품이름이름이름",
-				"img_src" : "image/1.jpg",
-				"price" : "30/300/3000",
-				"location" : "강릉시 아라동",
-			},
-					{
-				"id" : 7,
-				"category" : "캐주얼 > 상의",
-				"title" : "상품이름이름이름",
-				"img_src" : "image/2.jpg",
-				"price" : "30/300/3000",
-				"location" : "제주시 아라동",
-			},
-			{
-				"id" : 8,
-				"category" : "캐주얼 > 하의",
-				"title" : "상품이름이름이름",
-				"img_src" : "image/3.jpg",
-				"price" : "30/300/3000",
-				"location" : "서울시 아라동",
-			},
-			{
-				"id" : 9,
-				"category" : "캐주얼 > 신발",
-				"title" : "상품이름이름이름",
-				"img_src" : "image/4.jpg",
-				"price" : "30/300/3000",
-				"location" : "대전시 아라동",
-			},
-			{
-				"id" : 10,
-				"category" : "캐주얼 > 웃옷",
-				"title" : "상품이름이름이름",
-				"img_src" : "image/5.jpg",
-				"price" : "30/300/3000",
-				"location" : "부산시 아라동",
-			},
-			{
-				"id" : 11,
-				"category" : "캐주얼 > 상의",
-				"title" : "상품이름이름이름",
-				"img_src" : "image/1.jpg",
-				"price" : "30/300/3000",
-				"location" : "전주시 아라동",
-			},
-			{
-				"id" : 12,
-				"category" : "캐주얼 > 상의",
-				"title" : "상품이름이름이름",
-				"img_src" : "image/2.jpg",
-				"price" : "30/300/3000",
-				"location" : "강릉시 아라동",
-			},
-		]
-
-
-
+	caroajax = new AjaxData('/product/list',false)
+	carousel.data = caroajax.getData()
+	console.log(carousel.data)
 	carousel.mapcard = function(){
 		// console.log('mapcard');
 		// console.log(carousel.cardnum);
 			var cards = '';
 			for(var i= 0; i <carousel.cardnum.length; i++){
 				cards +=
-				'<a href="'+carousel.data[carousel.cardnum[i]].url+'" class="card_carousel_container_content_card">'+
+				'<a href="/product_details.html?productId='+carousel.data[carousel.cardnum[i]].id+'" class="card_carousel_container_content_card">'+
 					'<div class="card_img_wrap">'+
-						'<img src="'+carousel.data[carousel.cardnum[i]].img_src+'" alt="blank" class="card_img">'+
+						'<img src="/product_image/origin'+carousel.data[carousel.cardnum[i]].thumbnailImage+'" alt="blank" class="card_img">'+
 					'</div>'+
 					'<div class="card_text_wrap">'+
 						'<p class="text_category">'+carousel.data[carousel.cardnum[i]].category+'</p>'+
-						'<p class="text_title">'+carousel.data[carousel.cardnum[i]].title+'</p>'+
-						'<p class="text_price">'+carousel.data[carousel.cardnum[i]].price+'</p>'+
+						'<p class="text_title">'+carousel.data[carousel.cardnum[i]].name+'</p>'+
+						'<p class="text_price">'+carousel.data[carousel.cardnum[i]].costPerDay+'/'+carousel.data[carousel.cardnum[i]].deposit+'</p>'+
 						'<div class="location_wrap">'+
 							'<img src="image/location_pin.png" alt="L" class="icon_location">'+
 							'<span class="text_location">'+carousel.data[carousel.cardnum[i]].location+'</span>'+
@@ -155,7 +57,7 @@ $(document).ready(function() {
 		}
 
 		carousel.mapcard();
-		carousel.btn_visiblily(carousel.cardnumm);
+		carousel.btn_visiblily(carousel.cardnum);
 
 	}
 
