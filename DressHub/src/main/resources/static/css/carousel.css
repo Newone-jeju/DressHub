@@ -74,11 +74,11 @@
 }
 
 .card_carousel_container_content{
-	flex-grow: 1;
+	margin-left: 6%;
 }
 
 .card_carousel_container_content_card{
-	flex-grow: 1;
+	
 	border:2px solid #e1e1e1;
 	margin-right: 25px;
 	text-decoration: none;
@@ -89,11 +89,12 @@
 }
 
 .card_img_wrap{
-	height: auto;
+	width: 220px;
+	height: 200px;
 }
 .card_img{
 	width:100%;
-	height:auto;
+	height:100%;
 }
 
 .card_text_wrap{
