@@ -49,10 +49,16 @@ public class RestUserController {
         }
     }
 
-//    @PutMapping("/{uid}")
-//    public void modify(@RequestBody User user, @PathVariable String uid) {
-//        userRepository.save(user);
-//    }
+
+    @PutMapping
+    public ApiResponseMessage modify(@RequestBody User user) {
+        if (userRepository.existsById(user.getId()) == true) {
+            userRepository.save(user);
+            return new ApiResponseMessage(HttpStatus.OK, 200);
+        } else {
+            return new ApiResponseMessage(HttpStatus.BAD_REQUEST, 400);
+        }
+    }
 
 
 
