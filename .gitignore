@@ -1,5 +1,5 @@
 ### Eclipse ###
-
+*.properties
 .metadata
 bin/
 tmp/
