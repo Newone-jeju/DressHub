@@ -27,7 +27,7 @@ public class LoginController {
     @Autowired
     UserRepository userRepository;
     @PostMapping("/login")
-    public String login(@RequestBody AuthUser auth, HttpServletResponse res){
+    public String login(@ModelAttribute AuthUser auth, HttpServletResponse res){
         BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
         String jwtString = null;
         try{

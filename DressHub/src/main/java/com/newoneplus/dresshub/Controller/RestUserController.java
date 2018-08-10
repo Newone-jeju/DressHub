@@ -34,7 +34,7 @@ public class RestUserController {
 
 
     @PostMapping("/signup")
-    public ApiResponseMessage create(@RequestBody User user) {
+    public ApiResponseMessage create(@ModelAttribute User user) {
         if (user.getUid() == "" || user.getName() == "") {
             return new ApiResponseMessage(HttpStatus.BAD_REQUEST, 400);
         }
