@@ -31,6 +31,8 @@ public class RestUserController {
         return userRepository.findAll();
     }
 
+
+
     @PostMapping("/signup")
     public ApiResponseMessage create(@RequestBody User user) {
         if (user.getUid() == "" || user.getName() == "") {
@@ -42,6 +44,7 @@ public class RestUserController {
             user.setPassword(passwordEncoder.encode(user.getPassword()));
 //            role.setRoleName("USER");
 //            user.setRoles(Arrays.asList(role));
+            user.setUserType(1);
             userRepository.save(user);
             return new ApiResponseMessage(HttpStatus.OK, 200);
         } catch (Exception ex){

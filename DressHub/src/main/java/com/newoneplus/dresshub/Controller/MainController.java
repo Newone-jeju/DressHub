@@ -39,4 +39,9 @@ public class MainController {
     public String loginVC() {
         return "/login";
     }
+
+    @GetMapping("/join")
+    public String joinVC() {
+        return "join";
+    }
 }

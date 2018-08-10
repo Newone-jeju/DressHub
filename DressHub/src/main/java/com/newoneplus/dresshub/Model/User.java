@@ -36,6 +36,9 @@ public class User {
 //    @Pattern(regexp="^[_0-9a-zA-Z-]+@[0-9a-zA-Z]+(.[_0-9a-zA-Z-]+)*$" ,message="올바른 이메일을 입력하세요.")
     private String email;
 
+    @Column(name = "user_type")
+    private Integer userType;
+
     @Column
     private String address;
     @Column
