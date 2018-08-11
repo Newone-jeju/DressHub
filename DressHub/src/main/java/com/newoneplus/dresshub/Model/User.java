@@ -1,6 +1,7 @@
 package com.newoneplus.dresshub.Model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
@@ -29,6 +30,7 @@ public class User {
     private String uid;
     @Column
 //    @Pattern(regexp="([a-zA-Z0-9].*[!,@,#,$,%,^,&,*,?,_,~])|([!,@,#,$,%,^,&,*,?,_,~].*[a-zA-Z0-9]){10,16}" ,message="숫자 영문자 특수 문자를 포함한 10 ~ 16 자를 입력하세요. ")
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String password;
     @Column
     private String name;
@@ -41,7 +43,7 @@ public class User {
 
     @Column
     private String address;
-    @Column
+    @Column(name = "phone_number")
     private String phoneNumber;
     @Column
     private String nickname;

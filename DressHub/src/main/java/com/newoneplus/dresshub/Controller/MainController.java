@@ -1,17 +1,13 @@
 package com.newoneplus.dresshub.Controller;
 
 
-import com.newoneplus.dresshub.Model.Product;
 //import com.newoneplus.dresshub.Service.AuthorizationService;
-import com.newoneplus.dresshub.Model.ThumbUp;
-import com.newoneplus.dresshub.Service.AuthorizationService;
 
 import com.newoneplus.dresshub.Service.ProductService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import org.springframework.data.domain.Page;
-import org.springframework.stereotype.Controller;
+        import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
@@ -34,14 +30,14 @@ public class MainController {
     public String checkUser(NullPointerException e){
         return "403";
     }
-
-    @GetMapping(value ="/login")
-    public String loginVC() {
-        return "/login";
-    }
-
-    @GetMapping("/join")
-    public String joinVC() {
-        return "join";
-    }
+//
+//    @GetMapping(value ="/login")
+//    public String loginVC() {
+//        return "/login";
+//    }
+//
+//    @GetMapping("/join")
+//    public String joinVC() {
+//        return "join";
+//    }
 }

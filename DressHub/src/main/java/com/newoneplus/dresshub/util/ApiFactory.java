@@ -31,4 +31,18 @@ public class ApiFactory {
         apiResponseMessage.setMessage("요청하신 자원이 없습니다.");
         return apiResponseMessage;
     }
+
+    public static ApiResponseMessage serverError() {
+        ApiResponseMessage apiResponseMessage = new ApiResponseMessage();
+        apiResponseMessage.setResult_code(500);
+        apiResponseMessage.setMessage("서버 오류입니다.");
+        return apiResponseMessage;
+    }
+
+    public static ApiResponseMessage badRequest() {
+        ApiResponseMessage apiResponseMessage = new ApiResponseMessage();
+        apiResponseMessage.setResult_code(400);
+        apiResponseMessage.setMessage("잘못된 요청입니다.");
+        return apiResponseMessage;
+    }
 }

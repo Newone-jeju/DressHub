@@ -27,7 +27,7 @@ public class LoginController {
     @Autowired
     UserRepository userRepository;
     @PostMapping("/login")
-    public String login(@ModelAttribute AuthUser auth, HttpServletResponse res){
+    public String login(@RequestBody AuthUser auth, HttpServletResponse res){
         BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
         String jwtString = null;
         try{
@@ -39,6 +39,9 @@ public class LoginController {
                         .setSubject("")
                         .claim("uid", user.getUid())
                         .claim("name", user.getName())
+                        .claim("user_type", user.getUserType())
+                        .claim("nickname", user.getNickname())
+                        .claim("email", user.getEmail())
                         .signWith(SignatureAlgorithm.HS512, "Dresshub")
                         .compact();
             }else{

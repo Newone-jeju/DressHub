@@ -6,6 +6,7 @@ import com.newoneplus.dresshub.Model.User;
 //import com.newoneplus.dresshub.Model.UserRole;
 //import com.newoneplus.dresshub.Model.UserRole;
 import com.newoneplus.dresshub.Repository.UserRepository;
+import com.newoneplus.dresshub.util.ApiFactory;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -34,9 +35,9 @@ public class RestUserController {
 
 
     @PostMapping("/signup")
-    public ApiResponseMessage create(@ModelAttribute User user) {
+    public ApiResponseMessage create(@RequestBody User user) {
         if (user.getUid() == "" || user.getName() == "") {
-            return new ApiResponseMessage(HttpStatus.BAD_REQUEST, 400);
+            return ApiFactory.badRequest();
         }
         try {
 //            UserRole role = new UserRole();
@@ -46,9 +47,9 @@ public class RestUserController {
 //            user.setRoles(Arrays.asList(role));
             user.setUserType(1);
             userRepository.save(user);
-            return new ApiResponseMessage(HttpStatus.OK, 200);
+            return ApiFactory.accept();
         } catch (Exception ex){
-            return new ApiResponseMessage(HttpStatus.INTERNAL_SERVER_ERROR, 500, ex);
+            return ApiFactory.serverError();
         }
     }
 
@@ -57,9 +58,9 @@ public class RestUserController {
     public ApiResponseMessage modify(@RequestBody User user) {
         if (userRepository.existsById(user.getId()) == true) {
             userRepository.save(user);
-            return new ApiResponseMessage(HttpStatus.OK, 200);
+            return ApiFactory.accept();
         } else {
-            return new ApiResponseMessage(HttpStatus.BAD_REQUEST, 400);
+            return ApiFactory.badRequest();
         }
     }
 

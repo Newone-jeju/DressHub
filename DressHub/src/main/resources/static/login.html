@@ -11,8 +11,8 @@
 <div id="top">
     <h1 id="logo"><a href="/index.html">DRESS HUB</a></h1>
     <ul class="topul">
-        <li><a href="../login">LOGIN</a></li>
-        <li><a href="../join">회원가입</a></li>
+        <li><a href="../login.html">LOGIN</a></li>
+        <li><a href="../join.html">회원가입</a></li>
     </ul>
 </div>
 <nav id="nav">
@@ -57,37 +57,39 @@
 <section class="container">
     <div class="login">
         <h1 class=h1_login>MEMBER LOGIN</h1>
-        <div th:if="${param.error}">
-            <div class="alert alert-danger">
-                아이디 혹은 비밀번호를 확인해주세요.
-            </div>
-        </div>
-        <div th:if="${param.logout}">
-            <div class="alert alert-info">
-                로그아웃이 완료되었습니다.
-            </div>
-        </div>
-        <div th:if="${param.duplicate}">
-            <div class="alert alert-info">
-                다른 기기에서 접속이 발생하여 로그아웃 되었습니다.
-            </div>
-        </div>
-        <form method="post" action="/api/login"  >
+        <!--<div th:if="${param.error}">-->
+            <!--<div class="alert alert-danger">-->
+                <!--아이디 혹은 비밀번호를 확인해주세요.-->
+            <!--</div>-->
+        <!--</div>-->
+        <!--<div th:if="${param.logout}">-->
+            <!--<div class="alert alert-info">-->
+                <!--로그아웃이 완료되었습니다.-->
+            <!--</div>-->
+        <!--</div>-->
+        <!--<div th:if="${param.duplicate}">-->
+            <!--<div class="alert alert-info">-->
+                <!--다른 기기에서 접속이 발생하여 로그아웃 되었습니다.-->
+            <!--</div>-->
+        <!--</div>-->
+        <form method="post" onclick="return false" >
             <!--<input type ="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>-->
-            <p><input class='id' type="text" name="uid" value="" placeholder="  ID"></p>
-            <p><input class='password' type="password" name="password" value="" placeholder="  Password"></p>
-            <p ><input class="btn_login" type="submit" name="submit" value="LOGIN"></p>
+            <p><input class='id' type="text" name="uid" value="" placeholder="  ID" id="id"></p>
+            <p><input class='password' type="password" name="password" value="" placeholder="  Password" id="password"></p>
+            <p ><input class="btn_login" type="submit" name="submit" id="loginButton" value="LOGIN"></p>
         </form>
     </div>
 
     <div class="login_help">
         <ul class="topul">
             <li><a href=#>아이디/비밀번호찾기</a></li>
-            <li><a href="../join">회원가입</a></li>
+            <li><a href="join.html">회원가입</a></li>
         </ul>
     </div>
 </section>
 <script src="../js/menu.js">
 </script>
+<script type="text/javascript" src="../js/jquery-3.3.1.min.js" charset="utf-8"></script>
+<script type="text/javascript" src="../js/login.js" charset="utf-8"></script>
 </body>
 </html>
