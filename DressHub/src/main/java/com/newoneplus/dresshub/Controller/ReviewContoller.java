@@ -9,23 +9,17 @@ import com.newoneplus.dresshub.Model.Review;
 import com.newoneplus.dresshub.Repository.LeaseInfoRepository;
 import com.newoneplus.dresshub.Repository.ReviewRepository;
 import com.newoneplus.dresshub.Service.AuthorizationService;
-import com.newoneplus.dresshub.Service.ReviewService;
 
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import sun.misc.BASE64Decoder;
 
 import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletResponse;
-import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.nio.file.InvalidPathException;
 import java.text.SimpleDateFormat;
 import java.util.Base64;
 import java.util.Date;
@@ -39,7 +33,6 @@ import java.util.Optional;
 public class ReviewContoller {
     ReviewRepository reviewRepository;
     LeaseInfoRepository leaseInfoRepository;
-    ReviewService reviewService;
 
     @GetMapping("/{id}")
     public Review get(@PathVariable Integer id) {
@@ -86,7 +79,6 @@ public class ReviewContoller {
         reviewRepository.deleteById(id);
         res.setStatus(200);
         return null;
-
     }
 
 
@@ -122,8 +114,6 @@ public class ReviewContoller {
 
     private void saveImage(@RequestParam MultipartFile image) {
         ImageProcesser imageProcesser = new ImageProcesser();
-        //TODO 권한 문제 해결 필요
-        System.out.println(image);
         BufferedImage bufferedImage = null;
         try {
             bufferedImage = ImageIO.read(image.getInputStream());
