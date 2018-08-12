@@ -42,8 +42,9 @@ public class ReviewContoller {
     ReviewService reviewService;
 
     @GetMapping("/{id}")
-    public Optional get(@PathVariable Integer id) {
-        return reviewRepository.findById(id);
+    public Review get(@PathVariable Integer id) {
+        Optional<Review> review = reviewRepository.findById(id);
+        return review.orElse(null);
     }
 
 
@@ -60,8 +61,7 @@ public class ReviewContoller {
     }
 
     @PostMapping
-    public ResultMessage insert(@RequestBody Review review, HttpServletResponse res) {
-        //TODO 테스트코드, 개발완료시 newReview사용할것
+    public Review insert(@RequestBody Review review, HttpServletResponse res) {
         //TODO 시연용 유저 정보 가져오는 코드 반드시 지울것
         review.setUser(AuthorizationService.getCurrentUser().getUid());
 
@@ -73,13 +73,10 @@ public class ReviewContoller {
         review.setLeaseEnd(leaseInfo.getLeaseEnd());
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss.S");
         review.setDate(dateFormat.format(new Date()));
-        reviewRepository.save(review);
         res.setStatus(200);
 
         byte[] xxx = Base64.getDecoder().decode(review.getImage());
-
-
-        return null;
+        return reviewRepository.save(review);
     }
 
 
@@ -94,12 +91,10 @@ public class ReviewContoller {
 
 
     @PutMapping
-    public ResultMessage update(@RequestBody Review review, HttpServletResponse res) {
+    public Review update(@RequestBody Review review, HttpServletResponse res) {
         //TODO 시연용 유저 정보 가져오는 코드 반드시 지울것
         review.setUser(AuthorizationService.getCurrentUser().getUid());
-        reviewRepository.save(review);
-        res.setStatus(200);
-        return null;
+        return reviewRepository.save(review);
     }
 
     private static final String IMAGE_PATH = System.getProperty("user.dir") + "/out/production/resources/static/review/image/";
@@ -137,7 +132,5 @@ public class ReviewContoller {
             e.printStackTrace();
         }
     }
-
-
 }
 
