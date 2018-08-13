@@ -38,6 +38,7 @@ public class Product {
     Date registrationDate;
     Integer leastLeaseDay;
     String size;
+    Integer SearchPriority;
     @Transient
     ArrayList<MultipartFile> image;
 
