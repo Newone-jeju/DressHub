@@ -117,7 +117,6 @@ public class ProductController {
                              @RequestParam(defaultValue = "null") String provider,
                              @RequestParam(defaultValue = "null") String contents, Pageable pageable) {
         if (name != null && !name.equals("null")) {
-            List lists = new ArrayList();
             List<Product> map = productRepository.findAllByName(name, pageable);
             List<Integer> ids = new ArrayList<>();
             for (Product p : map) {
@@ -158,7 +157,13 @@ public class ProductController {
             for (int i = pageable.getPageSize() * pageable.getPageNumber(); i < (pageable.getPageSize() + 1) * pageable.getPageNumber(); i++) {
                 result.add(fullResult.get(i));
             }
-            return productRepository.findAllByProvider(provider, pageable);
+            Page<Product> map = productRepository.findAllByProvider(provider, pageable);
+            List<Integer> ids = new ArrayList<>();
+            for (Product p : map) {
+                ids.add(p.getId());
+            }
+            return productRepository.findByIdIn(ids, pageable);
+//            return productRepository.findAllByProvider(provider, pageable);
 
         } else {
             return null;
