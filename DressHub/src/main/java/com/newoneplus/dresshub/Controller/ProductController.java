@@ -139,7 +139,7 @@ public class ProductController {
             return locations;
 
         } else if (category != null && !category.equals("null")) {
-            Page<Product> categories = productRepository.findAllByCategory(category, pageable);
+            Page<Product> categories = productRepository.findAllByCategoryContaining(category, pageable);
             return categories;
 
         } else if (size != null && !size.equals("null")) {
