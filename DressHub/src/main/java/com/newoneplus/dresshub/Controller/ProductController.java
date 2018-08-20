@@ -115,7 +115,13 @@ public class ProductController {
     @GetMapping("/list/searching")
     public Page<Product> get(@RequestParam(defaultValue = "null") String name,
                              @RequestParam(defaultValue = "null") String provider,
+                             @RequestParam(defaultValue = "null") String location,
+                             @RequestParam(defaultValue = "null") String category,
+                             @RequestParam(defaultValue = "null") String size,
                              @RequestParam(defaultValue = "null") String contents, Pageable pageable) {
+
+//        @Transient
+//        ArrayList<MultipartFile> image;
         if (name != null && !name.equals("null")) {
             List<Product> map = productRepository.findAllByName(name, pageable);
             List<Integer> ids = new ArrayList<>();
@@ -123,9 +129,23 @@ public class ProductController {
                 ids.add(p.getId());
             }
             return productRepository.findByIdIn(ids, pageable);
+
         } else if (provider != null && !provider.equals("null")) {
             Page<Product> lists = productRepository.findAllByProvider(provider, pageable);
             return lists;
+
+        } else if (location != null && !location.equals("null")) {
+            Page<Product> locations = productRepository.findAllByLocation(location, pageable);
+            return locations;
+
+        } else if (category != null && !category.equals("null")) {
+            Page<Product> categories = productRepository.findAllByCategory(category, pageable);
+            return categories;
+
+        } else if (size != null && !size.equals("null")) {
+            Page<Product> sizes = productRepository.findAllBySize(size, pageable);
+            return sizes;
+
         } else if (contents != null && !contents.equals("null")) {
             String[] words = contents.split(" ");
 
