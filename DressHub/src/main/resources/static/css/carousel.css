@@ -10,8 +10,6 @@
 .card_carousel_wrap{
 	/*requre media query */
 	width:85%;
-	/* 보기좋게 하기 위한 마진 삭제 필 */
-	margin:30px;
 }
 
 .card_carousel_header, .card_carousel_container, .card_carousel_container_content{
@@ -83,17 +81,19 @@
 	margin-right: 25px;
 	text-decoration: none;
 	color:black;
+	width: 180px;
 }
 .card_carousel_container_content_card:nth-child(1){
 	margin-left: 25px;
 }
 
 .card_img_wrap{
-	height: auto;
+	height: 180px;
 }
 .card_img{
 	width:100%;
-	height:auto;
+	height:100%;
+	margin:0 auto;
 }
 
 .card_text_wrap{

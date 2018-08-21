@@ -42,6 +42,8 @@ $(document).ready(function () {
             "color": "red",
             "font-weight": "bold"
         });    // 현재 페이지 표시
+
+        var productIdArr = [];
         $("#paging a").click(function () {
             var $item = $(this);
             var $id = $item.attr("id");
@@ -50,14 +52,13 @@ $(document).ready(function () {
             if ($id == "next") selectedPage = next;
             if ($id == "prev") selectedPage = prev;
             $.ajax({
-                url: './products/search?page=' + selectedPage + "&category=" + categoryString,
+                url: './product/list/search?page=' + selectedPage + "&category=" + categoryString,
                 dataType: 'json',
                 type: 'get',
                 success: function (data) {
-                    var like = data.like;
-                    console.log("like" + like);
                     totalCount = data.totalElements;
                     var product = {};
+                    
                     console.log("$item=" + $item);
                     data = data.content;
                     console.log(data);
@@ -71,35 +72,27 @@ $(document).ready(function () {
                         } else {
                             var likeBtn ="";
                             for (var i = 0; i < data.length; i++) {
+                                productIdArr.push(data[i].id);
                                 cards +=
                                     '<span class="product_container_content_card" data-href="/product_details.html?productId=' + data[i].id + '">' +
-                                    '<div class="card_img_wrap">' +
-                                    '<img src="/product_image/origin' + data[i].thumbnailImage + '" alt="blank" class="card_img">' +
-                                    '<div class="hover-content">' +
-                                    '<img src="../image/' + data[i].state + '_icon.png}" alt="" class="hover-size">' +
-                                    '<div class="hover-btn-wrap">' +
-                                    '<img src="../image/cart_btn_0.png" alt="" class="cart_btn" name="' + data[i].id + '">'
+                                    '   <div class="card_img_wrap">' +
+                                    '       <img src="/product_image/origin' + data[i].thumbnailImage + '" alt="blank" class="card_img">' +
+                                    '       <div class="hover-content">' +
+                                    '           <img src="../image/' + data[i].size + '_icon.png" alt="" class="hover-size">' +
+                                    '           <div class="hover-btn-wrap">' +
+                                    '               <img src="../image/cart_btn_0.png" alt="" class="cart_btn" name="' + data[i].id + '">' +
+                                    '               <img src="../image/like_btn_0.png" alt="" class="like_btn 0 " name="'+data[i].id+ '">'
 
-                                    if(data[i].thumbUps.length != 0){
-                                     likeBtn = '<img src="../image/like_btn_1.png" alt="" class="like_btn 1" name="' + data[i].id + '">';
-                                    }else{
-                                     likeBtn= '<img src="../image/like_btn_0.png" alt="" class="like_btn 0 " name="'+data[i].id+ '">';
-                                    }
-
-                                cards += likeBtn;
-                                    if(data[i].likes == null){
-                                        data[i].likes=0;
-                                    }
-                                cards += '<span class="like-num">'+data[i].likes+'</span>'+
+                                cards += '               <span class="like-num">'+data[i].likes+'</span>'+
                                     // json 추가 필요
-                                    '</div>' +
-                                    '</div>' +
-                                    '</div>' +
-                                    '<div class="card_text_wrap">' +
-                                    '<h3 class="text_name">' + data[i].name + '</h3>' +
-                                    '<p class="text_deposit">보증금 : ' + data[i].deposit + '</p>' +
-                                    '<p class="text_costPerDay">1일 렌탈료 : ' + data[i].costPerDay + '</p>' +
-                                    '</div>' +
+                                    '           </div>' +
+                                    '       </div>' +
+                                    '   </div>' +
+                                    '   <div class="card_text_wrap">' +
+                                    '       <h3 class="text_name">' + data[i].name + '</h3>' +
+                                    '       <p class="text_deposit">보증금 : ' + data[i].deposit + '</p>' +
+                                    '       <p class="text_costPerDay">1일 렌탈료 : ' + data[i].costPerDay + '</p>' +
+                                    '   </div>' +
                                     '</span>';
                             }
 
@@ -108,10 +101,24 @@ $(document).ready(function () {
 
                     }
                     product.mapcard();
+                    console.log('question')
+                    console.log(productIdArr)
+                    console.log(JSON.stringify(productIdArr))
+                    $.ajax({
+                        type: "GET",
+                        url: "./thumbUp/list/product",
+                        data: JSON.stringify(productIdArr),
+                        async: false,
+                        success: function(res){
+                            console.log('answer')
+                            console.log(res)
+                        }
+
+                    })
+
                     //페이징
 
                     paging(totalCount, 25, 10, selectedPage);
-                    console.log("test");
 
                     $(".product_container_content_card").click(function (e) {
                         console.log($(this).attr("data-href"));
@@ -151,7 +158,10 @@ $(document).ready(function () {
                                     target.removeClass("0");
                                     target.addClass("1");
                                 }
-                            }
+                            },
+                            error: function(jqXHR, textStatus, errorThrown) {
+                                console.log("좋아요 에러");
+                            },
                         });
 
                     });
