@@ -15,7 +15,7 @@
         var ajaxData = '';
         //상품 데이터
         console.log(productId)
-        ajaxData = new AjaxData('/products/'+productId, false);
+        ajaxData = new AjaxData('/product/'+productId, false);
         data = ajaxData.getData();
         console.log(data);
         ajaxData = undefined;
