@@ -1,4 +1,6 @@
 ### Eclipse ###
+DressHub/src/main/resources/application.properties
+.properties
 *.properties
 .metadata
 bin/
