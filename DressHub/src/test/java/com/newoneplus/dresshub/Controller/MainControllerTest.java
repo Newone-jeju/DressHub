@@ -54,7 +54,7 @@
 //
 //
 ////    @Test
-////    public void getProductListTest() throws Exception {
+////    public void getProductListTest() throws Exceptions {
 ////        mockMvc.perform(get("/products")).andExpect(status().isOk());
 ////
 ////        verify(mainService).getProductList();
