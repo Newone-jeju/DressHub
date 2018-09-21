@@ -14,5 +14,5 @@ public interface ReviewService {
     Review insert(Review review) throws NotLoginedException, NoLeaseInfoException;
     Review update(Review review) throws NotLoginedException, NoResourcePresentException;
     void delete(Integer id) throws NotLoginedException, NoResourcePresentException, NoPermissionException;
-    void saveImage(Integer reviewId, MultipartFile image) throws NoResourcePresentException, DuplicateFileNameException, IOException;
+    void saveImage(Integer reviewId, MultipartFile image, String token) throws NoResourcePresentException, DuplicateFileNameException, IOException;
 }

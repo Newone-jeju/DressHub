@@ -89,7 +89,7 @@ public class ReviewContoller {
     @ResponseBody
     public ResultMessage insertImage(@RequestParam MultipartFile image, @RequestParam Integer reviewId, HttpServletResponse res) {
         try {
-            reviewService.saveImage(reviewId, image);
+            reviewService.saveImage(reviewId, image, "");
         } catch (NoResourcePresentException e) {
             res.setStatus(404, e.getMessage());
         } catch (DuplicateFileNameException e) {
@@ -99,6 +99,5 @@ public class ReviewContoller {
         }
         return null;
     }
-
 }
 

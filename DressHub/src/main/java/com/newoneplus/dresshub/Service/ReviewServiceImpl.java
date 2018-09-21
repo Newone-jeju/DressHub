@@ -113,13 +113,19 @@ public class ReviewServiceImpl implements ReviewService{
     }
 
     @Override
-    public void saveImage(Integer reviewId, @RequestParam MultipartFile image) throws IOException, NoResourcePresentException {
+    public void saveImage(Integer reviewId, @RequestParam MultipartFile image, String token) throws IOException, NoResourcePresentException {
         BufferedImage bufferedImage = null;
         if(reviewRepository.existsById(reviewId)) {
-            InputStream inputStream = image.getInputStream();
-            bufferedImage = ImageIO.read(inputStream);
-            ImageIO.write(bufferedImage, "jpg", new File(IMAGE_PATH + "/" + image.getOriginalFilename()));
-            inputStream.close();
+            Review review = reviewRepository.findById(reviewId).get();
+            String userInToken = "";
+            if(review.getUser().equals(userInToken)) {
+                InputStream inputStream = image.getInputStream();
+                bufferedImage = ImageIO.read(inputStream);
+                ImageIO.write(bufferedImage, "jpg", new File(IMAGE_PATH + "/" + image.getOriginalFilename()));
+                inputStream.close();
+            }else {
+                throw new NoResourcePresentException();
+            }
         }else{
             throw new NoResourcePresentException();
         }

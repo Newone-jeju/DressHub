@@ -1,6 +1,5 @@
 package com.newoneplus.dresshub;
 
-import com.newoneplus.dresshub.Service.AuthorizationService;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.security.StaticResourceLocation;
