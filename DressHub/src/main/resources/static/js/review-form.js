@@ -49,11 +49,14 @@ function getEditInfo(review_id) {
     }else {
         var id = review_id;
         console.log(id)
+
+
         $.ajax({
             type: "GET",
             url: "/review/"+id,// id로 받아올 리뷰 url
             async: false,
             data: {'id': id},
+            contentType : "application/json;charset=UTF-8",
             dataType: "json", // 서버에서 받을 데이터 형식
             success: function (response) {
                 console.log(response);
@@ -78,7 +81,8 @@ function gatherForm(){
         rate: $(".hid-rank").val(),
         title: $(".title-content").val(),
         comment: $(".text-content").val(),
-        imageUrl: $(".img-content").val().split("\\").slice(-1)[0]
+        imageUrl: $(".img-content").val().split("\\").slice(-1)[0],
+        image : $(".preview-img").attr("src")
     }
 }
 
@@ -105,12 +109,21 @@ var method = "POST";
 reviewFormInit();
 var formData = {}
 
+$(".img-content").on("change", function () {
+    getBase64($(".img-content")[0].files[0])
+    $(".preview-img").css("display", "block")
+})
+
 
 $(".send-btn").click(function(){
     var ajaxUtil = new AjaxUtil('review/'+review_id);
+
+    console.log($(".preview-img").attr("src"));
+
     ajaxUtil.crudData(gatherForm(), method, function(){
         console.log("send form!")
         //이미지 전송
+        console.log(gatherForm().image)
         $("#imageForm").on("submit", function() {
 
         });
@@ -124,3 +137,16 @@ $(".send-btn").click(function(){
 $(".cancel-btn").click(function(){
     window.open('about:blank', '_self').close();
 });
+
+
+
+function getBase64(file) {
+    var reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = function () {
+        $(".preview-img").attr("src",reader.result)
+    };
+    reader.onerror = function (error) {
+        console.log('Error: ', error);
+    };
+}

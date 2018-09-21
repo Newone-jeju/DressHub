@@ -2,10 +2,8 @@ package com.newoneplus.dresshub.Model;
 
 import lombok.Data;
 import lombok.ToString;
-import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.*;
-import java.util.ArrayList;
 
 @Data
 @Entity
@@ -24,4 +22,6 @@ public class Review {
     String leaseStart; //0000-00-00
     String leaseEnd; //0000-00-00
     String imageUrl;
+    @Transient
+    String image;
 }

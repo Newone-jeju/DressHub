@@ -26,3 +26,8 @@
 /dist/
 /nbdist/
 /.nb-gradle/
+<<<<<<< HEAD
+=======
+
+*.properties
+>>>>>>> bbdf51da3a8e65280badc039d3ec273e423611d5
