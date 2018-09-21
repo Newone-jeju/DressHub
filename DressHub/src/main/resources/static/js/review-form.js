@@ -11,7 +11,7 @@ function getName(){
 
 function getauthor(){
     //작성자 이름 가져오기
-    var user = new CookieUser();
+    var user = new TokenUser();
     var userId = user.getUserId();
     $(".author-content").text(userId);
 

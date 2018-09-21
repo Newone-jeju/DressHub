@@ -132,7 +132,7 @@ function write_btn(){
     $(".review-write-btn").click(function(){
         //권한검사
         //로그인 안되있으면 로그인 페이지로 리다이렉션
-        var user = new CookieUser();
+        var user = new TokenUser();
         if(user.inspectId() == false){
             return false;
         }
@@ -158,11 +158,11 @@ function getProductId(){
 function edit_btn(){
     $(".review-edit-btn").click(function(){
         //권한검사
-        var user = new CookieUser();
+        var user = new TokenUser();
         //로그인 안되있으면 로그인 페이지로 리다이렉션
         if(user.inspectId() == false){
             return false;
-        }
+        }해
         var reviewUser = $(this).parent().parent().prev().children(".td-author").text();
         console.log(reviewUser);
         if(user.inspectIdDiff(reviewUser) == false){
@@ -179,7 +179,7 @@ function edit_btn(){
 function delete_btn(){
     $(".review-delete-btn").click(function(){
         //권한검사
-        var user = new CookieUser();
+        var user = new TokenUser();
         //로그인 안되있으면 로그인 페이지로 리다이렉션
         if(user.inspectId() == false){
             return false;
