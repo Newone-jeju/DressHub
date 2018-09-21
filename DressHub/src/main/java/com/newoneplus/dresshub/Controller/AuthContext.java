@@ -3,15 +3,12 @@ package com.newoneplus.dresshub.Controller;
 import com.newoneplus.dresshub.Model.ApiResponseMessage;
 import com.newoneplus.dresshub.Model.ResultMessage;
 import com.newoneplus.dresshub.util.ApiFactory;
-import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.Jws;
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.MalformedJwtException;
+import io.jsonwebtoken.*;
 
 import javax.servlet.http.HttpServletResponse;
 
 public class AuthContext {
-    public static ApiResponseMessage askAuthorityAndAct(String userFromEntityModel, String token,
+    public static void askAuthorityAndAct(String userFromEntityModel, String token,
                                                         HttpServletResponse res, ActAfterAuthStrategy actAfterAuthStrategy) {
         ApiResponseMessage apiResponseMessage = null;
         if (token == null) {
@@ -23,17 +20,18 @@ public class AuthContext {
                         .setSigningKey("Dresshub")
                         .parseClaimsJws(token);
                 user = (String) claims.getBody().get("uid");
-            }catch (MalformedJwtException e){
+                if (userFromEntityModel.equals(user)) {
+                    actAfterAuthStrategy.act();
+                    apiResponseMessage = ApiFactory.accept();
+                } else {
+                    apiResponseMessage = ApiFactory.noAuthority();
+                }
+            }catch (MalformedJwtException|UnsupportedJwtException|SignatureException|IllegalArgumentException e){
                 apiResponseMessage = ApiFactory.notLogined();
+//                return apiResponseMessage;
             }
-            if (userFromEntityModel.equals(user)) {
-                actAfterAuthStrategy.act();
-                apiResponseMessage = ApiFactory.accept();
-            } else {
-                apiResponseMessage = ApiFactory.noAuthority();
-            }
-            res.setStatus(apiResponseMessage.getResult_code());
         }
-        return apiResponseMessage;
+//        return apiResponseMessage;
+        res.setStatus(apiResponseMessage.getResult_code());
     }
 }
