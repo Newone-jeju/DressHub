@@ -1,5 +1,6 @@
 package com.newoneplus.dresshub.Service;
 
+import com.newoneplus.dresshub.Controller.AuthContext;
 import com.newoneplus.dresshub.Exceptions.NoLeaseInfoException;
 import com.newoneplus.dresshub.Exceptions.NoPermissionException;
 import com.newoneplus.dresshub.Exceptions.NoResourcePresentException;
@@ -11,9 +12,13 @@ import com.newoneplus.dresshub.Repository.ReviewRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.imageio.ImageIO;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -22,6 +27,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
+import java.util.concurrent.atomic.AtomicReference;
 
 @Service
 @AllArgsConstructor
@@ -48,49 +54,52 @@ public class ReviewServiceImpl implements ReviewService{
 
 
     @Override
-    public Review insert(Review review) throws NotLoginedException, NoLeaseInfoException {
-        Review result = null;
-        //TODO 지금은 중복코드이나 곧 토큰이 사용될거라서 리팩토링은 일단 미룸
-        try {
-            review.setUser(AuthorizationService.getCurrentUser().getUid());
-        }
-        catch (NullPointerException e ){
-            throw new NotLoginedException();
-        }
+    public Review insert(Review review) throws NoLeaseInfoException {
+        HttpServletResponse res = ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes()).getResponse();
+        HttpServletRequest req = ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes()).getRequest();
+
+        String token = req.getHeader("token");
+        review.setId(null);
+
+        AtomicReference<Review> result = null;
+
         Integer product = review.getProductId();
         List<LeaseInfo> leaseInfos = leaseInfoRepository.findAllByLeaserAndProduct(review.getUser(), product);
 
         if(leaseInfos.size() >= 1 ) {
-            LeaseInfo leaseInfo = leaseInfos.get(leaseInfos.size() - 1);
-            review.setLeaseStart(leaseInfo.getLeaseStart());
-            review.setLeaseEnd(leaseInfo.getLeaseEnd());
-            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.S");
-            review.setDate(dateFormat.format(new Date()));
-            //TODO 이미지 처리 보류
-            result = reviewRepository.save(review);
+            AuthContext.askAuthorityAndAct(review.getUser(), token, res, ()->{
+                LeaseInfo leaseInfo = leaseInfos.get(leaseInfos.size() - 1);
+                review.setUser(AuthorizationService.getCurrentUser().getUid());
+                review.setLeaseStart(leaseInfo.getLeaseStart());
+                review.setLeaseEnd(leaseInfo.getLeaseEnd());
+                SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.S");
+                review.setDate(dateFormat.format(new Date()));
+                result.set(reviewRepository.save(review));
+            });
+            return result.get();
         }else{
             throw new NoLeaseInfoException();
         }
-        return result;
     }
 
     @Override
-    public Review update(Review review) throws NotLoginedException, NoResourcePresentException {
-        Review result = null;
-        //TODO 지금은 중복코드이나 곧 토큰이 사용될거라서 리팩토링은 일단 미룸
-        try {
-            review.setUser(AuthorizationService.getCurrentUser().getUid());
-        }
-        catch (NullPointerException e ){
-            throw new NotLoginedException();
-        }
+    public Review update(Review review) throws NoResourcePresentException{
+        HttpServletResponse res = ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes()).getResponse();
+        HttpServletRequest req = ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes()).getRequest();
 
-        if(reviewRepository.existsById(review.getId())){
-           result = reviewRepository.save(review);
+        String token = req.getHeader("token");
+        if (reviewRepository.existsById(review.getId())){
+            review = reviewRepository.findById(review.getId()).get();
+            AtomicReference<Review> result = null;
+            Review finalReview = review;
+
+            AuthContext.askAuthorityAndAct(review.getUser(), token, res, ()->{
+                result.set(reviewRepository.save(finalReview));
+            });
+            return result.get();
         }else{
             throw new NoResourcePresentException();
         }
-        return result;
     }
 
     @Override
