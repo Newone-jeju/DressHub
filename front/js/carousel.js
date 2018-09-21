@@ -109,8 +109,8 @@ $(document).ready(function() {
 
 
 	carousel.mapcard = function(){
-		console.log('mapcard');
-		console.log(carousel.cardnum);
+		// console.log('mapcard');
+		// console.log(carousel.cardnum);
 			var cards = '';
 			for(var i= 0; i <carousel.cardnum.length; i++){
 				cards +=
@@ -128,7 +128,7 @@ $(document).ready(function() {
 						'</div>'+
 					'</div>'+
 				'</a>';
-				console.log(carousel.cardnum[i]);
+				// console.log(carousel.cardnum[i]);
 			}
 			$('.card_carousel_container_content').html(cards);//+id
 	}
@@ -192,7 +192,7 @@ var prevBtn = document.querySelectorAll('button').item(0);
       var _position = position + 25;
       carouselWrapper.style.transform = 'translateX('+ _position +'%)';
      position = _position;
-     console.log('current position', position);
+     // console.log('current position', position);
     }
     function nextCarousel() {
       if ( position === -75 ) {
@@ -201,7 +201,7 @@ var prevBtn = document.querySelectorAll('button').item(0);
       var _position = position - 25;
       carouselWrapper.style.transform = 'translateX('+ _position +'%)';
       position = _position;
-      console.log('current position', position);
+      // console.log('current position', position);
     }
 
     setInterval(nextCarousel, 3000);
