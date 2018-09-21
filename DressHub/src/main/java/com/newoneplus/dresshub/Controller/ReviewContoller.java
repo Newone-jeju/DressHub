@@ -4,6 +4,8 @@ import com.newoneplus.dresshub.Exceptions.*;
 import com.newoneplus.dresshub.Model.ResultMessage;
 import com.newoneplus.dresshub.Model.Review;
 import com.newoneplus.dresshub.Service.ReviewService;
+import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -18,8 +20,8 @@ import java.util.List;
 @RequestMapping("/review")
 @ResponseBody
 public class ReviewContoller {
-    @Qualifier("ReviewServiceImpl")
-    ReviewService reviewService;
+    @Autowired
+    private ReviewService reviewService;
 
     @GetMapping("/{id}")
     public Review get(@PathVariable Integer id) {
@@ -47,8 +49,6 @@ public class ReviewContoller {
         Review result = null;
         try {
             result = reviewService.insert(review);
-        } catch (NotLoginedException e) {
-            res.setStatus(401, e.getMessage());
         } catch (NoLeaseInfoException e) {
             res.setStatus(403, e.getMessage());
         }
@@ -60,12 +60,8 @@ public class ReviewContoller {
     public ResultMessage delete(@RequestParam Integer id, HttpServletResponse res) {
         try {
             reviewService.delete(id);
-        } catch (NotLoginedException e) {
-            res.setStatus(401, e.getMessage());
         } catch (NoResourcePresentException e) {
             res.setStatus(404, e.getMessage());
-        } catch (NoPermissionException e) {
-            res.setStatus(403, e.getMessage());
         }
         return null;
     }
@@ -76,8 +72,6 @@ public class ReviewContoller {
         Review result = null;
         try {
             result = reviewService.update(review);
-        } catch (NotLoginedException e) {
-            res.setStatus(401, e.getMessage());
         } catch (NoResourcePresentException e) {
             res.setStatus(404, e.getMessage());
         }
@@ -94,10 +88,10 @@ public class ReviewContoller {
             res.setStatus(404, e.getMessage());
         } catch (DuplicateFileNameException e) {
             res.setStatus(400, e.getMessage());
-        } catch (IOException e) {
-            res.setStatus(500, "파일입출력 에러");
         }
         return null;
     }
+
+
 }
 

@@ -11,8 +11,8 @@ public interface ReviewService {
     Review get(Integer id);
     List<Review> searchByProductId(Integer productId);
     List<Review> searchByuserId(String userId);
-    Review insert(Review review) throws NotLoginedException, NoLeaseInfoException;
-    Review update(Review review) throws NotLoginedException, NoResourcePresentException, NoPermissionException;
-    void delete(Integer id) throws NotLoginedException, NoResourcePresentException, NoPermissionException;
-    void saveImage(Integer reviewId, MultipartFile image, String token) throws NoResourcePresentException, DuplicateFileNameException, IOException;
+    Review insert(Review review) throws NoLeaseInfoException;
+    Review update(Review review) throws NoResourcePresentException;
+    void delete(Integer id) throws NoResourcePresentException;
+    void saveImage(Integer reviewId, MultipartFile image, String token) throws NoResourcePresentException, DuplicateFileNameException;
 }
