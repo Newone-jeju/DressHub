@@ -22,7 +22,7 @@
 //    }
 //
 //    @Test
-//    public void testCategoryController() throws Exception {
+//    public void testCategoryController() throws Exceptions {
 //        when(categoryService.method1()).thenReturn(10);
 //        mockMvc.perform(get("/category/list")).andExpect(status().isOk());
 //

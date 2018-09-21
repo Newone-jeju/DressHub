@@ -1,6 +1,6 @@
 package com.newoneplus.dresshub.Controller;
 
 public interface ActAfterAuthStrategy {
-    void act();
+    void act() throws Exception;
 
 }
