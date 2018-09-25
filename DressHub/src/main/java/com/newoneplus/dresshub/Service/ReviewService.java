@@ -14,5 +14,5 @@ public interface ReviewService {
     Review insert(Review review) throws NoLeaseInfoException;
     Review update(Review review) throws NoResourcePresentException;
     void delete(Integer id) throws NoResourcePresentException;
-    void saveImage(Integer reviewId, MultipartFile image, String token) throws NoResourcePresentException, DuplicateFileNameException;
+    void saveImage(Integer reviewId, MultipartFile image, String token) throws NoResourcePresentException;
 }

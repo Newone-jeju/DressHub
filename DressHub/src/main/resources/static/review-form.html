@@ -9,7 +9,7 @@
 </head>
 <body>
 <section class="reviewform-wrap">
-	<form action="/review/image" method="POST" id="imageForm" name="imageData" enctype="multipart/form-data">
+	<form action="/review/image" method="POST" accept-charset="UTF-8" id="imageForm" name="imageData" enctype="multipart/form-data">
 		<div class="head flex border-bot">
 			<div class="rental-product-area flexcenter-align">
 				<div class="rental-product form-name">상품명</div>
@@ -46,7 +46,7 @@
 		</div>
 		<div class="footer">
 			<div class="btn-area flexcenter">
-				<button class="send-btn form-btn-style">작성완료</button>
+				<button class="send-btn form-btn-style" type="submit">작성완료</button>
 				<button class="cancel-btn form-btn-style">취소</button>
 			</div>
 		</div>
@@ -59,6 +59,7 @@
 <script type="text/javascript" src="js/jquery-3.3.1.min.js" charset="utf-8"></script>
 <!-- ajax 데이터 받아오기 -->
 <script type="text/javascript" src="js/ajaxData.js" charset="utf-8"></script>
+<script type="text/javascript" src="js/getToken.js" charset="utf-8"></script>
 <script type="text/javascript" src="js/getCookie.js" charset="utf-8"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.3.2/jquery.rateyo.min.js"></script>
 <script type="text/javascript" src="js/review-form.js" charset="utf-8"></script>
