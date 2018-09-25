@@ -121,6 +121,7 @@ public class ReviewServiceImpl implements ReviewService{
         if(reviewRepository.existsById(reviewId)) {
             Review review = reviewRepository.findById(reviewId).get();
             AuthContext.askAuthorityAndAct(review.getUser(), token, ()->{
+                //throw IOException
                 InputStream inputStream = image.getInputStream();
                 bufferedImage.set(ImageIO.read(inputStream));
                 ImageIO.write(bufferedImage.get(), "jpg", new File(IMAGE_PATH + "/" + image.getOriginalFilename()));
@@ -129,8 +130,6 @@ public class ReviewServiceImpl implements ReviewService{
         }else {
             throw new NoResourcePresentException();
         }
-        //TODO 이렇게만 하면 reviewId만 가지고도 악의적으로 사진을 업로드 할 수있는데... html form방식으로는 토큰을 헤더에 보낼수도 없고
-        //결과적으로 권한문제를 해결해야함
 
     }
 }

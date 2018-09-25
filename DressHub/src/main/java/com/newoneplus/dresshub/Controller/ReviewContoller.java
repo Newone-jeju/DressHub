@@ -32,48 +32,53 @@ public class ReviewContoller {
     //TODO 이거 그냥 추가 url없이 하면 좋을것같음
     @GetMapping("/list/search")
     public List get(@RequestParam(defaultValue = "-1") Integer productId,
-                    @RequestParam(defaultValue = "null") String userId, HttpServletResponse res) {
+                    @RequestParam(defaultValue = "null") String userId, HttpServletResponse res) throws IOException {
         List<Review> result = null;
         if (!productId.equals("null")) {
             result = reviewService.searchByProductId(productId);
+            res.setStatus(200);
         } else if (!userId.equals("null")) {
             result = reviewService.searchByuserId(userId);
+            res.setStatus(200);
         } else {
-            res.setStatus(400, "잘못된 요청입니다.");
+            res.sendError(400, "잘못된 요청입니다.");
         }
         return result;
     }
 
     @PostMapping
-    public Review insert(@RequestBody Review review, HttpServletResponse res) {
+    public Review insert(@RequestBody Review review, HttpServletResponse res) throws IOException {
         Review result = null;
         try {
             result = reviewService.insert(review);
+            res.setStatus(200);
         } catch (NoLeaseInfoException e) {
-            res.setStatus(403, e.getMessage());
+            res.sendError(403, e.getMessage());
         }
         return result;
     }
 
 
     @DeleteMapping(value = "/{id}")
-    public ResultMessage delete(@RequestParam Integer id, HttpServletResponse res) {
+    public ResultMessage delete(@RequestParam Integer id, HttpServletResponse res) throws IOException {
         try {
             reviewService.delete(id);
+            res.setStatus(200);
         } catch (NoResourcePresentException e) {
-            res.setStatus(404, e.getMessage());
+            res.sendError(404, e.getMessage());
         }
         return null;
     }
 
 
     @PutMapping
-    public Review update(@RequestBody Review review, HttpServletResponse res) {
+    public Review update(@RequestBody Review review, HttpServletResponse res) throws IOException {
         Review result = null;
         try {
             result = reviewService.update(review);
+            res.setStatus(200);
         } catch (NoResourcePresentException e) {
-            res.setStatus(404, e.getMessage());
+            res.sendError(404, e.getMessage());
         }
         return result;
     }
@@ -81,13 +86,13 @@ public class ReviewContoller {
 
     @PostMapping("/image")
     @ResponseBody
-    public ResultMessage insertImage(@RequestParam MultipartFile image, @RequestParam Integer reviewId, HttpServletResponse res) {
+    public ResultMessage insertImage(@RequestParam MultipartFile image, @RequestParam Integer reviewId, HttpServletResponse res) throws IOException {
         try {
             reviewService.saveImage(reviewId, image, "");
         } catch (NoResourcePresentException e) {
-            res.setStatus(404, e.getMessage());
+            res.sendError(404, e.getMessage());
         } catch (DuplicateFileNameException e) {
-            res.setStatus(400, e.getMessage());
+            res.sendError(400, e.getMessage());
         }
         return null;
     }

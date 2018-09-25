@@ -9,9 +9,10 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 
 
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 
 public class AuthContext {
-    public static void askAuthorityAndAct(String userFromEntityModel, String token, ActAfterAuthStrategy actAfterAuthStrategy) {
+    public static void askAuthorityAndAct(String userFromEntityModel, String token, ActAfterAuthStrategy actAfterAuthStrategy){
         HttpServletResponse res = ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes()).getResponse();
 
         //TODO user수정됏을 때 기존의 토큰을 사용 불가능하게 막기
@@ -33,7 +34,12 @@ public class AuthContext {
                 apiResponseMessage = ApiFactory.notLogined();
 //                return apiResponseMessage;
             } catch (Exception e) {
-                res.setStatus(500, e.getMessage());
+                try {
+                    res.sendError(500, e.getMessage());
+                } catch (IOException e1) {
+                    System.out.println(e.getMessage());
+                    e1.printStackTrace();
+                }
             }
         }
 //        return apiResponseMessage;
@@ -55,8 +61,12 @@ public class AuthContext {
                 apiResponseMessage = ApiFactory.notLogined();
 //                return apiResponseMessage;
             } catch (Exception e) {
-                res.setStatus(500, e.getMessage());
-            }
+                try {
+                    res.sendError(500, e.getMessage());
+                } catch (IOException e1) {
+                    System.out.println(e.getMessage());
+                    e1.printStackTrace();
+                }}
         }
 //        return apiResponseMessage;
         res.setStatus(apiResponseMessage.getResult_code());

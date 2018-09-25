@@ -37,6 +37,7 @@ AjaxUtil.prototype.crudData = function(crudData, type ,func){
 		{
 			url: this.url,
 		    contentType : "application/json; charset=UTF-8",
+            headers : {token:sessionStorage.getItem("token")},
 		    async: true,
 		    type: type,
 		    data: JSON.stringify(crudData),
