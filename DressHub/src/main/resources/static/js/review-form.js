@@ -81,8 +81,7 @@ function gatherForm(){
         rate: $(".hid-rank").val(),
         title: $(".title-content").val(),
         comment: $(".text-content").val(),
-        imageUrl: $(".img-content").val().split("\\").slice(-1)[0],
-        image : $(".preview-img").attr("src")
+        imageUrl: $(".img-content").val().split("\\").slice(-1)[0]
     }
 }
 
@@ -120,16 +119,12 @@ $(".send-btn").click(function(){
 
     console.log($(".preview-img").attr("src"));
 
-    ajaxUtil.crudData(gatherForm(), method, function(){
+    ajaxUtil.crudData(gatherForm(), method, function(jsonData){
         console.log("send form!")
         //이미지 전송
-        console.log(gatherForm().image)
-        // $("#imageForm").on("submit", function() {
-        //
-        // });
-        // opener.parent.location.reload();
-        // window.open('about:blank', '_self').close();
-
+        $("#imageForm").append('<input name ="reviewId" type="hidden" value="'+ jsonData.id +'">')
+        $("#imageForm").append('<input name ="token" type="hidden" value="'+ sessionStorage.getItem("token") +'">');
+        $("#imageForm").submit()
     })
     return false    ;
 });

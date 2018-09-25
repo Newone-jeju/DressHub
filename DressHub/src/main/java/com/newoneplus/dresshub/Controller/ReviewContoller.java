@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.annotation.security.RolesAllowed;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
@@ -86,13 +87,11 @@ public class ReviewContoller {
 
     @PostMapping("/image")
     @ResponseBody
-    public ResultMessage insertImage(@RequestParam MultipartFile image, @RequestParam Integer reviewId, HttpServletResponse res) throws IOException {
+    public ResultMessage insertImage(@RequestParam String token, @RequestParam MultipartFile image, @RequestParam Integer reviewId, HttpServletResponse res) throws IOException {
         try {
-            reviewService.saveImage(reviewId, image, "");
+            reviewService.saveImage(reviewId, image, token);
         } catch (NoResourcePresentException e) {
             res.sendError(404, e.getMessage());
-        } catch (DuplicateFileNameException e) {
-            res.sendError(400, e.getMessage());
         }
         return null;
     }

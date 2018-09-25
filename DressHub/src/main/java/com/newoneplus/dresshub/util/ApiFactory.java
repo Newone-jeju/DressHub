@@ -13,14 +13,14 @@ public class ApiFactory {
 
     public static ApiResponseMessage notLogined(){
         ApiResponseMessage apiResponseMessage = new ApiResponseMessage();
-        apiResponseMessage.setResult_code(404);
+        apiResponseMessage.setResult_code(401);
         apiResponseMessage.setMessage("로그인이 되어있지 않습니다.");
         return apiResponseMessage;
     }
 
     public static ApiResponseMessage noAuthority(){
         ApiResponseMessage apiResponseMessage = new ApiResponseMessage();
-        apiResponseMessage.setResult_code(404);
+        apiResponseMessage.setResult_code(403);
         apiResponseMessage.setMessage("접근 권한이 없습니다.");
         return apiResponseMessage;
     }
@@ -45,4 +45,5 @@ public class ApiFactory {
         apiResponseMessage.setMessage("잘못된 요청입니다.");
         return apiResponseMessage;
     }
+
 }

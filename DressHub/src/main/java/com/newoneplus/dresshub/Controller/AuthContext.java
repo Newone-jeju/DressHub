@@ -34,6 +34,7 @@ public class AuthContext {
                 apiResponseMessage = ApiFactory.notLogined();
 //                return apiResponseMessage;
             } catch (Exception e) {
+                apiResponseMessage = ApiFactory.serverError();
                 try {
                     res.sendError(500, e.getMessage());
                 } catch (IOException e1) {
@@ -61,12 +62,15 @@ public class AuthContext {
                 apiResponseMessage = ApiFactory.notLogined();
 //                return apiResponseMessage;
             } catch (Exception e) {
+                System.out.println(e.getMessage());
+                apiResponseMessage = ApiFactory.serverError();
                 try {
                     res.sendError(500, e.getMessage());
                 } catch (IOException e1) {
                     System.out.println(e.getMessage());
                     e1.printStackTrace();
-                }}
+                }
+            }
         }
 //        return apiResponseMessage;
         res.setStatus(apiResponseMessage.getResult_code());

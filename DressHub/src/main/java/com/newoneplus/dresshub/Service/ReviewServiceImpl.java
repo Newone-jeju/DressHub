@@ -24,6 +24,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -59,13 +60,12 @@ public class ReviewServiceImpl implements ReviewService{
 
         String token = req.getHeader("token");
         review.setId(null);
-
-        AtomicReference<Review> result = null;
+        String userId = (String) AuthContext.getDecodedToken(token).get("uid");
 
         Integer product = review.getProductId();
-        List<LeaseInfo> leaseInfos = leaseInfoRepository.findAllByLeaserAndProduct(review.getUser(), product);
-
+        List<LeaseInfo> leaseInfos = leaseInfoRepository.findAllByLeaserAndProduct(userId, product);
         if(leaseInfos.size() >= 1 ) {
+            final Review[] result = {null};
             AuthContext.askLoginedAndAct(token, ()->{
                 LeaseInfo leaseInfo = leaseInfos.get(leaseInfos.size() - 1);
                 review.setUser((String) AuthContext.getDecodedToken(token).get("uid"));
@@ -73,9 +73,9 @@ public class ReviewServiceImpl implements ReviewService{
                 review.setLeaseEnd(leaseInfo.getLeaseEnd());
                 SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.S");
                 review.setDate(dateFormat.format(new Date()));
-                result.set(reviewRepository.save(review));
+                result[0] = reviewRepository.save(review);
             });
-            return result.get();
+            return result[0];
         }else{
             throw new NoLeaseInfoException();
         }
@@ -88,13 +88,13 @@ public class ReviewServiceImpl implements ReviewService{
         String token = req.getHeader("token");
         if (reviewRepository.existsById(review.getId())){
             review = reviewRepository.findById(review.getId()).get();
-            AtomicReference<Review> result = null;
+            final Review[] result = {null};
             Review finalReview = review;
 
             AuthContext.askAuthorityAndAct(review.getUser(), token,()->{
-                result.set(reviewRepository.save(finalReview));
+                result[0] = reviewRepository.save(finalReview);
             });
-            return result.get();
+            return result[0];
         }else{
             throw new NoResourcePresentException();
         }
@@ -116,15 +116,15 @@ public class ReviewServiceImpl implements ReviewService{
     }
 
     @Override
-    public void saveImage(Integer reviewId, @RequestParam MultipartFile image, String token) throws NoResourcePresentException{
-        AtomicReference<BufferedImage> bufferedImage = null;
+    public void saveImage(Integer reviewId, MultipartFile image, String token) throws NoResourcePresentException{
+        System.out.println(token);
         if(reviewRepository.existsById(reviewId)) {
             Review review = reviewRepository.findById(reviewId).get();
             AuthContext.askAuthorityAndAct(review.getUser(), token, ()->{
                 //throw IOException
                 InputStream inputStream = image.getInputStream();
-                bufferedImage.set(ImageIO.read(inputStream));
-                ImageIO.write(bufferedImage.get(), "jpg", new File(IMAGE_PATH + "/" + image.getOriginalFilename()));
+                BufferedImage bufferedImage = ImageIO.read(inputStream);
+                ImageIO.write(bufferedImage, "jpg", new File(IMAGE_PATH  + image.getOriginalFilename()));
                 inputStream.close();
             });
         }else {

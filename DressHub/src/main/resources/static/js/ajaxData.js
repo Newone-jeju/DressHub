@@ -45,7 +45,7 @@ AjaxUtil.prototype.crudData = function(crudData, type ,func){
 		        alert("failed crud");
 		    },
 		    success: function(json_data){
-		    	func();
+		    	func(json_data);
 		    }
 		})
 }
