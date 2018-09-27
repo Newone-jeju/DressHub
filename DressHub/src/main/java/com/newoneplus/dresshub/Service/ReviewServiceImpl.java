@@ -10,6 +10,8 @@ import com.newoneplus.dresshub.Model.Review;
 import com.newoneplus.dresshub.Repository.LeaseInfoRepository;
 import com.newoneplus.dresshub.Repository.ReviewRepository;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.context.request.RequestContextHolder;
@@ -44,13 +46,13 @@ public class ReviewServiceImpl implements ReviewService{
     }
 
     @Override
-    public List<Review> searchByProductId(Integer productId) {
-        return reviewRepository.findAllByProductId(productId);
+    public Page<Review> searchByProductId(Integer productId, Pageable pageable) {
+        return reviewRepository.findAllByProductId(productId, pageable);
     }
 
     @Override
-    public List<Review> searchByuserId(String userId) {
-        return reviewRepository.findAllByUser(userId);
+    public Page<Review> searchByuserId(String userId, Pageable pageable) {
+        return reviewRepository.findAllByUser(userId, pageable);
     }
 
 

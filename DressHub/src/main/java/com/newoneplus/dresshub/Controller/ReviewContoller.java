@@ -7,6 +7,8 @@ import com.newoneplus.dresshub.Service.ReviewService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -32,14 +34,14 @@ public class ReviewContoller {
 
     //TODO 이거 그냥 추가 url없이 하면 좋을것같음
     @GetMapping("/list/search")
-    public List get(@RequestParam(defaultValue = "-1") Integer productId,
-                    @RequestParam(defaultValue = "null") String userId, HttpServletResponse res) throws IOException {
-        List<Review> result = null;
+    public Page<Review> get(@RequestParam(defaultValue = "-1") Integer productId,
+                            @RequestParam(defaultValue = "null") String userId, @RequestParam Pageable pageable, HttpServletResponse res) throws IOException {
+        Page<Review> result = null;
         if (!productId.equals("null")) {
-            result = reviewService.searchByProductId(productId);
+            result = reviewService.searchByProductId(productId, pageable);
             res.setStatus(200);
         } else if (!userId.equals("null")) {
-            result = reviewService.searchByuserId(userId);
+            result = reviewService.searchByuserId(userId, pageable);
             res.setStatus(200);
         } else {
             res.sendError(400, "잘못된 요청입니다.");
