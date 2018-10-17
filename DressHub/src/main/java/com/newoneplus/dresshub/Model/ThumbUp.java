@@ -15,4 +15,5 @@ public class ThumbUp{
     String liker;
     Integer product;
 
+
 }

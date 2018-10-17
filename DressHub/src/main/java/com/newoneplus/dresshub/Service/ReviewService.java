@@ -1,37 +1,18 @@
 package com.newoneplus.dresshub.Service;
 
-import com.newoneplus.dresshub.ImageProcesser;
-import com.newoneplus.dresshub.Model.*;
-import org.json.JSONArray;
-import org.json.JSONObject;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import com.newoneplus.dresshub.Exceptions.*;
+import com.newoneplus.dresshub.Model.Review;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.imageio.ImageIO;
-import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
+import java.util.List;
 
-@Service
-public class ReviewService {
-
-    public String saveImageAndGetUrl(MultipartFile reviewImage) {
-        String path = System.getProperty("user.dir") + "/src/main/resources/static/image/review/";
-        String filename = reviewImage.getOriginalFilename();
-
-        ImageProcesser imageProcesser = new ImageProcesser();
-
-        try {
-            BufferedImage image = imageProcesser.getOriginImage(reviewImage.getInputStream());
-            ImageIO.write(image,"jpg", new File(path + filename));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return "/image/review/" + filename;
-    }
-
+public interface ReviewService {
+    Review get(Integer id);
+    List<Review> searchByProductId(Integer productId);
+    List<Review> searchByuserId(String userId);
+    Review insert(Review review) throws NoLeaseInfoException;
+    Review update(Review review) throws NoResourcePresentException;
+    void delete(Integer id) throws NoResourcePresentException;
+    void saveImage(Integer reviewId, MultipartFile image, String token) throws NoResourcePresentException;
 }

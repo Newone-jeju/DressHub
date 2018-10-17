@@ -40,7 +40,7 @@ public class RestMemberControllerTest {
     }
 //
 //    @Test
-//    public void loginTest() throws Exception {
+//    public void loginTest() throws Exceptions {
 //        AuthenticationRequest request = new AuthenticationRequest();
 //        request.setUid("test");
 //        request.setPassword("test");

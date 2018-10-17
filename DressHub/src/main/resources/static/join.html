@@ -1,18 +1,17 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
   <head>
-    <meta charset="utf-8">
-      <script src="js/menu.js"></script>
-    <link rel="stylesheet" type="text/css" href="css/menu.css"  />
-<link rel="stylesheet" href="css/join.css">
+      <meta charset="UTF-8"/>
+    <link rel="stylesheet" type="text/css" href="../css/menu.css"  />
+<link rel="stylesheet" href="../css/join.css">
     <title></title>
   </head>
   <body>
     <div id="top">
-      <h1 id="logo"><a href="/index.html">DRESS HUB</a></h1>
+        <h1 id="logo"><a href="/index.html">DRESS HUB</a></h1>
         <ul class="topul">
-          <li><a href="login.html">LOGIN</a></li>
-          <li><a href="join.html">회원가입</a></li>
+          <li><a href="../login">LOGIN</a></li>
+          <li><a href="../join">회원가입</a></li>
         </ul>
   </div>
     <nav id="nav">
@@ -54,82 +53,101 @@
     </ul>
   </nav>
 
-
   <!-- 회원가입 -->
   <div id="join">
     <h2>회원가입</h2><hr width="90%"/>
-      <form method="GET" name="inputForm" id="inputForm">
+      <!--<form method="post" name="inputForm" id="inputForm" action="/user/signup">-->
+          <form id = "inputForm" method="post" onclick="return false">
+          <!--<input type ="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>-->
             <table id="joinTable">
                 <tr>
-                    <th><label for="name">이름</th>
-                    <td><input type="text" name="name" id="name" size="20%"></td>
+                    <th>
+                        <label for="name">이름
+                    </th>
+                    <td>
+                        <input type="text" name="name" id="name" size="20%">
+                    </td>
                 </tr>
                 <tr>
-                    <th>  <label for="id">아이디</th>
-                    <td><input type="text" name="id" id="id" size="20%">
+                    <th>
+                        <label for="id">아이디
+                    </th>
+                    <td>
+                        <input type="text" name="id" id="id" size="20%">
                            *영문소문자/숫자, 4~16자
                     </th>
                 </tr>
                 <tr>
-                    <th><label for="password">비밀번호</th>
+                    <th>
+                        <label for="password">비밀번호
+                    </th>
                     <td>
                         <input type="password" name="password" id="password" size="20%">
                         *영문 대소문자/숫자/특수문자 중 2가지 이상 조합, 10자~16자
                     </td>
                 </tr>
                 <tr>
-                    <th><label for="passwordCheck">비밀번호확인</th>
-                    <td><input type="password" name="passwordCheck" id="passwordCheck" size="20%"></td>
+                    <th>
+                        <label for="passwordCheck">비밀번호 확인
+                    </th>
+                    <td>
+                        <input type="password" name="passwordCheck" id="passwordCheck" size="20%">
+                    </td>
                 </tr>
                 <tr>
-                    <th>  <label for="email">이메일</th>
+                    <th>
+                        <label for="email">이메일
+                    </th>
                     <td>
-                        <input type="text" name="email" id="email" size="30%"> @
                         <input type="text" name="email" id="email" size="30%">
                     </td>
                 </tr>
                 <tr>
-                    <th>  <label for="address">주소</th>
-                    <td><input type="text" name="address" id="address" size="100%"></td>
-                </tr>
-                <tr>
-                    <th><label for="phone_number">연락처</th>
+                    <th>
+                        <label for="address">주소
+                    </th>
                     <td>
-                        <input type="text" name="phone_number" id="phone_number" size="30%">
+                        <input type="text" name="address" id="address" size="100%">
                     </td>
                 </tr>
                 <tr>
-                    <th><label for="nickname">닉네임</th>
-                    <td><input type="text" name="nickname" id="nickname" size="30%"></td>
-                </tr>
-                <tr>
-                    <th><label for="introduce">자기소개</th>
-                    <td><textarea name="introduce" id="introduce"></textarea></td>
-                </tr>
-                <tr>
-                    <th><label for="open_private_info">정보공개여부</th>
+                    <th>
+                        <label for="phoneNumber">연락처
+                    </th>
                     <td>
-                        <input type="radio" name="open_private_info" id="agree">동의함
-                        <input type="radio"  name="open_private_info"id="disagree" >동의하지 않음
+                        <input type="text" name="phoneNumber" id="phoneNumber" size="10%">
+                        <!--<input type="text" name="phone_number" id="phone_number" size="10%"> - -->
+                        <!--<input type="text" name="phone_number" id="phone_number" size="10%">-->
                     </td>
                 </tr>
                 <tr>
-                    <th><label for="certification">본인인증</th>
+                    <th>
+                        <label for="nickname">닉네임
+                    </th>
                     <td>
-                        처리해야함
+                        <input type="text" name="nickname" id="nickname" size="30%">
                     </td>
                 </tr>
+                <tr>
+                    <th>
+                        <label for="introduce">자기소개
+                    </th>
+                    <td>
+                        <textarea name="introduce" id="introduce"></textarea>
+                    </td>
+                </tr>
+
             </table>
+          <div id="Btn">
+              <input type="submit" class="joinBtn" id = "submitButton" value="회원가입">
+              <input type="button" class="cancle" value="취소하기" onclick=window.location='../login'>
+          </div>
         </form>
-        <div id="Btn">
-          <input type="submit" class="joinBtn" value="회원가입" onClick="location.href='index.html'">
-            <input type="button" class="cancle" value="취소하기" onclick="../login">
-        </div>
+
               </div>
-              <script type="text/javascript" src="js/jquery-3.3.1.min.js" charset="utf-8"></script>
-              <script src="js/ajaxData.js"></script>
-              <script src="js/getCookie.js"></script>
-              <script src="js/menu.js"></script>
-              <script src="js/join.js"></script>
+
+                <script type="text/javascript" src="../js/jquery-3.3.1.min.js" charset="utf-8"></script>
+                <script src="../js/menu.js"></script>
+                <script type="text/javascript" src="../js/signUp.js" charset="utf-8"></script>
               </body>
             </html>
