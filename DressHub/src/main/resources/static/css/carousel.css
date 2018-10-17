@@ -151,10 +151,10 @@
   width: 25%;
   height: 70vh;
 }
-.carousel-item:nth-child(1) { background-image: url("../image/m3.jpg"); background-size: contain; background-repeat: no-repeat;}
-.carousel-item:nth-child(2) { background-image: url("../image/m2.png"); background-size: contain;background-repeat: no-repeat;}
-.carousel-item:nth-child(3) { background-image: url("../image/m1.png"); background-size: contain;background-repeat: no-repeat;}
-.carousel-item:nth-child(4) { background-image: url("../image/m4.png"); background-size: contain;background-repeat: no-repeat;}
+.carousel-item:nth-child(1) { background-image: url("../image/skate.jpg"); background-size: contain; background-repeat: no-repeat;}
+.carousel-item:nth-child(2) { background-image: url("../image/gal-ot.jpg"); background-size: contain;background-repeat: no-repeat;}
+.carousel-item:nth-child(3) { background-image: url("../image/tube.jpg"); background-size: contain;background-repeat: no-repeat;}
+.carousel-item:nth-child(4) { background-image: url("../image/snorkel.jpg"); background-size: contain;background-repeat: no-repeat;}
 
 .btn-container {
   position: absolute;
