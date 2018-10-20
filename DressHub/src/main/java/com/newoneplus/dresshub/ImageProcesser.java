@@ -44,6 +44,8 @@ public class ImageProcesser {
         Graphics g = newImage.getGraphics();
         g.drawImage(resizeImage, 0, 0, null);
         g.dispose();
+
+        inputStream.close();
         return newImage;
     }
 
