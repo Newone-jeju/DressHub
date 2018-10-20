@@ -89,4 +89,3 @@ changeCategory = categoryList => {
   )
 }
 
-changeCategory(categoryList)
