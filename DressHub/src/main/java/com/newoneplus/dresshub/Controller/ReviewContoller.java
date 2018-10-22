@@ -139,7 +139,7 @@ public class ReviewContoller {
     @ResponseBody
     @RequestMapping(value = "/image/{filename}",  produces = "image/jps")
     public Resource loadImage(@PathVariable("filename") String filename) {
-        return resourceLoader.getResource("/image/review/" +filename);
+        return resourceLoader.getResource("file:/image/review/" +filename);
     }
 
 }
