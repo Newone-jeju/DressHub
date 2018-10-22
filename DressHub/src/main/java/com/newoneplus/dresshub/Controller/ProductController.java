@@ -3,26 +3,19 @@ package com.newoneplus.dresshub.Controller;
 import com.newoneplus.dresshub.ImageProcesser;
 import com.newoneplus.dresshub.Model.*;
 import com.newoneplus.dresshub.Repository.ProductRepository;
-import com.newoneplus.dresshub.Repository.ThumbUpRepository;
 import com.newoneplus.dresshub.Service.ProductService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.Resource;
 import org.springframework.data.domain.Page;
 import org.springframework.security.core.parameters.P;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
-import java.awt.image.ImageProducer;
-import java.io.BufferedOutputStream;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.text.ParseException;
+import java.io.*;
 import java.util.*;
 
 @Slf4j
@@ -76,7 +69,7 @@ public class ProductController {
 
 
     @GetMapping(value = "/image/list/search")
-    public List<ProductImage> getProductImageList(@RequestParam(value = "productId", required = false) Long paramId) {
+    public List<ProductImageController> getProductImageList(@RequestParam(value = "productId", required = false) Long paramId) {
         if (paramId == null) {
             return productService.getProductImageList();
         } else {
@@ -89,7 +82,7 @@ public class ProductController {
         log.info("***********************이미지가 오고 있습니다. **********************************8");
         ImageProcesser imageProcesser = new ImageProcesser();
         String filename = productImage.getOriginalFilename();
-        String path = System.getProperty("user.dir") + "/out/production/resources/static/product_image/";
+        String path = "/product_image/";
         new File(path).mkdirs(); // 디렉토리 생성
         if(productImage ==null){
             return;
@@ -109,6 +102,14 @@ public class ProductController {
     }
 
 
+
+
+
+    @ResponseBody
+    @RequestMapping(value = "/product_image/{filename}",  produces = "image/bmp")
+    public Resource loadImage(@PathVariable("id") String filename) {
+        return resourceLoader.getResource("/product_image/" +filename);
+    }
 
 
 }

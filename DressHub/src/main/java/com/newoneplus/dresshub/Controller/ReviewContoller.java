@@ -13,6 +13,9 @@ import com.newoneplus.dresshub.Service.ReviewService;
 
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.DefaultResourceLoader;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.ResourceLoader;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -38,6 +41,7 @@ public class ReviewContoller {
     ReviewRepository reviewRepository;
     LeaseInfoRepository leaseInfoRepository;
     ReviewService reviewService;
+    private ResourceLoader resourceLoader = new DefaultResourceLoader();
 
     @GetMapping("/{id}")
     public Optional get(@PathVariable Integer id) {
@@ -96,7 +100,7 @@ public class ReviewContoller {
         return null;
     }
 
-    private static final String IMAGE_PATH = System.getProperty("user.dir") + "/out/production/resources/static/review/image/";
+    private static final String IMAGE_PATH = "/image/review/";
 
     @PostMapping("/image")
     @ResponseBody
@@ -132,6 +136,11 @@ public class ReviewContoller {
         }
     }
 
+    @ResponseBody
+    @RequestMapping(value = "/image/{filename}",  produces = "image/jps")
+    public Resource loadImage(@PathVariable("filename") String filename) {
+        return resourceLoader.getResource("/image/review/" +filename);
+    }
 
 }
 
