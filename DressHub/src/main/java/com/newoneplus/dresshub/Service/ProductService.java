@@ -8,7 +8,6 @@ import com.newoneplus.dresshub.Repository.BasketRepository;
 import com.newoneplus.dresshub.Repository.ProductImageRepository;
 import com.newoneplus.dresshub.Repository.ProductRepository;
 import com.newoneplus.dresshub.Repository.ThumbUpRepository;
-import com.sun.corba.se.impl.protocol.giopmsgheaders.RequestMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -17,7 +16,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import javax.validation.constraints.Null;
 import java.util.HashMap;
 import java.util.List;
 
