@@ -20,4 +20,4 @@ fi
 echo "> New Application Deploy"
 JAR_NAME=$(ls $REPOSITORY/ |grep 'DressHub' | tail -n 1)
 echo "> JAR Name: $JAR_NAME"
-nohub java -jar $REPOSITORY/$JAR_NAME &
+nohup java -jar $REPOSITORY/$JAR_NAME &
