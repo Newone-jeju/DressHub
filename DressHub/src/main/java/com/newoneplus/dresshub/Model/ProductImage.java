@@ -1,6 +1,5 @@
 package com.newoneplus.dresshub.Model;
 
-import com.sun.xml.internal.ws.api.FeatureListValidatorAnnotation;
 import lombok.Data;
 
 import javax.persistence.Entity;
