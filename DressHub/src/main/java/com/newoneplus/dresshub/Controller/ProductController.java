@@ -9,7 +9,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.data.domain.Page;
-import org.springframework.security.core.parameters.P;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -69,7 +68,7 @@ public class ProductController {
 
 
     @GetMapping(value = "/image/list/search")
-    public List<ProductImageController> getProductImageList(@RequestParam(value = "productId", required = false) Long paramId) {
+    public List<ProductImage> getProductImageList(@RequestParam(value = "productId", required = false) Long paramId) {
         if (paramId == null) {
             return productService.getProductImageList();
         } else {
@@ -105,11 +104,11 @@ public class ProductController {
 
 
 
-    @ResponseBody
-    @RequestMapping(value = "/product_image/{filename}",  produces = "image/bmp")
-    public Resource loadImage(@PathVariable("id") String filename) {
-        return resourceLoader.getResource("/product_image/" +filename);
-    }
+//    @ResponseBody
+//    @RequestMapping(value = "/product_image/{filename}",  produces = "image/bmp")
+//    public Resource loadImage(@PathVariable("id") String filename) {
+//        return resourceLoader.getResource("/product_image/" +filename);
+//    }
 
 
 }
