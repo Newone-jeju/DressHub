@@ -17,7 +17,7 @@ public class ProductImageController {
     @ResponseBody
     @RequestMapping(value = "/product_image/{filename}",  produces = "image/jpg")
     public Resource loadImage(@PathVariable("filename") String filename) {
-        return resourceLoader.getResource("/product_image/" +filename);
+        return resourceLoader.getResource("file:/product_image/" +filename);
     }
 
 }
