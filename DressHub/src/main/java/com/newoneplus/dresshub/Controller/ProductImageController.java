@@ -13,7 +13,7 @@ public class ProductImageController {
     private ResourceLoader resourceLoader = new DefaultResourceLoader();
 
     @ResponseBody
-    @RequestMapping(value = "/product_image/{filename}",  produces = "image/bmp")
+    @RequestMapping(value = "/product_image/{filename}",  produces = "image/jpg")
     public Resource loadImage(@PathVariable("id") String filename) {
         return resourceLoader.getResource("/product_image/" +filename);
     }
