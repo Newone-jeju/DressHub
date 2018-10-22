@@ -1,6 +1,10 @@
 
-## 2018 캡스톤디자인 프로젝트(Newone Plus) Develop Branch(03) 
+## 2018 캡스톤디자인 프로젝트(Newone Plus) 
 
-4월
+### 10.23 03:38 
+
+0806_v1_test branch => master (0.1v)
+
+
 
 
