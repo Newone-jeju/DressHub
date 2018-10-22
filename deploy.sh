@@ -1,12 +1,12 @@
 #!/bin/bash
-REPOSITORY=/home/ubuntu/app/git
+REPOSITORY=/home/ubuntu/app/git/DressHub
 cd $REPOSITORY/DressHub/
 echo "> Git Pull"
 git pull
 echo "> 프로젝트 Build Start"
 ./gradlew build
 echo "> Build file 복사"
-cp ./DressHub/build/libs/*jar $REPOSITORY/
+cp ./DressHub/DressHub/build/libs/*jar $REPOSITORY/
 echo "> 현재 구동중인 Application pid check"
 CURRENT_PID=$(pgrep -f DressHub)
 echo "$CURRENT_PID"
