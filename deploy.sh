@@ -1,12 +1,12 @@
 #!/bin/bash
-REPOSITORY=/home/ubuntu/app/git/DressHub
+REPOSITORY=/home/ubuntu/app/git
 cd $REPOSITORY/DressHub/
 echo "> Git Pull"
 git pull
 echo "> 프로젝트 Build Start"
-./gradlew build
+./DressHub/gradlew build
 echo "> Build file 복사"
-cp ./build/libs/*.jar $REPOSITORY/
+cp ./DressHub/build/libs/*.jar $REPOSITORY/
 echo "> 현재 구동중인 Application pid check"
 CURRENT_PID=$(pgrep -f DressHub)
 echo "$CURRENT_PID"
@@ -18,6 +18,6 @@ else
 	sleep 5
 fi
 echo "> New Application Deploy"
-JAR_NAME=$(ls $REPOSITORY/ |grep 'DressHub' | tail -n 1)
+JAR_NAME=$(ls $REPOSITORY/DressHub |grep 'dresshub' | tail -n 1)
 echo "> JAR Name: $JAR_NAME"
-nohup java -jar $REPOSITORY/$JAR_NAME &
+nohup java -jar $REPOSITORY/DressHub/$JAR_NAME &
