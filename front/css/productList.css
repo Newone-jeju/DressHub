@@ -1,0 +1,69 @@
+* {
+	margin: 0;
+}
+
+.product_container_content{
+	display: flex;
+	width:90%;
+	flex-direction: row;
+	flex-wrap: wrap;
+	margin: 1%;
+	justify-content: center;
+}
+
+.product_container_content_card{
+	border:2px solid #e1e1e1;
+	margin: 1%;
+	text-decoration: none;
+	color:black;
+	flex-basis:15%;
+}
+
+.card_img_wrap{
+	height: auto;
+}
+
+.card_img{
+	display: block;
+	width:100%;
+	height:10rem;
+}
+
+.card_text_wrap{
+	padding:0.9rem;
+}
+
+.card_text_wrap .text_name{
+text-align: center;
+margin-bottom: 0.5rem;
+}
+
+.card_text_wrap .text_deposit {
+	text-align: right;
+}
+
+.card_text_wrap .text_costPerDay{
+		text-align: right;
+}
+
+/* 페이징 */
+#paging{
+	text-align: center;
+	font-size:1rem;
+	margin: 1rem;
+}
+
+/* 퀵메뉴 */
+.quick-menu-area{
+  position:fixed;
+  left:90%;
+	top:50%;
+  z-index: 99;
+}
+.quick-menu-area a{
+  display: block;
+}
+.quick-menu-area img{
+  max-width: 60%;
+  width: 60%;
+}

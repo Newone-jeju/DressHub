@@ -1,0 +1,144 @@
+
+.flexcenter {
+	display: flex;
+	justify-content: center;
+}
+
+.flexcenter-align {
+	display: flex;
+	align-items: center;
+}
+
+.hidd {
+	display: none;
+}
+
+#product-details > * {	
+	margin: 0;
+}
+
+#product-details {
+	width: 70%;
+	margin: 0 auto;
+
+}
+
+#product-details .header {
+	margin : 3em 0 4em 0;
+}
+#product-details .header .title {
+	border-bottom: 1px solid #bfbfbf;
+	padding-bottom: 0.5em;
+	font-size:2.5em;
+}
+
+
+.page-head-category > a{
+	text-decoration: none;
+}
+
+.page-head-category .text {
+	color : black;	
+	font-size: 1.3em;
+	padding : 0 0.4em;
+	font-weight: 550;
+}
+
+#product-details .order-area {
+	width: 90%;
+	margin: 0 auto;
+	display: flex;
+	/*media query*/
+}
+
+#product-details .order-area .image-area .cloud-zoom {
+	margin-bottom : 2em;
+	width: 60%;
+}
+
+#product-details .order-area .image-area .thumnamil-bar{
+	display: flex;
+}
+#product-details .order-area .image-area .cloud-zoom-gallery{
+	display: flex;
+	flex-grow: 1; 
+	justify-content: center;
+}
+
+#product-details .order-area .image-area .thumnail-img{
+	border:1px outset #bfbfbf;
+}
+
+#product-details .order-area .info-area {
+	flex-grow: 1;
+	/*border:1px solid red;*/
+	margin-left: 6%;
+}
+
+
+#product-details .order-area .info-area .title {
+	display: inline-block;
+	width: 40%;
+	font-size: 1.4em;
+	font-weight: 600;
+}
+
+#product-details .order-area .info-area .info {
+	font-size: 1.4em;
+}
+
+
+#product-details .body {
+	width:90%;
+}
+
+
+#product-details .article-area .body p {
+	font-size: 1.2em;
+}
+
+#product-details .info-area .group {
+	border-bottom: 1px solid #bfbfbf;
+	padding: 1em 0;
+}
+
+#product-details .info-area .group div {
+	padding: 1em 0;
+}
+
+
+#product-details .price .lime-txt {
+	font-size: 2.5em;
+	font-weight: 600;
+	color: #b5e61d;
+}
+
+#product-details .price .orange-txt {
+	font-size: 2.5em;
+	font-weight: 600;
+	color: orange;
+}
+
+#product-details .info-area .submit-btn {
+	margin: 5em 0;
+	display: flex;
+	justify-content: center;
+}
+
+#product-details .info-area .submit-btn > button {
+	display: inline-block;
+	width: 200px;
+	height: 70px;
+	margin: 0 5%;
+	background-color: black;
+	color: white;
+	font-size: 1.4em;
+	font-weight: 600;
+	border: none;
+}
+
+
+
+
+
+

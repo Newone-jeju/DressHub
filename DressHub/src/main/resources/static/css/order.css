@@ -1,0 +1,95 @@
+#orderPage{
+  margin: 2rem;
+}
+
+#cart_table{
+   border-collapse: collapse;
+   width: 100%;
+   margin: 2% auto;
+}
+
+#cart_table th, td{
+  border: 1px solid #ddd;
+  height: 2rem;
+}
+.buyer_inform{
+  border-collapse: collapse;
+  width: 100%;
+  margin: 2rem auto;
+}
+
+.buyer_inform th, td{
+  border: 1px solid #ddd;
+  height: 2rem;
+}
+
+.buyer_inform th{
+  background-color: #F7F9FF;
+  width:15%;
+}
+
+.delevery_inform{
+  border-collapse: collapse;
+  width: 100%;
+  margin: 2% auto;
+}
+
+.delevery_inform th, td{
+  border: 1px solid #ddd;
+  height: 2rem;
+  padding: 0 1rem;
+}
+
+.delevery_inform th{
+  background-color: #F7F9FF;
+  width:15%;
+}
+
+#total_price_table{
+  border-collapse: collapse;
+  width: 100%;
+  margin: 2%   auto;
+}
+#total_price_table th, td{
+  border: 1px solid #ddd;
+  height: 2rem;
+}
+
+#total_price_table th{
+  background-color: #F7F9FF;
+}
+
+#paymentMethod{
+  border: solid 1px #ddd;
+  padding: 1rem;
+}
+
+#paymentMethod input{
+  margin: 0 1rem;
+}
+input{
+  margin: 0.5rem 0.5rem;
+  line-height: 1.4rem;
+  border:solid 1px #ddd;
+}
+.addressSearch{
+  background-color: #fff;
+  width: 5rem;
+  height: 2rem;
+  border: solid 1px #ddd;
+  border-radius:0.5rem;
+}
+#payment{
+  background-color: #363636;
+   border: none;
+   color: white;
+   padding: 1% 2%;
+   margin: 1rem;
+   text-align: center;
+   text-decoration: none;
+   font-size: 10px;
+}
+
+#button{
+  text-align: center;
+}

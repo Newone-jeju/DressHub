@@ -1,0 +1,229 @@
+
+.flexcenter {
+	display: flex;
+	justify-content: center;
+}
+
+.flexcenter-align {
+	display: flex;
+	align-items: center;
+}
+
+.hidd {
+	display: none;
+}
+
+.border-bot {
+	border-bottom: 7px solid #777;
+}
+
+#rental-status > * {	
+	margin: 0;
+}
+
+#rental-status {
+	width: 55%;
+	margin: 0 auto;
+}
+
+#rental-status > .header {
+	margin : 3em 0 1em 0;
+}
+
+#rental-status article {
+	margin-bottom: 20px;
+}
+
+#rental-status article > header {
+	display: flex;
+}
+
+#rental-status article > header > h1 {
+	font-size:1.5rem;
+	flex-basis: 90%;
+}
+
+#rental-status article > header > a {
+	display: flex;
+	align-items: center;
+	text-decoration: none;
+	color : black;	
+	font-size: 0.8rem;
+	padding : 0 0.4em;
+	font-weight: 550;
+}
+
+#rental-status article > header > a:hover {
+	color: gray;
+	transition: all 0.5s;
+	text-decoration: underline;
+}
+
+@media screen and (max-width: 800px) {
+    #rental-status {
+    width:95%;
+    min-width: 520px;  
+	}
+}
+
+
+.page-head-category > a{
+	text-decoration: none;
+}
+
+.page-head-category .text {
+	color : black;	
+	font-size: 1.3em;
+	padding : 0 0.4em;
+	font-weight: 550;
+}
+
+.page-head-category .text:hover {
+	color: gray;
+	transition: all 0.5s;
+	text-decoration: underline;
+}
+
+.card-th {
+	display:flex;
+}
+
+.card-header {
+	display:flex;
+	cursor: pointer;
+	border-bottom: 1px solid gray;
+}
+.product-card .thumnail, .card-th .thumnail {
+	flex-basis: 16%;
+}
+
+.product-card .thumnail > img {
+	padding:5%;
+	width:90%;
+	height: 85%;
+}
+
+.product-card .title, .card-th .title{
+	flex-grow:1;
+	padding:0 5%;
+}
+
+.product-card .title > .text {
+	font-size:0.9rem;
+}
+
+.card-header:hover .title > .text {
+	text-decoration: underline;
+}
+
+.product-card .order-day, .card-th .order-day{
+	flex-basis: 20%;
+	justify-content: center;
+	font-size:0.9rem;
+}
+
+.product-card .recent-status, .card-th .recent-status{
+	flex-basis: 15%;
+	justify-content: center;
+}
+
+.card-th{
+	background-color: #f7f5f5;
+	border-top: 1.5px solid black;
+}
+
+.card-th > .title > .text{
+	margin:8px auto;
+}
+
+.card-th .text {
+	justify-content: center;
+	font-size:0.9rem;
+	margin: 8px 0;
+}
+
+.product-card .recent-status > .text{
+	font-size:1rem;
+	color: red;
+	font-weight:550;
+}
+
+.product-card > .card-header > div, .card-body{
+	border:1px solid #ddd;
+	border-collapse: collapse;
+}
+
+
+.card-body {
+	padding: 3%;
+	border-bottom: 7px solid #777;
+}
+
+.card-btn-wrap {
+	position: relative;
+	display: flex;
+	margin-bottom: 20px;
+	height: 34px;
+}
+
+.card-btn-wrap > .msg-box {
+	font-size: 0.7rem;
+	flex-basis: 90%;
+	margin:auto 0;
+	padding:8px 2%;
+	outline: none;
+	border-radius: 7px;
+	border: 1.5px solid #ddd;
+}
+
+.card-btn-wrap > .msg-box:focus {
+	outline: none;
+	border: 2px solid #b5e61d;
+	transition: 0.2s;
+}
+
+.card-btn {
+	border-radius: 7px;
+	border: 1px solid #00ab33;
+	background-color: #00ab33;
+	padding: 7px 15px;
+	color: white;
+	font-weight: 600;
+	cursor: pointer;
+	position: absolute;
+	right: 1px;
+}
+.card-btn:hover {
+	background-color: #4CAF89;
+}
+
+.log-list {
+	width:90%;
+	margin: 0 auto;
+}
+
+.log-list > .log-card {
+	border-bottom: 7px solid #ddd;
+}
+
+.log-list, .log-list td {
+	border: 1px solid gray;
+	border-collapse: collapse;
+
+}
+
+td.log-no {
+	width:8%;
+	text-align: center;
+}
+
+td.log-title{
+	width:15%;
+	text-align: center;
+	font-size: 0.9rem;
+}
+
+td.log-content{
+	width:auto;
+	padding:6px 3%;
+}

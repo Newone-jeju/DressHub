@@ -1,0 +1,78 @@
+
+.flexcenter {
+	display: flex;
+	justify-content: center;
+}
+
+.flexcenter-align {
+	display: flex;
+	align-items: center;
+}
+
+.hidd {
+	display: none;
+}
+
+.border-bot {
+	border-bottom: 7px solid #777;
+}
+
+#my-main > * {	
+	margin: 0;
+}
+
+#my-main {
+	width: 55%;
+	margin: 0 auto;
+}
+
+#my-main > .header {
+	margin : 3em 0 1em 0;
+}
+
+#my-main article {
+	margin-bottom: 20px;
+}
+
+#my-main article > header {
+	display: flex;
+}
+
+#my-main article > header > h1 {
+	font-size:1.5rem;
+	flex-basis: 90%;
+}
+
+#my-main article > header > a {
+	display: flex;
+	align-items: center;
+	text-decoration: none;
+	color : black;	
+	font-size: 0.8rem;
+	padding : 0 0.4em;
+	font-weight: 550;
+}
+
+#my-main article > header > a:hover {
+	color: gray;
+	transition: all 0.5s;
+	text-decoration: underline;
+}
+
+
+.page-head-category > a{
+	text-decoration: none;
+}
+
+.page-head-category .text {
+	color : black;	
+	font-size: 1.3em;
+	padding : 0 0.4em;
+	font-weight: 550;
+}
+
+.page-head-category .text:hover {
+	color: gray;
+	transition: all 0.5s;
+	text-decoration: underline;
+}

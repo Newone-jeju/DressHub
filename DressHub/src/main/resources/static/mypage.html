@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="css/menu.css"  />
+<link rel="stylesheet" href="css/mypage.css">
+    <title></title>
+  </head>
+  <body>
+    <div id="top">
+      <h1 id="logo"><a href="/index.html">DRESS HUB</a></h1>
+        <ul class="topul">
+          <li><a href="login.html">LOGIN</a></li>
+          <li><a href="join.html">회원가입</a></li>
+          <li><a href="cart.html">장바구니</a></li>
+          <li><a href="mypage.html">MYPAGE</a></li>
+        </ul>
+  </div>
+    <nav id="nav">
+
+    <ul class="menu">
+      <li><a class="category">전체카테고리</a> </li>
+        <li><a id="clothes" class="name" href="productList?category=10">캐쥬얼</a>
+        <ul class="allcategory">
+           <li><a href="productList?category=11">남성</a></li>
+           <li><a href="productList?category=12">여성</a></li>
+           <li><a href="productList?category=13">신발</a></li>
+           <li><a href="productList?category=14">기타</a></li>
+          </ul>
+        </li>
+        <li><a id="suit"  class="name" href="productList?category=20">예복</a>
+        <ul class="allcategory">
+           <li><a href="productList?category=21">경조사</a></li>
+           <li><a href="productList?category=22">면접</a></li>
+           <li><a href="productList?category=23">실생활</a></li>
+           <li><a href="productList?category=24">기타</a></li>
+          </ul>
+          </li>
+        <li><a id="accessory"  class="name" href="productList?category=30">악세사리</a>
+        <ul class="allcategory">
+           <li><a href="productList?category=31">남성</a></li>
+           <li><a href="productList?category=32">여성</a></li>
+           <li><a href="productList?category=33">고가</a></li>
+           <li><a href="productList?category=34">특수한 경우</a></li>
+          </ul>
+          </li>
+        <li><a href="productList?category=40">할인/기획</a>
+          <ul class="allcategory">
+             <li><a href="productList?category=41">의류</a></li>
+             <li><a href="productList?category=42">악세사리</a></li>
+             <li><a href="productList?category=43">신발</a></li>
+             <li><a href="productList?category=44">기타</a></li>
+            </ul>
+        </li>
+        <li><a href=#>MYPAGE</a></li>
+    </ul>
+  </nav>
+
+
+<!-- 마이페이지 -->
+<div id="mypqge">
+
+  <!-- 세로메뉴 -->
+  <div id="column_menu">
+          <ul class="column_menu">
+              <li class="bold"><a href="mypage.html">마이페이지홈</a></li>
+              <li><a href="cart.html">장바구니</a></li>
+              <li><a href="like.html">좋아요 한 목록</a></li>
+              <br>
+              <li class="bold"><a href="/rental_status.html">내상품</a></li>
+              <br>
+              <li class="bold"><a href="#">회원정보</a></li>
+              <li><a href="#">프로필</a></li>
+              <li><a href="#">본인인증</a></li>
+              <li><a href="#">회원정보 수정</a></li>
+              <br>
+              <li class="bold"><a href="#">손해배상</a></li>
+              <li><a href="inquire.html">신청양식</a></li>
+              <li><a href="help.html">도움말</a></li>
+          </ul>
+      </div>
+
+  <!-- 메인화면 -->
+      <div id="article">
+
+        <!-- 간단 프로필 -->
+        <div id="simple_profile">
+          <div class="profile_top">
+          <h2 class="nickname">newonePlus님</h2>
+          <button class="modification_btn">수정</button>
+        </div>
+        <hr />
+          <div class="profile_middle">
+            <p class="text">가입일</p>
+            <p class="joinDate">2018-06-12</p>
+            <p class="text">본인인증</p>
+            <p class="certification">인증됨</p>
+          </div>
+          <div class="nickname_bottom">
+            <p class="text">자기소개:</p>
+            <p class="introduce"></p>
+          </div>
+        </div>
+
+        <!-- 상태 갯수 -->
+        <div id="state_num">
+          <div class="list"><p>장바구니</p> <div class="cart_num">0</div></div>
+          <div class="list"><p>배송/세탁</p><div class="ShipLaun_num">0</div></div>
+          <div class="list"><p>대여/구매 요청</p><div class="RenPur_num">0</div></div>
+        </div>
+
+        <!--대여해줌 -->
+        <div class="card_carousel_wrap">
+          <!--card_carousel head title, more btn -->
+          <div class="card_carousel_header">
+            <h1 class="card_carousel_header_title">대여해줌</h1>
+            <span class="card_carousel_header_more">
+              <a href="" class="card_carousel_header_more_text">더보기</a>
+            </span>
+          </div>
+
+          <div class="card_carousel_container">
+            <div class="card_carousel_slide_btn">
+              <form>
+                <input class="btn_left" type="button">
+              </form>
+            </div>
+
+            <!--card_carousel cardset -->
+            <div class="card_carousel_container_content">
+              <!--js card gen -->
+            </div>
+            <div class="card_carousel_slide_btn">
+              <form>
+                <input class="btn_right" type="button">
+              </form>
+            </div>
+          </div>
+        </div>
+
+        <!--대여받음 -->
+        <div class="card_carousel_wrap">
+          <!--card_carousel head title, more btn -->
+          <div class="card_carousel_header">
+            <h1 class="card_carousel_header_title"><br>대여받음</h1>
+            <span class="card_carousel_header_more">
+              <a href="" class="card_carousel_header_more_text">더보기</a>
+            </span>
+          </div>
+
+          <div class="card_carousel_container">
+            <div class="card_carousel_slide_btn">
+              <form>
+                <input class="btn_left" type="button">
+              </form>
+            </div>
+
+            <!--card_carousel cardset -->
+            <div class="card_carousel_container_content">
+              <!--js card gen -->
+            </div>
+            <div class="card_carousel_slide_btn">
+              <form>
+                <input class="btn_right" type="button">
+              </form>
+            </div>
+          </div>
+        </div>
+
+</div>
+<script type="text/javascript" src="js/jquery-3.3.1.min.js" charset="utf-8"></script>
+<script src="js/ajaxData.js"></script>
+<script src="js/getCookie.js"></script>
+  <script src="js/menu.js">  </script>
+  <script src="js/mypage.js">  </script>
+  </body>
+</html>
