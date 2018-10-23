@@ -14,6 +14,11 @@ cache:
 
 script: "./gradlew clean build"
 
+before_deploy:
+  - zip -r newone-dresshub *
+  - mkdir -p deploy
+  - mv newone-dresshub.zip deploy/newone-dresshub.zip
+
 deploy:
   - provider: s3
     access_key_id: $AWS_ACCESS_KEY
@@ -22,6 +27,7 @@ deploy:
     region: ap-northeast-2
     skip_cleanup: true
     acl: public_read
+    local_dir: deploy
     wait-until-deployed: true
     on:
       repo: Newone-jeju/DressHub #Github 주소
