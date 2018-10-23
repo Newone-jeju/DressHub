@@ -9,10 +9,10 @@ branches:
 # Travis CI 서버의 Home
 cache:
   directories:
-    - '$HOME/.m2/repository/DressHub'
-    - '$HOME/DressHub/.gradle'
+    - '$HOME/.m2/repository/'
+    - '$HOME/.gradle'
 
-script: "./gradlew clean build"
+script: "./DressHub/gradlew clean build"
 
 # CI 알람
 notifications:
