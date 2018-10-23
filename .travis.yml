@@ -1,0 +1,21 @@
+language: java
+jdk:
+  - openjdk8
+
+branches:
+  only:
+    - master
+
+# Travis CI 서버의 Home
+cache:
+  directories:
+    - '$HOME/.m2/repository'
+    - '$HOME/.gradle'
+
+script: "./DressHub/gradlew clean build"
+
+# CI 알람
+notifications:
+  email:
+    recipients:
+      - spear131121@gmail.com 
