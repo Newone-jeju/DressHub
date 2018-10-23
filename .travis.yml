@@ -33,7 +33,19 @@ deploy:
       repo: Newone-jeju/DressHub #Github 주소
       branch: master
 
-
+  - provider: codedeploy
+    access_key_id: $AWS_ACCESS_KEY
+    secret_access_key: $AWS_SECRET_KEY
+    bucket: dresshub-deploy
+    key: newone-dresshub.zip
+    bundle_type: zip
+    application: dresshub
+    deployment_group: dresshub-group
+    region: ap-northeast-2
+    wait-until-deployed: true
+    on:
+      repo: Newone-jeju/Dresshub
+      branch: master
 
 # CI 알람
 notifications:
