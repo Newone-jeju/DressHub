@@ -5,7 +5,7 @@ $(document).ready(function() {
 	carousel.cardnum = [0,1,2,3];
 	// $.getJSON(jsonFile, function(info){
 	// 	console.log("getJSON");
-	// });		
+	// });
 		// ㅠㅠ
 		carousel.data = [
 			{
@@ -109,11 +109,11 @@ $(document).ready(function() {
 
 
 	carousel.mapcard = function(){
-		console.log('mapcard');
-		console.log(carousel.cardnum);
+		// console.log('mapcard');
+		// console.log(carousel.cardnum);
 			var cards = '';
 			for(var i= 0; i <carousel.cardnum.length; i++){
-				cards += 
+				cards +=
 				'<a href="'+carousel.data[carousel.cardnum[i]].url+'" class="card_carousel_container_content_card">'+
 					'<div class="card_img_wrap">'+
 						'<img src="'+carousel.data[carousel.cardnum[i]].img_src+'" alt="blank" class="card_img">'+
@@ -128,7 +128,7 @@ $(document).ready(function() {
 						'</div>'+
 					'</div>'+
 				'</a>';
-				console.log(carousel.cardnum[i]);
+				// console.log(carousel.cardnum[i]);
 			}
 			$('.card_carousel_container_content').html(cards);//+id
 	}
@@ -146,19 +146,19 @@ $(document).ready(function() {
 			$(".btn_right").removeClass('hidden');
 		}
 	}
-	
+
 
 	carousel.btn_click = function(dir){
 		var dirm=1;
 		if(dir=='btn_left'){
 			dirm *= -1
-		} 
-		
+		}
+
 		for(var i= 0; i <carousel.cardnum.length; i++){
 			carousel.cardnum[i] += carousel.cardnum.length*dirm;
 		}
-		
-		carousel.mapcard();	
+
+		carousel.mapcard();
 		carousel.btn_visiblily(carousel.cardnumm);
 
 	}
@@ -173,6 +173,38 @@ $(document).ready(function() {
 	$(".btn_right").click(function(){
 		carousel.btn_click($(this).attr('class'));
 	})
-	
-	
+
+
 })
+
+
+
+// 메인 캐러셀
+
+var prevBtn = document.querySelectorAll('button').item(0);
+    var nextBtn = document.querySelectorAll('button')[1];
+    var carouselWrapper = document.querySelector('.carousel-wrapper');
+    var position = 0;
+    function prevCarousel() {
+      if ( position === 0 ) {
+        position = -100;
+      }
+      var _position = position + 25;
+      carouselWrapper.style.transform = 'translateX('+ _position +'%)';
+     position = _position;
+     // console.log('current position', position);
+    }
+    function nextCarousel() {
+      if ( position === -75 ) {
+        position = 25;
+      }
+      var _position = position - 25;
+      carouselWrapper.style.transform = 'translateX('+ _position +'%)';
+      position = _position;
+      // console.log('current position', position);
+    }
+
+    setInterval(nextCarousel, 3000);
+
+    prevBtn.addEventListener('click', prevCarousel);
+    nextBtn.addEventListener('click', nextCarousel);

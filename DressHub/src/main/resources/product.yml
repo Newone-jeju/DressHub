@@ -1,0 +1,88 @@
+product:
+  product:
+    -
+
+      id: 1
+      name: tproduct1
+      image: url1
+      contents: product1test
+      cost_per_day: 3
+      deposit: 3000
+      sale_price: 20
+      category: suit
+      consigment_start: 2018-04-01
+      consigment_end: 2018-04-23
+      state: Rentable
+      delevery_type: null
+      provider: null
+      userid: a
+
+    -
+
+      id: 2
+      name: tproduct2
+      image: url2
+      contents: product2test
+      cost_per_day: 3
+      deposit: 3000
+      sale_price: 20
+      category: suit
+      consigment_start: 2018-04-01
+      consigment_end: 2018-04-23
+      state: Rentable
+      delevery_type: null
+      provider: null
+      userid: b
+
+    -
+
+      id: 3
+      name: tproduct3
+      image: url3
+      contents: product3test
+      cost_per_day: 3
+      deposit: 3000
+      sale_price: 20
+      category: suit
+      consigment_start: 2018-04-01
+      consigment_end: 2018-04-23
+      state: Rentable
+      delevery_type: null
+      provider: null
+      userid: b
+
+    -
+
+      id: 4
+      name: tproduct4
+      image: url4
+      contents: product4test
+      cost_per_day: 3
+      deposit: 3000
+      sale_price: 20
+      category: suit
+      consigment_start: 2018-04-01
+      consigment_end: 2018-04-23
+      state: Rentable
+      delevery_type: null
+      provider: null
+      userid: a
+
+    -
+
+      id: 5
+      name: tproduct5
+      image: url5
+      contents: product5test
+      cost_per_day: 3
+      deposit: 3000
+      sale_price: 20
+      category: suit
+      consigment_start: 2018-04-01
+      consigment_end: 2018-04-23
+      state: Rentable
+      delevery_type: null
+      provider: null
+      userid: a
+
+    -

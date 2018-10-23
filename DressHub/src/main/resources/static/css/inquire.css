@@ -1,0 +1,75 @@
+#my-main article > header {
+	display: block;
+	
+
+}
+
+#my-main article > header > p {
+	color: gray;
+	width:60%;
+}
+
+.inquire-form {
+	border-top: 2px solid #333;
+}
+
+.inquire-form > section {
+	display: flex;
+	align-items: center;
+	height: 57px;
+	border-bottom: 1px solid #ececec;
+}
+
+#email, #title, #comment {
+	width:90%;
+	padding: 0, 10px;
+}
+
+#email, #title, #dropdown{
+	height: 25px;
+
+}
+
+.inquire-form > section.comment{
+	padding-top: 20px;
+	align-items: stretch;
+	height: 200px;
+}
+
+.inquire-form > section > .name{
+	flex-basis: 15%;
+	font-size: 0.9rem;
+	padding-left: 3%;
+}
+
+.inquire-form > section > .content{
+	width:90%;
+	
+
+}
+
+.inquire-form > section.classification > .content {
+	font-size:13px;
+	padding: ;
+}
+
+section.sub-btn{
+	justify-content: flex-end;
+	margin-right: 8%;
+}
+
+.form-btn-style {
+	font-size: 0.9rem;
+	border-radius: 10px;
+	border: 1px solid #00ab33;
+	background-color: #00ab33;
+	padding: 7px 15px;
+	color: white;
+	font-weight: 600;
+	cursor: pointer;
+	width: 100px;
+}
+
+.form-btn-style:hover {
+	background-color: #4CAF89;
+}

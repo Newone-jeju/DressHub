@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="css/menu.css"  />
+    <link rel="stylesheet" href="css/order.css">
+    <title></title>
+</head>
+<body>
+<div id="top">
+  <h1 id="logo"><a href="/index.html">DRESS HUB</a></h1>
+    <ul class="topul">
+        <li><a href="login.html">LOGIN</a></li>
+        <li><a href="join.html">회원가입</a></li>
+        <li><a href="cart.html">장바구니</a></li>
+        <li><a href="mypage.html">MYPAGE</a></li>
+    </ul>
+</div>
+<nav id="nav">
+    <ul class="menu">
+      <li><a class="category">전체카테고리</a> </li>
+        <li><a id="clothes" class="name" href="productList?category=10">캐쥬얼</a>
+        <ul class="allcategory">
+           <li><a href="productList?category=11">남성</a></li>
+           <li><a href="productList?category=12">여성</a></li>
+           <li><a href="productList?category=13">신발</a></li>
+           <li><a href="productList?category=14">기타</a></li>
+          </ul>
+        </li>
+        <li><a id="suit"  class="name" href="productList?category=20">예복</a>
+        <ul class="allcategory">
+           <li><a href="productList?category=21">경조사</a></li>
+           <li><a href="productList?category=22">면접</a></li>
+           <li><a href="productList?category=23">실생활</a></li>
+           <li><a href="productList?category=24">기타</a></li>
+          </ul>
+          </li>
+        <li><a id="accessory"  class="name" href="productList?category=30">악세사리</a>
+        <ul class="allcategory">
+           <li><a href="productList?category=31">남성</a></li>
+           <li><a href="productList?category=32">여성</a></li>
+           <li><a href="productList?category=33">고가</a></li>
+           <li><a href="productList?category=34">특수한 경우</a></li>
+          </ul>
+          </li>
+        <li><a href="productList?category=40">할인/기획</a>
+          <ul class="allcategory">
+             <li><a href="productList?category=41">의류</a></li>
+             <li><a href="productList?category=42">악세사리</a></li>
+             <li><a href="productList?category=43">신발</a></li>
+             <li><a href="productList?category=44">기타</a></li>
+
+            </ul>
+        </li>
+        <li><a href=#>MYPAGE</a></li>
+    </ul>
+  </nav>
+
+<div id="orderPage">
+
+    <!-- 주문상품 -->
+    <h3>주문상품</h3>
+    <table id="cart_table">
+        <tr>
+            <th>상품명</th>
+            <th>상품금액</th>
+            <th>배송비</th>
+        </tr>
+        <tr>
+            <td class="productName"></td>
+            <td class="totalPrice"></td>
+            <td class="totalShipment"></td>
+
+            <!-- <div class="cartAdd_container"></div> -->
+        </tr>
+
+    </table>
+
+    <!-- 주문자 정보 -->
+    <h3>주문자 정보</h3>
+    <table class="buyer_inform">
+        <tr>
+            <th>주문자</th>
+            <td>홍길동</td>
+        </tr>
+        <tr>
+            <th>휴대폰</th>
+            <td>010-1234-5678</td>
+        </tr>
+        <tr>
+            <th>이메일</th>
+            <td>gildong@abc.com</td>
+        </tr>
+    </table>
+
+    <!-- 배송정보 -->
+    <h3>배송정보</h3>
+    <table class="delevery_inform">
+        <tr>
+            <th>이름</th>
+            <td><input type="text" name="name" id="name" size="20%"></td>
+        </tr>
+        <tr>
+            <th>휴대폰</th>
+            <td>  <input type="text" name="phone_number" id="phone_number" size="10%"> -
+                <input type="text" name="phone_number" id="phone_number" size="10%"> -
+                <input type="text" name="phone_number" id="phone_number" size="10%">
+            </td>
+        </tr>
+        <tr>
+            <th>주소</th>
+            <td>
+                <input type="text" name="address" id="address" size="15%">
+                <button class=addressSearch>주소검색</button><br/>
+                <input type="text" name="address" id="address" size="100%">  기본주소
+                <input type="text" name="address" id="address" size="100%">  나머지주소
+            </td>
+        </tr>
+        <tr>
+            <th>베송메시지</th>
+            <td><input type="text" id="message" size="100%"></td>
+        </tr>
+    </table>
+
+    <!-- 결제예정금액 -->
+    <h3>결제예정금액</h3>
+    <table id="total_price_table">
+        <tr>
+            <th>총 상품금액</th>
+            <th>보증금</th>
+            <th>총 배송비</th>
+            <th>결제 예정 금액</th>
+        </tr>
+        <tr>
+            <td class="totalPrice"></td>
+            <td class="deposit"></td>
+            <td class="totalShipment"></td>
+            <td class="totalPayment"></td>
+        </tr>
+    </table>
+
+    <!-- 결제수단 -->
+    <h3>결제수단</h3>
+    <div id="paymentMethod">
+        <input type="radio" name="paymentMethod" value="deposit"/>무통장 입금
+        <input type="radio" name="paymentMethod" value="card"/>신용카드
+        <input type="radio" name="paymentMethod" value="phone"/>휴대폰 결제
+        <input type="radio" name="paymentMethod" value="bankTransfer"/>실시간 계좌이체
+    </div>
+
+    <div id="button">
+        <button id="payment">결제하기</button>
+    </div>
+
+</div>
+
+<script type="text/javascript" src="js/jquery-3.3.1.min.js" charset="utf-8"></script>
+<script src="js/ajaxData.js"></script>
+<script src="js/getCookie.js"></script>
+<script src="js/menu.js"></script>
+<script src="js/order.js"></script>
+
+</body>
+</html>

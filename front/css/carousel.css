@@ -9,7 +9,7 @@
 
 .card_carousel_wrap{
 	/*requre media query */
-	width:1000px;
+	width:85%;
 	/* 보기좋게 하기 위한 마진 삭제 필 */
 	margin:30px;
 }
@@ -26,6 +26,7 @@
 .card_carousel_header_title{
 	flex-grow: 11;
 	flex-shrink: 1;
+	margin-left: 10%;
 }
 
 .card_carousel_header_more{
@@ -33,13 +34,13 @@
 	display: flex;
 	justify-content: center;
 	align-items: center;
-
-
 }
+
 .card_carousel_header_more_text {
 	color:gray;
 	text-decoration: none;
 }
+
 .card_carousel_header_more_text:hover {
 	color: black;
 	font-weight: bold;
@@ -61,17 +62,16 @@
 }
 
 .card_carousel_slide_btn .btn_left{
-	background: url(/image/carousel_btn_left.png) no-repeat;
+	background: url("../image/carousel_btn_left.png") no-repeat;
 }
 .card_carousel_slide_btn .btn_right{
-	background: url(/image/carousel_btn_right.png) no-repeat;
-	
+	background: url("../image/carousel_btn_right.png") no-repeat;
+
 }
 
 .hidden{
 	visibility: hidden;
 }
-
 
 .card_carousel_container_content{
 	flex-grow: 1;
@@ -89,18 +89,17 @@
 }
 
 .card_img_wrap{
-	height: 200px;
+	height: auto;
 }
 .card_img{
 	width:100%;
-	height:100%;
+	height:auto;
 }
 
 .card_text_wrap{
 	padding:0.9rem;
-	
-}
 
+}
 
 .card_text_wrap .text_category{
 	font-size: 0.8rem;
@@ -108,7 +107,7 @@
 }
 
 .card_text_wrap .text_title{
-	font-size: 1.15rem;
+	font-size: 1.0rem;
 	padding:0.7rem 0rem;
 	font-weight: 700;
 }
@@ -119,4 +118,45 @@
 
 .card_text_wrap .text_location{
 	font-size: 0.9rem;
+}
+
+/* 메인캐러셀 */
+
+.carousel {
+  position: relative;
+  width: 90%;
+  height: auto;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+  overflow: hidden;
+	margin-top:1%;
+}
+
+.carousel-wrapper {
+  width: 400%;
+  height: 70vh;
+  transition: all 0.4s ease-in-out;
+}
+
+.carousel-wrapper::after {
+  content: '';
+  display: block;
+  clear: left;
+}
+
+.carousel-item {
+  float: left;
+  width: 25%;
+  height: 70vh;
+}
+.carousel-item:nth-child(1) { background-image: url("../image/m3.jpg"); background-size: contain; background-repeat: no-repeat;}
+.carousel-item:nth-child(2) { background-image: url("../image/m2.png"); background-size: contain;background-repeat: no-repeat;}
+.carousel-item:nth-child(3) { background-image: url("../image/m1.png"); background-size: contain;background-repeat: no-repeat;}
+.carousel-item:nth-child(4) { background-image: url("../image/m4.png"); background-size: contain;background-repeat: no-repeat;}
+
+.btn-container {
+  position: absolute;
+  top: 30px;
+  left: 30px;
 }

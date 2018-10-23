@@ -1,0 +1,23 @@
+[
+{
+
+    "id": 59,
+    "name": "상의",
+    "thumbnailImage": "origingirl-2961959_640.jpg",
+    "image": null,
+    "contents": "상의입니다.",
+    "costPerDay": 3000,
+    "deposit": 40000,
+    "salePrice": 50000,
+    "category": "상의",
+    "consigmentStart": "2018-05-09",
+    "consigmentEnd": "2018-05-10",
+    "state": "xl",
+    "deleveryType": null,
+    "providerId": "ojlee",
+    "likes": 0,
+    "regDate": null,
+    "leastLeaseDay": 20,
+    "size": "xl"
+}
+]
