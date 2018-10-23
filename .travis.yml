@@ -5,7 +5,7 @@ jdk:
 branches:
   only:
     - master
-
+before_script: cd DressHub
 # Travis CI 서버의 Home
 cache:
   directories:
