@@ -5,6 +5,8 @@
 
 0806_v1_test branch => master (0.1v)
 
+### 10.24 01:31 
 
+Deploy Test(AWS)
 
 
