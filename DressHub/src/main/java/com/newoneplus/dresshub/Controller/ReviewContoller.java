@@ -82,7 +82,7 @@ public class ReviewContoller {
 
 
     @DeleteMapping(value = "/{id}")
-    public ResultMessage delete(@RequestParam Integer id, HttpServletResponse res) {
+    public ResultMessage delete(@PathVariable Integer id, HttpServletResponse res) {
 
         reviewRepository.deleteById(id);
         res.setStatus(200);

@@ -190,9 +190,9 @@ function delete_btn(){
         //아이디 불일치시
         var reviewUser = $(this).parent().parent().prev().children(".td-author").text();
         console.log(reviewUser);
-        if(user.inspectIdDiff(reviewUser) == false){
-            return false
-        }
+        // if(user.inspectIdDiff(reviewUser) == false){
+        //     return false
+        // }
         var reviewId = $(this).attr("data-reviewId");
         //삭제되면 새로고침
         var ajaxDelete = new AjaxUtil('/review/'+reviewId);
