@@ -9,4 +9,5 @@
 
 Deploy Test(AWS)
 
-
+### 11.02 09:16 
+Server reset(ec2)
