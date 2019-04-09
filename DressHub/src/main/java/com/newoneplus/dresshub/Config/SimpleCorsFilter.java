@@ -17,12 +17,12 @@ public class SimpleCorsFilter implements Filter {
 
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
-        log.info("================Cors Init=================");
+       // log.info("================Cors Init=================");
     }
 
     @Override
     public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain) throws IOException, ServletException {
-        log.info("================Cors Filter=================");
+//        log.info("================Cors Filter=================");
         HttpServletResponse response = (HttpServletResponse) res;
         response.setHeader("Access-Control-Allow-Origin", "127.0.0.1");
         response.setHeader("Access-Control-Allow-Methods", "POST, GET, PUT, OPTIONS, DELETE");
@@ -35,6 +35,8 @@ public class SimpleCorsFilter implements Filter {
 
     @Override
     public void destroy() {
-        log.info("================Cors Destory=================");
+
+
+//        log.info("================Cors Destory=================");
     }
 }
