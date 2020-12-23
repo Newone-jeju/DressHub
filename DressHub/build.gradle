@@ -1,52 +1,47 @@
-buildscript {
-    ext {
-        springBootVersion = '2.0.1.RELEASE'
-    }
-    repositories {
-        mavenCentral()
-    }
-    dependencies {
-        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+plugins {
+    id 'org.springframework.boot' version '2.3.5.RELEASE'
+    id 'io.spring.dependency-management' version '1.0.10.RELEASE'
+    id 'java'
+}
+group = 'com.newone'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '11'
+configurations {
+    compileOnly {
+        extendsFrom annotationProcessor
     }
 }
-
-apply plugin: 'java'
-apply plugin: 'idea'
-apply plugin: 'org.springframework.boot'
-apply plugin: 'io.spring.dependency-management'
-
-group = 'com.NewOnePlus'
-version = '0.0.1-SNAPSHOT'
-sourceCompatibility = 1.8
-
 repositories {
     mavenCentral()
-    maven { url "http://repo.spring.io/libs-snapshot" }
 }
-
-
 dependencies {
-    
-    compile "org.springframework.boot:spring-boot-starter-jdbc"
-    compile("org.springframework.boot:spring-boot-starter-security")
-    compile("org.springframework.boot:spring-boot-starter-data-jpa")
-    compile('org.springframework.boot:spring-boot-starter-web')
-    runtime('mysql:mysql-connector-java')
-    compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.9.5'
-    testCompile('org.springframework.boot:spring-boot-starter-test')
-    compile 'org.projectlombok:lombok:1.16.8'
-    compile('org.springframework.boot:spring-boot-starter-thymeleaf')
-    compile group: 'org.projectlombok', name: 'lombok', version: '1.16.8'
-    compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.4'
-    compile 'org.hibernate:hibernate-core:5.2.10.Final'
-    testCompile group: 'org.mockito', name: 'mockito-core', version: '1.10.19'
-    testCompile group: 'junit', name: 'junit', version: '4.12'
-    compile group: 'org.bgee.log4jdbc-log4j2', name: 'log4jdbc-log4j2-jdbc4.1', version: '1.16'
-    compile 'org.json:json:20171018'
-    compile 'org.springframework.session:spring-session-core:2.0.4.BUILD-SNAPSHOT'
-    compile 'org.springframework.security:spring-security-taglibs:4.0.4.RELEASE'
-//    compile group: 'commons-io', name: 'commons-io', version: '2.5'
-//    compile group: 'servlets.com', name: 'cos', version: '05Nov2002'
-
-
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+    implementation 'org.springframework.boot:spring-boot-starter-jdbc'
+    implementation 'org.springframework.boot:spring-boot-starter-security'
+    compileOnly 'org.projectlombok:lombok'
+    runtimeOnly 'mysql:mysql-connector-java'
+    runtimeOnly 'com.h2database:h2'
+    compileOnly group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.9.5'
+    compileOnly 'org.json:json:20171018'
+    annotationProcessor 'org.projectlombok:lombok'
+    testImplementation('org.springframework.boot:spring-boot-starter-test') {
+// exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+    }
 }
+test {
+    useJUnitPlatform()
+}
+
+
+
+
+
+
+
+
+
+
+
