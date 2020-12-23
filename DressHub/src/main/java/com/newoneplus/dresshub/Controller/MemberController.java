@@ -1,8 +1,8 @@
 package com.newoneplus.dresshub.Controller;
 
 
-import com.newoneplus.dresshub.Model.User;
-import com.newoneplus.dresshub.Repository.UserRepository;
+import com.newoneplus.dresshub.Domain.Member;
+import com.newoneplus.dresshub.Repository.MemberRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -18,10 +18,10 @@ import java.text.ParseException;
 
 @Controller
 @RequestMapping("/join")
-public class UserController {
+public class MemberController {
     //User controller
     @Autowired
-    UserRepository userRepository;
+    MemberRepository memberRepository;
 
     @GetMapping
     public String showJoinForm(Model model, Authentication authentication) {
@@ -32,11 +32,11 @@ public class UserController {
     }
 
     @PostMapping("")
-    public String create(@ModelAttribute @Valid User user) throws ClassNotFoundException, ParseException {
+    public String create(@ModelAttribute @Valid Member member) throws ClassNotFoundException, ParseException {
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
-        user.setUserType(1);
-        userRepository.save(user);
+        member.setPassword(passwordEncoder.encode(member.getPassword()));
+        member.setUserType(1);
+        memberRepository.save(member);
         return "redirect:/";
     }
 

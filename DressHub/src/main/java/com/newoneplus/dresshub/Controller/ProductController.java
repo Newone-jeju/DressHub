@@ -1,14 +1,16 @@
 package com.newoneplus.dresshub.Controller;
 
+import com.newoneplus.dresshub.Domain.Product.Product;
 import com.newoneplus.dresshub.ImageProcesser;
-import com.newoneplus.dresshub.Model.*;
+import com.newoneplus.dresshub.Domain.*;
 import com.newoneplus.dresshub.Repository.ProductRepository;
 import com.newoneplus.dresshub.Service.ProductService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.Resource;
 import org.springframework.data.domain.Page;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -18,7 +20,7 @@ import java.io.*;
 import java.util.*;
 
 @Slf4j
-@RestController
+@Controller
 @RequestMapping(value = "/products")
 @AllArgsConstructor
 public class ProductController {
@@ -29,52 +31,58 @@ public class ProductController {
     @Autowired
     ProductRepository productRepository;
 
-    @GetMapping(value = "/{id}")
-    public Product getProduct(@PathVariable Integer id) {
-        return productService.getProduct(id);
-    }
-    @GetMapping(value = "/list/search")
-    public List<Product> getProductProvider(@RequestParam String provider){
-        return productService.getProductListByProvider(provider);
+    @GetMapping(value = "/new")
+    public String create(Model model) {
+        model.addAttribute("form", new ProductDto());
+        return "/product/addProduct";
     }
 
-    @PostMapping
-    public Product productCreate(@RequestBody Product product) {
-        log.info("***********************요청이가 오고 있습니다. **********************************8");
-        return productService.createProduct(product);
+//    @GetMapping(value = "/{id}")
+//    public Product getProduct(@PathVariable Integer id) {
+//        return productService.getProduct(id);
+//    }
+//    @GetMapping(value = "/list/search")
+//    public List<Product> getProductProvider(@RequestParam String provider){
+//        return productService.getProductListByProvider(provider);
+//    }
+//
+//    @PostMapping
+//    public Product productCreate(@RequestBody Product product) {
+//        log.info("***********************요청이가 오고 있습니다. **********************************8");
+//        return productService.createProduct(product);
+//
+//
+//    }
 
-
-    }
-
-    @PutMapping
-    public void productUpdate(@RequestBody Product product){
-        productService.updateProduct(product);
-    }
-
-    @DeleteMapping(value = "/{id}")
-    public void productDelete(@PathVariable Integer id){
-        productService.deleteProduct(productService.getProduct(id));
-    }
-
-    @GetMapping(value = "/list")
-    public List<Product> getProductList() {
-        return productService.getProductList();
-    }
-
-    @GetMapping(value = "/search")
-    public Page getProductList(@RequestParam(value = "page", defaultValue = "1") int page, @RequestParam(value = "category", defaultValue = "캐쥬얼") String category, @RequestParam(value = "order", defaultValue = "id desc") String order) {
-        return productService.getProductList(page - 1, category, order);
-    }
-
-
-    @GetMapping(value = "/image/list/search")
-    public List<ProductImage> getProductImageList(@RequestParam(value = "productId", required = false) Long paramId) {
-        if (paramId == null) {
-            return productService.getProductImageList();
-        } else {
-            return productService.getProductImageList(paramId);
-        }
-    }
+//    @PutMapping
+//    public void productUpdate(@RequestBody Product product){
+//        productService.updateProduct(product);
+//    }
+//
+//    @DeleteMapping(value = "/{id}")
+//    public void productDelete(@PathVariable Integer id){
+//        productService.deleteProduct(productService.getProduct(id));
+//    }
+//
+//    @GetMapping(value = "/list")
+//    public List<Product> getProductList() {
+//        return productService.getProductList();
+//    }
+//
+//    @GetMapping(value = "/search")
+//    public Page getProductList(@RequestParam(value = "page", defaultValue = "1") int page, @RequestParam(value = "category", defaultValue = "캐쥬얼") String category, @RequestParam(value = "order", defaultValue = "id desc") String order) {
+//        return productService.getProductList(page - 1, category, order);
+//    }
+//
+//
+//    @GetMapping(value = "/image/list/search")
+//    public List<ProductImage> getProductImageList(@RequestParam(value = "productId", required = false) Long paramId) {
+//        if (paramId == null) {
+//            return productService.getProductImageList();
+//        } else {
+//            return productService.getProductImageList(paramId);
+//        }
+//    }
 
     @PostMapping(value = "/image")
     public void createProductImage(@RequestParam("file") MultipartFile productImage) throws IOException {

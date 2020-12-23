@@ -1,13 +1,9 @@
-package com.newoneplus.dresshub.Model;
+package com.newoneplus.dresshub.Domain;
 
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 
 import javax.persistence.*;
-import java.lang.reflect.Field;
 import java.util.Collection;
-import java.util.HashMap;
-import java.util.List;
 
 @Data
 @Entity

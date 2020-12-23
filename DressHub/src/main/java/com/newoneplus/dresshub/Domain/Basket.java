@@ -1,11 +1,9 @@
-package com.newoneplus.dresshub.Model;
+package com.newoneplus.dresshub.Domain;
 
+import com.newoneplus.dresshub.Domain.Product.Product;
 import lombok.Data;
-import org.hibernate.annotations.GeneratorType;
 
 import javax.persistence.*;
-import java.io.Serializable;
-import java.util.List;
 
 //일단은 이정도의 데이터가 필요할 것같음
 @Data
@@ -16,9 +14,9 @@ public class Basket {
     private Integer id;
     private String uid;
 
-    @ManyToOne
-    @JoinColumn(name="product_id")
-    private Product product;
+//    @ManyToOne
+//    @JoinColumn(name="product_id")
+//    private Product product;
 
 
 

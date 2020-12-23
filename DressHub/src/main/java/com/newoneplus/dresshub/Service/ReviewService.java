@@ -1,10 +1,6 @@
 package com.newoneplus.dresshub.Service;
 
 import com.newoneplus.dresshub.ImageProcesser;
-import com.newoneplus.dresshub.Model.*;
-import org.json.JSONArray;
-import org.json.JSONObject;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -12,9 +8,6 @@ import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
 
 @Service
 public class ReviewService {

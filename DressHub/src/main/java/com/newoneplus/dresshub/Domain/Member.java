@@ -1,8 +1,7 @@
-package com.newoneplus.dresshub.Model;
+package com.newoneplus.dresshub.Domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
-import lombok.ToString;
 import org.hibernate.annotations.CreationTimestamp;
 
 
@@ -10,8 +9,8 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Data
-@Entity(name = "user")
-public class User {
+@Entity
+public class Member {
     // User VO
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

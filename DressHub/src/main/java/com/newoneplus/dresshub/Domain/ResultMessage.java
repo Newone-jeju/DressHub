@@ -1,4 +1,4 @@
-package com.newoneplus.dresshub.Model;
+package com.newoneplus.dresshub.Domain;
 
 import lombok.Data;
 

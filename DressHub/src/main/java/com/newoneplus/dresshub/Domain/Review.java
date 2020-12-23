@@ -1,11 +1,9 @@
-package com.newoneplus.dresshub.Model;
+package com.newoneplus.dresshub.Domain;
 
 import lombok.Data;
 import lombok.ToString;
-import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.*;
-import java.util.ArrayList;
 
 @Data
 @Entity

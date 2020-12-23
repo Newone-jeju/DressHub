@@ -1,4 +1,4 @@
-package com.newoneplus.dresshub.Model;
+package com.newoneplus.dresshub.Domain;
 
 import lombok.Cleanup;
 import org.springframework.beans.factory.annotation.Value;
@@ -10,7 +10,6 @@ import org.springframework.jdbc.support.KeyHolder;
 
 import java.sql.PreparedStatement;
 import java.sql.Statement;
-import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package com.newoneplus.dresshub.Model;
+package com.newoneplus.dresshub.Domain;
 
 import lombok.Data;
 
@@ -9,15 +9,11 @@ import javax.persistence.Id;
 
 @Data
 @Entity
-public class LeaseInfoLog {
+public class ProductImage {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Integer id;
-    Integer leaseInfo;
-    String status;
-    String name;
-    String phoneNum;
-    String startDay;
-    String endDay;
-    String message;
+    long id;
+    long productId;
+    String image;
+    String imageSize;
 }

@@ -1,7 +1,10 @@
-package com.newoneplus.dresshub.Model;
+package com.newoneplus.dresshub.Domain.Product;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import lombok.Data;
+import com.newoneplus.dresshub.Domain.Category;
+import com.newoneplus.dresshub.Domain.ThumbUp;
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.*;
@@ -9,12 +12,15 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-@Data
 @Entity
-
-public class Product {
+@Getter
+@Setter
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name ="dtype")
+public abstract class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "product_id")
     Long id;
     String name;
     String thumbnailImage;
@@ -23,7 +29,6 @@ public class Product {
     Integer deposit;
     Integer salePrice;
     String location;
-    String category;
     String consigmentStart;
     String consigmentEnd;
     String state;
@@ -33,6 +38,8 @@ public class Product {
     Date registrationDate;
     Integer leastLeaseDay;
     String size;
+    @ManyToMany(mappedBy = "products")
+    private List<Category> categories = new ArrayList<>();
     @Transient
     ArrayList<MultipartFile> image;
 

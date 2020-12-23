@@ -1,10 +1,10 @@
-package com.newoneplus.dresshub.Model;
+package com.newoneplus.dresshub.Domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.newoneplus.dresshub.Domain.Product.Product;
 import lombok.Data;
 
 import javax.persistence.*;
-import java.io.Serializable;
 
 @Data
 @Entity

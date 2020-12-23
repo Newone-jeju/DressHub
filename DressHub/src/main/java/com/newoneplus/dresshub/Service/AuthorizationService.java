@@ -1,41 +1,39 @@
 package com.newoneplus.dresshub.Service;
 
 import com.newoneplus.dresshub.Config.MyAuthentication;
-import com.newoneplus.dresshub.Model.User;
-import com.newoneplus.dresshub.Repository.UserRepository;
+import com.newoneplus.dresshub.Domain.Member;
+import com.newoneplus.dresshub.Repository.MemberRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletResponse;
 import java.sql.SQLException;
 
 @Service
 public class AuthorizationService {
     @Autowired
-    UserRepository userRepository;
+    MemberRepository memberRepository;
 
-    public User login(String uid, String password) throws SQLException, ClassNotFoundException {
+    public Member login(String uid, String password) throws SQLException, ClassNotFoundException {
         BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
-        User user = userRepository.findByUid(uid);
-        if(user == null) return null;
-        if(bCryptPasswordEncoder.matches(password, user.getPassword()) == false) return null;
-        return user;
+        Member member = memberRepository.findByUid(uid);
+        if(member == null) return null;
+        if(bCryptPasswordEncoder.matches(password, member.getPassword()) == false) return null;
+        return member;
     }
 
-    public static User getCurrentUser() {
+    public static Member getCurrentUser() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if (authentication instanceof MyAuthentication)
-            return ((MyAuthentication) authentication).getUser();
+            return ((MyAuthentication) authentication).getMember();
         return null;
     }
 
-    public static void setCurrentUser(User user) {
+    public static void setCurrentUser(Member member) {
         ((MyAuthentication)
-                SecurityContextHolder.getContext().getAuthentication()).setUser(user);
+                SecurityContextHolder.getContext().getAuthentication()).setMember(member);
     }
 
 
