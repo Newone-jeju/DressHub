@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<!-- 퀵메뉴 -->
+<aside class="quick-menu-area" th:fragment="quick_menu">
+    <a href="#" >
+        <img th:src="@{/image/recently.png}" alt="최근본상품" >
+    </a>
+    <a href="./cart.html" >
+        <img th:src="@{/image/cart.png}" alt="장바구니" >
+    </a>
+    <a href="/products/new" >
+        <img th:src="@{/image/add.png}" alt="상품등록" >
+    </a>
+    <a href="./inquire.html" >
+        <img th:src="@{/image/contact.png}" alt="문의하기" >
+    </a>
+</aside>

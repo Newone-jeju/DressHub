@@ -1,13 +1,12 @@
 package com.newoneplus.dresshub.Controller;
 
-import com.newoneplus.dresshub.Model.LeaseInfo;
-import com.newoneplus.dresshub.Model.LeaseInfoLog;
-import com.newoneplus.dresshub.Model.ResultMessage;
+import com.newoneplus.dresshub.Domain.LeaseInfo;
+import com.newoneplus.dresshub.Domain.LeaseInfoLog;
+import com.newoneplus.dresshub.Domain.ResultMessage;
 import com.newoneplus.dresshub.Repository.LeaseInfoLogRepository;
 import com.newoneplus.dresshub.Repository.LeaseInfoRepository;
 import com.newoneplus.dresshub.Service.AuthorizationService;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;

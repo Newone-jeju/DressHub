@@ -1,17 +1,13 @@
 package com.newoneplus.dresshub.Repository;
 
-import com.newoneplus.dresshub.Model.Product;
-import com.newoneplus.dresshub.Model.ThumbUp;
-import org.springframework.data.domain.Example;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
+import com.newoneplus.dresshub.Domain.Product.Product;
+import com.newoneplus.dresshub.Domain.ThumbUp;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public interface ThumbUpRepository extends JpaRepository<ThumbUp, Integer>{

@@ -1,6 +1,6 @@
 package com.newoneplus.dresshub.Repository;
 
-import com.newoneplus.dresshub.Model.ProductImage;
+import com.newoneplus.dresshub.Domain.ProductImage;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

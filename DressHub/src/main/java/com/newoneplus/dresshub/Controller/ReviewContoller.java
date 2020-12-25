@@ -1,9 +1,9 @@
 package com.newoneplus.dresshub.Controller;
 
 import com.newoneplus.dresshub.ImageProcesser;
-import com.newoneplus.dresshub.Model.LeaseInfo;
-import com.newoneplus.dresshub.Model.ResultMessage;
-import com.newoneplus.dresshub.Model.Review;
+import com.newoneplus.dresshub.Domain.LeaseInfo;
+import com.newoneplus.dresshub.Domain.ResultMessage;
+import com.newoneplus.dresshub.Domain.Review;
 //import com.newoneplus.dresshub.Model.User;
 //import com.newoneplus.dresshub.Service.AuthorizationService;
 import com.newoneplus.dresshub.Repository.LeaseInfoRepository;
@@ -12,7 +12,6 @@ import com.newoneplus.dresshub.Service.AuthorizationService;
 import com.newoneplus.dresshub.Service.ReviewService;
 
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.DefaultResourceLoader;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
@@ -22,12 +21,9 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletResponse;
-import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.nio.file.InvalidPathException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;

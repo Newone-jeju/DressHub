@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:sec="http://www.springframework.org/security/tags"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="fragments/header :: header">
+</head>
+
+<body>
+  <th:block th:replace="fragments/navigation :: navigation"/>
+
+  <!-- 메인캐러셀 -->
+  <section class="carousel">
+    <div class="carousel-wrapper">
+      <article class="carousel-item">
+
+      </article>
+      <article class="carousel-item">
+      </article>
+      <article class="carousel-item">
+      </article>
+      <article class="carousel-item">
+      </article>
+    </div>
+  </section>
+
+  <!--신상품 -->
+  <div class="card_carousel_wrap">
+    <!--card_carousel head title, more btn -->
+    <div class="card_carousel_header">
+      <h1 class="card_carousel_header_title">NEW ITEM</h1>
+      <span class="card_carousel_header_more">
+        <a href="" class="card_carousel_header_more_text">더보기</a>
+      </span>
+    </div>
+
+    <div class="card_carousel_container">
+      <div class="card_carousel_slide_btn">
+        <form>
+          <input class="btn_left" type="button">
+        </form>
+      </div>
+
+      <!--card_carousel cardset -->
+      <div class="card_carousel_container_content">
+        <!--js card gen -->
+      </div>
+      <div class="card_carousel_slide_btn">
+        <form>
+          <input class="btn_right" type="button">
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!--인기상품 -->
+  <div class="card_carousel_wrap">
+    <!--card_carousel head title, more btn -->
+    <div class="card_carousel_header">
+      <h1 class="card_carousel_header_title"><br>BEST ITEM</h1>
+      <span class="card_carousel_header_more">
+        <a href="" class="card_carousel_header_more_text">더보기</a>
+      </span>
+    </div>
+
+    <div class="card_carousel_container">
+      <div class="card_carousel_slide_btn">
+        <form>
+          <input class="btn_left" type="button">
+        </form>
+      </div>
+
+      <!--card_carousel cardset -->
+      <div class="card_carousel_container_content">
+        <!--js card gen -->
+      </div>
+      <div class="card_carousel_slide_btn">
+        <form>
+          <input class="btn_right" type="button">
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- card -->
+  <div class="card_section">
+    <img th:src="@{/image/luxury.png}"  alt="고가브랜드" a href="#">
+    <img th:src="@{/image/wedding.png}"  alt="결혼식하객" a href="#">
+    <img th:src="@{/image/near.png}"   alt="가까운거리" a href="#">
+  </div>
+
+  <!-- 퀵메뉴 -->
+  <aside th:replace="fragments/quick_menu :: quick_menu">
+
+  </aside>
+
+  <!-- footer -->
+  <footer th:replace="fragments/footer :: footer">
+
+  </footer>
+  <th:block th:replace="fragments/script :: common_script"/>
+
+  <script type="text/javascript" src="../js/carousel.js" charset="utf-8"></script>
+<!--  <script src="/js/menu.js">-->
+
+<!--  // </script>-->
+
+</body>
+
+</html>
